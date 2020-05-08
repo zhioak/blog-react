@@ -1,11 +1,12 @@
-import { Avatar, Divider } from 'antd'
+import { Avatar } from 'antd'
+
 import '../static/style/component/blogger.css'
 
 
 const Blogger = () => {
     return (
         <div className="blogger zbox">
-            <div className="avator">
+            <div>
                 <Avatar
                     shape="square"
                     size={128}

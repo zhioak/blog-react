@@ -1,10 +1,11 @@
-import { Menu } from 'antd'
-import { PictureOutlined, ReadOutlined } from '@ant-design/icons'
+import { PictureOutlined, ReadOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 
-const { SubMenu } = Menu
+const { SubMenu, ItemGroup, Item } = Menu
+
 
 const handleClick = e => {
-    console.log('click ', e);
+    console.log('click ', e)
 }
 
 const Sider = () => {
@@ -16,30 +17,29 @@ const Sider = () => {
                 // defaultOpenKeys={['sub1']}
                 mode="inline"
             >
-
-                <SubMenu
-                    key="phont"
-                    icon={<PictureOutlined />}
-                    title="PHOTO"
-                >
-                    <Menu.ItemGroup key="g1" title="2018">
-                        <Menu.Item key="1000">济南 - 千佛山</Menu.Item>
-                        <Menu.Item key="1002">济南 - 泰山</Menu.Item>
-                    </Menu.ItemGroup>
-
-                    <Menu.ItemGroup key="g2" title="2019">
-                        <Menu.Item key="1003">蓟县 - 盘山</Menu.Item>
-                        <Menu.Item key="1004">蓟县 - 滑雪场</Menu.Item>
-                    </Menu.ItemGroup>
-                </SubMenu>
-
                 <SubMenu
                     key="sub2"
                     icon={<ReadOutlined />}
-                    title="STORY"
+                    title="日志"
+                    disabled={true}
                 >
-                    <Menu.Item key="5">自己跳</Menu.Item>
-                    <Menu.Item key="6">梦境</Menu.Item>
+                    <Item key="5">自己跳</Item>
+                    <Item key="6">梦境</Item>
+                </SubMenu>
+                <SubMenu
+                    key="phont"
+                    icon={<PictureOutlined />}
+                    title="相册"
+                >
+                    <ItemGroup key="g1" title="2018">
+                        <Item key="1000">济南 - 千佛山</Item>
+                        <Item key="1002">济南 - 泰山</Item>
+                    </ItemGroup>
+
+                    <ItemGroup key="g2" title="2019">
+                        <Item key="1003">蓟县 - 盘山</Item>
+                        <Item key="1004">蓟县 - 滑雪场</Item>
+                    </ItemGroup>
                 </SubMenu>
 
             </Menu>
