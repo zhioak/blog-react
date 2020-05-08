@@ -1,6 +1,10 @@
-import { Col, Row } from 'antd'
-import Head from 'next/head'
-import Sider from '../component/Sider'
+import { Layout } from 'antd'
+
+
+import Menu from '../component/Menu'
+import Blogger from '../component/Blogger'
+
+const { Sider } = Layout
 
 // xs: <576
 // sm：≥576
@@ -9,22 +13,21 @@ import Sider from '../component/Sider'
 // xl: ≥1200
 // xxl: ≥1600
 
+export default () => {
 
-const Home = () => {
-  return (<>
-    <Head>
-      <title>zhou</title>
-    </Head>
-
-    <Row>
-      <Col xs={0} sm={8} md={7} lg={5} xl={4} xxl={3}>
-        <Sider />
-      </Col>
-      <Col xs={24} sm={16} md={17} lg={19} xl={20} xxl={21}>
+  return (
+    <Layout>
+      <Sider
+        theme="light"
+        breakpoint="md"
+        collapsedWidth="0"
+      >
+        <Blogger/>
+        <Menu />
+      </Sider>
+      <Layout>
         主内容
-      </Col>
-    </Row>
-  </>)
+    </Layout>
+    </Layout>
+  )
 }
-
-export default Home
