@@ -1,8 +1,8 @@
-import { Layout, Breadcrumb } from 'antd'
+import { Layout } from 'antd'
 
 import Blogger from '../component/Blogger'
 import Menu from '../component/Menu'
-import Footer from '../component/Footer'
+import Detail from '../pages/detail'
 
 const { Sider } = Layout
 
@@ -26,23 +26,14 @@ export default () => {
         breakpoint="md"
         collapsedWidth="0"
         onCollapse={handleCollapse}
-        trigger={()=>{return (<span>sdff</span>)}}
-        // zeroWidthTriggerStyle={{backgroundColor:'red'}}
+        trigger={(<div>12313</div>)}
+      // zeroWidthTriggerStyle={{backgroundColor:'red'}}
       >
         <Blogger />
         <Menu />
       </Sider>
-      <Layout>
-        <Breadcrumb>
-          <Breadcrumb.Item>
-            <a href="">Home</a>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>
-            <a href="">PHOTO</a>
-          </Breadcrumb.Item>
-          <Breadcrumb.Item>济南 - 千佛山</Breadcrumb.Item>
-        </Breadcrumb>
-        <Footer/>
+      <Layout className="zmain">
+        <Detail/>
       </Layout>
     </Layout>
   )

@@ -2,8 +2,12 @@ body {
     background-color: #fff;
 }
 
+.zmain{
+    padding: 1rem;
+}
+
 .zbox {
-    padding: 15px;
+    padding: 1rem;
     background-color: #fff;
     border-radius: 3px;
     border: 1px solid #eee;
