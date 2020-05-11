@@ -5,7 +5,7 @@ import '../static/style/component/blogger.css'
 
 const Blogger = () => {
     return (
-        <div className="blogger zbox">
+        <div className="blogger">
             <div>
                 <Avatar
                     shape="square"

@@ -11,13 +11,15 @@
 
 .about{
     text-align: center;
-    margin-bottom: 2vh;
 }
 .about>div{
     display: inline-block;
     margin: 0 10px;
 }
 
+.content>div{
+    margin: 2vh 0;
+}
 
 div>img{
     width: 100%;
