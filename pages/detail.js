@@ -1,7 +1,7 @@
 import { Breadcrumb } from 'antd'
 import Footer from '../component/Footer'
 
-import { CalendarFilled, EyeFilled } from '@ant-design/icons';
+import { CalendarFilled, EyeFilled } from '@ant-design/icons'
 
 
 import '../static/style/pages/detail.css'
@@ -25,14 +25,14 @@ const Detail = () => {
             </div>
 
             <div>
-                <div className="title">济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</div>
-                <div className="about">
+                <div className="detail-title">济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</div>
+                <div className="detail-meta">
                     <div><CalendarFilled /> 2020-02-10</div>
                     <div><EyeFilled /> 1553</div>
                 </div>
             </div>
 
-            <div className="content">
+            <div className="detail-content">
                 <div>
                     fdsfasfasdfsdafasflksadfjasdlkfjs adlkf asdl;f jaslf;ajsfk;lja ;sldfja sdfsa d;lf
                 </div>

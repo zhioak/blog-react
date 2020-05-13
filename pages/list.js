@@ -1,140 +1,102 @@
-import { List, message, Spin } from 'antd'
-import { useState, useEffect } from 'react'
+import { Typography, List, Skeleton } from 'antd';
+import AutoList from '../component/AutoList';
+import '../static/style/pages/list.css';
 
-import WindowScroller from 'react-virtualized/dist/commonjs/WindowScroller'
-import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
-import VList from 'react-virtualized/dist/commonjs/List'
-import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
-
-const result = { hasMore: true, data: [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }] }
-
-const AutoList = () => {
-
-  const
-    [data, setData] = useState([]),
-    [hasMore, setHasMore] = useState(true),
-    [loading, setLoading] = useState(false)
-
-  var loadedRowsMap = {}
+const { Title, Paragraph } = Typography;
 
 
-  // 初始化
-  useEffect(() => {
-    fetchData(r => {
-      setData(r.data)
-    })
-  }, [])
+// const result = { hasMore: true, data: [{ url: 'https://zhousb.cn/upload/jagsaw/1.jpg' }, { url: 'https://zhousb.cn/upload/jagsaw/1.jpg' }, { url: 'https://zhousb.cn/upload/jagsaw/1.jpg' }, { url: 'https://zhousb.cn/upload/jagsaw/1.jpg' }, { url: 'https://zhousb.cn/upload/jagsaw/1.jpg' }] }
+const result = {
+  hasMore: true, data: [
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少', gmtCreate: '2020-05-13' },
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
+    { title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' }
+  ]
+}
 
-  const fetchData = cb => {
+
+
+export default ({ type = 1 }) => {
+
+  const ellipsis = {
+    rows: 3,
+    expandable: false
+  }
+
+  const height = 1 == type ? 150 : 300
+
+
+
+  var i = 0
+  const getData = cb => {
+
+
+    if (++i > 10) {
+      result.hasMore = false
+    }
+
+
     setTimeout(() => {
-      console.log('fetch')
-      if (data.length > 19) {
-        result.hasMore = false
-      }
-
-      if (!result.hasMore) {
-        message.warning('已加载全部数据')
-        setLoading(false)
-        setHasMore(false)
-        return
-      }
-
       cb(result)
-
-    }, 1)
+    }, 3000)
 
   }
 
+  const itemRender = item => (
+    <div className="list-item">
 
+      {/* <div className="item-img"
+        style={{
+          height: 300 - 35,
+          backgroundImage: `url(${item.url})`
+        }}
+      >
+      </div> */}
 
-  const loadMoreRows = ({ startIndex, stopIndex }) => {
-    if (!hasMore) {
-      return
-    }
+      <Title level={4} ellipsis={true}>
+        {item.title}
+      </Title>
+      <Paragraph ellipsis={ellipsis}>
+        {item.content}
+      </Paragraph>
 
-    setLoading(true)
-    for (let i = startIndex; i <= stopIndex; i++) {
-      loadedRowsMap[i] = 1
-    }
+      <div className="item-meta">
+        <div>{item.gmtCreate}</div>
+      </div>
+    </div>
+  )
 
-    fetchData(r => {
-      setData(data.concat(r.data))
-      setLoading(false)
-    })
-  }
+  // 占位
+  const seat = (
+    <List
+      itemLayout="horizontal"
+      dataSource={[1, 2, 3]}
+      renderItem={() => (
 
-  const isRowLoaded = ({ index }) => !!loadedRowsMap[index]
-
-  const renderItem = ({ index, key, style }) => {
-    const item = data[index];
-    return (
-      <List.Item key={key} style={style}>
-        <div>
-          <div className="title">
-            作为计算机专业学生，最应该学习的课程前五位是什么？
+        <List.Item className="seat">
+          <div className="list-item">
+            <Skeleton
+              title={{ width: '50%' }}
+              paragraph={{ rows: 3 }}
+              active />
           </div>
-          <div className="content">
-            程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉
-            </div>
-        </div>
-      </List.Item>
-    )
-  }
-
-  const vlist = ({ height, isScrolling, onChildScroll, scrollTop, onRowsRendered, width }) => (
-    <VList
-      autoHeight
-      height={height}
-      isScrolling={isScrolling}
-      onScroll={onChildScroll}
-      overscanRowCount={2}
-      rowCount={data.length}
-      rowHeight={150}
-      rowRenderer={renderItem}
-      onRowsRendered={onRowsRendered}
-      scrollTop={scrollTop}
-      width={width}
+          <Skeleton.Button className="item-meta" size="small" active />
+        </List.Item>
+      )}
     />
   )
 
-  const autoSize = ({ height, isScrolling, onChildScroll, scrollTop, onRowsRendered }) => (
-    <AutoSizer disableHeight>
-      {({ width }) =>
-        vlist({
-          height,
-          isScrolling,
-          onChildScroll,
-          scrollTop,
-          onRowsRendered,
-          width,
-        })
-      }
-    </AutoSizer>
-  )
-
-  const infiniteLoader = ({ height, isScrolling, onChildScroll, scrollTop }) => (
-    <InfiniteLoader
-      isRowLoaded={isRowLoaded}
-      loadMoreRows={loadMoreRows}
-      rowCount={data.length}
-    >
-      {({ onRowsRendered }) =>
-        autoSize({
-          height,
-          isScrolling,
-          onChildScroll,
-          scrollTop,
-          onRowsRendered,
-        })
-      }
-    </InfiniteLoader>
-  )
-
   return (
-    <List>
-      {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}
-      {loading && <Spin />}
-    </List>
+    <AutoList
+      getData={getData}
+      itemRender={itemRender}
+      itemHeight={height}
+      itemSeat={seat}
+    >
+    </AutoList>
   )
+
 }
-export default AutoList

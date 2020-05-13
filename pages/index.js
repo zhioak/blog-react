@@ -1,5 +1,5 @@
-import { Layout } from 'antd'
-import Blogger from '../component/Blogger'
+import { Layout ,BackTop} from 'antd'
+import Profile from '../component/Profile'
 import Menu from '../component/Menu'
 import Detail from '../pages/detail'
 import List from '../pages/list'
@@ -38,12 +38,13 @@ export default () => {
         onCollapse={handleCollapse}
         zeroWidthTriggerStyle={zwts}
       >
-        <Blogger />
+        <Profile />
         <Menu />
       </Sider>
       <div className="zmain">
-          <List />
-          <Footer/>
+        <List />
+        <Footer />
+        <BackTop/>
       </div>
     </Layout>
   )
