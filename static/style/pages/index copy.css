@@ -1,0 +1,13 @@
+.ant-layout{
+    background-color: #fff;
+}
+
+.ant-layout-sider{
+    border-right: 1px solid #eee;
+}
+
+.zmain {
+    flex-grow: 1;
+    max-width: 1200px;
+    padding: 2% 6%;
+}

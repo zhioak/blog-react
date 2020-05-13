@@ -15,22 +15,13 @@ const Sider = () => {
         <>
             <Menu
                 onClick={handleClick}
-                // defaultSelectedKeys={['1']}
-                // defaultOpenKeys={['sub1']}
                 mode="inline"
                 style={{ border: "none" }}
             >
-                <Item
-                    key="5"
-                    icon={<ReadOutlined />}
-                    disabled={true}
-                >
+                <Item key="notes" icon={<ReadOutlined />} disabled={true} >
                     日志
                 </Item>
-                <Item
-                    key="6"
-                    icon={<PictureOutlined />}
-                >
+                <Item key="6" icon={<PictureOutlined />} >
                     相册
                 </Item>
             </Menu>

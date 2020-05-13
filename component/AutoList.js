@@ -6,7 +6,7 @@ import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import VList from 'react-virtualized/dist/commonjs/List'
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
-
+var tasks = 0 // 任务数 
 const AutoList = ({ getData, itemRender, itemHeight = 150, itemSeat }) => {
 
   const
@@ -18,16 +18,16 @@ const AutoList = ({ getData, itemRender, itemHeight = 150, itemSeat }) => {
   useEffect(() => {
     handleData()
   }, [])
-
-
-  var tasks = 0, // 任务数 
-    loadedRowsMap = {}
+ 
+  var loadedRowsMap = {}
 
   const handleData = () => {
-    tasks++
+    
+    ++tasks
+
     getData(r => {
       setData(data.concat(r.data))
-      --tasks < 0 && setLoading(false)
+      --tasks <= 0 && setLoading(false)
       !r.hasMore && setHasMore(false)
     })
   }
