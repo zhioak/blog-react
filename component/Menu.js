@@ -1,16 +1,17 @@
-import { Menu } from 'antd';
+import { Menu } from 'antd'
+import Router from 'next/router'
+import { PictureOutlined, ReadOutlined } from '@ant-design/icons'
 
-import { PictureOutlined, ReadOutlined } from '@ant-design/icons';
+const { Item } = Menu
 
 
-const { SubMenu, ItemGroup, Item } = Menu
+const handleClick = ({ key }) => {
 
-
-const handleClick = e => {
-    console.log('click ', e)
+    console.log(key)
+    Router.push(`/${key}`)
 }
 
-const Sider = () => {
+export default () => {
     return (
         <>
             <Menu
@@ -18,15 +19,13 @@ const Sider = () => {
                 mode="inline"
                 style={{ border: "none" }}
             >
-                <Item key="notes" icon={<ReadOutlined />} disabled={true} >
+                <Item key="list?type=1" icon={<ReadOutlined />}>
                     日志
                 </Item>
-                <Item key="6" icon={<PictureOutlined />} >
+                <Item key="list?type=2" icon={<PictureOutlined />} >
                     相册
                 </Item>
             </Menu>
         </>
     )
 }
-
-export default Sider
