@@ -21,22 +21,20 @@ export default () => {
 
   const [drawerVisible, setDrawerVisible] = useState(false)
 
-  const handleDrawer = () => setDrawerVisible(!drawerVisible)
 
-  const drawerClose = () => setDrawerVisible(false)
-
-
-  const drawerTrigger = (
-    <div onClick={handleDrawer} className={`drawer-tigger`}>
-      <i className="drawer-tigger-icon"></i>
-    </div>
-  )
+  
 
   const sider = (
     <>
       <Profile />
       <Menu />
     </>
+  )
+
+  const drawerTrigger = (
+    <div onClick={() => setDrawerVisible(!drawerVisible)} className={`drawer-tigger`}>
+      <i className="drawer-tigger-icon"></i>
+    </div>
   )
   return (
     <>
@@ -50,8 +48,8 @@ export default () => {
           </Affix>
         </Col>
         <Col xs={24} sm={24} md={18} lg={19} xl={19} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
-          <List />
-          {/* <Detail /> */}
+          {/* <List /> */}
+          <Detail />
           <Footer />
           <BackTop />
         </Col>
@@ -62,7 +60,7 @@ export default () => {
         placement="left"
         width={200}
         closable={false}
-        onClose={drawerClose}
+        onClose={() => setDrawerVisible(false)}
         visible={drawerVisible}
         handler={drawerTrigger}
       >

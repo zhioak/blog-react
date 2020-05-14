@@ -1,29 +1,59 @@
-import { Breadcrumb } from 'antd'
+import { Breadcrumb, Affix } from 'antd'
 import ReactMarkdown from 'react-markdown'
-
+import MarkNav from 'markdown-navbar'
 import { CalendarFilled, EyeFilled } from '@ant-design/icons'
 
 
 import '../static/style/pages/detail.css'
-
+import 'markdown-navbar/dist/navbar.css'
 const { Item } = Breadcrumb;
 
 
 
-let markdown = '# 千佛山游玩的一天\n' +
-    '大致计划为\n' +
-    '1.去**东北**\n' +
-    '2.去**东北**\n' +
-    '3.去**东北**\n' +
-    '***\n' +
-    '引用鲁迅的一句话就是\n' +
-    '> 活得很好啊朋友' +
-    '这是我的*二维码*\n' +
-    '![qrCode](https://zhousb.cn/blog/wechatQR.png) \n' +
-    '这是我做的商品展示\n' +
-    '[mini-mall](https://zhousb.cn/mini-mall/#/) \n' +
-    '我学过这些代码\n' +
-    '`public static void main(){System.out.println("hello world");}`\n'
+
+const blog = {
+    title: '济南 - 千佛山尽快尽快劳动纪律卡萨丁解散',
+    typeStr: '相册',
+    content: '## 加密方式\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' ## 解密方式在纽约\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' ## 东北往事之干活不累\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n'
+
+}
+
+
 
 
 
@@ -31,35 +61,47 @@ let markdown = '# 千佛山游玩的一天\n' +
 
 const Detail = () => {
 
-    return (
-        <div className="detail">
-            <div className="crumb">
-                <Breadcrumb>
-                    <Item>
-                        HOME
-                    </Item>
-                    <Item>
-                        相册
-                    </Item>
-                    <Item>济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</Item>
-                </Breadcrumb>
-            </div>
 
-            <div>
-                <div className="title">济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</div>
-                <div className="detail-meta">
-                    <div><CalendarFilled /> 2020-02-10</div>
-                    <div><EyeFilled /> 1553</div>
+    const { title, typeStr, content } = blog
+
+    return (
+        <>
+            <div className="detail">
+                <div className="crumb">
+                    <Breadcrumb>
+                        <Item>
+                            HOME
+                    </Item>
+                        <Item>
+                            {typeStr}
+                        </Item>
+                        <Item>{title}</Item>
+                    </Breadcrumb>
+                </div>
+                <div>
+                    <div className="title">{title}</div>
+                    <div className="detail-meta">
+                        <div><CalendarFilled /> 2020-02-10</div>
+                        <div><EyeFilled /> 1553</div>
+                    </div>
+                </div>
+
+                <div className="detail-content">
+                    <Affix>
+                        <div className="detail-toc">
+                            <MarkNav
+                                source={content}
+                                ordered={false}
+                            />
+                        </div>
+                    </Affix>
+                    <ReactMarkdown
+                        source={content}
+                        escapeHtml={false}
+                    />
                 </div>
             </div>
-
-            <div className="detail-content">
-                <ReactMarkdown
-                    source={markdown}
-                    escapeHtml={false}
-                />
-            </div>
-        </div>
+        </>
     )
 
 }

@@ -43,6 +43,12 @@
     .item-img-cover {
         height: 0;
     }
+    .item-img:hover .item-img-cover {
+        height: 100%;
+        animation: enter-top .3s ease-in;
+        -webkit-animation: enter-top .3s ease-in;
+        -moz-animation: enter-top .3s ease-in;
+    }
 }
 
 .item-img-meta {
@@ -55,13 +61,6 @@
 
 .item-img-meta>.title {
     margin-bottom: .3em;
-}
-
-.item-img:hover .item-img-cover {
-    height: 100%;
-    animation: enter-top .3s ease-in;
-    -webkit-animation: enter-top .3s ease-in;
-    -moz-animation: enter-top .3s ease-in;
 }
 
 @keyframes enter-top {

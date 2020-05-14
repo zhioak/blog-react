@@ -21,3 +21,21 @@
 .detail-content img{
     max-width: 600px;
 }
+
+
+
+/* 导航 */
+.detail-toc{
+    display: none;
+    position: absolute;
+    right: 0;
+    max-width: 200px;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .detail-toc{
+        display: block;
+    }
+}
