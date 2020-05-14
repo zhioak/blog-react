@@ -7,7 +7,7 @@ import VList from 'react-virtualized/dist/commonjs/List'
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 var tasks = 0 // 任务数 
-const AutoList = ({ getData, itemRender, itemHeight = 150, itemSeat }) => {
+const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeat }) => {
 
   const
     [data, setData] = useState([]),
@@ -18,11 +18,11 @@ const AutoList = ({ getData, itemRender, itemHeight = 150, itemSeat }) => {
   useEffect(() => {
     handleData()
   }, [])
- 
+
   var loadedRowsMap = {}
 
   const handleData = () => {
-    
+
     ++tasks
 
     getData(r => {
@@ -110,7 +110,7 @@ const AutoList = ({ getData, itemRender, itemHeight = 150, itemSeat }) => {
 
 
   return (
-    <List className="list">
+    <List className={className}>
       {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}
       {loading && itemSeat}
     </List>

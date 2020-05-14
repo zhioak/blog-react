@@ -1,3 +1,7 @@
+.list {
+    padding: 2% 5%;
+}
+
 .list-item {
     margin: auto;
     width: 100%;
@@ -12,26 +16,36 @@
 
 /* 图片 */
 
+.item-img-wrap {
+    padding: 8px 0;
+}
+
+.item-img, .seat .item-img-wrap .ant-skeleton-input {
+    height: 260px;
+    border-radius: 5px;
+}
+
 .item-img {
     overflow: hidden;
-    width: 100%;
-    border-radius: 5px;
     border: 1px solid #DCDCDC;
     background-size: cover;
     background-position: center;
-    
 }
 
-.item-img-cover{
+.item-img-cover {
     position: relative;
-    width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, .4);
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .4);
 }
 
+@media (min-width: 576px) {
+    .item-img-cover {
+        height: 0;
+    }
+}
 
-
-.item-img-meta{
+.item-img-meta {
     position: absolute;
     top: 45%;
     width: 100%;
@@ -39,24 +53,19 @@
     text-align: center;
 }
 
-.item-img-meta>.title{
+.item-img-meta>.title {
     margin-bottom: .3em;
 }
 
-
-/* .item-img:hover .item-img-cover {
-    width: 100%;
+.item-img:hover .item-img-cover {
     height: 100%;
-    background: rgba(0, 0, 0, .4);
-
     animation: enter-top .3s ease-in;
     -webkit-animation: enter-top .3s ease-in;
     -moz-animation: enter-top .3s ease-in;
-} */
+}
 
 @keyframes enter-top {
     0% {
-        
         z-index: 0;
         transform: translate3d(0, -100%, 0);
         -webkit-transform: translate3d(0, -100%, 0);
@@ -71,6 +80,7 @@
 }
 
 /* 占位 */
+
 .seat {
     position: relative;
 }

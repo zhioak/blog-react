@@ -44,11 +44,11 @@ export default () => {
     <>
       <Row id="react-content">
 
-        <Col xs={0} sm={0} md={6} lg={5} xl={4} xxl={3}>
+        <Col xs={0} sm={0} md={6} lg={5} xl={5} xxl={4}>
           <div></div>
           {sider}
         </Col>
-        <Col xs={24} sm={24} md={18} lg={19} xl={20} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
+        <Col xs={24} sm={24} md={18} lg={19} xl={19} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
           <List />
           {/* <Detail/> */}
           <Footer />

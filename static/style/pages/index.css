@@ -4,7 +4,7 @@
 
 .zmain {
     max-width: 1200px;
-    padding: 2% 5%;
+    /* padding: 2% 5%; */
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
@@ -54,7 +54,7 @@
 .drawer-tigger {
     position: absolute;
     top: 70px;
-    left: 200px;
+    left: 199px;
     width: 40px;
     height: 40px;
     line-height: 40px;
