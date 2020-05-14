@@ -1,23 +1,57 @@
-
-
-
-.zsider {
-    position: fixed;
-    border-right: 1px solid #eee;
+#react-content{
+    overflow: hidden;
 }
 
 .zmain {
     max-width: 1200px;
     padding: 2% 5%;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+}
+
+.zmain.drawer-open {
+    transform: translateX(200px);
 }
 
 
 
-/* 抽屉菜单 */
+
+
+/* 侧栏 */
+
+.zsider{
+    position: fixed;
+    width: 20%;
+    height: 100%;
+    max-width: 260px;
+    min-width: 200px;
+    border-right: 1px solid #eee;
+}
+
+
+/* 抽屉侧栏 */
+@media (min-width: 768px) {
+    .zdrawer {
+        display: none;
+    }
+    .drawer-tigger{
+        display: none;
+    }
+    .zmain.drawer-open {
+        transform: translateX(0) !important;
+    }
+}
+.ant-drawer.ant-col-sm-8 {
+    max-width: 100% !important;
+}
+
 .ant-drawer-body {
     padding: 0;
 }
-.drawer-handle {
+
+.drawer-tigger {
     position: absolute;
     top: 70px;
     left: 200px;
@@ -42,7 +76,7 @@
     z-index: 100;
 }
 
-.drawer-handle-icon {
+.drawer-tigger-icon {
     position: relative;
     width: 14px;
     height: 2px;
@@ -51,15 +85,15 @@
     -webkit-transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.drawer-handle-icon:before {
+.drawer-tigger-icon:before {
     top: -5px;
 }
 
-.drawer-handle-icon:after {
+.drawer-tigger-icon:after {
     top: 5px;
 }
 
-.drawer-handle-icon:before, .drawer-handle-icon:after {
+.drawer-tigger-icon:before, .drawer-tigger-icon:after {
     content: '';
     display: block;
     position: absolute;
@@ -72,16 +106,16 @@
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.ant-drawer-open .drawer-handle-icon {
+.ant-drawer-open .drawer-tigger-icon {
     background: 0 0;
 }
 
-.ant-drawer-open  .drawer-handle-icon:before {
+.ant-drawer-open .drawer-tigger-icon:before {
     transform: translateY(5px) rotate(45deg);
     -webkit-transform: translateY(5px) rotate(45deg);
 }
 
-.ant-drawer-open  .drawer-handle-icon:after {
+.ant-drawer-open .drawer-tigger-icon:after {
     transform: translateY(-5px) rotate(-45deg);
     -webkit-transform: translateY(-5px) rotate(-45deg);
 }
