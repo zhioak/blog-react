@@ -1,5 +1,5 @@
 import { Breadcrumb } from 'antd'
-import Footer from '../component/Footer'
+import ReactMarkdown from 'react-markdown'
 
 import { CalendarFilled, EyeFilled } from '@ant-design/icons'
 
@@ -8,10 +8,31 @@ import '../static/style/pages/detail.css'
 
 const { Item } = Breadcrumb;
 
+
+
+let markdown = '# 千佛山游玩的一天\n' +
+    '大致计划为\n' +
+    '1.去**东北**\n' +
+    '2.去**东北**\n' +
+    '3.去**东北**\n' +
+    '***\n' +
+    '引用鲁迅的一句话就是\n' +
+    '> 活得很好啊朋友' +
+    '这是我的*二维码*\n' +
+    '![qrCode](https://zhousb.cn/blog/wechatQR.png) \n' +
+    '这是我做的商品展示\n' +
+    '[mini-mall](https://zhousb.cn/mini-mall/#/) \n' +
+    '我学过这些代码\n' +
+    '`public static void main(){System.out.println("hello world");}`\n'
+
+
+
+
+
 const Detail = () => {
 
     return (
-        <>
+        <div className="detail">
             <div className="crumb">
                 <Breadcrumb>
                     <Item>
@@ -25,7 +46,7 @@ const Detail = () => {
             </div>
 
             <div>
-                <div className="detail-title">济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</div>
+                <div className="title">济南 - 千佛山尽快尽快劳动纪律卡萨丁解散</div>
                 <div className="detail-meta">
                     <div><CalendarFilled /> 2020-02-10</div>
                     <div><EyeFilled /> 1553</div>
@@ -33,27 +54,12 @@ const Detail = () => {
             </div>
 
             <div className="detail-content">
-                <div>
-                    fdsfasfasdfsdafasflksadfjasdlkfjs adlkf asdl;f jaslf;ajsfk;lja ;sldfja sdfsa d;lf
-                </div>
-                <div>
-                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588994882256&di=352d50974c874d68d2f547f4f63333f2&imgtype=0&src=http%3A%2F%2Femm.zhengbang.com.cn%2Fbuilder%2Fimages%2Fsinomach%2Fsinomach-logovi-01.jpg" />
-                </div>
-                <div>
-                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588994882256&di=352d50974c874d68d2f547f4f63333f2&imgtype=0&src=http%3A%2F%2Femm.zhengbang.com.cn%2Fbuilder%2Fimages%2Fsinomach%2Fsinomach-logovi-01.jpg" />
-                </div>
-                <div>
-                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588994882256&di=352d50974c874d68d2f547f4f63333f2&imgtype=0&src=http%3A%2F%2Femm.zhengbang.com.cn%2Fbuilder%2Fimages%2Fsinomach%2Fsinomach-logovi-01.jpg" />
-                </div>
-                <div>
-                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588994882256&di=352d50974c874d68d2f547f4f63333f2&imgtype=0&src=http%3A%2F%2Femm.zhengbang.com.cn%2Fbuilder%2Fimages%2Fsinomach%2Fsinomach-logovi-01.jpg" />
-                </div>
-                <div>
-                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1588994882256&di=352d50974c874d68d2f547f4f63333f2&imgtype=0&src=http%3A%2F%2Femm.zhengbang.com.cn%2Fbuilder%2Fimages%2Fsinomach%2Fsinomach-logovi-01.jpg" />
-                </div>
+                <ReactMarkdown
+                    source={markdown}
+                    escapeHtml={false}
+                />
             </div>
-            <Footer />
-        </>
+        </div>
     )
 
 }

@@ -1,4 +1,4 @@
-.detai-title{
+.detail .title{
     margin: 2vh 0;
     text-align: center;
 }
@@ -6,13 +6,14 @@
 .detail-meta{
     text-align: center;
 }
+
 .detail-meta>div{
     display: inline-block;
     margin: 0 10px;
 }
 
 .detail-content{
-    padding: 1rem;
+    padding: 1em;
 }
 .detail-content>div{
     margin: 2vh 0;

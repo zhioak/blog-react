@@ -1,4 +1,4 @@
-import { Row, Col, BackTop, Drawer } from 'antd'
+import { Row, Col, Affix, BackTop, Drawer } from 'antd'
 import { useState } from 'react'
 import Profile from '../component/Profile'
 import Menu from '../component/Menu'
@@ -18,12 +18,6 @@ import Footer from '../component/Footer'
 
 export default () => {
 
-  const sider = (
-    <div className="zsider">
-      <Profile />
-      <Menu />
-    </div>
-  )
 
   const [drawerVisible, setDrawerVisible] = useState(false)
 
@@ -38,19 +32,26 @@ export default () => {
     </div>
   )
 
-
-
+  const sider = (
+    <>
+      <Profile />
+      <Menu />
+    </>
+  )
   return (
     <>
       <Row id="react-content">
 
         <Col xs={0} sm={0} md={6} lg={5} xl={5} xxl={4}>
-          <div></div>
-          {sider}
+          <Affix >
+            <div className="zsider">
+              {sider}
+            </div>
+          </Affix>
         </Col>
         <Col xs={24} sm={24} md={18} lg={19} xl={19} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
           <List />
-          {/* <Detail/> */}
+          {/* <Detail /> */}
           <Footer />
           <BackTop />
         </Col>
