@@ -1,0 +1,14 @@
+.list {
+    padding: 2% 5%;
+}
+
+.list-item {
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* 占位 */
+.seat {
+    position: relative;
+}

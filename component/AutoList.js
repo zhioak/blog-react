@@ -6,6 +6,7 @@ import AutoSizer from 'react-virtualized/dist/commonjs/AutoSizer'
 import VList from 'react-virtualized/dist/commonjs/List'
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
+
 var tasks = 0 // 任务数 
 const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeat }) => {
 

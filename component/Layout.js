@@ -41,7 +41,7 @@ export default ({ main }) => {
                         </div>
                     </Affix>
                 </Col>
-                <Col xs={24} sm={24} md={18} lg={19} xl={19} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
+                <Col xs={24} sm={24} md={18} lg={19} xl={19} xxl={20} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
                     {main}
                     <Footer />
                     <BackTop />

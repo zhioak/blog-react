@@ -3,8 +3,9 @@
 }
 
 .zmain {
+    overflow: hidden;
     max-width: 1300px;
-    margin-top: 2%;
+    margin-top: 2vh;
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);

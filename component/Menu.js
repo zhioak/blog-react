@@ -13,19 +13,13 @@ const handleClick = ({ key }) => {
 
 export default () => {
     return (
-        <>
-            <Menu
-                onClick={handleClick}
-                mode="inline"
-                style={{ border: "none" }}
-            >
-                <Item key="list?type=1" icon={<ReadOutlined />}>
-                    日志
-                </Item>
-                <Item key="list?type=2" icon={<PictureOutlined />} >
-                    相册
-                </Item>
-            </Menu>
-        </>
+        <Menu
+            onClick={handleClick}
+            mode="inline"
+            style={{ border: "none" }}
+        >
+            <Item key="notes" icon={<ReadOutlined />}>日志</Item>
+            <Item key="album" icon={<PictureOutlined />} > 相册</Item>
+        </Menu>
     )
 }

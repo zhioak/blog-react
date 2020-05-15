@@ -6,7 +6,8 @@ import '../static/style/pages/detail.css'
 
 // markdown 解析
 import marked from 'marked'
-import hljs from "highlight.js"
+import hljs from 'highlight.js'
+
 import 'highlight.js/styles/monokai-sublime.css'
 
 // 博客导航
@@ -17,9 +18,10 @@ const blog = {
     title: '济南 - 千佛山尽快尽快劳动纪律卡萨丁解散',
     typeStr: '相册',
     content: '## 加密方式\n\n' +
+        ' >比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' ```{name:"zhou,age:17"}```\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
-        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比巴布比比巴布比比巴布比比巴布比比比巴布比比巴布\n\n' +
-        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        ' ![狮子](https://tvax1.sinaimg.cn/large/6f8a2832gy1gdrccpw1lij21z418g7o1.jpg)\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴巴布比比巴布比比巴布比比巴布比比布比比巴布比比巴布\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴布比巴布比比巴布比比巴布比比巴布比比比巴布比比巴布\n\n' +
@@ -51,31 +53,34 @@ const blog = {
         ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴巴布比比巴布比比布比比巴巴布比比巴布比比布比比巴布\n\n' +
         ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
-        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n'
+        ' 比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
+        '```css\n\n' +
+        'public static void main(String[] args){\n\n' +
+        '   System.out.println("hellow world"); \n\n' +
+        '} \n\n' +
+        '```\n\n'
 
 }
 
+const renderer = new marked.Renderer()
+
+marked.setOptions({
+    renderer: renderer,
+    gfm: true,
+    pedantic: false,
+    sanitize: false,
+    tables: true,
+    breaks: false,
+    smartLists: true,
+    smartypants: false,
+    highlight: function (code) {
+        return hljs.highlightAuto(code).value
+    }
+})
+
 
 export default () => {
-
     const { title, typeStr, content } = blog
-    const renderer = new marked.Renderer()
-
-    marked.setOptions({
-        renderer: renderer,
-        gfm: true,
-        pedantic: false,
-        sanitize: false,
-        tables: true,
-        breaks: false,
-        smartLists: true,
-        smartypants: false,
-        highlight: (code) => {
-            return hljs.highlightAuto(code).value
-        }
-    })
-
-    const contentHTML = marked(content)
 
     const detail = (
         <div className="detail">
@@ -94,18 +99,18 @@ export default () => {
                 </div>
             </div>
 
+            <Affix>
+                <div className="detail-toc">
+                    <MarkNav
+                        source={content}
+                        ordered={false}
+                    />
+                </div>
+            </Affix>
             <div className="detail-content" >
-
-                <Affix>
-                    <div className="detail-toc">
-                        <MarkNav
-                            source={content}
-                            ordered={false}
-                        />
-                    </div>
-                </Affix>
-                <div dangerouslySetInnerHTML={{ __html: contentHTML }}></div>
+                <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
             </div>
+
         </div>
     )
 
