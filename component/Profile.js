@@ -8,7 +8,7 @@ const profile = {
     name: 'zhou',
     avatar: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2292059386,809594845&fm=26&gp=0.jpg',
     email: 'flyingnoob@qq.com',
-    wechatQR: 'https://zhousb.cn/blog/wechatQR.png',
+    wechatQR: 'https://zhousb.cn/resource/wechatQR.png',
     github: 'https://github.com/er222er'
 }
 
