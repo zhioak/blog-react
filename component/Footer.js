@@ -3,7 +3,7 @@ import '../static/style/component/footer.css'
 
 export default () => {
     
-    console.log('profile render')
+    console.log('footer render')
 
     return (
         <div className="footer">

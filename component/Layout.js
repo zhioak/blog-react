@@ -1,6 +1,7 @@
 import { Row, Col, Affix, BackTop, Drawer } from 'antd'
-import { useState } from 'react'
+import { useState, useMemo, createContext } from 'react'
 import Profile from '../component/Profile'
+import Sider from '../component/Sider'
 import Menu from '../component/Menu'
 import Footer from '../component/Footer'
 
@@ -13,57 +14,46 @@ import '../static/style/component/layout.css'
 // xl: ≥1200
 // xxl: ≥1600
 
-export default ({ main,selectedKeys }) => {
+export const drawerVisibleContext = createContext()
 
-    
-    console.log('layout render')
-
+export default ({ main, selectedKeys }) => {
 
     const [drawerVisible, setDrawerVisible] = useState(false)
 
-    const sider = (
-        <>
-            <Profile />
-            <Menu 
-                selectedKeys={selectedKeys}
-            />
-        </>
-    )
+    console.log('layout render')
 
-    const drawerTrigger = (
-        <div onClick={() => setDrawerVisible(!drawerVisible)} className={`drawer-tigger`}>
-            <i className="drawer-tigger-icon"></i>
-        </div>
-    )
+
+    const profile = useMemo(() => (<Profile />), [])
+
+    const menu = useMemo(() => (<Menu selectedKeys={selectedKeys} />), [selectedKeys])
+
+    const footer = useMemo(() => (<Footer />), [])
 
     return (
         <>
             <Row id="react-content">
                 <Col xs={0} sm={0} md={6} lg={5} xl={4} xxl={3}>
                     <Affix >
-                        <div className="zsider">
-                            {sider}
-                        </div>
+
+                        <drawerVisibleContext.Provider value={{ drawerVisible, setDrawerVisible }}>
+                            <Sider
+                                bodyRender={() => (
+                                    <>
+                                        {profile}
+                                        {menu}
+                                    </>
+                                )}
+                            />
+                        </drawerVisibleContext.Provider>
+
                     </Affix>
                 </Col>
                 <Col xs={24} sm={24} md={18} lg={19} xl={20} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
                     {main}
-                    <Footer />
+                    {footer}
                     <BackTop />
                 </Col>
             </Row>
-
-            <Drawer
-                className="zdrawer"
-                placement="left"
-                width={200}
-                closable={false}
-                onClose={() => setDrawerVisible(false)}
-                visible={drawerVisible}
-                handler={drawerTrigger}
-            >
-                {sider}
-            </Drawer>
         </>
     )
 }

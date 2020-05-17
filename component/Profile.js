@@ -13,9 +13,10 @@ const profile = {
 }
 
 const size = 25,
-    trigger = ['click','hover' ]
+    trigger = ['click','hover']
 
 const Profile = () => {
+
     const { name, avatar, email, wechatQR, github } = profile
 
     console.log('profile render')
