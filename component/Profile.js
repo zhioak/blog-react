@@ -18,6 +18,7 @@ const size = 25,
 const Profile = () => {
     const { name, avatar, email, wechatQR, github } = profile
 
+    console.log('profile render')
 
     return (
         <div className="profile">

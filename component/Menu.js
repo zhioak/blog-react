@@ -10,6 +10,9 @@ const handleClick = ({ key }) => {
 }
 
 export default ({ selectedKeys }) => {
+    
+    console.log('menu render')
+
     return (
         <Menu
             onClick={handleClick}

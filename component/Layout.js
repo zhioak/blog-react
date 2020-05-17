@@ -15,6 +15,10 @@ import '../static/style/component/layout.css'
 
 export default ({ main,selectedKeys }) => {
 
+    
+    console.log('layout render')
+
+
     const [drawerVisible, setDrawerVisible] = useState(false)
 
     const sider = (
@@ -35,7 +39,6 @@ export default ({ main,selectedKeys }) => {
     return (
         <>
             <Row id="react-content">
-
                 <Col xs={0} sm={0} md={6} lg={5} xl={4} xxl={3}>
                     <Affix >
                         <div className="zsider">
@@ -61,7 +64,6 @@ export default ({ main,selectedKeys }) => {
             >
                 {sider}
             </Drawer>
-
         </>
     )
 }
