@@ -1,19 +1,28 @@
-.imgs-wrap {
-    /* margin-top: 10em; */
-    padding: 10% 2em ;
+.hair-wrap {
+    margin: 5em 2em 0;
+}
+
+.hair-wrap>.title {
+    text-align: center;
+}
+
+.imgs-x {
+    padding: 7em 0;
+    border-right: 1px solid #eee;
     overflow-x: auto;
     white-space: nowrap;
 }
 
-.imgs-wrap>div {
+.imgs-x>div {
     display: inline-block;
     max-width: 350px;
     margin-right: 30px;
 }
 
-.imgs-wrap>div>img {
+.imgs-x>div>img {
     border-radius: 3px;
 }
-.imgs-wrap .arrow{
-    vertical-align: text-top;   
+
+.imgs-x .arrow {
+    vertical-align: text-top;
 }

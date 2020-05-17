@@ -17,7 +17,7 @@ var i = 0
 
 const
   height = 300,
-  preNum = 4,
+  preNum = 2,
   
   getData = cb => {
 
@@ -83,5 +83,8 @@ const
   )
 
 export default () => (
-  <Layout main={list} />
+  <Layout
+    main={list}
+    selectedKeys={['/album']}
+  />
 )

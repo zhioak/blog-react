@@ -23,14 +23,14 @@ const result = {
 const renderer = new marked.Renderer()
 
 marked.setOptions({
-    renderer: renderer,
-    gfm: true,
-    pedantic: false,
-    sanitize: false,
-    tables: true,
-    breaks: false,
-    smartLists: true,
-    smartypants: false
+  renderer: renderer,
+  gfm: true,
+  pedantic: false,
+  sanitize: false,
+  tables: true,
+  breaks: false,
+  smartLists: true,
+  smartypants: false
 })
 
 
@@ -40,7 +40,7 @@ var i = 0
 const
   height = 150,
   rows = 3,
-  preNum = 4,
+  preNum = 3,
 
   getData = cb => {
     if (++i > 2) {
@@ -92,5 +92,8 @@ const
 
 
 export default () => (
-  <Layout main={list} />
+  <Layout
+    main={list}
+    selectedKeys={['/notes']}
+  />
 )

@@ -3,9 +3,9 @@
 }
 
 .zmain {
-    /* overflow: hidden; */
-    /* max-width: 1300px; */
+    max-width: 1350px;
     margin-top: 2vh;
+    padding: 2%;
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
@@ -20,7 +20,7 @@
 .zsider{
     height: 100vh;
     max-width: 260px;
-    min-width: 200px;
+    min-width: 150px;
     border-right: 1px solid #eee;
 }
 
