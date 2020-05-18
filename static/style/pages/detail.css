@@ -1,11 +1,6 @@
-.detail {
-    margin: 0 1em;
-}
-
 .detail .title {
-    margin: 2vh 20%;
+    margin: 2vh 0;
     text-align: center;
-    max-width: 80%;
 }
 
 .detail-meta {
@@ -15,10 +10,6 @@
 .detail-meta>div {
     display: inline-block;
     margin: 0 10px;
-}
-
-.detail-content {
-    padding: .5em;
 }
 
 .detail-content>div {
@@ -44,6 +35,10 @@
 @media (min-width: 768px) {
     .detail-toc {
         display: block;
+    }
+    .detail .title {
+        margin: 2vh 20%;
+        max-width: 80%;
     }
 }
 

@@ -15,6 +15,11 @@ import '../static/style/component/layout.css'
 // xl: ≥1200
 // xxl: ≥1600
 
+
+
+/**
+ * 公用布局，左右格式
+ */
 export const siderVisibleContext = createContext()
 
 export default ({ main, selectedKeys }) => {

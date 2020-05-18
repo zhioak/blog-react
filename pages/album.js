@@ -33,15 +33,15 @@ const
 
   render = item => (
     <div className="list-item">
-      <div className="item-img-wrap">
+      <div className="album-img-wrap">
 
-        <div className="item-img"
+        <div className="album-img"
           style={{
             backgroundImage: `url(${item.url})`
           }}
         >
-          <div className="item-img-cover">
-            <div className="item-img-meta">
+          <div className="album-cover">
+            <div className="album-meta">
               <div className="title">{item.title}</div>
               <div>
                 <span>{item.place}</span>
@@ -55,7 +55,7 @@ const
     </div>
   ),
 
-  seat = (
+  seatRender = (
     <List
       itemLayout="horizontal"
       dataSource={[...Array(preNum).keys()]}
@@ -63,7 +63,7 @@ const
 
         <List.Item className="seat">
           <div className="list-item">
-            <div className="item-img-wrap">
+            <div className="album-img-wrap">
               <Skeleton.Input active />
             </div>
           </div>
@@ -78,7 +78,7 @@ const
       getData={getData}
       itemHeight={height}
       itemRender={render}
-      itemSeat={seat}
+      itemSeatRender={seatRender}
     />
   )
 

@@ -1,28 +1,30 @@
-.hair-wrap {
-    margin: 5em 2em 0;
-}
 
-.hair-wrap>.title {
+.hair-record{
+    
+    margin-top: 5vh;
+    border-right: 1px solid #eee;
+}
+.hair-record>.title{
+    line-height: 100px;
     text-align: center;
 }
 
-.imgs-x {
-    padding: 7em 0;
-    border-right: 1px solid #eee;
+.img-row {
     overflow-x: auto;
     white-space: nowrap;
+    padding: 50px 0;
 }
 
-.imgs-x>div {
+.img-row>div {
     display: inline-block;
-    max-width: 350px;
+    max-width: 200px;
     margin-right: 30px;
 }
 
-.imgs-x>div>img {
+.img-row>div>img {
     border-radius: 3px;
 }
 
-.imgs-x .arrow {
+.img-row .arrow {
     vertical-align: text-top;
 }

@@ -4,13 +4,10 @@ import { HomeOutlined, PictureOutlined, ReadOutlined, UserOutlined } from '@ant-
 
 const { Item } = Menu
 
-
 const handleClick = ({ key }) => {
     Router.push(key)
 }
-
 export default ({ selectedKeys }) => {
-    
     console.log('menu render')
 
     return (

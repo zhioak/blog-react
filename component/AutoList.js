@@ -7,8 +7,16 @@ import VList from 'react-virtualized/dist/commonjs/List'
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 
+/**
+ * 无限滚动列表组件
+ * getData 获取数据的方式,返回数据为 {data:DATA,hasMore:HASMORE}
+ * itemRender 单元素渲染
+ * itemSeatRender   加载时的占位
+ */
+
+
 var tasks = 0 // 任务数 
-const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeat }) => {
+const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {
 
   const
     [data, setData] = useState([]),
@@ -113,7 +121,7 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeat }
   return (
     <List className={className}>
       {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}
-      {loading && itemSeat}
+      {loading && itemSeatRender}
     </List>
   )
 }
