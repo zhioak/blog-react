@@ -1,5 +1,5 @@
 import Layout from '../component/Layout'
-import { Breadcrumb, Affix } from 'antd'
+import { Affix } from 'antd'
 import { CalendarFilled, EyeFilled } from '@ant-design/icons'
 
 import '../static/style/pages/detail.css'
@@ -16,7 +16,10 @@ import 'markdown-navbar/dist/navbar.css'
 
 const blog = {
     title: '济南 - 千佛山尽快尽快劳动纪律卡萨丁解散',
-    typeStr: '相册',
+    type: {
+        key: 'notes',
+        lable: '日志'
+    },
     content: '## 加密方式\n\n' +
         ' >比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n' +
         ' ```{name:"zhou,age:17"}```\n\n' +
@@ -79,40 +82,65 @@ marked.setOptions({
 })
 
 
-export default () => {
-    const { title, typeStr, content } = blog
+const detail = ({ title, type, content }) => {
 
-    const detail = (
-        <div className="detail">
-            <div className="crumb">
-                <Breadcrumb>
-                    <Breadcrumb.Item>HOME</Breadcrumb.Item>
-                    <Breadcrumb.Item>{typeStr}</Breadcrumb.Item>
-                    <Breadcrumb.Item>{title}</Breadcrumb.Item>
-                </Breadcrumb>
-            </div>
-            <div>
-                <div className="title">{title}</div>
-                <div className="detail-meta">
-                    <div><CalendarFilled /> 2020-02-10</div>
-                    <div><EyeFilled /> 1553</div>
+    console.log(title)
+
+    // const { title, typeStr, content } = blog
+
+
+    return (
+        <Layout
+            selectedKeys={['/notes']}
+            main={(
+                <div className="detail">
+                    <div>
+                        <div className="title">{title}</div>
+                        <div className="detail-meta">
+                            <div><CalendarFilled /> 2020-02-10</div>
+                            <div><EyeFilled /> 1553</div>
+                        </div>
+                    </div>
+
+                    <Affix>
+                        <div className="detail-toc">
+                            <MarkNav
+                                source={content}
+                                ordered={false}
+                            />
+                        </div>
+                    </Affix>
+
+                    <div className="detail-content" >
+                        <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+                    </div>
+
                 </div>
-            </div>
-
-            <Affix>
-                <div className="detail-toc">
-                    <MarkNav
-                        source={content}
-                        ordered={false}
-                    />
-                </div>
-            </Affix>
-            <div className="detail-content" >
-                <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
-            </div>
-
-        </div>
+            )}
+        />
     )
-
-    return (<Layout main={detail} />)
 }
+
+
+detail.getInitialProps = async (context) => {
+
+
+    console.log(context.query.id)
+
+
+    const promise = new Promise((resolve) => {
+        setTimeout(() => {
+            resolve({
+                title: blog.title,
+                type: blog.type,
+                content: blog.content
+            })
+        }, 1000)
+    })
+    return await promise
+
+}
+
+
+
+export default detail

@@ -16,6 +16,7 @@ import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 
 var tasks = 0 // 任务数 
+
 const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {
 
   const
@@ -31,9 +32,7 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
   var loadedRowsMap = {}
 
   const handleData = () => {
-
     ++tasks
-
     getData(r => {
       setData(data.concat(r.data))
       --tasks <= 0 && setLoading(false)
@@ -125,4 +124,5 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     </List>
   )
 }
+
 export default AutoList

@@ -42,6 +42,20 @@
 }
 
 @media (min-width: 576px) {
+
+    .notes-title,.notes-preview:hover{
+        cursor: pointer;
+    }
+
+    .notes-title:hover {
+        color: rgba(0, 0, 0, .7)
+    }
+    .notes-preview:hover {
+        color: rgba(0, 0, 0, 0.5);
+    }
+
+
+
     .album-cover {
         height: 0;
     }
