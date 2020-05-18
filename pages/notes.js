@@ -1,20 +1,14 @@
 import { Typography, List, Spin, Skeleton } from 'antd'
-
 import { useState } from 'react'
-
 import Router from 'next/router'
+
 import AutoList from '../component/AutoList'
 import Layout from '../component/Layout'
+import { ICON_LOAD } from '../config/common'
 
-import { LoadingOutlined } from '@ant-design/icons'
-
-
-import '../static/style/pages/list.css'
+import '../static/style/pages/notes.css'
 
 const { Title, Paragraph } = Typography
-const loadIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
-
-
 
 
 const
@@ -72,7 +66,7 @@ export default () => {
     })
   }
 
-  
+
   const render = item => (
     <div className="list-item">
       <Title className="notes-title" level={4} ellipsis={true} onClick={() => viewDetail(item.id)}> {item.title} </Title>
@@ -86,7 +80,7 @@ export default () => {
   )
 
   const list = (
-    <Spin indicator={loadIcon} spinning={spinning}>
+    <Spin indicator={ICON_LOAD} spinning={spinning}>
       <AutoList
         className="list"
         getData={getData}

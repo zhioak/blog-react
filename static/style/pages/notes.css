@@ -1,0 +1,49 @@
+.notes-title {
+    font-size: 1.2rem !important;
+}
+
+.notes-meta {
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    height: 18px !important;
+}
+
+@media (min-width: 576px) {
+
+    .notes-title,.notes-preview:hover{
+        cursor: pointer;
+    }
+
+    .notes-title:hover {
+        color: rgba(0, 0, 0, .7)
+    }
+
+    .notes-preview:hover {
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* 占位 */
+.seat {
+    position: relative;
+}
+
+.list-item .ant-skeleton-content .ant-skeleton-title {
+    height: 17px;
+    margin-top: 10px;
+}
+
+.list-item .ant-skeleton-content .ant-skeleton-title+.ant-skeleton-paragraph {
+    margin-top: 17px;
+    margin-bottom: 23px;
+}
+
+.list-item .ant-skeleton-content .ant-skeleton-paragraph>li {
+    height: 14px;
+}
+
+.list-item .ant-skeleton-content .ant-skeleton-paragraph>li+li {
+    margin-top: 8px;
+}

@@ -34,7 +34,6 @@ const Profile = () => {
                 <Tooltip trigger={trigger} title={(<img src={wechatQR} />)} placement="bottom" overlayStyle={{ width: 200 }} >
                     <Avatar size={size} icon={<WechatFilled />} className="contact" />
                 </Tooltip>
-                
                 <Tooltip title={github}>
                     <a href={github} target="_blank">
                         <Avatar size={size} icon={<GithubFilled />} className="contact" />

@@ -13,8 +13,6 @@ import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
  * itemRender 单元素渲染
  * itemSeatRender   加载时的占位
  */
-
-
 var tasks = 0 // 任务数 
 
 const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {

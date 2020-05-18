@@ -1,7 +1,12 @@
-import { List, Skeleton } from 'antd'
+import { List, Skeleton,Spin } from 'antd'
+import { useState } from 'react'
+import Router from 'next/router'
+
 import AutoList from '../component/AutoList'
 import Layout from '../component/Layout'
-import '../static/style/pages/list.css'
+import { ICON_LOAD } from '../config/common'
+
+import '../static/style/pages/album.css'
 
 const result = {
   hasMore: true, data: [
@@ -17,8 +22,8 @@ var i = 0
 
 const
   height = 300,
-  preNum = 2,
-  
+  preview = 2,
+
   getData = cb => {
 
     if (++i > 2) {
@@ -30,15 +35,43 @@ const
     }, 3000)
   },
 
+  seatRender = (
+    <List
+      itemLayout="horizontal"
+      dataSource={[...Array(preview).keys()]}
+      renderItem={() => (
 
-  render = item => (
+        <List.Item className="seat">
+          <div className="list-item">
+            <div className="album-img-wrap">
+              <Skeleton.Input active />
+            </div>
+          </div>
+        </List.Item>
+      )}
+    />
+  )
+
+export default () => {
+
+  const [spinning, setSpinning] = useState(false)
+
+  const viewDetail = id => {
+    setSpinning(true)
+    Router.push({
+      pathname: '/detail',
+      query: { id }
+    })
+  }
+
+  const render = item=> (
     <div className="list-item">
       <div className="album-img-wrap">
-
-        <div className="album-img"
+        <div className="album-img" 
           style={{
             backgroundImage: `url(${item.url})`
           }}
+          onClick={() => viewDetail(item.id)}
         >
           <div className="album-cover">
             <div className="album-meta">
@@ -53,38 +86,26 @@ const
         </div>
       </div>
     </div>
-  ),
-
-  seatRender = (
-    <List
-      itemLayout="horizontal"
-      dataSource={[...Array(preNum).keys()]}
-      renderItem={() => (
-
-        <List.Item className="seat">
-          <div className="list-item">
-            <div className="album-img-wrap">
-              <Skeleton.Input active />
-            </div>
-          </div>
-        </List.Item>
-      )}
-    />
-  ),
-
-  list = (
-    <AutoList
-      className="list"
-      getData={getData}
-      itemHeight={height}
-      itemRender={render}
-      itemSeatRender={seatRender}
-    />
   )
 
-export default () => (
-  <Layout
-    main={list}
-    selectedKeys={['/album']}
-  />
-)
+  const list = (
+    <Spin indicator={ICON_LOAD} spinning={spinning}>
+      <AutoList
+        className="list"
+        getData={getData}
+        itemHeight={height}
+        itemRender={render}
+        itemSeatRender={seatRender}
+      />
+
+    </Spin>
+  )
+
+  return (
+    <Layout
+      main={list}
+      selectedKeys={['/album']}
+    />
+  )
+}
+
