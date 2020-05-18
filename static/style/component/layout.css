@@ -12,6 +12,7 @@
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
+/* 当侧栏打开时 */
 .zmain.drawer-open {
     transform: translateX(200px);
 }

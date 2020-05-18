@@ -1,12 +1,13 @@
-import { useState,useContext } from 'react'
-import {Drawer } from 'antd'
-import  {drawerVisibleContext} from './Layout'
+import { useContext } from 'react'
+import { Drawer } from 'antd'
+import { siderVisibleContext } from './Layout'
+
 import '../static/style/component/sider.css'
 
 
-export default ({ bodyRender }) => {
-    const [drawerVisible, setDrawerVisible] = useContext(drawerVisibleContext)
-
+export default ({ render }) => {
+    
+    const { siderVisible: drawerVisible, setSiderVisible: setDrawerVisible } = useContext(siderVisibleContext)
 
     const drawerTrigger = (
         <div onClick={() => setDrawerVisible(!drawerVisible)} className={`drawer-tigger`}>
@@ -17,7 +18,7 @@ export default ({ bodyRender }) => {
     return (
         <>
             <div className="zsider">
-                {bodyRender}
+                {render}
             </div>
             <Drawer
                 className="zdrawer"
@@ -28,7 +29,7 @@ export default ({ bodyRender }) => {
                 visible={drawerVisible}
                 handler={drawerTrigger}
             >
-                {bodyRender}
+                {render}
             </Drawer>
         </>
     )

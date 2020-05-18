@@ -1,5 +1,6 @@
 import { Row, Col, Affix, BackTop, Drawer } from 'antd'
 import { useState, useMemo, createContext } from 'react'
+
 import Profile from '../component/Profile'
 import Sider from '../component/Sider'
 import Menu from '../component/Menu'
@@ -14,11 +15,11 @@ import '../static/style/component/layout.css'
 // xl: ≥1200
 // xxl: ≥1600
 
-export const drawerVisibleContext = createContext()
+export const siderVisibleContext = createContext()
 
 export default ({ main, selectedKeys }) => {
 
-    const [drawerVisible, setDrawerVisible] = useState(false)
+    const [siderVisible, setSiderVisible] = useState(false)
 
     console.log('layout render')
 
@@ -34,21 +35,19 @@ export default ({ main, selectedKeys }) => {
             <Row id="react-content">
                 <Col xs={0} sm={0} md={6} lg={5} xl={4} xxl={3}>
                     <Affix >
-
-                        <drawerVisibleContext.Provider value={{ drawerVisible, setDrawerVisible }}>
+                        <siderVisibleContext.Provider value={{ siderVisible, setSiderVisible }}>
                             <Sider
-                                bodyRender={() => (
+                                render={(
                                     <>
                                         {profile}
                                         {menu}
                                     </>
                                 )}
                             />
-                        </drawerVisibleContext.Provider>
-
+                        </siderVisibleContext.Provider>
                     </Affix>
                 </Col>
-                <Col xs={24} sm={24} md={18} lg={19} xl={20} xxl={21} className={`zmain ${drawerVisible ? 'drawer-open' : ''}`}>
+                <Col xs={24} sm={24} md={18} lg={19} xl={20} xxl={21} className={`zmain ${siderVisible ? 'drawer-open' : ''}`}>
                     {main}
                     {footer}
                     <BackTop />
