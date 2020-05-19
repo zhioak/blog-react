@@ -10,9 +10,6 @@ const { Item } = Menu
 
 export default ({ selectedKeys }) => {
 
-    console.log('menu render')
-
-
     const [spinning, setSpinning] = useState(false)
 
     const handleClick = ({ key }) => {
@@ -32,11 +29,11 @@ export default ({ selectedKeys }) => {
                 selectedKeys={selectedKeys}
                 style={{ border: "none" }}
             >
-                <Item key="/" icon={<HomeOutlined />}> 首页</Item>
-                <Item key="/notes" icon={<ReadOutlined />}> 日志</Item>
-                <Item key="/album" icon={<PictureOutlined />} > 相册</Item>
-                <Item key="/java" icon={<CoffeeOutlined />} disabled> JAVA</Item>
-                <Item key="/about" icon={<UserOutlined />} disabled > 关于</Item>
+                <Item key="/" icon={<HomeOutlined />}>首页</Item>
+                <Item key="/notes" icon={<ReadOutlined />}>日志</Item>
+                <Item key="/album" icon={<PictureOutlined />} >相册</Item>
+                <Item key="/java" icon={<CoffeeOutlined />} disabled>AVA</Item>
+                <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
             </Menu>
         </Spin>
     )

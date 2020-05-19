@@ -1,60 +1,58 @@
-import { List, Skeleton,Spin } from 'antd'
-import { useState } from 'react'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 import Router from 'next/router'
+import { List, Skeleton, Spin, message } from 'antd'
 
-import AutoList from '../component/AutoList'
 import Layout from '../component/Layout'
-import { ICON_LOAD } from '../config/common'
+import AutoList from '../component/AutoList'
+import { ICON_LOAD, LIST_URL, SUCCESS_CODE } from '../config/common'
 
 import '../static/style/pages/album.css'
 
-const result = {
-  hasMore: true, data: [
-    { url: 'https://tvax1.sinaimg.cn/large/6f8a2832gy1gdrccpw1lij21z418g7o1.jpg', title: '游千佛山', place: '济南' },
-    { url: 'https://tvax1.sinaimg.cn/large/6f8a2832gy1gdrccpw1lij21z418g7o1.jpg', title: '游千佛山', place: '济南' },
-    { url: 'https://tvax1.sinaimg.cn/large/6f8a2832gy1gdrccpw1lij21z418g7o1.jpg', title: '游千佛山', place: '济南' },
-    { url: 'https://zhousb.cn/upload/jagsaw/1.jpg', title: '游千佛山', place: '济南' },
-    { url: 'https://zhousb.cn/upload/jagsaw/1.jpg', title: '游千佛山', place: '济南' }
-  ]
-}
-
-var i = 0
 
 const
   height = 300,
   preview = 2,
+  type = 'album'
 
-  getData = cb => {
+let page = 1
 
-    if (++i > 2) {
-      result.hasMore = false
+const getData = cb => {
+  let form = new FormData()
+  form.append('page', page++)
+  form.append('type', type)
+  axios.post(LIST_URL, form).then(
+    (res) => {
+      const { code, info, data } = res.data
+      if (code != SUCCESS_CODE) {
+        return message.warning(info)
+      }
+      cb(data)
     }
-
-    setTimeout(() => {
-      cb(result)
-    }, 3000)
-  },
-
-  seatRender = (
-    <List
-      itemLayout="horizontal"
-      dataSource={[...Array(preview).keys()]}
-      renderItem={() => (
-
-        <List.Item className="seat">
-          <div className="list-item">
-            <div className="album-img-wrap">
-              <Skeleton.Input active />
-            </div>
-          </div>
-        </List.Item>
-      )}
-    />
   )
+}
 
-export default () => {
+const seatRender = (
+  <List
+    dataSource={[...Array(preview).keys()]}
+    renderItem={() => (
+      <List.Item className="seat">
+        <div className="list-item">
+          <div className="album-img-wrap">
+            <Skeleton.Input active />
+          </div>
+        </div>
+      </List.Item>
+    )}
+  />
+)
 
+const album = () => {
   const [spinning, setSpinning] = useState(false)
+
+  console.log('album render')
+
+
 
   const viewDetail = id => {
     setSpinning(true)
@@ -64,20 +62,19 @@ export default () => {
     })
   }
 
-  const render = item=> (
+  const render = item => (
     <div className="list-item">
       <div className="album-img-wrap">
-        <div className="album-img" 
-          style={{
-            backgroundImage: `url(${item.url})`
-          }}
+        <div
+          className="album-img"
+          style={{ backgroundImage: `url(${item.preview})` }}
           onClick={() => viewDetail(item.id)}
         >
           <div className="album-cover">
             <div className="album-meta">
               <div className="title">{item.title}</div>
               <div>
-                <span>{item.place}</span>
+                <span>{item.remark}</span>
                 <span> · </span>
                 <span>2019-05-01</span>
               </div>
@@ -97,7 +94,6 @@ export default () => {
         itemRender={render}
         itemSeatRender={seatRender}
       />
-
     </Spin>
   )
 
@@ -109,3 +105,4 @@ export default () => {
   )
 }
 
+export default album

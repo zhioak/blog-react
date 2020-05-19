@@ -11,10 +11,12 @@ img {
     font-size: 1.4rem;
 }
 
-
 .list-item {
     margin: auto;
     width: 100%;
     max-width: 800px;
 }
 
+.anticon {
+    margin-right: .5rem;
+}

@@ -25,10 +25,7 @@ export const siderVisibleContext = createContext()
 export default ({ main, selectedKeys }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
-
-    console.log('layout render')
-
-
+    
     const profile = useMemo(() => (<Profile />), [])
 
     const menu = useMemo(() => (<Menu selectedKeys={selectedKeys} />), [selectedKeys])

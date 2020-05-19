@@ -7,8 +7,6 @@ import '../static/style/component/footer.css'
  */
 export default () => {
     
-    console.log('footer render')
-
     return (
         <div className="footer">
             <div>Powered by React & Ant Desgin</div>

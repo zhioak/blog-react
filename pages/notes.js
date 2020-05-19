@@ -1,10 +1,11 @@
-import { Typography, List, Spin, Skeleton } from 'antd'
-import { useState } from 'react'
+import axios from 'axios'
 import Router from 'next/router'
+import { useState } from 'react'
+import { Typography, List, Spin, Skeleton, message } from 'antd'
 
-import AutoList from '../component/AutoList'
 import Layout from '../component/Layout'
-import { ICON_LOAD } from '../config/common'
+import AutoList from '../component/AutoList'
+import { ICON_LOAD, LIST_URL, SUCCESS_CODE } from '../config/common'
 
 import '../static/style/pages/notes.css'
 
@@ -12,49 +13,56 @@ const { Title, Paragraph } = Typography
 
 
 const
-  height = 150,
   rows = 3,
-  preview = 3
+  type = 'notes',
+  height = 150,
+  preview = 2
 
 // 获取数据
 
-var i = 0
+
+
+let page = 1
 const getData = cb => {
-
-  console.log('getData')
-
-  if (++i > 2) {
-    result.hasMore = false
-  }
-
-  setTimeout(() => {
-    cb(result)
-  }, 100)
+  let form = new FormData()
+  form.append('page', page++)
+  form.append('type', type)
+  axios.post(LIST_URL, form).then(
+    (res) => {
+      const { code, info, data } = res.data
+      if (code != SUCCESS_CODE) {
+        return message.warning(info)
+      }
+      cb(data)
+    }
+  )
 }
-
 
 const seatRender = (
   <List
-    itemLayout="horizontal"
     dataSource={[...Array(preview).keys()]}
-    renderItem={() => (<List.Item className="seat">
-      <div className="list-item">
-        <Skeleton
-          title={{ width: '50%' }}
-          paragraph={{ rows: rows }}
-          active
-        />
-      </div>
-      <div className="notes-meta">
-        <Skeleton.Button size="small" active />
-      </div>
-    </List.Item>)}
+    renderItem={() => (
+      <List.Item className="seat">
+        <div className="list-item">
+          <Skeleton
+            title={{ width: '50%' }}
+            paragraph={{ rows: rows }}
+            active
+          />
+        </div>
+        <div className="notes-meta">
+          <Skeleton.Button
+            size="small"
+            active />
+        </div>
+      </List.Item>)}
   />
 )
 
 
+const notes = () => {
 
-export default () => {
+  console.log('notes render')
 
   const [spinning, setSpinning] = useState(false)
 
@@ -66,18 +74,29 @@ export default () => {
     })
   }
 
-
   const render = item => (
     <div className="list-item">
-      <Title className="notes-title" level={4} ellipsis={true} onClick={() => viewDetail(item.id)}> {item.title} </Title>
-      <Paragraph className="notes-preview" ellipsis={{ rows: rows, expandable: false }} onClick={() => viewDetail(item.id)} >
-        {item.content}
+      <Title
+        className="notes-title"
+        level={4}
+        ellipsis={true}
+        onClick={() => viewDetail(item.id)}
+      >
+        {item.title}
+      </Title>
+      <Paragraph
+        className="notes-preview"
+        ellipsis={{ rows: rows, expandable: false }}
+        onClick={() => viewDetail(item.id)}
+      >
+        {item.preview}
       </Paragraph>
       <div className="notes-meta">
         <div>{item.gmtCreate}</div>
       </div>
     </div>
   )
+
 
   const list = (
     <Spin indicator={ICON_LOAD} spinning={spinning}>
@@ -100,15 +119,4 @@ export default () => {
 }
 
 
-
-// 临时数据
-const result = {
-  hasMore: true, data: [
-    { id: 1, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少', gmtCreate: '2020-05-13' },
-    { id: 2, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '加密方式比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布{name:"zhou,age:17"}比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布', gmtCreate: '2020-05-13' },
-    { id: 3, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '加密方式  比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布  {name:"zhou,age:17"}  比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布  ', gmtCreate: '2020-05-13' },
-    { id: 4, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
-    { id: 5, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '程序员吴师兄： 不知不觉自己的程序员生涯已经有 6 年。变秃了，也变强了。 如果让我回到大学生涯，我一定会认认真真的学习下面的课程，起码我的头发可以少掉', gmtCreate: '2020-05-13' },
-    { id: 6, title: '作为计算机专业学生，最应该学习的课程前五位是什么？', content: '## 加密方式\n\n>比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n ```{name:"zhou,age:17"}```比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布比比巴布\n\n', gmtCreate: '2020-05-13' }
-  ]
-}
+export default notes

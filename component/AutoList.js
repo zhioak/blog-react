@@ -7,39 +7,41 @@ import VList from 'react-virtualized/dist/commonjs/List'
 import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 
-/**
- * 无限滚动列表组件
- * getData 获取数据的方式,返回数据为 {data:DATA,hasMore:HASMORE}
- * itemRender 单元素渲染
- * itemSeatRender   加载时的占位
- */
-var tasks = 0 // 任务数 
 
+var tasks = 0, // 任务数
+  hasMore = true
+
+
+/**
+* 无限滚动列表
+* getData 获取数据的方式,返回数据为 {data:DATA,hasMore:HASMORE}
+* itemRender 单元素渲染
+* itemSeatRender   加载时的占位
+*/
 const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {
 
-  const
-    [data, setData] = useState([]),
-    [hasMore, setHasMore] = useState(true),
-    [loading, setLoading] = useState(true)
+  console.log(`autolist render`)
+  console.log(hasMore)
 
-  // 初始化
+  const [data, setData] = useState(),
+    [loading, setLoading] = useState(false)
+
   useEffect(() => {
-    handleData()
+    getData(r => {
+      hasMore = r.hasMore
+      setData(r.list)
+    })
   }, [])
 
-  var loadedRowsMap = {}
-
-  const handleData = () => {
-    ++tasks
-    getData(r => {
-      setData(data.concat(r.data))
-      --tasks <= 0 && setLoading(false)
-      !r.hasMore && setHasMore(false)
-    })
+  // 未获取到数据使用seat占位
+  if (!data) {
+    console.log('init 占位')
+    return itemSeatRender
   }
 
+  console.log('大行其道')
+  var loadedRowsMap = {}
   const loadMoreRows = ({ startIndex, stopIndex }) => {
-
     if (!hasMore) return
 
     setLoading(true)
@@ -47,10 +49,13 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
       loadedRowsMap[i] = 1
     }
 
-    handleData()
+    ++tasks
+    getData(r => {
+      setData(data.concat(r.list))
+      --tasks <= 0 && setLoading(false)
+      hasMore = r.hasMore
+    })
   }
-
-
 
   const
     renderItem = ({ index, key, style }) => {
@@ -92,8 +97,6 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
       </AutoSizer>
     )
 
-
-
   const
     isRowLoaded = ({ index }) => !!loadedRowsMap[index],
     infiniteLoader = ({ height, isScrolling, onChildScroll, scrollTop }) => (
@@ -113,8 +116,6 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
         }
       </InfiniteLoader>
     )
-
-
   return (
     <List className={className}>
       {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}
@@ -122,5 +123,6 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     </List>
   )
 }
+
 
 export default AutoList
