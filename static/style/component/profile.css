@@ -3,9 +3,12 @@
     text-align: center;
     padding: 2em;
 }
-.contacts{
+.profile>div:first-child{
+    margin-bottom: 2vh;;
+}
+/* .contacts{
     margin-top: 2vh;
 }
 .contact{
     margin: 0 7px;
-}
+}   */

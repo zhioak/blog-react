@@ -1,5 +1,6 @@
 #root {
     overflow: hidden;
+    min-width: 300px;
 }
 
 #root>div {
@@ -24,6 +25,11 @@
     .root-lose {
         transform: translateX(0) !important;
     }
+}
+
+#topstory{
+    margin: .4em auto;
+    max-width: 1200px;
 }
 
 /* .zmain {

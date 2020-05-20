@@ -1,8 +1,10 @@
 import { Row, Col } from 'antd'
 import { useContext, useMemo } from 'react'
+
 import { GithubOutlined } from '@ant-design/icons'
 
 import Menu from './Menu'
+import Social from './Social'
 import { siderContext } from './Layout'
 
 import '../static/style/component/header.css'
@@ -37,7 +39,8 @@ const Header = ({ menuKeys }) => {
                         {menu}
                     </Col>
                     <Col className="header-right" xs={8} sm={8} md={4} >
-                        <a>GitHub <GithubOutlined /></a>
+                        <Social/>
+                        {/* <a>GitHub <GithubOutlined /></a> */}
                     </Col>
                 </Row>
             </div>

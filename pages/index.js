@@ -1,50 +1,25 @@
 import Layout from '../component/Layout'
 
+import Banner from '../component/Banner'
+
 import { LineChartOutlined, RightOutlined } from '@ant-design/icons'
 import '../static/style/pages/index.css'
 
+// https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ
 
-const hairs = (
-  <div className="hair-record">
-    <div className="title"><LineChartOutlined /> 发量年记</div>
-    <div className="img-row">
-      <div>
-        <span className="title">2016</span>
-      </div>
-      <div>
-        <img src="https://zhousb.cn/resource/hair_2018.png" />
-      </div>
 
-      <div>
-        <RightOutlined className="arrow" /><span className="title">2017</span>
-      </div>
-      <div>
-        <img src="https://zhousb.cn/resource/hair_2018.png" />
-      </div>
-      <div>
-        <RightOutlined className="arrow" /><span className="title">2018</span>
-      </div>
-      <div>
-        <img src="https://zhousb.cn/resource/hair_2018.png" />
-      </div>
-      <div>
-        <RightOutlined className="arrow" /><span className="title">2019</span>
-      </div>
-      <div>
-        <img src="https://zhousb.cn/resource/hair_2018.png" />
-      </div>
 
-      <div>
-        <RightOutlined className="arrow" /><span className="title">END</span>
-      </div>
-    </div>
-  </div>
+const banner = (
+  <Banner
+    bg={'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ'}
+    title="记录生活,分享技术"
+    desc={<p>用于构建用户界面的 JavaScript 库</p>}
+  />
 )
-
 
 const index = () => (
   <Layout
-    // main={hairs}
+    banner={banner}
     menuKeys={['/']}
   />
 )
