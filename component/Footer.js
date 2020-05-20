@@ -5,8 +5,9 @@ import '../static/style/component/footer.css'
 /**
  * 公用页脚
  */
-export default () => {
-    
+const Footer = () => {
+
+    console.log('footer render')
     return (
         <div className="footer">
             <div>Powered by React & Ant Desgin</div>
@@ -16,3 +17,5 @@ export default () => {
         </div>
     )
 }
+
+export default Footer

@@ -100,7 +100,7 @@ const album = () => {
   return (
     <Layout
       main={list}
-      selectedKeys={['/album']}
+      menuKeys={['/album']}
     />
   )
 }

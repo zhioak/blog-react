@@ -44,8 +44,8 @@ const hairs = (
 
 const index = () => (
   <Layout
-    main={hairs}
-    selectedKeys={['/']}
+    // main={hairs}
+    menuKeys={['/']}
   />
 )
 

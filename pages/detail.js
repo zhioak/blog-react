@@ -65,14 +65,14 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
             </div>
             <div className="detail-nav">
                 {prev && <a href={`?id=${prev.id}`}><LeftOutlined />{prev.title}</a>}
-                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined/></a>}
+                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined className="end"/></a>}
             </div>
         </div>
     )
 
     return (
         <Layout
-            selectedKeys={[backPath]}
+        menuKeys={[backPath]}
             main={main}
         />
     )

@@ -111,7 +111,7 @@ const notes = () => {
   return (
     <Layout
       main={list}
-      selectedKeys={['/notes']}
+      menuKeys={['/notes']}
     />
   )
 }

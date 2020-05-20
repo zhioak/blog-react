@@ -46,14 +46,9 @@
     height: 70px;
     line-height: 70px
 }
- .nav-next{
+.nav-next{
      text-align: right;
 } 
-
-.nav-next>.anticon {
-    margin-left: .5rem;
-    margin-right: 0;
-}
 
 /* markdown解析 */
 

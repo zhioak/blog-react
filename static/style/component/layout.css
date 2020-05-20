@@ -1,18 +1,33 @@
-#react-content{
+#root {
     overflow: hidden;
 }
 
-
-.zmain {
-    overflow: hidden;
-    padding: 2vh 4%;
-    max-width: 1350px;
+#root>div {
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.zmain.drawer-open {
+.root-lose {
     transform: translateX(200px);
 }
+
+.sider .ant-drawer-body{
+    padding: 0;
+}
+
+@media (min-width: 768px) {
+    .sider {
+        display: none;
+    }
+    .root-lose {
+        transform: translateX(0) !important;
+    }
+}
+
+/* .zmain {
+    overflow: hidden;
+    padding: 2vh 4%;
+    max-width: 1350px;
+} */

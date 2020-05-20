@@ -1,9 +1,8 @@
-import { Row, Col, Affix, BackTop } from 'antd'
+import { Affix, BackTop } from 'antd'
 import { useState, useMemo, createContext } from 'react'
 
-import Profile from '../component/Profile'
+import Header from '../component/Header'
 import Sider from '../component/Sider'
-import Menu from '../component/Menu'
 import Footer from '../component/Footer'
 
 import '../static/style/component/layout.css'
@@ -16,45 +15,40 @@ import '../static/style/component/layout.css'
 // xxl: ≥1600
 
 
-
 /**
- * 公用布局，左右格式
+ * 公用布局
  */
-export const siderVisibleContext = createContext()
+export const siderContext = createContext()
 
-export default ({ main, selectedKeys }) => {
+export default ({ main, menuKeys }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
 
-    const profile = useMemo(() => (<Profile />), [])
-
-    const menu = useMemo(() => (<Menu selectedKeys={selectedKeys} />), [selectedKeys])
-
     const footer = useMemo(() => (<Footer />), [])
+
+    const sider = useMemo(() => (
+        <siderContext.Provider value={{ siderVisible, setSiderVisible }}>
+            <Sider
+                className="sider"
+                menuKeys={menuKeys}
+            />
+        </siderContext.Provider>
+    ), [siderVisible])
 
     return (
         <>
-            <Row id="react-content">
-                <Col xs={0} sm={0} md={6} lg={5} xl={4} xxl={3}>
-                    <Affix >
-                        <siderVisibleContext.Provider value={{ siderVisible, setSiderVisible }}>
-                            <Sider
-                                render={(
-                                    <>
-                                        {profile}
-                                        {menu}
-                                    </>
-                                )}
-                            />
-                        </siderVisibleContext.Provider>
+            <div id="root">
+                <div className={`${siderVisible ? 'root-lose' : ''}`}>
+                    <Affix offsetTop={0}>
+                        <siderContext.Provider value={{ setSiderVisible }}>
+                            <Header menuKeys={menuKeys}/>
+                        </siderContext.Provider>
                     </Affix>
-                </Col>
-                <Col xs={24} sm={24} md={18} lg={19} xl={20} xxl={21} className={`zmain ${siderVisible ? 'drawer-open' : ''}`}>
-                    {main}
                     {footer}
                     <BackTop />
-                </Col>
-            </Row>
+                </div>
+            </div>
+            {sider}
         </>
     )
 }

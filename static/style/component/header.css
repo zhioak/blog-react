@@ -1,43 +1,53 @@
-.zsider{
-    height: 100vh;
-    max-width: 260px;
-    min-width: 150px;
-    border-right: 1px solid #eee;
-}
-
-@media (min-width: 768px) {
-    .zdrawer {
-        display: none;
-    }
-    .drawer-tigger{
-        display: none;
-    }
-    .zmain.drawer-open {
-        transform: translateX(0) !important;
-    }
-}
-
-.ant-drawer.ant-col-sm-8 {
-    max-width: 100% !important;
-}
-
-.ant-drawer-body {
-    padding: 0;
-}
-
-.drawer-tigger {
-    position: absolute;
-    top: 100px;
-    left: 200px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    font-size: 16px;
-    text-align: center;
-    border-radius: 0 4px 4px 0;
-    box-shadow: 4px 0 10px -3px rgba(0, 0, 0, .15);
+.header {
+    padding: 0 5%;
+    line-height: 2.8rem;
     background-color: #fff;
-    display: -webkit-box;
+    border-bottom: 1px solid #eee
+}
+
+.header-wrap {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.logo {
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: block;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .logo{
+        text-align: left;
+    }
+}
+
+.header-right {
+    text-align: right;
+}
+
+.header-right a{
+    vertical-align: sub;
+    color: rgba(0, 0, 0, .65);
+}
+.header-right a:hover{
+    color:  rgba(0, 0, 0, .5);
+}
+
+
+/* 侧栏控制 */
+.header .ant-row{
+    height: 100%;
+}
+
+.tigger-wrap{
+    height: 100%;
+}
+
+
+.sider-tigger {
+    width: 14px;
+    height: 100%;
     display: -ms-flexbox;
     display: flex;
     cursor: pointer;
@@ -47,10 +57,9 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    z-index: 100;
 }
 
-.drawer-tigger-icon {
+.sider-tigger-icon {
     position: relative;
     width: 14px;
     height: 2px;
@@ -59,15 +68,15 @@
     -webkit-transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.drawer-tigger-icon:before {
+.sider-tigger-icon:before {
     top: -5px;
 }
 
-.drawer-tigger-icon:after {
+.sider-tigger-icon:after {
     top: 5px;
 }
 
-.drawer-tigger-icon:before, .drawer-tigger-icon:after {
+.sider-tigger-icon:before, .sider-tigger-icon:after {
     content: '';
     display: block;
     position: absolute;
@@ -80,16 +89,17 @@
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.ant-drawer-open .drawer-tigger-icon {
+/* 侧栏打开 */
+.root-lose .sider-tigger-icon {
     background: 0 0;
 }
 
-.ant-drawer-open .drawer-tigger-icon:before {
+.root-lose .sider-tigger-icon:before {
     transform: translateY(5px) rotate(45deg);
     -webkit-transform: translateY(5px) rotate(45deg);
 }
 
-.ant-drawer-open .drawer-tigger-icon:after {
+.root-lose .sider-tigger-icon:after {
     transform: translateY(-5px) rotate(-45deg);
     -webkit-transform: translateY(-5px) rotate(-45deg);
 }

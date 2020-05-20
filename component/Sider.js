@@ -1,36 +1,37 @@
-import { useContext } from 'react'
+
 import { Drawer } from 'antd'
-import { siderVisibleContext } from './Layout'
+import { useMemo, useContext } from 'react'
 
-import '../static/style/component/sider.css'
+import Menu from '../component/Menu'
+import Profile from '../component/Profile'
 
+import { siderContext } from './Layout'
 
-export default ({ render }) => {
-    
-    const { siderVisible: drawerVisible, setSiderVisible: setDrawerVisible } = useContext(siderVisibleContext)
+/**
+ * 小屏侧栏
+ */
+const Sider = ({ className, menuKeys }) => {
 
-    const drawerTrigger = (
-        <div onClick={() => setDrawerVisible(!drawerVisible)} className={`drawer-tigger`}>
-            <i className="drawer-tigger-icon"></i>
-        </div>
-    )
-    
+    console.log('sider render')
+
+    const { siderVisible, setSiderVisible } = useContext(siderContext)
+
+    const menu = useMemo(() => (<Menu selectedKeys={menuKeys} />), [])
+    const profile = useMemo(() => (<Profile />), [])
+
     return (
-        <>
-            <div className="zsider">
-                {render}
-            </div>
-            <Drawer
-                className="zdrawer"
-                placement="left"
-                width={200}
-                closable={false}
-                onClose={() => setDrawerVisible(false)}
-                visible={drawerVisible}
-                handler={drawerTrigger}
-            >
-                {render}
-            </Drawer>
-        </>
+        <Drawer
+            className={className}
+            placement="left"
+            width={200}
+            closable={false}
+            onClose={() => setSiderVisible(false)}
+            visible={siderVisible}
+        >
+            {profile}
+            {menu}
+        </Drawer>
     )
 }
+
+export default Sider

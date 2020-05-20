@@ -8,13 +8,19 @@ import { ICON_LOAD } from '../config/common'
 const { Item } = Menu
 
 
-export default ({ selectedKeys }) => {
+
+
+
+
+export default ({ selectedKeys,mode = "vertical" }) => {
+
+    console.log('menu render')
 
     const [spinning, setSpinning] = useState(false)
 
     const handleClick = ({ key }) => {
 
-        if ( !selectedKeys.includes(key)) {
+        if (!selectedKeys || !selectedKeys.includes(key)) {
             setSpinning(true)
             Router.push(key)
         }
@@ -24,8 +30,8 @@ export default ({ selectedKeys }) => {
     return (
         <Spin indicator={ICON_LOAD} spinning={spinning}>
             <Menu
+                mode={mode}
                 onClick={handleClick}
-                mode="inline"
                 selectedKeys={selectedKeys}
                 style={{ border: "none" }}
             >
