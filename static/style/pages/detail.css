@@ -13,13 +13,7 @@
     margin: 0 10px;
 }
 
-.detail-content>div {
-    margin: 2vh 0;
-}
 
-.detail-content img {
-    max-width: 600px;
-}
 
 /* 文章导航 */
 .detail-toc {
@@ -42,7 +36,37 @@
     }
 }
 
+/* 文章页面 */
+.detail-nav{
+    border-top: 1px solid #eee
+}
+.detail-nav>a{
+    display: inline-block;
+    width: 50%;
+    height: 70px;
+    line-height: 70px
+}
+ .nav-next{
+     text-align: right;
+} 
+
+.nav-next>.anticon {
+    margin-left: .5rem;
+    margin-right: 0;
+}
+
 /* markdown解析 */
+
+
+.detail-content{
+    margin: 2vh 0;
+}
+
+.detail-content img {
+    display: block;
+    margin: auto;
+    max-width: 600px;
+}
 
 pre {
     padding: .5em;

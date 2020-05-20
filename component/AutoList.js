@@ -9,8 +9,9 @@ import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 
 var tasks = 0, // 任务数
-  hasMore = true
 
+  page,
+  hasMore
 
 /**
 * 无限滚动列表
@@ -21,13 +22,15 @@ var tasks = 0, // 任务数
 const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {
 
   console.log(`autolist render`)
-  console.log(hasMore)
 
   const [data, setData] = useState(),
     [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getData(r => {
+
+    page = 1
+    hasMore = true
+    getData(page, r => {
       hasMore = r.hasMore
       setData(r.list)
     })
@@ -35,11 +38,9 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
 
   // 未获取到数据使用seat占位
   if (!data) {
-    console.log('init 占位')
     return itemSeatRender
   }
 
-  console.log('大行其道')
   var loadedRowsMap = {}
   const loadMoreRows = ({ startIndex, stopIndex }) => {
     if (!hasMore) return
@@ -50,7 +51,7 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     }
 
     ++tasks
-    getData(r => {
+    getData(++page, r => {
       setData(data.concat(r.list))
       --tasks <= 0 && setLoading(false)
       hasMore = r.hasMore
@@ -116,6 +117,7 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
         }
       </InfiniteLoader>
     )
+
   return (
     <List className={className}>
       {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}

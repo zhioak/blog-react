@@ -1,4 +1,4 @@
-import { Row, Col, Affix, BackTop, Drawer } from 'antd'
+import { Row, Col, Affix, BackTop } from 'antd'
 import { useState, useMemo, createContext } from 'react'
 
 import Profile from '../component/Profile'
@@ -25,7 +25,7 @@ export const siderVisibleContext = createContext()
 export default ({ main, selectedKeys }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
-    
+
     const profile = useMemo(() => (<Profile />), [])
 
     const menu = useMemo(() => (<Menu selectedKeys={selectedKeys} />), [selectedKeys])

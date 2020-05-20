@@ -10,6 +10,8 @@ export const LIST_URL = gate + 'blog/list'
 
 export const SUCCESS_CODE = '0000'
 
+export const DATE_FORMAT = 'YYYY-MM-DD'
+
 /**
  * 加载样式
  */

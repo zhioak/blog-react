@@ -1,11 +1,13 @@
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+
+import moment from 'moment'
 import Router from 'next/router'
 import { List, Skeleton, Spin, message } from 'antd'
 
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
-import { ICON_LOAD, LIST_URL, SUCCESS_CODE } from '../config/common'
+import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
 import '../static/style/pages/album.css'
 
@@ -15,11 +17,9 @@ const
   preview = 2,
   type = 'album'
 
-let page = 1
-
-const getData = cb => {
+const getData = (page, cb) => {
   let form = new FormData()
-  form.append('page', page++)
+  form.append('page', page)
   form.append('type', type)
   axios.post(LIST_URL, form).then(
     (res) => {
@@ -76,7 +76,7 @@ const album = () => {
               <div>
                 <span>{item.remark}</span>
                 <span> · </span>
-                <span>2019-05-01</span>
+                <span>{moment(item.gmtCreate).format(DATE_FORMAT)}</span>
               </div>
             </div>
           </div>

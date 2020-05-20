@@ -4,8 +4,6 @@ import { LineChartOutlined, RightOutlined } from '@ant-design/icons'
 import '../static/style/pages/index.css'
 
 
-
-
 const hairs = (
   <div className="hair-record">
     <div className="title"><LineChartOutlined /> 发量年记</div>
@@ -44,9 +42,11 @@ const hairs = (
 )
 
 
-export default () => (
+const index = () => (
   <Layout
     main={hairs}
     selectedKeys={['/']}
   />
 )
+
+export default index

@@ -5,9 +5,9 @@ import marked from 'marked'
 import moment from 'moment'
 import hljs from 'highlight.js'
 import Layout from '../component/Layout'
-import { DETAIL_URL, SUCCESS_CODE } from '../config/common'
+import { DETAIL_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
-import { CalendarFilled, EyeFilled } from '@ant-design/icons'
+import { CalendarFilled, EyeFilled ,LeftOutlined,RightOutlined} from '@ant-design/icons'
 
 import '../static/style/pages/detail.css'
 import 'highlight.js/styles/monokai-sublime.css'
@@ -29,9 +29,7 @@ marked.setOptions({
 })
 
 
-const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate }) => {
-
-
+const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, next }) => {
     if (error) {
         return (
             <Result
@@ -42,8 +40,6 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate }) => {
             />
         )
     }
-
-
 
     let backPath = `/${type}`
     let main = (
@@ -60,12 +56,16 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate }) => {
             <div>
                 <div className="title">{title}</div>
                 <div className="detail-meta">
-                    <div><CalendarFilled />{moment(gmtCreate).format('YYYY-MM-DD')}</div>
+                    <div><CalendarFilled />{moment(gmtCreate).format(DATE_FORMAT)}</div>
                     <div><EyeFilled />{pv}</div>
                 </div>
             </div>
             <div className="detail-content" >
                 <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+            </div>
+            <div className="detail-nav">
+                {prev && <a href={`?id=${prev.id}`}><LeftOutlined />{prev.title}</a>}
+                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined/></a>}
             </div>
         </div>
     )

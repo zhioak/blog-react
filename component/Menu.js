@@ -14,7 +14,7 @@ export default ({ selectedKeys }) => {
 
     const handleClick = ({ key }) => {
 
-        if (!selectedKeys.includes(key)) {
+        if ( !selectedKeys.includes(key)) {
             setSpinning(true)
             Router.push(key)
         }
@@ -32,7 +32,7 @@ export default ({ selectedKeys }) => {
                 <Item key="/" icon={<HomeOutlined />}>首页</Item>
                 <Item key="/notes" icon={<ReadOutlined />}>日志</Item>
                 <Item key="/album" icon={<PictureOutlined />} >相册</Item>
-                <Item key="/java" icon={<CoffeeOutlined />} disabled>AVA</Item>
+                <Item key="/java" icon={<CoffeeOutlined />} disabled>JAVA</Item>
                 <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
             </Menu>
         </Spin>

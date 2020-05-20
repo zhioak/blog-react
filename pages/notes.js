@@ -1,11 +1,13 @@
 import axios from 'axios'
+
+import moment from 'moment'
 import Router from 'next/router'
 import { useState } from 'react'
 import { Typography, List, Spin, Skeleton, message } from 'antd'
 
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
-import { ICON_LOAD, LIST_URL, SUCCESS_CODE } from '../config/common'
+import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
 import '../static/style/pages/notes.css'
 
@@ -19,11 +21,7 @@ const
   preview = 2
 
 // 获取数据
-
-
-
-let page = 1
-const getData = cb => {
+const getData = (page, cb) => {
   let form = new FormData()
   form.append('page', page++)
   form.append('type', type)
@@ -92,7 +90,7 @@ const notes = () => {
         {item.preview}
       </Paragraph>
       <div className="notes-meta">
-        <div>{item.gmtCreate}</div>
+        <div>{moment(item.gmtCreate).format(DATE_FORMAT)}</div>
       </div>
     </div>
   )
