@@ -25,6 +25,7 @@ const Sider = ({ className, menuKeys }) => {
             placement="left"
             width={200}
             closable={false}
+            maskStyle={{backgroundColor:'transparent'}}
             onClose={() => setSiderVisible(false)}
             visible={siderVisible}
         >
