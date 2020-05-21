@@ -28,8 +28,16 @@
 }
 
 #topstory{
-    margin: .4em auto;
+    margin: 0 auto;
     max-width: 1200px;
+}
+
+#main{
+    padding: 2vh 4%;
+}
+
+#sticky{
+    padding: 2vh 0;
 }
 
 /* .zmain {

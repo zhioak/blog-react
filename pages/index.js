@@ -3,10 +3,6 @@ import Layout from '../component/Layout'
 import Banner from '../component/Banner'
 import '../static/style/pages/index.css'
 
-// https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ
-
-
-
 const banner = (
   <Banner
     bg={'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ'}

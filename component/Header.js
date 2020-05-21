@@ -18,7 +18,7 @@ const Header = ({ menuKeys }) => {
 
     return (
         <div className="header">
-            <div className="header-wrap">
+            <div className="header-holder">
                 <Row justify="center">
                     <Col xs={16} sm={16} md={4} >
                         <Row>

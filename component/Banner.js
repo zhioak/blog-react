@@ -1,6 +1,7 @@
 
 import '../static/style/component/banner.css'
 
+
 const Banner = ({ bg, title, desc }) => (
     <div className="banner" style={{ backgroundImage: `url(${bg})` }}>
         <div className="banner-holder">

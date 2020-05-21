@@ -21,9 +21,8 @@ export const siderContext = createContext()
 
 
 
-const Layout = ({ banner, main, menuKeys }) => {
+const Layout = ({ banner, main, sticky, menuKeys }) => {
 
-    console.log(banner)
 
     const [siderVisible, setSiderVisible] = useState(false)
 
@@ -38,6 +37,29 @@ const Layout = ({ banner, main, menuKeys }) => {
         </siderContext.Provider>
     ), [siderVisible])
 
+    const topstory = useMemo(() => (
+        <div id="topstory">
+            <Row>
+                {main && sticky ?
+                    <>
+                        <Col id="main" xs={24} sm={24} md={24} lg={18}>
+                            {main}
+                        </Col>
+                        <Col id="sticky" xs={0} sm={0} md={0} lg={6}>
+                            {sticky}
+                        </Col>
+                    </>
+                    :
+                    <Col id="main" xs={24} sm={24} md={24}>
+                        {main}
+                    </Col>
+                }
+
+            </Row>
+        </div>
+    ), [])
+
+
     return (
         <>
             <div id="root">
@@ -48,16 +70,7 @@ const Layout = ({ banner, main, menuKeys }) => {
                         </siderContext.Provider>
                     </Affix>
                     {banner}
-                    <div id="topstory">
-                        <Row>
-                            <Col id="main" xs={24} sm={24} md={24} lg={18}>
-                                {main}
-                            </Col>
-                            <Col id="sticky" xs={0} sm={0} md={0} lg={18}>
-                            </Col>
-                        </Row>
-                    </div>
-
+                    {topstory}
                     {footer}
                     <BackTop />
                 </div>

@@ -38,13 +38,13 @@ const Social = ({ mode }) => {
     if ('grid' == mode) {
         return (
             <Row className='social'>
-                <Col xs={0} sm={0} md={0} lg={5} xl={4}>
+                <Col xs={0} sm={0} md={0} lg={5}>
                     {email}
                 </Col>
-                <Col xs={0} sm={0} md={8} lg={5} xl={4}>
+                <Col xs={0} sm={0} md={8} lg={5}>
                     {wechat}
                 </Col>
-                <Col xs={24} sm={24} md={8} lg={5} xl={4}>
+                <Col xs={24} sm={24} md={8} lg={5} >
                     {github}
                 </Col>
             </Row>

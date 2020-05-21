@@ -5,6 +5,7 @@ import Router from 'next/router'
 import { useState } from 'react'
 import { Typography, List, Spin, Skeleton, message } from 'antd'
 
+import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
 import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
@@ -12,7 +13,6 @@ import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common
 import '../static/style/pages/notes.css'
 
 const { Title, Paragraph } = Typography
-
 
 const
   rows = 3,
@@ -31,12 +31,16 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      cb(data)
+      setTimeout(()=>{
+        cb(data)
+
+      },1000)
     }
   )
 }
 
 const seatRender = (
+
   <List
     dataSource={[...Array(preview).keys()]}
     renderItem={() => (
@@ -47,15 +51,26 @@ const seatRender = (
             paragraph={{ rows: rows }}
             active
           />
-        </div>
-        <div className="notes-meta">
-          <Skeleton.Button
-            size="small"
-            active />
+
+          <div className="notes-meta">
+            <Skeleton.Button
+              size="small"
+              active />
+          </div>
         </div>
       </List.Item>)}
   />
 )
+
+
+const banner = (
+  <Banner
+    bg={'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ'}
+    title="记录生活 分享技术"
+    desc={<p>编程是一门艺术，生活亦是如此</p>}
+  />
+)
+
 
 
 const notes = () => {
@@ -110,6 +125,7 @@ const notes = () => {
 
   return (
     <Layout
+      banner={banner}
       main={list}
       menuKeys={['/notes']}
     />

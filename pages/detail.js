@@ -1,18 +1,28 @@
 
-import { Breadcrumb, Result, Button } from 'antd'
+import { Breadcrumb, Result, Button,Affix } from 'antd'
 import axios from 'axios'
 import marked from 'marked'
 import moment from 'moment'
 import hljs from 'highlight.js'
+import Tocify from '../component/Tocify.tsx'
+
 import Layout from '../component/Layout'
 import { DETAIL_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
-import { CalendarFilled, EyeFilled ,LeftOutlined,RightOutlined} from '@ant-design/icons'
+
+
+import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import '../static/style/pages/detail.css'
 import 'highlight.js/styles/monokai-sublime.css'
 
+
+const tocify = new Tocify()
 const renderer = new marked.Renderer()
+renderer.heading = (text, level, raw) => {
+    const anchor = tocify.add(text, level);
+    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+}
 
 marked.setOptions({
     renderer: renderer,
@@ -65,15 +75,23 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
             </div>
             <div className="detail-nav">
                 {prev && <a href={`?id=${prev.id}`}><LeftOutlined />{prev.title}</a>}
-                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined className="end"/></a>}
+                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined className="end" /></a>}
             </div>
         </div>
     )
 
+    let sticky = (
+        <Affix offsetTop={5}>
+        <div className="detail-toc">
+            {tocify && tocify.render()}
+        </div></Affix>
+    )
+
     return (
         <Layout
-        menuKeys={[backPath]}
+            menuKeys={[backPath]}
             main={main}
+            sticky={sticky}
         />
     )
 }

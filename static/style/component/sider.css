@@ -1,0 +1,19 @@
+
+.profile{
+    text-align: center;    
+    padding: 2em 2em 1em;
+}
+
+.sider .social{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 3rem;
+    border-top: 1px solid #eee
+}
+
+.sider .social .ant-avatar{
+    
+    margin-right: 7px;
+}
