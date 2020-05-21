@@ -6,9 +6,6 @@
 .profile>div:first-child{
     margin-bottom: 2vh;;
 }
-/* .contacts{
-    margin-top: 2vh;
+.profile .social .ant-avatar{
+    margin-right: 7px;
 }
-.contact{
-    margin: 0 7px;
-}   */

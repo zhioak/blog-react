@@ -1,8 +1,6 @@
 import Layout from '../component/Layout'
 
 import Banner from '../component/Banner'
-
-import { LineChartOutlined, RightOutlined } from '@ant-design/icons'
 import '../static/style/pages/index.css'
 
 // https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ
@@ -12,8 +10,8 @@ import '../static/style/pages/index.css'
 const banner = (
   <Banner
     bg={'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ'}
-    title="记录生活,分享技术"
-    desc={<p>用于构建用户界面的 JavaScript 库</p>}
+    title="记录生活 分享技术"
+    desc={<p>编程是一门艺术，生活亦是如此</p>}
   />
 )
 

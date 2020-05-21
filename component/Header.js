@@ -1,8 +1,5 @@
 import { Row, Col } from 'antd'
 import { useContext, useMemo } from 'react'
-
-import { GithubOutlined } from '@ant-design/icons'
-
 import Menu from './Menu'
 import Social from './Social'
 import { siderContext } from './Layout'
@@ -15,7 +12,9 @@ const Header = ({ menuKeys }) => {
 
     const { setSiderVisible } = useContext(siderContext)
 
-    const menu = useMemo(() => (<Menu mode="horizontal" selectedKeys={menuKeys}/>), [])
+    const menu = useMemo(() => (<Menu mode="horizontal" selectedKeys={menuKeys} />), [])
+
+    const social = useMemo(() => (<Social mode="grid" />), [])
 
     return (
         <div className="header">
@@ -39,13 +38,11 @@ const Header = ({ menuKeys }) => {
                         {menu}
                     </Col>
                     <Col className="header-right" xs={8} sm={8} md={4} >
-                        <Social/>
-                        {/* <a>GitHub <GithubOutlined /></a> */}
+                        {social}
                     </Col>
                 </Row>
             </div>
         </div>
-
     )
 }
 

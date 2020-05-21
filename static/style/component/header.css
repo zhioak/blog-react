@@ -21,6 +21,9 @@
         text-align: left;
     }
 }
+.header-right{
+    text-align: right;
+}
 
 /* 侧栏控制 */
 .header .ant-row{
