@@ -27,14 +27,18 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     [loading, setLoading] = useState(false)
 
   useEffect(() => {
-
+    // 重复使用组件
+    if(data){
+      setData(null)
+    }
     page = 1
     hasMore = true
+    
     getData(page, r => {
       hasMore = r.hasMore
       setData(r.list)
     })
-  }, [])
+  }, [getData])
 
   // 未获取到数据使用seat占位
   if (!data) {

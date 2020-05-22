@@ -1,8 +1,16 @@
-.notes-title {
+.list-item{
+    position: relative;
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+    height: 100%;
+}
+
+.list-title {
     font-size: 1.2rem !important;
 }
 
-.notes-meta {
+.list-meta {
     overflow: hidden;
     position: absolute;
     right: 0;
@@ -11,13 +19,13 @@
 }
 
 @media (min-width: 576px) {
-    .notes-title, .notes-preview:hover {
+    .list-title, .list-preview:hover {
         cursor: pointer;
     }
-    .notes-title:hover {
+    .list-title:hover {
         color: rgba(0, 0, 0, .7)
     }
-    .notes-preview:hover {
+    .list-preview:hover {
         color: rgba(0, 0, 0, 0.5);
     }
 }

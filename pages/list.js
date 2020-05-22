@@ -9,9 +9,9 @@ import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 
 import AutoList from '../component/AutoList'
-import { LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
+import { LIST_URL, SUCCESS_CODE, DATE_FORMAT, ERROR_ENUM, ERROR_RESULT } from '../config/common'
 
-import '../static/style/pages/notes.css'
+import '../static/style/pages/list.css'
 
 const { Title, Paragraph } = Typography
 
@@ -34,7 +34,7 @@ const seatRender = (
             active
           />
 
-          <div className="notes-meta">
+          <div className="list-meta">
             <Skeleton.Button
               size="small"
               active />
@@ -46,19 +46,18 @@ const seatRender = (
 
 
 const banner = (
-  <Banner
-    title="记录生活 分享技术"
-    desc={<p>编程是一门艺术，生活亦是如此</p>}
-  />
+  <Banner />
 )
 
 
 
-const notes = ({type}) => {
+const list = ({ error, type }) => {
 
-  console.log('notes render')
+  console.log('list render')
 
-  console.log(type)
+  if (error) {
+    return (<ERROR_RESULT error={error} />)
+  }
 
   const [spinning, setSpinning] = useState(false)
 
@@ -90,7 +89,7 @@ const notes = ({type}) => {
   const render = item => (
     <div className="list-item">
       <Title
-        className="notes-title"
+        className="list-title"
         level={4}
         ellipsis={true}
         onClick={() => viewDetail(item.id)}
@@ -98,13 +97,13 @@ const notes = ({type}) => {
         {item.title}
       </Title>
       <Paragraph
-        className="notes-preview"
+        className="list-preview"
         ellipsis={{ rows: rows, expandable: false }}
         onClick={() => viewDetail(item.id)}
       >
         {item.preview}
       </Paragraph>
-      <div className="notes-meta">
+      <div className="list-meta">
         <div>{moment(item.gmtCreate).format(DATE_FORMAT)}</div>
       </div>
     </div>
@@ -131,11 +130,15 @@ const notes = ({type}) => {
   )
 }
 
-notes.getInitialProps = async (context) => {
+list.getInitialProps = async (context) => {
 
-  console.log('init:'+context.query.key)
+  let { key } = context.query
 
-  return { type: context.query.key }
+  if (!key) {
+    return { error: ERROR_ENUM[404] }
+  }
+
+  return { type: key }
 }
 
-export default notes
+export default list

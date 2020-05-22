@@ -25,7 +25,11 @@
         display: none;
     }
     .lose-retinue {
-        transform: translateX(0) !important;
+        transform: none !important;
+    }
+    /* 侧栏出现时，会去除滚动条,放大后恢复它 */
+    .ant-scrolling-effect{
+        overflow: visible !important;
     }
 }
 

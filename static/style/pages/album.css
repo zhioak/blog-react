@@ -1,3 +1,9 @@
+.album-item {
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+}
+
 .album-img-wrap {
     padding: 8px 0;
 }

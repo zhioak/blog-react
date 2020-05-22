@@ -5,12 +5,7 @@ import { HomeOutlined, PictureOutlined, ReadOutlined, CoffeeOutlined, UserOutlin
 
 const { Item } = Menu
 
-
-
-
-
-
-export default ({ menuKeys, mode = "vertical" }) => {
+export default ({ menuKeys, mode = "vertical", closeSider }) => {
 
     console.log('menu render')
 
@@ -21,14 +16,14 @@ export default ({ menuKeys, mode = "vertical" }) => {
     const handleClick = ({ item, key }) => {
 
         if (!selectedKeys || !selectedKeys.includes(key)) {
-            setSpinning(true)
+
+            let { pathname = key } = item.props
+
+            pathname != Router.route ? setSpinning(true) : closeSider()
             setSelectedKeys([key])
 
-            let page = item.props.page
-            Router.push({
-                pathname: page ? page : key,
-                query: { key: key }
-            }, page ? page + '/' + key : key)
+            let query = pathname == key ? null : { key }
+            Router.push({ pathname, query })
         }
     }
 
@@ -41,9 +36,9 @@ export default ({ menuKeys, mode = "vertical" }) => {
                 style={{ border: "none" }}
             >
                 <Item key="/" icon={<HomeOutlined />}>首页</Item>
-                <Item key="notes" page="/list" icon={<ReadOutlined />}>日志</Item>
+                <Item key="notes" pathname="/list" icon={<ReadOutlined />}>日志</Item>
                 <Item key="/album" icon={<PictureOutlined />} >相册</Item>
-                <Item key="java" page="/list" icon={<CoffeeOutlined />}>JAVA</Item>
+                <Item key="java" pathname="/list" icon={<CoffeeOutlined />}>JAVA</Item>
                 <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
             </Menu>
         </Spin>

@@ -86,14 +86,14 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
                 <Affix offsetTop={0}>
                     {header}
                 </Affix>
-                <Spin spinning={spinning} className="spin-full">
+                {/* <Spin spinning={spinning} className="spin-full"> */}
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
                         {!spinning && <BackTop />}
                     </div>
-                </Spin>
+                {/* </Spin> */}
             </div>
             {sider}
         </>

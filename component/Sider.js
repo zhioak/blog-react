@@ -33,7 +33,9 @@ const Sider = ({ className, menuKeys }) => {
 
     const { siderVisible, setSiderVisible } = useContext(layoutContext)
 
-    const menu = useMemo(() => (<Menu menuKeys={menuKeys} />), [])
+    const closeSider = () => { setSiderVisible(false) }
+
+    const menu = useMemo(() => (<Menu menuKeys={menuKeys} closeSider={closeSider} />), [])
 
     const social = useMemo(() => (<Social />), [])
 
@@ -46,7 +48,7 @@ const Sider = ({ className, menuKeys }) => {
             width={200}
             closable={false}
             maskStyle={{ backgroundColor: 'transparent' }}
-            onClose={() => setSiderVisible(false)}
+            onClose={closeSider}
             visible={siderVisible}
         >
             {profile}

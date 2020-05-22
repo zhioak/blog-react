@@ -23,10 +23,3 @@ img {
     font-size: 1.4rem;
 }
 
-.list-item {
-    position: relative;
-    margin: auto;
-    width: 100%;
-    max-width: 800px;
-    height: 100%;
-}

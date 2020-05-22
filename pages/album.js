@@ -5,6 +5,7 @@ import moment from 'moment'
 import Router from 'next/router'
 import { List, Skeleton, message } from 'antd'
 
+import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
 import { LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
@@ -37,7 +38,7 @@ const seatRender = (
     dataSource={[...Array(preview).keys()]}
     renderItem={() => (
       <List.Item className="seat">
-        <div className="list-item">
+        <div className="album-item">
           <div className="album-img-wrap">
             <Skeleton.Input active />
           </div>
@@ -61,7 +62,7 @@ const album = () => {
   }
 
   const render = item => (
-    <div className="list-item">
+    <div className="album-item">
       <div className="album-img-wrap">
         <div
           className="album-img"
@@ -95,6 +96,7 @@ const album = () => {
 
   return (
     <Layout
+      banner={<Banner/>}
       main={list}
       menuKeys={['/album']}
       spinning={spinning}

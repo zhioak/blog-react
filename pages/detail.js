@@ -80,7 +80,9 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
 
     let sticky = tocify.tocItems.length > 0 && (
         <Affix offsetTop={55}>
-            <div className="detail-toc">{tocify.render()}</div>
+            <div className="detail-toc">
+                {tocify.render()}
+            </div>
         </Affix>
     )
 
@@ -97,8 +99,8 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
 
 
 detail.getInitialProps = async (context) => {
-    const id = context.query.id
-    if (null == id) {
+    let id = context.query.id
+    if (!id) {
         return { error: ERROR_ENUM[404] }
     }
 
