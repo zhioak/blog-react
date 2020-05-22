@@ -1,15 +1,17 @@
-.social .ant-avatar{
+.social .ant-avatar {
     margin-left: 7px;
 }
 
-.social-email{
+.social-email {
     background-color: #F7B007;
 }
-.social-wechat{
+
+.social-wechat {
     font-size: 15px !important;
     background-color: #07C160
 }
-.social-github{
+
+.social-github {
     font-size: 15px !important;
     background-color: #24292e;
 }

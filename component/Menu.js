@@ -3,8 +3,6 @@ import Router from 'next/router'
 import { useState } from 'react'
 import { HomeOutlined, PictureOutlined, ReadOutlined, CoffeeOutlined, UserOutlined } from '@ant-design/icons'
 
-import { ICON_LOAD } from '../config/common'
-
 const { Item } = Menu
 
 
@@ -12,23 +10,26 @@ const { Item } = Menu
 
 
 
-export default ({ selectedKeys,mode = "vertical" }) => {
+export default ({ menuKeys, mode = "vertical" }) => {
 
     console.log('menu render')
 
     const [spinning, setSpinning] = useState(false)
+    const [selectedKeys, setSelectedKeys] = useState(menuKeys)
+
 
     const handleClick = ({ key }) => {
 
         if (!selectedKeys || !selectedKeys.includes(key)) {
             setSpinning(true)
+            setSelectedKeys([key])
             Router.push(key)
         }
 
     }
 
     return (
-        <Spin indicator={ICON_LOAD} spinning={spinning}>
+        <Spin spinning={spinning}>
             <Menu
                 mode={mode}
                 onClick={handleClick}

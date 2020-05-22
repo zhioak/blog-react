@@ -1,5 +1,5 @@
 .header {
-    padding: 0 5%;
+    /* padding: 0 5%; */
     line-height: 2.8rem;
     background-color: #fff;
     border-bottom: 1px solid #eee
@@ -8,6 +8,7 @@
 .header-holder {
     margin: 0 auto;
     max-width: 1200px;
+    padding: 0 4vw;
 }
 
 .logo {

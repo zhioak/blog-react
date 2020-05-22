@@ -1,4 +1,4 @@
-.banner{
+.banner {
     overflow: hidden;
     height: 36vh;
     max-height: 300px;
@@ -6,11 +6,13 @@
     background-size: cover;
     background-position: center;
 }
-.banner-holder{
+
+.banner-holder {
     margin-top: 10vh;
     padding: 0 5%;
 }
-.banner-title{
+
+.banner-title {
     margin-bottom: 1em;
     font-size: 1.8rem;
     font-weight: 800;

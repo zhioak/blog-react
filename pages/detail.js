@@ -1,20 +1,17 @@
 
-import { Breadcrumb, Result, Button,Affix } from 'antd'
-import axios from 'axios'
-import marked from 'marked'
-import moment from 'moment'
-import hljs from 'highlight.js'
-import Tocify from '../component/Tocify.tsx'
-
-import Layout from '../component/Layout'
-import { DETAIL_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
-
-
-
+import { Affix, Breadcrumb } from 'antd'
 import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 
-import '../static/style/pages/detail.css'
+import axios from 'axios'
+import hljs from 'highlight.js'
+import marked from 'marked'
+import moment from 'moment'
+import Layout from '../component/Layout'
+import Tocify from '../component/Tocify.tsx'
 import 'highlight.js/styles/monokai-sublime.css'
+import { DATE_FORMAT, DETAIL_URL, SUCCESS_CODE, ERROR_ENUM, ERROR_RESULT } from '../config/common'
+import '../static/style/pages/detail.css'
+
 
 
 const tocify = new Tocify()
@@ -41,19 +38,12 @@ marked.setOptions({
 
 const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, next }) => {
     if (error) {
-        return (
-            <Result
-                status="warning"
-                title={error.code}
-                subTitle={error.info}
-                extra={<Button type="primary" onClick={() => { window.history.back() }} >Go Back</Button>}
-            />
-        )
+        return (<ERROR_RESULT error={error} />)
     }
-
     let backPath = `/${type}`
-    let main = (
-        <div className="detail">
+
+    let banner = (
+        <div className="detail-header">
             <Breadcrumb>
                 <Breadcrumb.Item>
                     <a href="/">首页</a>
@@ -64,32 +54,39 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
             <div>
-                <div className="title">{title}</div>
+                <div className="detail-title">{title}</div>
                 <div className="detail-meta">
-                    <div><CalendarFilled />{moment(gmtCreate).format(DATE_FORMAT)}</div>
-                    <div><EyeFilled />{pv}</div>
+                    <div><CalendarFilled /> {moment(gmtCreate).format(DATE_FORMAT)}</div>
+                    <div><EyeFilled /> {pv}</div>
                 </div>
-            </div>
-            <div className="detail-content" >
-                <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
-            </div>
-            <div className="detail-nav">
-                {prev && <a href={`?id=${prev.id}`}><LeftOutlined />{prev.title}</a>}
-                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title}<RightOutlined className="end" /></a>}
             </div>
         </div>
     )
 
-    let sticky = (
-        <Affix offsetTop={5}>
-        <div className="detail-toc">
-            {tocify && tocify.render()}
-        </div></Affix>
+    let main = (
+        <>
+            <div className="detail-content">
+                <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+            </div>
+            <div className="detail-nav">
+                {prev && <a className="nav-prev" href={`?id=${prev.id}`}><LeftOutlined /> {prev.title}</a>}
+                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title} <RightOutlined className="end" /></a>}
+            </div>
+        </>
+    )
+
+
+
+    let sticky = tocify.tocItems.length > 0 && (
+        <Affix offsetTop={55}>
+            <div className="detail-toc">{tocify.render()}</div>
+        </Affix>
     )
 
     return (
         <Layout
             menuKeys={[backPath]}
+            banner={banner}
             main={main}
             sticky={sticky}
         />
@@ -100,18 +97,24 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
 
 detail.getInitialProps = async (context) => {
     const id = context.query.id
-    const promise = new Promise((resolve) => {
-        axios(DETAIL_URL + id).then(
-            (res) => {
-                const { code, info, data } = res.data
+    if (null == id) {
+        return { error: ERROR_ENUM[404] }
+    }
 
-                if (code != SUCCESS_CODE) {
-                    resolve({ error: { code, info } })
-                    return
+    const promise = new Promise((resolve) => {
+        setTimeout(() => {
+
+            axios(DETAIL_URL + id).then(
+                (res) => {
+                    // const { code, info, data } = res.data
+                    // if (code != SUCCESS_CODE) {
+                    //     resolve({ error: { code, info } })
+                    //     return
+                    // }
+                    // resolve(data)
                 }
-                resolve(data)
-            }
-        )
+            )
+        }, 3000)
     })
     return await promise
 }

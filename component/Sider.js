@@ -4,11 +4,11 @@ import { useMemo, useContext } from 'react'
 
 import Menu from './Menu'
 import Social from './Social'
-import { siderContext } from './Layout'
+import { layoutContext } from './Layout'
 
 import '../static/style/component/sider.css'
 
-const name = '念念不忘 必有回响',
+const name = 'zhou',
     avatar = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2292059386,809594845&fm=26&gp=0.jpg'
 
 const Profile = ()=>(
@@ -26,9 +26,9 @@ const Sider = ({ className, menuKeys }) => {
 
     console.log('sider render')
 
-    const { siderVisible, setSiderVisible } = useContext(siderContext)
+    const { siderVisible, setSiderVisible } = useContext(layoutContext)
 
-    const menu = useMemo(() => (<Menu selectedKeys={menuKeys} />), [])
+    const menu = useMemo(() => (<Menu menuKeys={menuKeys} />), [])
 
     const social = useMemo(() => (<Social />), [])
 

@@ -3,45 +3,51 @@
     min-width: 300px;
 }
 
-#root>div {
+.lose-retinue {
     -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
-.root-lose {
-    transform: translateX(200px);
+/* 侧栏 */
+
+.sider .ant-drawer-body {
+    padding: 0;
 }
 
-.sider .ant-drawer-body{
-    padding: 0;
+.root-lose .lose-retinue {
+    transform: translateX(200px);
 }
 
 @media (min-width: 768px) {
     .sider {
         display: none;
     }
-    .root-lose {
+    .lose-retinue {
         transform: translateX(0) !important;
     }
 }
 
-#topstory{
+/* 主显示层 */
+
+#topstory {
     margin: 0 auto;
     max-width: 1200px;
 }
 
-#main{
-    padding: 2vh 4%;
+#main {
+    padding: 2vh 4vw;
 }
 
-#sticky{
-    padding: 2vh 0;
+#sticky {
+    padding: 2vh 4vw 2vh 2em;
 }
 
-/* .zmain {
-    overflow: hidden;
-    padding: 2vh 4%;
-    max-width: 1350px;
-} */
+/* 全屏加载 */
+
+.spin-full {
+    position: fixed !important;
+    top: 2.8rem !important;
+    max-height: none !important;
+}

@@ -8,13 +8,13 @@ img {
     width: 100%;
 }
 
-.card{
+.card {
     overflow: hidden;
     margin-bottom: 10px;
     border-radius: 2px;
     background-color: #fff;
-    box-shadow: 0 1px 3px rgba(26,26,26,.1);
-    -webkit-box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
 }
@@ -23,7 +23,7 @@ img {
     font-size: 1.4rem;
 }
 
-.list-item{
+.list-item {
     position: relative;
     margin: auto;
     width: 100%;

@@ -25,7 +25,7 @@
     .album-cover {
         height: 0;
     }
-    .album-img{
+    .album-img {
         cursor: pointer;
     }
     .album-img:hover .album-cover {

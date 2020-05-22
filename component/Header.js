@@ -2,22 +2,22 @@ import { Row, Col } from 'antd'
 import { useContext, useMemo } from 'react'
 import Menu from './Menu'
 import Social from './Social'
-import { siderContext } from './Layout'
+import { layoutContext } from './Layout'
 
 import '../static/style/component/header.css'
 
-const Header = ({ menuKeys }) => {
+const Header = ({ className, menuKeys }) => {
 
     console.log('header render')
 
-    const { setSiderVisible } = useContext(siderContext)
+    const { setSiderVisible } = useContext(layoutContext)
 
-    const menu = useMemo(() => (<Menu mode="horizontal" selectedKeys={menuKeys} />), [])
+    const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [])
 
     const social = useMemo(() => (<Social mode="grid" />), [])
 
     return (
-        <div className="header">
+        <div className={`header ${className}`}>
             <div className="header-holder">
                 <Row justify="center">
                     <Col xs={16} sm={16} md={4} >

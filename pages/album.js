@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 
 import moment from 'moment'
 import Router from 'next/router'
-import { List, Skeleton, Spin, message } from 'antd'
+import { List, Skeleton, message } from 'antd'
 
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
-import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
+import { LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
 import '../static/style/pages/album.css'
 
@@ -48,11 +48,9 @@ const seatRender = (
 )
 
 const album = () => {
-  const [spinning, setSpinning] = useState(false)
 
   console.log('album render')
-
-
+  const [spinning, setSpinning] = useState(false)
 
   const viewDetail = id => {
     setSpinning(true)
@@ -85,22 +83,21 @@ const album = () => {
     </div>
   )
 
-  const list = (
-    <Spin indicator={ICON_LOAD} spinning={spinning}>
-      <AutoList
-        className="list"
-        getData={getData}
-        itemHeight={height}
-        itemRender={render}
-        itemSeatRender={seatRender}
-      />
-    </Spin>
-  )
+  const list = useMemo(() => (
+    <AutoList
+      className="list"
+      getData={getData}
+      itemHeight={height}
+      itemRender={render}
+      itemSeatRender={seatRender}
+    />
+  ), [])
 
   return (
     <Layout
       main={list}
       menuKeys={['/album']}
+      spinning={spinning}
     />
   )
 }

@@ -1,9 +1,10 @@
-import { Row, Col, Affix, BackTop } from 'antd'
+import { Row, Col, Affix, BackTop, Spin } from 'antd'
 import { useState, useMemo, createContext } from 'react'
-import Header from '../component/Header'
-import Sider from '../component/Sider'
-import Footer from '../component/Footer'
+import Header from './Header'
+import Sider from './Sider'
+import Footer from './Footer'
 
+import { LoadingOutlined } from '@ant-design/icons'
 import '../static/style/component/layout.css'
 
 // xs: <576
@@ -16,26 +17,46 @@ import '../static/style/component/layout.css'
 /**
  * 公用布局
  */
-export const siderContext = createContext()
+export const layoutContext = createContext()
 
+Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
 
+const FullSpin = () => {
 
+    return (
+        <div id="spin">
+            <div>
+                <LoadingOutlined style={{ fontSize: 24 }} />
+            </div>
+        </div>
+    )
+}
 
-const Layout = ({ banner, main, sticky, menuKeys }) => {
+const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
 
     const [siderVisible, setSiderVisible] = useState(false)
 
+
     const footer = useMemo(() => (<Footer />), [])
 
+
+    const header = useMemo(() => (
+        <layoutContext.Provider value={{ setSiderVisible }}>
+            <Header className="lose-retinue" menuKeys={menuKeys} />
+        </layoutContext.Provider>
+    ), [])
+
+
     const sider = useMemo(() => (
-        <siderContext.Provider value={{ siderVisible, setSiderVisible }}>
+        <layoutContext.Provider value={{ siderVisible, setSiderVisible }}>
             <Sider
                 className="sider"
                 menuKeys={menuKeys}
             />
-        </siderContext.Provider>
+        </layoutContext.Provider>
     ), [siderVisible])
+
 
     const topstory = useMemo(() => (
         <div id="topstory">
@@ -54,26 +75,25 @@ const Layout = ({ banner, main, sticky, menuKeys }) => {
                         {main}
                     </Col>
                 }
-
             </Row>
         </div>
-    ), [])
+    ), [main, sticky])
 
 
     return (
         <>
-            <div id="root">
-                <div className={`${siderVisible ? 'root-lose' : ''}`}>
-                    <Affix offsetTop={0}>
-                        <siderContext.Provider value={{ setSiderVisible }}>
-                            <Header menuKeys={menuKeys} />
-                        </siderContext.Provider>
-                    </Affix>
-                    {banner}
-                    {topstory}
-                    {footer}
-                    <BackTop />
-                </div>
+            <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
+                <Affix offsetTop={0}>
+                    {header}
+                </Affix>
+                <Spin spinning={spinning} className="spin-full">
+                    <div className="lose-retinue">
+                        {banner}
+                        {topstory}
+                        {footer}
+                        {!spinning && <BackTop />}
+                    </div>
+                </Spin>
             </div>
             {sider}
         </>

@@ -1,7 +1,6 @@
 import Layout from '../component/Layout'
 
 import Banner from '../component/Banner'
-import '../static/style/pages/index.css'
 
 const banner = (
   <Banner

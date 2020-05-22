@@ -17,12 +17,12 @@ const placement = "bottom"
 const Social = ({ mode }) => {
 
     const email = (
-        <Tooltip title={zhou.email} trigger={trigger} placement={placement}>
+        <Tooltip title={zhou.email} placement={placement} trigger={trigger} >
             <Avatar size={size} icon={<MailFilled />} className="social-email" />
         </Tooltip>
     )
     const wechat = (
-        <Tooltip trigger={trigger} title={(<img src={zhou.wechat} />)} placement={placement} overlayStyle={{ width: 200 }} >
+        <Tooltip trigger={trigger} placement={placement} title={(<img src={zhou.wechat} />)}  overlayStyle={{ width: 200 }} >
             <Avatar size={size} icon={<WechatFilled />} className="social-wechat" />
         </Tooltip>
     )
@@ -37,7 +37,7 @@ const Social = ({ mode }) => {
 
     if ('grid' == mode) {
         return (
-            <Row className='social'>
+            <Row className='social' justify="end">
                 <Col xs={0} sm={0} md={0} lg={5}>
                     {email}
                 </Col>

@@ -2,13 +2,14 @@ import axios from 'axios'
 
 import moment from 'moment'
 import Router from 'next/router'
-import { useState } from 'react'
-import { Typography, List, Spin, Skeleton, message } from 'antd'
+import { useState, useMemo } from 'react'
+import { Typography, List, Skeleton, message } from 'antd'
 
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
+
 import AutoList from '../component/AutoList'
-import { ICON_LOAD, LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
+import { LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
 
 import '../static/style/pages/notes.css'
 
@@ -31,10 +32,7 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      setTimeout(()=>{
-        cb(data)
-
-      },1000)
+      cb(data)
     }
   )
 }
@@ -111,22 +109,21 @@ const notes = () => {
   )
 
 
-  const list = (
-    <Spin indicator={ICON_LOAD} spinning={spinning}>
-      <AutoList
-        className="list"
-        getData={getData}
-        itemHeight={height}
-        itemRender={render}
-        itemSeatRender={seatRender}
-      />
-    </Spin>
-  )
+  const list = useMemo(() => (
+    <AutoList
+      className="list"
+      getData={getData}
+      itemHeight={height}
+      itemRender={render}
+      itemSeatRender={seatRender}
+    />
+  ), [])
 
   return (
     <Layout
       banner={banner}
       main={list}
+      spinning={spinning}
       menuKeys={['/notes']}
     />
   )
