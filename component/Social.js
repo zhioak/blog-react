@@ -17,7 +17,7 @@ const placement = "bottom"
 const Social = ({ mode }) => {
 
     const email = (
-        <Tooltip title={zhou.email} placement={placement} trigger={trigger} >
+        <Tooltip trigger={trigger}  title={zhou.email}  >
             <Avatar size={size} icon={<MailFilled />} className="social-email" />
         </Tooltip>
     )

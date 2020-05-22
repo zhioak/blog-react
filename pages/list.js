@@ -17,25 +17,9 @@ const { Title, Paragraph } = Typography
 
 const
   rows = 3,
-  type = 'notes',
   height = 150,
   preview = 2
 
-// 获取数据
-const getData = (page, cb) => {
-  let form = new FormData()
-  form.append('page', page++)
-  form.append('type', type)
-  axios.post(LIST_URL, form).then(
-    (res) => {
-      const { code, info, data } = res.data
-      if (code != SUCCESS_CODE) {
-        return message.warning(info)
-      }
-      cb(data)
-    }
-  )
-}
 
 const seatRender = (
 
@@ -63,7 +47,6 @@ const seatRender = (
 
 const banner = (
   <Banner
-    bg={'https://gw.alipayobjects.com/mdn/rms_08e378/afts/img/A*kJM2Q6uPXCAAAAAAAAAAAABkARQnAQ'}
     title="记录生活 分享技术"
     desc={<p>编程是一门艺术，生活亦是如此</p>}
   />
@@ -71,11 +54,30 @@ const banner = (
 
 
 
-const notes = () => {
+const notes = ({type}) => {
 
   console.log('notes render')
 
+  console.log(type)
+
   const [spinning, setSpinning] = useState(false)
+
+
+  // 获取数据
+  const getData = (page, cb) => {
+    let form = new FormData()
+    form.append('page', page++)
+    form.append('type', type)
+    axios.post(LIST_URL, form).then(
+      (res) => {
+        const { code, info, data } = res.data
+        if (code != SUCCESS_CODE) {
+          return message.warning(info)
+        }
+        cb(data)
+      }
+    )
+  }
 
   const viewDetail = id => {
     setSpinning(true)
@@ -117,17 +119,23 @@ const notes = () => {
       itemRender={render}
       itemSeatRender={seatRender}
     />
-  ), [])
+  ), [type])
 
   return (
     <Layout
       banner={banner}
       main={list}
       spinning={spinning}
-      menuKeys={['/notes']}
+      menuKeys={[type]}
     />
   )
 }
 
+notes.getInitialProps = async (context) => {
+
+  console.log('init:'+context.query.key)
+
+  return { type: context.query.key }
+}
 
 export default notes

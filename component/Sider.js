@@ -1,6 +1,7 @@
 
 import { Avatar, Drawer } from 'antd'
 import { useMemo, useContext } from 'react'
+import Link from 'next/link'
 
 import Menu from './Menu'
 import Social from './Social'
@@ -11,10 +12,14 @@ import '../static/style/component/sider.css'
 const name = 'zhou',
     avatar = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2292059386,809594845&fm=26&gp=0.jpg'
 
-const Profile = ()=>(
+const Profile = () => (
     <div className="profile">
         <div>
-            <Avatar shape="square" size={128} src={avatar} />
+            <Link href="/">
+                <a>
+                    <Avatar shape="square" size={128} src={avatar} />
+                </a>
+            </Link>
             <div className="name">{name}</div>
         </div>
     </div>

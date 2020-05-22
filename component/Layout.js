@@ -5,8 +5,8 @@ import Sider from './Sider'
 import Footer from './Footer'
 
 import { LoadingOutlined } from '@ant-design/icons'
-import '../static/style/component/layout.css'
 
+import '../static/style/component/layout.css'
 // xs: <576
 // sm：≥576
 // md: ≥768

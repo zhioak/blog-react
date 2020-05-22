@@ -6,6 +6,7 @@ import axios from 'axios'
 import hljs from 'highlight.js'
 import marked from 'marked'
 import moment from 'moment'
+import Link from 'next/link'
 import Layout from '../component/Layout'
 import Tocify from '../component/Tocify.tsx'
 import 'highlight.js/styles/monokai-sublime.css'
@@ -18,7 +19,7 @@ const tocify = new Tocify()
 const renderer = new marked.Renderer()
 renderer.heading = (text, level, raw) => {
     const anchor = tocify.add(text, level);
-    return `<a id="${anchor}" href="#${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a>\n`;
+    return `<Link href="#${anchor}"><a id="${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a></Link>\n`;
 }
 
 marked.setOptions({
@@ -46,10 +47,10 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
         <div className="detail-header">
             <Breadcrumb>
                 <Breadcrumb.Item>
-                    <a href="/">首页</a>
+                    <Link href="/" ><a>首页</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <a href={backPath}>{typeLabel}</a>
+                    <Link href={backPath}><a>{typeLabel}</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
@@ -69,8 +70,8 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
                 <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
             </div>
             <div className="detail-nav">
-                {prev && <a className="nav-prev" href={`?id=${prev.id}`}><LeftOutlined /> {prev.title}</a>}
-                {next && <a className="nav-next" href={`?id=${next.id}`}>{next.title} <RightOutlined className="end" /></a>}
+                {prev && <Link href={`?id=${prev.id}`}><a className="nav-prev"><LeftOutlined /> {prev.title}</a></Link>}
+                {next && <Link href={`?id=${next.id}`}><a className="nav-next">{next.title} <RightOutlined className="end" /></a></Link>}
             </div>
         </>
     )
@@ -106,12 +107,12 @@ detail.getInitialProps = async (context) => {
 
             axios(DETAIL_URL + id).then(
                 (res) => {
-                    // const { code, info, data } = res.data
-                    // if (code != SUCCESS_CODE) {
-                    //     resolve({ error: { code, info } })
-                    //     return
-                    // }
-                    // resolve(data)
+                    const { code, info, data } = res.data
+                    if (code != SUCCESS_CODE) {
+                        resolve({ error: { code, info } })
+                        return
+                    }
+                    resolve(data)
                 }
             )
         }, 3000)

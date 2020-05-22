@@ -1,5 +1,6 @@
 import { Row, Col } from 'antd'
 import { useContext, useMemo } from 'react'
+import Link from 'next/link'
 import Menu from './Menu'
 import Social from './Social'
 import { layoutContext } from './Layout'
@@ -30,7 +31,9 @@ const Header = ({ className, menuKeys }) => {
                                 </div>
                             </Col>
                             <Col xs={12} sm={12} md={24}>
-                                <a className="logo">ZHOU</a>
+                                <Link href="/" >
+                                    <a className="logo">ZHOU</a>
+                                </Link>
                             </Col>
                         </Row>
                     </Col>

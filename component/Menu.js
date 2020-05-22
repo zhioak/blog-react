@@ -18,14 +18,18 @@ export default ({ menuKeys, mode = "vertical" }) => {
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
 
 
-    const handleClick = ({ key }) => {
+    const handleClick = ({ item, key }) => {
 
         if (!selectedKeys || !selectedKeys.includes(key)) {
             setSpinning(true)
             setSelectedKeys([key])
-            Router.push(key)
-        }
 
+            let page = item.props.page
+            Router.push({
+                pathname: page ? page : key,
+                query: { key: key }
+            }, page ? page + '/' + key : key)
+        }
     }
 
     return (
@@ -37,9 +41,9 @@ export default ({ menuKeys, mode = "vertical" }) => {
                 style={{ border: "none" }}
             >
                 <Item key="/" icon={<HomeOutlined />}>首页</Item>
-                <Item key="/notes" icon={<ReadOutlined />}>日志</Item>
+                <Item key="notes" page="/list" icon={<ReadOutlined />}>日志</Item>
                 <Item key="/album" icon={<PictureOutlined />} >相册</Item>
-                <Item key="/java" icon={<CoffeeOutlined />} disabled>JAVA</Item>
+                <Item key="java" page="/list" icon={<CoffeeOutlined />}>JAVA</Item>
                 <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
             </Menu>
         </Spin>
