@@ -1,20 +1,23 @@
 .album-item {
     margin: auto;
     width: 100%;
-    max-width: 800px;
+    height: 100%;
 }
 
 .album-img-wrap {
-    padding: 8px 0;
+    height: 100%;
+    /* padding: 8px 0; */
 }
 
-.album-img, .seat .album-img-wrap .ant-skeleton-input {
-    height: 260px;
-    border-radius: 5px;
+.album-item .ant-skeleton,.album-item .ant-skeleton-input{
+    height: 100%;
+    /* height: 260px; */
+    /* border-radius: 5px; */
 }
 
 .album-img {
     overflow: hidden;
+    height: 100%;
     border: 1px solid #eee;
     background-size: cover;
     background-position: center;
@@ -23,28 +26,27 @@
 .album-cover {
     position: relative;
     height: 100%;
-    overflow: hidden;
-    background-color: rgba(0, 0, 0, .4);
+    background-color: rgba(0, 0, 0, .2);
 }
 
 @media (min-width: 576px) {
-    .album-cover {
-        height: 0;
-    }
-    .album-img {
+    .album-item {
         cursor: pointer;
+        width: 95%;
+        height: 95%;
+        max-width: 800px;
+        transition: all 300ms ease;
     }
-    .album-img:hover .album-cover {
+    .album-item:hover {
+        width: 100%;
         height: 100%;
-        animation: enter-top .3s ease-in;
-        -webkit-animation: enter-top .3s ease-in;
-        -moz-animation: enter-top .3s ease-in;
+        max-width: 820px;
     }
 }
 
 .album-meta {
     position: absolute;
-    top: 45%;
+    top: 40%;
     width: 100%;
     color: #fff;
     text-align: center;

@@ -28,7 +28,8 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      cb(data)
+      // setTimeout(()=>cb(data),1000) 
+
     }
   )
 }
@@ -37,11 +38,9 @@ const seatRender = (
   <List
     dataSource={[...Array(preview).keys()]}
     renderItem={() => (
-      <List.Item className="seat">
+      <List.Item style={{ height }}>
         <div className="album-item">
-          <div className="album-img-wrap">
-            <Skeleton.Input active />
-          </div>
+          <Skeleton.Input active/>
         </div>
       </List.Item>
     )}
@@ -96,7 +95,7 @@ const album = () => {
 
   return (
     <Layout
-      banner={<Banner/>}
+      banner={<Banner />}
       main={list}
       menuKeys={['/album']}
       spinning={spinning}
