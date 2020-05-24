@@ -34,7 +34,10 @@ export default ({ menuKeys, mode = "vertical", closeSider }) => {
                 onClick={handleClick}
                 selectedKeys={selectedKeys}
                 style={{ border: "none" }}
+
+                // inlineCollapsed={true}
             >
+
                 <Item key="/" icon={<HomeOutlined />}>首页</Item>
                 <Item key="notes" pathname="/list" icon={<ReadOutlined />}>日志</Item>
                 <Item key="/album" icon={<PictureOutlined />} >相册</Item>

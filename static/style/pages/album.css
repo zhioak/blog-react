@@ -1,47 +1,44 @@
+.album-item, .album-img, .album-cover, .album-item .ant-skeleton, .album-item .ant-skeleton-input {
+    height: 100%;
+}
+
 .album-item {
+    overflow: hidden;
     margin: auto;
     width: 100%;
-    height: 100%;
-}
-
-.album-img-wrap {
-    height: 100%;
-    /* padding: 8px 0; */
-}
-
-.album-item .ant-skeleton,.album-item .ant-skeleton-input{
-    height: 100%;
-    /* height: 260px; */
-    /* border-radius: 5px; */
-}
-
-.album-img {
-    overflow: hidden;
-    height: 100%;
-    border: 1px solid #eee;
-    background-size: cover;
-    background-position: center;
-}
-
-.album-cover {
-    position: relative;
-    height: 100%;
-    background-color: rgba(0, 0, 0, .2);
+    border-radius: 5px;
 }
 
 @media (min-width: 576px) {
     .album-item {
-        cursor: pointer;
         width: 95%;
         height: 95%;
         max-width: 800px;
+    }
+    .album-item.done{
+        cursor: pointer;
         transition: all 300ms ease;
     }
-    .album-item:hover {
+
+    .album-item.done:hover {
         width: 100%;
         height: 100%;
         max-width: 820px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, .3);
+        -webkit-box-shadow: 0 2px 12px rgba(0, 0, 0, .3);
     }
+}
+
+.album-img {
+    background-size: cover;
+    background-position: center;
+}
+
+/* 图片信息 */
+
+.album-cover {
+    position: relative;
+    background-color: rgba(0, 0, 0, .2);
 }
 
 .album-meta {
@@ -53,20 +50,5 @@
 }
 
 .album-meta>.title {
-    margin-bottom: .3em;
-}
-
-@keyframes enter-top {
-    0% {
-        z-index: 0;
-        transform: translate3d(0, -100%, 0);
-        -webkit-transform: translate3d(0, -100%, 0);
-        -moz-transform: translate3d(0, -100%, 0);
-    }
-    100% {
-        z-index: 0;
-        transform: translate3d(0, 0, 0);
-        -webkit-transform: translate3d(0, 0, 0);
-        -moz-transform: translate3d(0, 0, 0);
-    }
+    margin-bottom: 10px;
 }

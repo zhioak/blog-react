@@ -28,7 +28,7 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      // setTimeout(()=>cb(data),1000) 
+      cb(data)
 
     }
   )
@@ -40,7 +40,7 @@ const seatRender = (
     renderItem={() => (
       <List.Item style={{ height }}>
         <div className="album-item">
-          <Skeleton.Input active/>
+          <Skeleton.Input active />
         </div>
       </List.Item>
     )}
@@ -61,21 +61,19 @@ const album = () => {
   }
 
   const render = item => (
-    <div className="album-item">
-      <div className="album-img-wrap">
-        <div
-          className="album-img"
-          style={{ backgroundImage: `url(${item.preview})` }}
-          onClick={() => viewDetail(item.id)}
-        >
-          <div className="album-cover">
-            <div className="album-meta">
-              <div className="title">{item.title}</div>
-              <div>
-                <span>{item.remark}</span>
-                <span> · </span>
-                <span>{moment(item.gmtCreate).format(DATE_FORMAT)}</span>
-              </div>
+    <div className="album-item done">
+      <div
+        className="album-img"
+        style={{ backgroundImage: `url(${item.preview})` }}
+        onClick={() => viewDetail(item.id)}
+      >
+        <div className="album-cover">
+          <div className="album-meta">
+            <div className="title">{item.title}</div>
+            <div>
+              <span>{item.remark}</span>
+              <span> · </span>
+              <span>{moment(item.gmtCreate).format(DATE_FORMAT)}</span>
             </div>
           </div>
         </div>

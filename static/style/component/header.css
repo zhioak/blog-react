@@ -2,7 +2,7 @@
     /* padding: 0 5%; */
     line-height: 2.8rem;
     background-color: #fff;
-    border-bottom: 1px solid #eee
+    border-bottom: 1px solid #eee;
 }
 
 .header-holder {
@@ -17,24 +17,26 @@
     display: block;
     text-align: center;
 }
+
 @media (min-width: 768px) {
-    .logo{
+    .logo {
         text-align: left;
     }
 }
-.header-right{
+
+.header-right {
     text-align: right;
 }
 
 /* 侧栏控制 */
-.header .ant-row{
+
+.header .ant-row {
     height: 100%;
 }
 
-.tigger-wrap{
+.tigger-wrap {
     height: 100%;
 }
-
 
 .sider-tigger {
     width: 14px;
@@ -81,6 +83,7 @@
 }
 
 /* 侧栏打开 */
+
 .root-lose .sider-tigger-icon {
     background: 0 0;
 }
