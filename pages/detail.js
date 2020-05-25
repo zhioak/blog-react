@@ -37,7 +37,7 @@ marked.setOptions({
 })
 
 
-const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, next }) => {
+const detail = ({ error, title, content, type, typeName, pv, gmtCreate, prev, next }) => {
     if (error) {
         return (<ERROR_RESULT error={error} />)
     }
@@ -50,7 +50,7 @@ const detail = ({ error, title, content, type, typeLabel, pv, gmtCreate, prev, n
                     <Link href="/" ><a>首页</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={backPath}><a>{typeLabel}</a></Link>
+                    <Link href={backPath}><a>{typeName}</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>

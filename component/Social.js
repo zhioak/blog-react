@@ -1,6 +1,7 @@
 import { GithubFilled, MailFilled, WechatFilled } from '@ant-design/icons'
 import { Avatar, Col, Row, Tooltip } from 'antd'
 import '../static/style/component/social.css'
+import { useMemo } from 'react'
 
 
 const zhou = {
@@ -12,30 +13,32 @@ const zhou = {
 const size = 25,
     trigger = ['click', 'hover']
 
+const GRID = 'grid'
+
 const placement = "bottom"
 
 const Social = ({ mode }) => {
 
-    const email = (
-        <Tooltip trigger={trigger}  title={zhou.email}  >
+    const email = useMemo(() => (
+        <Tooltip trigger={trigger} placement={placement} title={zhou.email}  >
             <Avatar size={size} icon={<MailFilled />} className="social-email" />
         </Tooltip>
-    )
-    const wechat = (
-        <Tooltip trigger={trigger} placement={placement} title={(<img src={zhou.wechat} />)}  overlayStyle={{ width: 200 }} >
+    ), [])
+    const wechat = useMemo(() => (
+        <Tooltip trigger={trigger} placement={placement} title={(<img src={zhou.wechat} />)} overlayStyle={{ width: 200 }} >
             <Avatar size={size} icon={<WechatFilled />} className="social-wechat" />
         </Tooltip>
-    )
-    const github = (
+    ), [])
+    const github = useMemo(() => (
         <Tooltip title={zhou.github} placement={placement}>
             <a href={zhou.github} target="_blank">
                 <Avatar size={size} icon={<GithubFilled />} className="social-github" />
             </a>
         </Tooltip>
-    )
+    ), [])
 
 
-    if ('grid' == mode) {
+    if (GRID == mode) {
         return (
             <Row className='social' justify="end">
                 <Col xs={0} sm={0} md={0} lg={5}>
@@ -57,7 +60,6 @@ const Social = ({ mode }) => {
             {wechat}
             {github}
         </div>
-
     )
 }
 

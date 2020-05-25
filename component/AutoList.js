@@ -123,7 +123,7 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     )
 
   return (
-    <List className={className}>
+    <List className={className} >
       {data.length > 0 && <WindowScroller>{infiniteLoader}</WindowScroller>}
       {loading && itemSeatRender}
     </List>

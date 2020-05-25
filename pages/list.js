@@ -1,17 +1,17 @@
+import { List, message, Skeleton, Typography } from 'antd'
 import axios from 'axios'
-
 import moment from 'moment'
 import Router from 'next/router'
-import { useState, useMemo } from 'react'
-import { Typography, List, Skeleton, message } from 'antd'
-
+import { useMemo, useState } from 'react'
+import AutoList from '../component/AutoList'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
-
-import AutoList from '../component/AutoList'
-import { LIST_URL, SUCCESS_CODE, DATE_FORMAT, ERROR_ENUM, ERROR_RESULT } from '../config/common'
-
+import { DATE_FORMAT, ERROR_ENUM, ERROR_RESULT, LIST_URL, SUCCESS_CODE, TYPE_URL } from '../config/common'
 import '../static/style/pages/list.css'
+
+
+
+
 
 const { Title, Paragraph } = Typography
 
@@ -45,13 +45,9 @@ const seatRender = (
 )
 
 
-const banner = (
-  <Banner />
-)
 
+const list = ({ error, type, title, desc, bg }) => {
 
-
-const list = ({ error, type }) => {
 
   console.log('list render')
 
@@ -109,6 +105,14 @@ const list = ({ error, type }) => {
     </div>
   )
 
+  const banner = useMemo(() => (
+    <Banner
+      bg={bg}
+      title={title}
+      desc={desc}
+    />
+  ), [type])
+
 
   const list = useMemo(() => (
     <AutoList
@@ -130,15 +134,30 @@ const list = ({ error, type }) => {
   )
 }
 
+
 list.getInitialProps = async (context) => {
 
   let { key } = context.query
-
   if (!key) {
     return { error: ERROR_ENUM[404] }
   }
 
-  return { type: key }
+  const promise = new Promise((resolve) => {
+    axios(TYPE_URL + key).then(
+      (res) => {
+        const { code, info, data } = res.data
+        if (code != SUCCESS_CODE) {
+          resolve({ error: { code, info } })
+          return
+        }
+        data.type = key
+        resolve(data)
+      }
+    )
+  })
+
+
+  return await promise
 }
 
 export default list

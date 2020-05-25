@@ -5,10 +5,9 @@ import { HomeOutlined, PictureOutlined, ReadOutlined, CoffeeOutlined, UserOutlin
 
 const { Item } = Menu
 
-export default ({ menuKeys, mode = "vertical", closeSider }) => {
+export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     console.log('menu render')
-
     const [spinning, setSpinning] = useState(false)
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
 
@@ -19,7 +18,7 @@ export default ({ menuKeys, mode = "vertical", closeSider }) => {
 
             let { pathname = key } = item.props
 
-            pathname != Router.route ? setSpinning(true) : closeSider()
+            pathname != Router.route ? setSpinning(true) : closeSider && closeSider()
             setSelectedKeys([key])
 
             let query = pathname == key ? null : { key }
@@ -31,13 +30,12 @@ export default ({ menuKeys, mode = "vertical", closeSider }) => {
         <Spin spinning={spinning}>
             <Menu
                 mode={mode}
+                // mode="inline"
                 onClick={handleClick}
                 selectedKeys={selectedKeys}
                 style={{ border: "none" }}
-
-                // inlineCollapsed={true}
+            // inlineCollapsed={true}
             >
-
                 <Item key="/" icon={<HomeOutlined />}>首页</Item>
                 <Item key="notes" pathname="/list" icon={<ReadOutlined />}>日志</Item>
                 <Item key="/album" icon={<PictureOutlined />} >相册</Item>

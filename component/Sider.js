@@ -45,7 +45,7 @@ const Sider = ({ className, menuKeys }) => {
         <Drawer
             className={className}
             placement="left"
-            width={200}
+            width={225}
             closable={false}
             maskStyle={{ backgroundColor: 'transparent' }}
             onClose={closeSider}
