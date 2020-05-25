@@ -9,15 +9,11 @@ import Layout from '../component/Layout'
 import { DATE_FORMAT, ERROR_ENUM, ERROR_RESULT, LIST_URL, SUCCESS_CODE, TYPE_URL } from '../config/common'
 import '../static/style/pages/list.css'
 
-
-
-
-
 const { Title, Paragraph } = Typography
 
 const
   rows = 3,
-  height = 150,
+  height = 310,
   preview = 2
 
 
@@ -26,19 +22,20 @@ const seatRender = (
   <List
     dataSource={[...Array(preview).keys()]}
     renderItem={() => (
-      <List.Item className="seat">
+      <List.Item className="seat" style={{ height }}>
         <div className="list-item">
           <Skeleton
             title={{ width: '50%' }}
-            paragraph={{ rows: rows }}
+            paragraph={{ rows: 1, width: '10%' }}
             active
           />
-
-          <div className="list-meta">
-            <Skeleton.Button
-              size="small"
-              active />
+          <div className="list-img-holder" >
+            <Skeleton.Input active />
           </div>
+          {/* <Skeleton
+            paragraph={{ rows: rows }}
+            active
+          /> */}
         </div>
       </List.Item>)}
   />
@@ -69,7 +66,7 @@ const list = ({ error, type, title, desc, bg }) => {
         if (code != SUCCESS_CODE) {
           return message.warning(info)
         }
-        cb(data)
+        // cb(data)
       }
     )
   }
@@ -92,6 +89,15 @@ const list = ({ error, type, title, desc, bg }) => {
       >
         {item.title}
       </Title>
+      <div className="list-meta">
+        <span>{moment(item.gmtCreate).format(DATE_FORMAT)}</span>
+        <span> · </span>
+        <span>{item.pv} views</span>
+      </div>
+      <div className="list-img-holder">
+        <div className="list-img">
+        </div>
+      </div>
       <Paragraph
         className="list-preview"
         ellipsis={{ rows: rows, expandable: false }}
@@ -99,9 +105,6 @@ const list = ({ error, type, title, desc, bg }) => {
       >
         {item.preview}
       </Paragraph>
-      <div className="list-meta">
-        <div>{moment(item.gmtCreate).format(DATE_FORMAT)}</div>
-      </div>
     </div>
   )
 
@@ -155,8 +158,6 @@ list.getInitialProps = async (context) => {
       }
     )
   })
-
-
   return await promise
 }
 

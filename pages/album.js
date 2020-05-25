@@ -28,7 +28,7 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      cb(data)
+      // cb(data)
 
     }
   )
