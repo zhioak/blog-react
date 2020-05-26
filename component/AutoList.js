@@ -129,6 +129,4 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
     </List>
   )
 }
-
-
 export default AutoList
