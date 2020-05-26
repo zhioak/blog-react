@@ -1,28 +1,25 @@
-import { List, message, Skeleton, Typography } from 'antd'
-import axios from 'axios'
-import moment from 'moment'
-import Router from 'next/router'
-import { useMemo, useState } from 'react'
-import AutoList from '../component/AutoList'
-import Banner from '../component/Banner'
 import Layout from '../component/Layout'
+import axios from 'axios'
+import { useMemo, useState } from 'react'
 import { DATE_FORMAT, ERROR_ENUM, ERROR_RESULT, LIST_URL, SUCCESS_CODE, TYPE_URL } from '../config/common'
-import '../static/style/pages/list.css'
+import { List, message, Skeleton, Typography } from 'antd'
+// import Banner from '../component/Banner'
 
+import moment from 'moment'
 const { Title, Paragraph } = Typography
 
-const
-  rows = 3,
-  height = 310,
-  preview = 2
+import '../static/style/pages/list.css'
+import LoadMoreList from '../component/LoadMoreList'
 
+const preview = 3,
+  rows = 3
 
 const seatRender = (
 
   <List
     dataSource={[...Array(preview).keys()]}
     renderItem={() => (
-      <List.Item className="seat" style={{ height }}>
+      <List.Item className="seat">
         <div className="list-item">
           <Skeleton
             title={{ width: '50%' }}
@@ -42,20 +39,10 @@ const seatRender = (
 )
 
 
+const list = () => {
 
-const list = ({ error, type, title, desc, bg }) => {
+  const type = "notes"
 
-
-  console.log('list render')
-
-  if (error) {
-    return (<ERROR_RESULT error={error} />)
-  }
-
-  const [spinning, setSpinning] = useState(false)
-
-
-  // 获取数据
   const getData = (page, cb) => {
     let form = new FormData()
     form.append('page', page++)
@@ -69,14 +56,6 @@ const list = ({ error, type, title, desc, bg }) => {
         cb(data)
       }
     )
-  }
-
-  const viewDetail = id => {
-    setSpinning(true)
-    Router.push({
-      pathname: '/detail',
-      query: { id }
-    })
   }
 
   const render = item => (
@@ -108,57 +87,28 @@ const list = ({ error, type, title, desc, bg }) => {
     </div>
   )
 
-  const banner = useMemo(() => (
-    <Banner
-      bg={bg}
-      title={title}
-      desc={desc}
-    />
-  ), [type])
-
 
   const list = useMemo(() => (
-    <AutoList
+
+
+    <LoadMoreList
+
       className="list"
       getData={getData}
-      itemHeight={height}
       itemRender={render}
       itemSeatRender={seatRender}
+
     />
-  ), [type])
+  ), [])
 
   return (
     <Layout
-      banner={banner}
+      // banner={<Banner title="记录生活 分享技术" desc="编程是一门艺术，生活亦是如此"/>}
       main={list}
-      spinning={spinning}
-      menuKeys={[type]}
+      menuKeys={['/']}
     />
   )
-}
 
-
-list.getInitialProps = async (context) => {
-
-  let { key } = context.query
-  if (!key) {
-    return { error: ERROR_ENUM[404] }
-  }
-
-  const promise = new Promise((resolve) => {
-    axios(TYPE_URL + key).then(
-      (res) => {
-        const { code, info, data } = res.data
-        if (code != SUCCESS_CODE) {
-          resolve({ error: { code, info } })
-          return
-        }
-        data.type = key
-        resolve(data)
-      }
-    )
-  })
-  return await promise
 }
 
 export default list
