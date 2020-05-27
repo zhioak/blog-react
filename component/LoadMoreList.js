@@ -1,10 +1,8 @@
-import { List, Avatar, Button, Skeleton } from 'antd'
-import { useMemo, useEffect, useState } from 'react'
+import { List, Button } from 'antd'
+import { useEffect, useState } from 'react'
 
 
-var
-    page,
-    hasMore
+var page, hasMore
 
 const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
 
@@ -12,7 +10,6 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
         [loading, setLoading] = useState(false)
 
     useEffect(() => {
-
         if (data) {
             setData(null)
         }
@@ -32,15 +29,13 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
 
     const onLoadMore = () => {
         setLoading(true)
-
         getData(++page, r => {
             setData(data.concat(r.list))
             setLoading(false)
             hasMore = r.hasMore
             window.dispatchEvent(new Event('resize'))
         })
-
-    };
+    }
 
     const loadMore = hasMore && !loading ? (
         <div
@@ -60,9 +55,18 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
             className={className}
             loadMore={loadMore}
             dataSource={data}
-            renderItem={itemRender}
+            renderItem={(item) => {
+                return (
+                    <List.Item key={item.id}>
+                        {
+                            itemRender(item)
+                        }
+                    </List.Item>
+                )
+            }}
         >
-            {loading && itemSeatRender}
+            {/* {loading && itemSeatRender} */}
+            {itemSeatRender}
         </List>
     )
 

@@ -28,7 +28,7 @@
         transform: none !important;
     }
     /* 侧栏出现时，会去除滚动条,放大后恢复它 */
-    .ant-scrolling-effect{
+    .ant-scrolling-effect {
         overflow: visible !important;
     }
 }
@@ -41,7 +41,7 @@
 }
 
 #main {
-    padding: 2vh 4vw;
+    padding: 0 4vw 2vh;
 }
 
 #sticky {
