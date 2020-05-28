@@ -14,7 +14,6 @@ import { DATE_FORMAT, DETAIL_URL, SUCCESS_CODE, ERROR_ENUM, ERROR_RESULT } from 
 import '../static/style/pages/detail.css'
 
 
-
 const tocify = new Tocify()
 const renderer = new marked.Renderer()
 renderer.heading = (text, level, raw) => {

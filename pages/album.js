@@ -58,20 +58,18 @@ const album = () => {
     })
   }
 
-  const render = item => (
+  const render = ({ id, title, preview, previewImg }) => (
     <div className="album-item done">
       <div
         className="album-img"
-        style={{ backgroundImage: `url(${item.preview})` }}
-        onClick={() => viewDetail(item.id)}
+        style={{ backgroundImage: `url(${previewImg})` }}
+        onClick={() => viewDetail(id)}
       >
         <div className="album-cover">
           <div className="album-meta">
-            <div className="title">{item.title}</div>
+            <div className="title">{title}</div>
             <div>
-              <span>{item.remark}</span>
-              <span> · </span>
-              <span>{moment(item.gmtCreate).format(DATE_FORMAT)}</span>
+              {preview}
             </div>
           </div>
         </div>

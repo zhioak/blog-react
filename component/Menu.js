@@ -1,9 +1,16 @@
-import { Menu, Spin } from 'antd'
 import Router from 'next/router'
 import { useState } from 'react'
-import { HomeOutlined, PictureOutlined, ReadOutlined, CoffeeOutlined, UserOutlined } from '@ant-design/icons'
+import { Menu, Spin } from 'antd'
+import * as icons from '@ant-design/icons'
 
-const { Item } = Menu
+
+const menus = [
+    {
+        key: '/',
+        name: '首页',
+        icon: 'HomeOutlined'
+    }
+]
 
 export default ({ menuKeys, mode = "inline", closeSider }) => {
 
@@ -30,17 +37,22 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
         <Spin spinning={spinning}>
             <Menu
                 mode={mode}
-                // mode="inline"
                 onClick={handleClick}
                 selectedKeys={selectedKeys}
                 style={{ border: "none" }}
-            // inlineCollapsed={true}
             >
-                <Item key="/" icon={<HomeOutlined />}>首页</Item>
-                <Item key="notes" pathname="/list" icon={<ReadOutlined />}>日志</Item>
-                <Item key="/album" icon={<PictureOutlined />} >相册</Item>
-                <Item key="java" pathname="/list" icon={<CoffeeOutlined />}>JAVA</Item>
-                <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
+                {
+                    menus.map((menu) => (
+                        <Menu.Item key={menu.key} icon={React.createElement(icons[menu.icon])}>{menu.name}</Menu.Item>
+                    ))
+                }
+                {/*
+                    <Item key="/" icon={<HomeOutlined />}>首页</Item>
+                    <Item key="notes" pathname="/list" icon={<ReadOutlined />}>日志</Item>
+                    <Item key="/album" icon={<PictureOutlined />} >相册</Item>
+                    <Item key="java" pathname="/list" icon={<CoffeeOutlined />}>JAVA</Item>
+                    <Item key="/about" icon={<UserOutlined />} disabled >关于</Item>
+                 */}
             </Menu>
         </Spin>
     )
