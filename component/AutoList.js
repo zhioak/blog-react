@@ -28,12 +28,12 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
 
   useEffect(() => {
     // 重复使用组件
-    if(data){
+    if (data) {
       setData(null)
     }
     page = 1
     hasMore = true
-    
+
     getData(page, r => {
       hasMore = r.hasMore
       setData(r.list)
@@ -63,15 +63,14 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
   }
 
   const
-    renderItem = ({ index, key, style }) => {
-      return (
-        <List.Item key={key} style={style}>
-          {
-            itemRender(data[index])
-          }
-        </List.Item>
-      )
-    },
+    renderItem = ({ index, key, style }) => (
+      <List.Item key={key} style={style}>
+        {
+          itemRender(data[index])
+        }
+      </List.Item>
+    )
+    ,
     vlist = ({ height, isScrolling, onChildScroll, scrollTop, onRowsRendered, width }) => (
       <VList
         autoHeight

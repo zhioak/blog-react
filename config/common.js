@@ -4,8 +4,8 @@ import { Button, Result } from 'antd'
 
 
 // const gate = 'https://www.zhousb.cn/api/'
-const gate = 'http://127.0.0.1:8080/'
-// const gate = 'http://192.168.1.44:8080/'
+// const gate = 'http://127.0.0.1:8080/'
+const gate = 'http://192.168.1.44:8080/'
 
 export const DETAIL_URL = gate + 'blog/get/'
 

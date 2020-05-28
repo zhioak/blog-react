@@ -15,7 +15,6 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
         }
         page = 1
         hasMore = true
-
         getData(page, r => {
             hasMore = r.hasMore
             setData(r.list)
@@ -23,50 +22,31 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
     }, [])
 
     // 未获取到数据使用seat占位
-    if (!data) {
-        return itemSeatRender
-    }
+    if (!data) return itemSeatRender
 
     const onLoadMore = () => {
+        if (!hasMore) return
         setLoading(true)
         getData(++page, r => {
-            setData(data.concat(r.list))
-            setLoading(false)
             hasMore = r.hasMore
+            setLoading(false)
+            setData(data.concat(r.list))
             window.dispatchEvent(new Event('resize'))
         })
     }
 
-    const loadMore = hasMore && !loading ? (
-        <div
-            style={{
-                textAlign: 'center',
-                marginTop: 12,
-                height: 32,
-                lineHeight: '32px',
-            }}
-        >
-            <Button onClick={onLoadMore}>loading more</Button>
-        </div>
-    ) : null
+    const loadMore = (
+        <Button className="loadMore" onClick={onLoadMore}>加载更多</Button>
+    )
 
     return (
         <List
             className={className}
-            loadMore={loadMore}
             dataSource={data}
-            renderItem={(item) => {
-                return (
-                    <List.Item key={item.id}>
-                        {
-                            itemRender(item)
-                        }
-                    </List.Item>
-                )
-            }}
+            loadMore={hasMore && !loading ? loadMore : null}
+            renderItem={item => (<List.Item key={item.id}>{itemRender(item)}</List.Item>)}
         >
-            {/* {loading && itemSeatRender} */}
-            {itemSeatRender}
+            {loading && itemSeatRender}
         </List>
     )
 

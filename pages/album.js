@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { useState, useMemo } from 'react'
-
 import moment from 'moment'
 import Router from 'next/router'
+import { useState, useMemo } from 'react'
 import { List, Skeleton, message } from 'antd'
 
 import Banner from '../component/Banner'
@@ -28,8 +27,7 @@ const getData = (page, cb) => {
       if (code != SUCCESS_CODE) {
         return message.warning(info)
       }
-      // cb(data)
-
+      cb(data)
     }
   )
 }
