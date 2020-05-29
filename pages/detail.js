@@ -36,7 +36,7 @@ marked.setOptions({
 })
 
 
-const detail = ({ error, title, content, typePath,typeName, pv, gmtCreate, prev, next }) => {
+const detail = ({ error, title, content, type, typePath, typeName, pv, gmtCreate, prev, next }) => {
     if (error) {
         return (<ERROR_RESULT error={error} />)
     }
@@ -48,7 +48,7 @@ const detail = ({ error, title, content, typePath,typeName, pv, gmtCreate, prev,
                     <Link href="/" ><a>首页</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={typePath}><a>{typeName}</a></Link>
+                    <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}><a>{typeName}</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
@@ -87,6 +87,7 @@ const detail = ({ error, title, content, typePath,typeName, pv, gmtCreate, prev,
     return (
         <Layout
             menuKeys={[typePath]}
+            menuKeys={[type]}
             banner={banner}
             main={main}
             sticky={sticky}

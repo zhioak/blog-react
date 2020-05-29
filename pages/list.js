@@ -28,7 +28,7 @@ const seatRender = (
 )
 
 
-const list = ({ error, type, title, desc, bg }) => {
+const list = ({ error, listKey, title, desc, bg }) => {
   if (error) {
     return (<ERROR_RESULT error={error} />)
   }
@@ -46,7 +46,7 @@ const list = ({ error, type, title, desc, bg }) => {
   const getData = (page, cb) => {
     let form = new FormData()
     form.append('page', page++)
-    form.append('type', type)
+    form.append('type', listKey)
     axios.post(LIST_URL, form).then(
       (res) => {
         const { code, info, data } = res.data
@@ -98,17 +98,18 @@ const list = ({ error, type, title, desc, bg }) => {
       title={title}
       desc={desc}
     />
-  ), [type])
+  ), [listKey])
 
 
   const list = useMemo(() => (
     <LoadMoreList
       className="list"
+      cacheKey={listKey}
       getData={getData}
       itemRender={render}
       itemSeatRender={seatRender}
     />
-  ), [type])
+  ), [listKey])
 
 
   return (
@@ -116,17 +117,20 @@ const list = ({ error, type, title, desc, bg }) => {
       spinning={spinning}
       banner={banner}
       main={list}
-      menuKeys={[type]}
+      menuKeys={[listKey]}
     />
   )
 }
 
 
+const pool = {}
 list.getInitialProps = async (context) => {
 
   let { key } = context.query
   if (!key) {
     return { error: ERROR_ENUM[404] }
+  } else if (pool[key]) {
+    return pool[key]
   }
 
   const promise = new Promise(
@@ -138,7 +142,8 @@ list.getInitialProps = async (context) => {
             resolve({ error: { code, info } })
             return
           }
-          data.type = key
+          data.listKey = key
+          pool[key] = data
           resolve(data)
         }
       )

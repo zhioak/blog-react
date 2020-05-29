@@ -2,35 +2,42 @@ import { List, Button } from 'antd'
 import { useEffect, useState } from 'react'
 
 
+const pool = {}
 var page, hasMore
 
-const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
+const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender }) => {
 
     const [data, setData] = useState(),
         [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (data) {
-            setData(null)
-        }
-        page = 1
-        hasMore = true
-        getData(page, r => {
-            hasMore = r.hasMore
-            setData(r.list)
-        })
-    }, [])
+        let {
+            data: cData = [],
+            page: cPage = 0,
+            hasMore: cMore = true
+        } = pool[cacheKey] ? pool[cacheKey] : {}
+        page = cPage
+        hasMore = cMore
+        hasMore ?
+            getData(++page, r => {
+                hasMore = r.hasMore
+                let tData = cData.concat(r.list)
+                pool[cacheKey] = { hasMore, page, data: tData }
+                setData(tData)
+            })
+            : setData(cData)
 
-    // 未获取到数据使用seat占位
-    if (!data) return itemSeatRender
+    }, [cacheKey])
 
     const onLoadMore = () => {
         if (!hasMore) return
         setLoading(true)
         getData(++page, r => {
             hasMore = r.hasMore
+            let tData = data.concat(r.list)
+            pool[cacheKey] = { hasMore, page, data: tData }
             setLoading(false)
-            setData(data.concat(r.list))
+            setData(tData)
             window.dispatchEvent(new Event('resize'))
         })
     }
@@ -43,10 +50,10 @@ const LoadMoreList = ({ className, getData, itemRender, itemSeatRender }) => {
         <List
             className={className}
             dataSource={data}
-            loadMore={hasMore && !loading ? loadMore : null}
+            loadMore={data && hasMore && !loading && loadMore}
             renderItem={item => (<List.Item key={item.id}>{itemRender(item)}</List.Item>)}
         >
-            {loading && itemSeatRender}
+            {(!data || loading) && itemSeatRender}
         </List>
     )
 
