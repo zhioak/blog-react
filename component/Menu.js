@@ -21,6 +21,7 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     console.log('menu render')
     const [spinning, setSpinning] = useState(false)
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
+    useEffect(() => setSelectedKeys(menuKeys), [menuKeys])
 
 
     // 默认使用key作为跳转路径,

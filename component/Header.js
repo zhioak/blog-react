@@ -1,9 +1,9 @@
-import { Row, Col } from 'antd'
-import { useContext, useMemo } from 'react'
-import Link from 'next/link'
 import Menu from './Menu'
+import Link from 'next/link'
 import Social from './Social'
+import { Row, Col } from 'antd'
 import { layoutContext } from './Layout'
+import { useContext, useMemo } from 'react'
 
 import '../static/style/component/header.css'
 
@@ -13,7 +13,7 @@ const Header = ({ className, menuKeys }) => {
 
     const { setSiderVisible } = useContext(layoutContext)
 
-    const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [])
+    const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [menuKeys])
 
     const social = useMemo(() => (<Social mode="grid" />), [])
 

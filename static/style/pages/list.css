@@ -46,14 +46,15 @@
 }
 
 @media (min-width: 576px) {
-    .list-title, .list-img-holder, .list-preview:hover {
+    .list-title, .list-type, .list-img-holder, .list-preview:hover {
         cursor: pointer;
     }
-    .list-title:hover {
-        color: rgba(0, 0, 0, .7)
+    .list-title:hover, .list-type:hover {
+        color: #1890ff;
+        /* color: rgba(0, 0, 0, .7) */
     }
     .list-preview:hover {
-        color: rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, .45);
     }
     .list-img-holder {
         height: 30vh;
@@ -71,6 +72,7 @@
 }
 
 /* 占位 */
+
 .seat {
     padding: 12px 0;
 }

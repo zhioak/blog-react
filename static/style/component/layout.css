@@ -17,7 +17,7 @@
 }
 
 .root-lose .lose-retinue {
-    transform: translateX(200px);
+    transform: translateX(225px);
 }
 
 @media (min-width: 768px) {

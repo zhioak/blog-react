@@ -13,6 +13,8 @@ export const TYPE_URL = gate + 'blog/type/get/'
 
 export const LIST_URL = gate + 'blog/list'
 
+export const DICT_DATA_LIST_URL = gate + 'dict/dataList'
+
 export const SUCCESS_CODE = '0000'
 
 export const DATE_FORMAT = 'YYYY-MM-DD'

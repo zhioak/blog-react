@@ -7,7 +7,7 @@ import { useMemo } from 'react'
 const zhou = {
     email: 'flyingnoob@qq.com',
     wechat: 'https://zhousb.cn/resource/wechatQR.png',
-    github: 'https://github.com/er222er'
+    github: 'https://github.com/zhousb1999'
 }
 
 const size = 25,

@@ -7,6 +7,8 @@ var page, hasMore
 
 const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender }) => {
 
+    console.log('loadmorelist render')
+
     const [data, setData] = useState(),
         [loading, setLoading] = useState(false)
 

@@ -35,7 +35,7 @@ const Sider = ({ className, menuKeys }) => {
 
     const closeSider = () => { setSiderVisible(false) }
 
-    const menu = useMemo(() => (<Menu menuKeys={menuKeys} closeSider={closeSider} />), [])
+    const menu = useMemo(() => (<Menu menuKeys={menuKeys} closeSider={closeSider} />), [menuKeys])
 
     const social = useMemo(() => (<Social />), [])
 

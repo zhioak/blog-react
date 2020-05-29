@@ -23,3 +23,7 @@ img {
     font-size: 1.4rem;
 }
 
+.cut::after {
+    content: " · ";
+    padding: 0 .5%;
+}

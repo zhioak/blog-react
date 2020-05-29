@@ -63,14 +63,14 @@ const list = ({ error, listKey, title, desc, bg }) => {
       <Title
         className="list-title"
         level={4}
-        ellipsis={true}
+        ellipsis={{ rows: 2 }}
         onClick={() => viewDetail(id)}
       >
         {title}
       </Title>
       <div className="list-meta">
         <span>{moment(gmtCreate).format(DATE_FORMAT)}</span>
-        <span> · </span>
+        <span className="cut" />
         <span>{pv} views</span>
       </div>
       {

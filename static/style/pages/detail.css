@@ -75,7 +75,7 @@
 .detail-content img {
     display: block;
     margin: auto;
-    max-width: 600px;
+    max-width: 800px;
 }
 
 pre {
@@ -89,7 +89,7 @@ code {
     display: inline-block;
     margin: 0px 10px;
     font-size: .87rem;
-    line-height: .85rem;
+    line-height: 1.5rem;
 }
 
 pre>code {

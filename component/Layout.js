@@ -34,18 +34,14 @@ const FullSpin = () => {
 
 const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
-
     const [siderVisible, setSiderVisible] = useState(false)
-
-
-    const footer = useMemo(() => (<Footer />), [])
-
+    
 
     const header = useMemo(() => (
         <layoutContext.Provider value={{ setSiderVisible }}>
             <Header className="lose-retinue" menuKeys={menuKeys} />
         </layoutContext.Provider>
-    ), [])
+    ), [menuKeys])
 
 
     const sider = useMemo(() => (
@@ -55,7 +51,7 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
                 menuKeys={menuKeys}
             />
         </layoutContext.Provider>
-    ), [siderVisible])
+    ), [siderVisible, menuKeys])
 
 
     const topstory = useMemo(() => (
@@ -79,6 +75,7 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
         </div>
     ), [main, sticky])
 
+    const footer = useMemo(() => (<Footer />), [])
 
     return (
         <>

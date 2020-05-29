@@ -14,15 +14,7 @@ import { DATE_FORMAT, DETAIL_URL, SUCCESS_CODE, ERROR_ENUM, ERROR_RESULT } from 
 import '../static/style/pages/detail.css'
 
 
-const tocify = new Tocify()
-const renderer = new marked.Renderer()
-renderer.heading = (text, level, raw) => {
-    const anchor = tocify.add(text, level);
-    return `<Link href="#${anchor}"><a id="${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a></Link>\n`;
-}
-
 marked.setOptions({
-    renderer: renderer,
     gfm: true,
     pedantic: false,
     sanitize: false,
@@ -31,6 +23,7 @@ marked.setOptions({
     smartLists: true,
     smartypants: false,
     highlight: function (code) {
+        console.log('hhhhhhhhhh')
         return hljs.highlightAuto(code).value
     }
 })
@@ -40,6 +33,14 @@ const detail = ({ error, title, content, type, typePath, typeName, pv, gmtCreate
     if (error) {
         return (<ERROR_RESULT error={error} />)
     }
+    const tocify = new Tocify()
+    const renderer = new marked.Renderer()
+    renderer.heading = (text, level) => {
+        const anchor = tocify.add(text, level);
+        return `<Link href="#${anchor}"><a id="${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a></Link>\n`;
+    }
+    marked.setOptions({
+        renderer: renderer})
 
     let banner = (
         <div className="detail-header">
