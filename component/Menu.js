@@ -4,8 +4,18 @@ import { Menu, Spin } from 'antd'
 import * as icons from '@ant-design/icons'
 
 
-var menus
 
+const { SubMenu, Item } = Menu
+const menus = list => (
+    list.map(({ key, path, type, icon, name, childList }) => (
+        0 === type ?
+            (<SubMenu key={key} title={name} icon={React.createElement(icons[icon])}>{menus(childList)}</SubMenu>)
+            :
+            (<Item key={key} path={path} icon={React.createElement(icons[icon])} >{name}</Item>)
+    ))
+)
+
+var menuList
 export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     console.log('menu render')
@@ -15,41 +25,45 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     // 默认使用key作为跳转路径,
     // pathname存在时则作为跳转页面，key变为参数传递
-    if (!menus) {
-        menus = [
+    if (!menuList) {
+        menuList = [
             {
                 key: ' ',
                 name: '首页',
+                type: 1,
                 icon: 'HomeOutlined',
                 path: '/ '
             },
             {
                 key: 'notes',
                 name: '日志',
+                type: 1,
                 icon: 'ReadOutlined',
                 path: '/list'
             },
             {
                 key: 'album',
                 name: '相册',
+                type: 1,
                 icon: 'PictureOutlined',
                 path: '/album'
             },
             {
                 key: 'java',
                 name: 'JAVA',
+                type: 1,
                 icon: 'CoffeeOutlined',
                 path: '/list'
             }, {
                 key: 'about',
                 name: '关于',
+                type: 1,
                 icon: 'UserOutlined',
                 path: '/ablout'
-            },
+            }
         ]
         console.log('menu init')
     }
-
 
     const handleClick = ({ item, key }) => {
 
@@ -73,18 +87,10 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
                 selectedKeys={selectedKeys}
                 style={{ border: 'none' }}
             >
-                {
-                    menus.map(({ key, path, icon, name }) => (
-                        <Menu.Item
-                            key={key}
-                            path={path}
-                            icon={React.createElement(icons[icon])}
-                        >
-                            {name}
-                        </Menu.Item>
-                    ))
-                }
+                {menus(menuList)}
             </Menu>
         </Spin>
     )
 }
+
+
