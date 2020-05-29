@@ -36,11 +36,10 @@ marked.setOptions({
 })
 
 
-const detail = ({ error, title, content, type, typeName, pv, gmtCreate, prev, next }) => {
+const detail = ({ error, title, content, typePath,typeName, pv, gmtCreate, prev, next }) => {
     if (error) {
         return (<ERROR_RESULT error={error} />)
     }
-    let backPath = `/${type}`
 
     let banner = (
         <div className="detail-header">
@@ -49,7 +48,7 @@ const detail = ({ error, title, content, type, typeName, pv, gmtCreate, prev, ne
                     <Link href="/" ><a>首页</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={backPath}><a>{typeName}</a></Link>
+                    <Link href={typePath}><a>{typeName}</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
@@ -87,7 +86,7 @@ const detail = ({ error, title, content, type, typeName, pv, gmtCreate, prev, ne
 
     return (
         <Layout
-            menuKeys={[backPath]}
+            menuKeys={[typePath]}
             banner={banner}
             main={main}
             sticky={sticky}

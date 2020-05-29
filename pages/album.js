@@ -91,7 +91,7 @@ const album = () => {
     <Layout
       banner={<Banner />}
       main={list}
-      menuKeys={['/album']}
+      menuKeys={['album']}
       spinning={spinning}
     />
   )
