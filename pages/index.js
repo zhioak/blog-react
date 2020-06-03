@@ -1,17 +1,18 @@
-import axios from 'axios'
+
+import { Skeleton, Typography } from 'antd'
+
 import moment from 'moment'
-import Link from 'next/link'
 import Router from 'next/router'
 import { useMemo, useState } from 'react'
-import { message, Skeleton, Typography } from 'antd'
-
-
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
-import { DATE_FORMAT, LIST_URL, SUCCESS_CODE } from '../config/common'
+import apiMap from '../config/apiMap'
+import { httpPost } from '../component/util/httpUtil'
 
 import '../static/style/pages/list.css'
+
+
 
 const { Title, Paragraph } = Typography
 
@@ -29,31 +30,18 @@ const seatRender = (
 )
 
 
-const index = ({ title, desc, bg }) => {
+const index = () => {
+
+  console.log('index')
 
   const [spinning, setSpinning] = useState(false)
 
-  const viewDetail = id => {
+  const jump = path => {
     setSpinning(true)
-    Router.push({
-      pathname: '/detail',
-      query: { id }
-    })
+    Router.push(path)
   }
 
-  const getData = (page, cb) => {
-    let form = new FormData()
-    form.append('page', page++)
-    axios.post(LIST_URL, form).then(
-      (res) => {
-        const { code, info, data } = res.data
-        if (code != SUCCESS_CODE) {
-          return message.warning(info)
-        }
-        cb(data)
-      }
-    )
-  }
+  const getData = (page, cb) => httpPost(apiMap.list, { page }, data => cb(data))
 
   const render = ({ id, title, type, typePath, typeName, pv, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
@@ -61,22 +49,23 @@ const index = ({ title, desc, bg }) => {
         className="list-title"
         level={4}
         ellipsis={{ rows: 2 }}
-        onClick={() => viewDetail(id)}
+        onClick={() => jump(`/detail?id=${id}`)}
       >
         {title}
       </Title>
       <div className="list-meta">
-        <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}>
-          <span className="list-type">{typeName}</span>
-        </Link>
+        <span
+          className="list-type"
+          onClick={() => jump(`/${type}` == typePath ? typePath : `${typePath}?key=${type}`)}
+        >
+          {typeName}
+        </span>
         <span className="cut" />
-        <span>{moment(gmtCreate).format(DATE_FORMAT)}</span>
-        <span className="cut" />
-        <span>{pv} views</span>
+        <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
       {
         previewImg &&
-        <div className="list-img-holder" onClick={() => viewDetail(id)}>
+        <div className="list-img-holder" onClick={() => jump(`/detail?id=${id}`)}>
           <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
         </div>
       }
@@ -85,7 +74,7 @@ const index = ({ title, desc, bg }) => {
         <Paragraph
           className="list-preview"
           ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-          onClick={() => viewDetail(id)}
+          onClick={() => jump(`/detail?id=${id}`)}
         >
           {preview}
         </Paragraph>

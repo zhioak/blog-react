@@ -1,13 +1,12 @@
-import axios from 'axios'
-import moment from 'moment'
 import Router from 'next/router'
+import { List, Skeleton } from 'antd'
 import { useState, useMemo } from 'react'
-import { List, Skeleton, message } from 'antd'
 
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
-import { LIST_URL, SUCCESS_CODE, DATE_FORMAT } from '../config/common'
+import { httpPost } from '../component/util/httpUtil'
+import apiMap from '../config/apiMap'
 
 import '../static/style/pages/album.css'
 
@@ -18,17 +17,10 @@ const
   type = 'album'
 
 const getData = (page, cb) => {
-  let form = new FormData()
-  form.append('page', page)
-  form.append('type', type)
-  axios.post(LIST_URL, form).then(
-    (res) => {
-      const { code, info, data } = res.data
-      if (code != SUCCESS_CODE) {
-        return message.warning(info)
-      }
-      cb(data)
-    }
+  httpPost(
+    apiMap.list,
+    { page: page++, type },
+    data => cb(data)
   )
 }
 
@@ -50,7 +42,7 @@ const album = () => {
   console.log('album render')
   const [spinning, setSpinning] = useState(false)
 
-  const viewDetail = id => {
+  const jump = id => {
     setSpinning(true)
     Router.push({
       pathname: '/detail',
@@ -63,7 +55,7 @@ const album = () => {
       <div
         className="album-img"
         style={{ backgroundImage: `url(${previewImg})` }}
-        onClick={() => viewDetail(id)}
+        onClick={() => jump(id)}
       >
         <div className="album-cover">
           <div className="album-meta">

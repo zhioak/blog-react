@@ -1,20 +1,20 @@
-import axios from 'axios'
 import moment from 'moment'
 import Router from 'next/router'
 import { useMemo, useState } from 'react'
-import { message, Skeleton, Typography } from 'antd'
+import { Skeleton, Typography } from 'antd'
 
 
+import apiMap from '../config/apiMap'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
-import { DATE_FORMAT, ERROR_ENUM, ERROR_RESULT, LIST_URL, SUCCESS_CODE, TYPE_URL } from '../config/common'
+import { httpPost } from '../component/util/httpUtil'
+import Error, { ERROR_ENUM } from '../component/Error'
 
 import '../static/style/pages/list.css'
 
+
 const { Title, Paragraph } = Typography
-
-
 const seatRender = (
   <div className="seat">
     <div className="list-item">
@@ -29,13 +29,11 @@ const seatRender = (
 
 
 const list = ({ error, listKey, title, desc, bg }) => {
-  if (error) {
-    return (<ERROR_RESULT error={error} />)
-  }
+
+  if (error) return (<Error error={error} />)
 
   const [spinning, setSpinning] = useState(false)
-
-  const viewDetail = id => {
+  const jump = id => {
     setSpinning(true)
     Router.push({
       pathname: '/detail',
@@ -44,38 +42,29 @@ const list = ({ error, listKey, title, desc, bg }) => {
   }
 
   const getData = (page, cb) => {
-    let form = new FormData()
-    form.append('page', page++)
-    form.append('type', listKey)
-    axios.post(LIST_URL, form).then(
-      (res) => {
-        const { code, info, data } = res.data
-        if (code != SUCCESS_CODE) {
-          return message.warning(info)
-        }
-        cb(data)
-      }
+    httpPost(
+      apiMap.list,
+      { page: page++, type: listKey },
+      data => cb(data)
     )
   }
 
-  const render = ({ id, title, pv, preview, previewImg, gmtCreate }) => (
+  const render = ({ id, title, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
       <Title
         className="list-title"
         level={4}
         ellipsis={{ rows: 2 }}
-        onClick={() => viewDetail(id)}
+        onClick={() => jump(id)}
       >
         {title}
       </Title>
       <div className="list-meta">
-        <span>{moment(gmtCreate).format(DATE_FORMAT)}</span>
-        <span className="cut" />
-        <span>{pv} views</span>
+        <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
       {
         previewImg &&
-        <div className="list-img-holder" onClick={() => viewDetail(id)}>
+        <div className="list-img-holder" onClick={() => jump(id)}>
           <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
         </div>
       }
@@ -84,7 +73,7 @@ const list = ({ error, listKey, title, desc, bg }) => {
         <Paragraph
           className="list-preview"
           ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-          onClick={() => viewDetail(id)}
+          onClick={() => jump(id)}
         >
           {preview}
         </Paragraph>
@@ -135,17 +124,15 @@ list.getInitialProps = async (context) => {
 
   const promise = new Promise(
     resolve => {
-      axios(TYPE_URL + key).then(
-        (res) => {
-          const { code, info, data } = res.data
-          if (code != SUCCESS_CODE) {
-            resolve({ error: { code, info } })
-            return
-          }
+      httpPost(
+        apiMap.type + key,
+        null,
+        data => {
           data.listKey = key
           pool[key] = data
           resolve(data)
-        }
+        },
+        res => resolve({ error: res })
       )
     }
   )

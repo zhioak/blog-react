@@ -21,28 +21,17 @@ export const layoutContext = createContext()
 
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
 
-const FullSpin = () => {
-
-    return (
-        <div id="spin">
-            <div>
-                <LoadingOutlined style={{ fontSize: 24 }} />
-            </div>
-        </div>
-    )
-}
-
 const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
-    
 
+    console.log(menuKeys)
+    
     const header = useMemo(() => (
         <layoutContext.Provider value={{ setSiderVisible }}>
             <Header className="lose-retinue" menuKeys={menuKeys} />
         </layoutContext.Provider>
     ), [menuKeys])
-
 
     const sider = useMemo(() => (
         <layoutContext.Provider value={{ siderVisible, setSiderVisible }}>

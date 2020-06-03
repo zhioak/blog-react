@@ -66,7 +66,7 @@ export default class Tocify {
       <Link key={item.anchor} href={`#${item.anchor}`} title={item.text}>
         {item.children && this.renderToc(item.children)}
       </Link>
-    ));
+    ))
   }
 
   render() {
@@ -74,6 +74,6 @@ export default class Tocify {
       <Anchor>
          {this.renderToc(this.tocItems)}
       </Anchor>
-    );
+    )
   }
 }

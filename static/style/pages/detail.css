@@ -54,7 +54,11 @@
 .nav-prev, .nav-next {
     position: absolute;
     width: 50%;
-    line-height: 70px
+    line-height: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 
 .nav-prev {

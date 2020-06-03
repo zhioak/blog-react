@@ -63,7 +63,6 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
                 path: '/ablout'
             }
         ]
-        console.log('menu init')
     }
 
     const handleClick = ({ item, key }) => {

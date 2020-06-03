@@ -1,101 +1,110 @@
 
 import { Affix, Breadcrumb } from 'antd'
 import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
-
-import axios from 'axios'
-import hljs from 'highlight.js'
-import marked from 'marked'
 import moment from 'moment'
+import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+
+import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
 import Tocify from '../component/Tocify.tsx'
-import 'highlight.js/styles/monokai-sublime.css'
-import { DATE_FORMAT, DETAIL_URL, SUCCESS_CODE, ERROR_ENUM, ERROR_RESULT } from '../config/common'
+import marked from '../component/util/marked'
+import { httpPost } from '../component/util/httpUtil'
+import Error, { ERROR_ENUM } from '../component/Error'
+
 import '../static/style/pages/detail.css'
 
+/**
+ * 每次新建数组 导致更新
+ */
 
-marked.setOptions({
-    gfm: true,
-    pedantic: false,
-    sanitize: false,
-    tables: true,
-    breaks: false,
-    smartLists: true,
-    smartypants: false,
-    highlight: function (code) {
-        console.log('hhhhhhhhhh')
-        return hljs.highlightAuto(code).value
-    }
-})
+const menuKeys = []
+const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCreate, prev, next }) => {
 
+    if (error) return (<Error error={error} />)
 
-const detail = ({ error, title, content, type, typePath, typeName, pv, gmtCreate, prev, next }) => {
-    if (error) {
-        return (<ERROR_RESULT error={error} />)
-    }
-    const tocify = new Tocify()
-    const renderer = new marked.Renderer()
-    renderer.heading = (text, level) => {
-        const anchor = tocify.add(text, level);
-        return `<Link href="#${anchor}"><a id="${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a></Link>\n`;
-    }
-    marked.setOptions({
-        renderer: renderer})
+    console.log('detail render')
+    const [spinning, setSpinning] = useState(false)
 
-    let banner = (
+    useEffect(()=>{
+        return ()=>{
+            console.log('卸载 ')
+        }
+    },[])
+
+    useEffect(() => {
+        spinning && setSpinning(false)
+    }, [id])
+
+    let tocify
+    let banner = useMemo(() => (
         <div className="detail-header">
             <Breadcrumb>
                 <Breadcrumb.Item>
-                    <Link href="/" ><a>首页</a></Link>
+                    <Link href='/'>
+                        <a onClick={() => setSpinning(true)}>首页</a>
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}><a>{typeName}</a></Link>
+                    <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}>
+                        <a onClick={() => setSpinning(true)}>{typeName}</a>
+                    </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
             <div>
                 <div className="detail-title">{title}</div>
                 <div className="detail-meta">
-                    <div><CalendarFilled /> {moment(gmtCreate).format(DATE_FORMAT)}</div>
+                    <div><CalendarFilled /> {moment(gmtCreate).format('YYYY-MM-DD')}</div>
                     <div><EyeFilled /> {pv}</div>
                 </div>
             </div>
         </div>
-    )
+    ), [id])
 
-    let main = (
+    let main = useMemo(() => (
         <>
             <div className="detail-content">
-                <div dangerouslySetInnerHTML={{ __html: marked(content) }}></div>
+                <div dangerouslySetInnerHTML={{ __html: marked(content, (tocify = new Tocify())) }}></div>
             </div>
             <div className="detail-nav">
-                {prev && <Link href={`?id=${prev.id}`}><a className="nav-prev"><LeftOutlined /> {prev.title}</a></Link>}
-                {next && <Link href={`?id=${next.id}`}><a className="nav-next">{next.title} <RightOutlined className="end" /></a></Link>}
+                {prev &&
+                    <Link href={`?id=${prev.id}`}>
+                        <a className="nav-prev" onClick={() => setSpinning(true)}>
+                            <LeftOutlined />{prev.title}</a>
+                    </Link>
+                }
+                {next &&
+                    <Link href={`?id=${next.id}`}>
+                        <a className="nav-next" onClick={() => setSpinning(true)}>{next.title}
+                            <RightOutlined className="end" /></a>
+                    </Link>
+                }
             </div>
         </>
-    )
+    ), [id])
 
 
-
-    let sticky = tocify.tocItems.length > 0 && (
+    let sticky = useMemo(() => (
+        tocify.tocItems.length > 0 &&
         <Affix offsetTop={55}>
             <div className="detail-toc">
                 {tocify.render()}
             </div>
         </Affix>
-    )
+    ), [id])
+
 
     return (
         <Layout
-            menuKeys={[typePath]}
-            menuKeys={[type]}
+            menuKeys={menuKeys}
             banner={banner}
             main={main}
             sticky={sticky}
+            spinning={spinning}
         />
     )
 }
-
 
 
 detail.getInitialProps = async (context) => {
@@ -107,17 +116,17 @@ detail.getInitialProps = async (context) => {
     const promise = new Promise((resolve) => {
         setTimeout(() => {
 
-            axios(DETAIL_URL + id).then(
-                (res) => {
-                    const { code, info, data } = res.data
-                    if (code != SUCCESS_CODE) {
-                        resolve({ error: { code, info } })
-                        return
-                    }
+            httpPost(
+                apiMap.detail + id,
+                null,
+                data => {
+                    data.id = id
                     resolve(data)
-                }
+                },
+                res => resolve({ error: res })
             )
-        }, 3000)
+
+        }, 5000)
     })
     return await promise
 }

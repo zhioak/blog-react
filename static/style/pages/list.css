@@ -9,6 +9,12 @@
     height: 100%;
 }
 
+.list-title, .list-type, .list-preview {
+    -webkit-transition: color .3s ease;
+    -moz-transition: color .3s ease;
+    transition: color .3s ease;
+}
+
 .list .ant-list-item:last-child {
     border-bottom: none !important;
 }
