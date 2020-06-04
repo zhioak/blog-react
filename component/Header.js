@@ -1,6 +1,6 @@
 import Menu from './Menu'
 import Link from 'next/link'
-import Social from './Social'
+import SNS from './SNS'
 import { Row, Col } from 'antd'
 import { layoutContext } from './Layout'
 import { useContext, useMemo } from 'react'
@@ -15,7 +15,7 @@ const Header = ({ className, menuKeys }) => {
 
     const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [menuKeys])
 
-    const social = useMemo(() => (<Social mode="grid" />), [])
+    const sns = useMemo(() => (<SNS mode="grid" />), [])
 
     return (
         <div className={`header ${className}`}>
@@ -41,7 +41,7 @@ const Header = ({ className, menuKeys }) => {
                         {menu}
                     </Col>
                     <Col className="header-right" xs={8} sm={8} md={4} >
-                        {social}
+                        {sns}
                     </Col>
                 </Row>
             </div>

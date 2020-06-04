@@ -17,7 +17,7 @@ const GRID = 'grid'
 
 const placement = "bottom"
 
-const Social = ({ mode }) => {
+const SNS = ({ mode }) => {
 
     const email = useMemo(() => (
         <Tooltip trigger={trigger} placement={placement} title={zhou.email}  >
@@ -63,4 +63,4 @@ const Social = ({ mode }) => {
     )
 }
 
-export default Social
+export default SNS

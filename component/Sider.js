@@ -4,7 +4,7 @@ import { useMemo, useContext } from 'react'
 import Link from 'next/link'
 
 import Menu from './Menu'
-import Social from './Social'
+import SNS from './SNS'
 import { layoutContext } from './Layout'
 
 import '../static/style/component/sider.css'
@@ -37,7 +37,7 @@ const Sider = ({ className, menuKeys }) => {
 
     const menu = useMemo(() => (<Menu menuKeys={menuKeys} closeSider={closeSider} />), [menuKeys])
 
-    const social = useMemo(() => (<Social />), [])
+    const sns = useMemo(() => (<SNS />), [])
 
     const profile = useMemo(() => (<Profile />), [])
 
@@ -53,7 +53,7 @@ const Sider = ({ className, menuKeys }) => {
         >
             {profile}
             {menu}
-            {social}
+            {sns}
         </Drawer>
     )
 }
