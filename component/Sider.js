@@ -4,7 +4,7 @@ import { useMemo, useContext } from 'react'
 import Link from 'next/link'
 
 import Menu from './Menu'
-import SNS from './SNS'
+import Sns from './Sns'
 import { layoutContext } from './Layout'
 
 import '../static/style/component/sider.css'
@@ -37,7 +37,7 @@ const Sider = ({ className, menuKeys }) => {
 
     const menu = useMemo(() => (<Menu menuKeys={menuKeys} closeSider={closeSider} />), [menuKeys])
 
-    const sns = useMemo(() => (<SNS />), [])
+    const sns = useMemo(() => (<Sns />), [])
 
     const profile = useMemo(() => (<Profile />), [])
 

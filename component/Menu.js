@@ -41,21 +41,14 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     }, [])
 
 
-
-
-    // 默认使用key作为跳转路径,
-    // pathname存在时则作为跳转页面，key变为参数传递
     const handleClick = ({ item, key }) => {
 
         if (!selectedKeys || !selectedKeys.includes(key)) {
+            let { path } = item.props
 
-            let { path: pathname } = item.props
-
-            pathname != Router.route ? setSpinning(true) : closeSider && closeSider()
+            Router.route != path.substr(0, path.indexOf('?')) ? setSpinning(true) : closeSider && closeSider()
             setSelectedKeys([key])
-
-            let query = `/${key}` == pathname ? null : { key }
-            Router.push({ pathname, query })
+            Router.push(path)
         }
     }
 

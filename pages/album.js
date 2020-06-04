@@ -20,7 +20,10 @@ const
 const getData = (page, cb) => {
   httpPost(
     apiMap.list,
-    { page: page++, type },
+    {
+      page,
+      'type.key': type
+    },
     data => cb(data)
   )
 }

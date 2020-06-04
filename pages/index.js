@@ -28,15 +28,22 @@ const seatRender = (
 )
 
 
+const menuKeys = ['/']
 const index = () => {
 
   console.log('index')
 
   const [spinning, setSpinning] = useState(false)
 
-  const getData = (page, cb) => httpPost(apiMap.list, { page }, data => cb(data))
+  const getData = (page, cb) => {
+    httpPost(
+      apiMap.list,
+      { page },
+      data => cb(data)
+    )
+  }
 
-  const render = ({ id, title, type, typePath, typeName, pv, preview, previewImg, gmtCreate }) => (
+  const render = ({ id, title, type, menu, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
       <Link href={`/detail?id=${id}`}>
         <a onClick={() => setSpinning(true)}>
@@ -51,9 +58,9 @@ const index = () => {
       </Link>
 
       <div className="list-meta">
-        <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}>
+        <Link href={menu.path}>
           <a className="list-type" onClick={() => setSpinning(true)}>
-            {typeName}
+            {type.name}
           </a>
         </Link>
         <span className="cut" />
@@ -110,7 +117,7 @@ const index = () => {
       spinning={spinning}
       banner={banner}
       main={list}
-      menuKeys={[' ']}
+      menuKeys={menuKeys}
     />
   )
 }

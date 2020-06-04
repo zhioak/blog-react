@@ -28,18 +28,21 @@ const seatRender = (
   </div>
 )
 
-const list = ({ error, listKey, title, desc, bg }) => {
+const list = ({ error, type, title, desc, bg }) => {
 
   if (error) return (<Error error={error} />)
 
-  
-  menuKeys[0] = listKey
+
+  menuKeys[0] = type
   const [spinning, setSpinning] = useState(false)
 
   const getData = (page, cb) => {
     httpPost(
       apiMap.list,
-      { page: page++, type: listKey },
+      {
+        page,
+        'type.key': type
+      },
       data => cb(data)
     )
   }
@@ -93,18 +96,18 @@ const list = ({ error, listKey, title, desc, bg }) => {
       title={title}
       desc={desc}
     />
-  ), [listKey])
+  ), [type])
 
 
   const list = useMemo(() => (
     <LoadMoreList
       className="list"
-      cacheKey={listKey}
+      cacheKey={type}
       getData={getData}
       itemRender={render}
       itemSeatRender={seatRender}
     />
-  ), [listKey])
+  ), [type])
 
 
   return (
@@ -119,23 +122,23 @@ const list = ({ error, listKey, title, desc, bg }) => {
 
 
 const pool = {}
-list.getInitialProps = async (context) => {
+list.getInitialProps = async ({ query }) => {
 
-  let { key } = context.query
-  if (!key) {
+  let { type } = query
+  if (!type) {
     return { error: ERROR_ENUM[404] }
-  } else if (pool[key]) {
-    return pool[key]
+  } else if (pool[type]) {
+    return pool[type]
   }
 
   const promise = new Promise(
     resolve => {
       httpPost(
-        apiMap.type + key,
+        apiMap.type + type,
         null,
         data => {
-          data.listKey = key
-          pool[key] = data
+          data.type = type
+          pool[type] = data
           resolve(data)
         },
         res => resolve({ error: res })

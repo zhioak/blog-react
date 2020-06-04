@@ -1,6 +1,6 @@
 import Menu from './Menu'
 import Link from 'next/link'
-import SNS from './SNS'
+import Sns from './Sns'
 import { Row, Col } from 'antd'
 import { layoutContext } from './Layout'
 import { useContext, useMemo } from 'react'
@@ -15,7 +15,7 @@ const Header = ({ className, menuKeys }) => {
 
     const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [menuKeys])
 
-    const sns = useMemo(() => (<SNS mode="grid" />), [])
+    const sns = useMemo(() => (<Sns mode="grid" />), [])
 
     return (
         <div className={`header ${className}`}>

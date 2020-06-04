@@ -19,13 +19,13 @@ import '../static/style/pages/detail.css'
  */
 
 const menuKeys = []
-const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCreate, prev, next }) => {
+const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, next }) => {
 
     if (error) return (<Error error={error} />)
 
     console.log('detail render')
 
-    menuKeys[0] = type
+    menuKeys[0] = type.key
     const [spinning, setSpinning] = useState(false)
 
 
@@ -43,8 +43,8 @@ const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCr
                     </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}>
-                        <a onClick={() => setSpinning(true)}>{typeName}</a>
+                    <Link href={menu.path}>
+                        <a onClick={() => setSpinning(true)}>{type.name}</a>
                     </Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
@@ -117,10 +117,9 @@ detail.getInitialProps = async ({ query, asPath }) => {
     const promise = new Promise(resolve => {
         setTimeout(() => {
             httpPost(
-                apiMap.detail + id,
-                null,
+                apiMap.detail,
+                { id },
                 data => {
-                    data.id = id
                     resolve(data)
                 },
                 res => resolve({ error: res })
