@@ -1,12 +1,13 @@
-import Router from 'next/router'
+
+import Link from 'next/link'
 import { List, Skeleton } from 'antd'
 import { useState, useMemo } from 'react'
 
+import apiMap from '../config/apiMap'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
 import { httpPost } from '../component/util/httpUtil'
-import apiMap from '../config/apiMap'
 
 import '../static/style/pages/album.css'
 
@@ -42,31 +43,22 @@ const album = () => {
   console.log('album render')
   const [spinning, setSpinning] = useState(false)
 
-  const jump = id => {
-    setSpinning(true)
-    Router.push({
-      pathname: '/detail',
-      query: { id }
-    })
-  }
-
   const render = ({ id, title, preview, previewImg }) => (
-    <div className="album-item done">
-      <div
-        className="album-img"
-        style={{ backgroundImage: `url(${previewImg})` }}
-        onClick={() => jump(id)}
-      >
-        <div className="album-cover">
-          <div className="album-meta">
-            <div className="title">{title}</div>
-            <div>
-              {preview}
+    <Link href={`detail?id=${id}`}>
+      <a onClick={() => setSpinning(true)} className="album-item done">
+        <div
+          className="album-img"
+          style={{ backgroundImage: `url(${previewImg})` }}
+        >
+          <div className="album-cover">
+            <div className="album-meta">
+              <div className="title">{title}</div>
+              <div>{preview}</div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </a>
+    </Link>
   )
 
   const list = useMemo(() => (

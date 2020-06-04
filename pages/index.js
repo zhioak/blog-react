@@ -1,18 +1,16 @@
 
+import moment from 'moment'
+import Link from 'next/link'
+import { useMemo, useState } from 'react'
 import { Skeleton, Typography } from 'antd'
 
-import moment from 'moment'
-import Router from 'next/router'
-import { useMemo, useState } from 'react'
+import apiMap from '../config/apiMap'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
-import apiMap from '../config/apiMap'
 import { httpPost } from '../component/util/httpUtil'
 
 import '../static/style/pages/list.css'
-
-
 
 const { Title, Paragraph } = Typography
 
@@ -36,48 +34,54 @@ const index = () => {
 
   const [spinning, setSpinning] = useState(false)
 
-  const jump = path => {
-    setSpinning(true)
-    Router.push(path)
-  }
-
   const getData = (page, cb) => httpPost(apiMap.list, { page }, data => cb(data))
 
   const render = ({ id, title, type, typePath, typeName, pv, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
-      <Title
-        className="list-title"
-        level={4}
-        ellipsis={{ rows: 2 }}
-        onClick={() => jump(`/detail?id=${id}`)}
-      >
-        {title}
-      </Title>
+      <Link href={`/detail?id=${id}`}>
+        <a onClick={() => setSpinning(true)}>
+          <Title
+            className="list-title"
+            level={4}
+            ellipsis={{ rows: 2 }}
+          >
+            {title}
+          </Title>
+        </a>
+      </Link>
+
       <div className="list-meta">
-        <span
-          className="list-type"
-          onClick={() => jump(`/${type}` == typePath ? typePath : `${typePath}?key=${type}`)}
-        >
-          {typeName}
-        </span>
+        <Link href={`/${type}` == typePath ? typePath : `${typePath}?key=${type}`}>
+          <a className="list-type" onClick={() => setSpinning(true)}>
+            {typeName}
+          </a>
+        </Link>
         <span className="cut" />
         <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
       {
         previewImg &&
-        <div className="list-img-holder" onClick={() => jump(`/detail?id=${id}`)}>
-          <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
-        </div>
+        <Link href={`/detail?id=${id}`}>
+          <a onClick={() => setSpinning(true)}>
+            <div className="list-img-holder">
+              <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
+            </div>
+          </a>
+        </Link>
+
       }
       {
         preview &&
-        <Paragraph
-          className="list-preview"
-          ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-          onClick={() => jump(`/detail?id=${id}`)}
-        >
-          {preview}
-        </Paragraph>
+        <Link href={`/detail?id=${id}`}>
+          <a onClick={() => setSpinning(true)}>
+            <Paragraph
+              className="list-preview"
+              ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
+            >
+              {preview}
+            </Paragraph>
+          </a>
+        </Link>
       }
     </div>
   )

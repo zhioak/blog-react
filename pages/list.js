@@ -1,5 +1,5 @@
 import moment from 'moment'
-import Router from 'next/router'
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { Skeleton, Typography } from 'antd'
 
@@ -14,6 +14,7 @@ import Error, { ERROR_ENUM } from '../component/Error'
 import '../static/style/pages/list.css'
 
 
+const menuKeys = []
 const { Title, Paragraph } = Typography
 const seatRender = (
   <div className="seat">
@@ -27,19 +28,13 @@ const seatRender = (
   </div>
 )
 
-
 const list = ({ error, listKey, title, desc, bg }) => {
 
   if (error) return (<Error error={error} />)
 
+  
+  menuKeys[0] = listKey
   const [spinning, setSpinning] = useState(false)
-  const jump = id => {
-    setSpinning(true)
-    Router.push({
-      pathname: '/detail',
-      query: { id }
-    })
-  }
 
   const getData = (page, cb) => {
     httpPost(
@@ -51,32 +46,43 @@ const list = ({ error, listKey, title, desc, bg }) => {
 
   const render = ({ id, title, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
-      <Title
-        className="list-title"
-        level={4}
-        ellipsis={{ rows: 2 }}
-        onClick={() => jump(id)}
-      >
-        {title}
-      </Title>
+      <Link href={`/detail?id=${id}`}>
+        <a onClick={() => setSpinning(true)}>
+          <Title
+            className="list-title"
+            level={4}
+            ellipsis={{ rows: 2 }}
+          >
+            {title}
+          </Title>
+        </a>
+      </Link>
+
       <div className="list-meta">
         <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
       {
         previewImg &&
-        <div className="list-img-holder" onClick={() => jump(id)}>
-          <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
-        </div>
+        <Link href={`/detail?id=${id}`}>
+          <a onClick={() => setSpinning(true)}>
+            <div className="list-img-holder">
+              <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
+            </div>
+          </a>
+        </Link>
       }
       {
         preview &&
-        <Paragraph
-          className="list-preview"
-          ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-          onClick={() => jump(id)}
-        >
-          {preview}
-        </Paragraph>
+        <Link href={`/detail?id=${id}`}>
+          <a onClick={() => setSpinning(true)}>
+            <Paragraph
+              className="list-preview"
+              ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
+            >
+              {preview}
+            </Paragraph>
+          </a>
+        </Link>
       }
     </div>
   )
@@ -106,7 +112,7 @@ const list = ({ error, listKey, title, desc, bg }) => {
       spinning={spinning}
       banner={banner}
       main={list}
-      menuKeys={[listKey]}
+      menuKeys={menuKeys}
     />
   )
 }
@@ -138,5 +144,4 @@ list.getInitialProps = async (context) => {
   )
   return await promise
 }
-
 export default list

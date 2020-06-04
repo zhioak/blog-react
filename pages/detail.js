@@ -1,9 +1,8 @@
 
-import { Affix, Breadcrumb } from 'antd'
-import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 import moment from 'moment'
-import { useState, useMemo, useEffect } from 'react'
 import Link from 'next/link'
+import { Affix, Breadcrumb } from 'antd'
+import { useState, useMemo, useEffect } from 'react'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
@@ -12,6 +11,7 @@ import marked from '../component/util/marked'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 
+import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 import '../static/style/pages/detail.css'
 
 /**
@@ -24,13 +24,10 @@ const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCr
     if (error) return (<Error error={error} />)
 
     console.log('detail render')
+
+    menuKeys[0] = type
     const [spinning, setSpinning] = useState(false)
 
-    useEffect(()=>{
-        return ()=>{
-            console.log('卸载 ')
-        }
-    },[])
 
     useEffect(() => {
         spinning && setSpinning(false)
@@ -77,7 +74,8 @@ const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCr
                 {next &&
                     <Link href={`?id=${next.id}`}>
                         <a className="nav-next" onClick={() => setSpinning(true)}>{next.title}
-                            <RightOutlined className="end" /></a>
+                            <RightOutlined className="end" />
+                        </a>
                     </Link>
                 }
             </div>
@@ -107,8 +105,11 @@ const detail = ({ error, id, title, content, type, typePath, typeName, pv, gmtCr
 }
 
 
-detail.getInitialProps = async (context) => {
-    let id = context.query.id
+detail.getInitialProps = async ({ query, asPath }) => {
+
+    console.log(asPath)
+
+    let { id } = query
     if (!id) {
         return { error: ERROR_ENUM[404] }
     }
@@ -125,8 +126,7 @@ detail.getInitialProps = async (context) => {
                 },
                 res => resolve({ error: res })
             )
-
-        }, 5000)
+        }, 2000)
     })
     return await promise
 }
