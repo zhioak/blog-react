@@ -89,15 +89,8 @@ const list = ({ error, type, title, desc, bg }) => {
       }
     </div>
   )
-
-  const banner = useMemo(() => (
-    <Banner
-      bg={bg}
-      title={title}
-      desc={desc}
-    />
-  ), [type])
-
+  
+  const banner = useMemo(() => (bg || title || desc) && <Banner bg={bg} title={title} desc={desc} />, [type])
 
   const list = useMemo(() => (
     <LoadMoreList
@@ -134,9 +127,12 @@ list.getInitialProps = async ({ query }) => {
   const promise = new Promise(
     resolve => {
       httpPost(
-        apiMap.type + type,
-        null,
+        apiMap.type,
+        {
+          key: type
+        },
         data => {
+          // next 不解析key
           data.type = type
           pool[type] = data
           resolve(data)

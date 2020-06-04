@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 import { Skeleton, Typography } from 'antd'
 
 import apiMap from '../config/apiMap'
+import Error from '../component/Error'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
@@ -14,7 +15,7 @@ import '../static/style/pages/list.css'
 
 const { Title, Paragraph } = Typography
 
-
+const page = { key: '/' }
 const seatRender = (
   <div className="seat">
     <div className="list-item">
@@ -28,8 +29,10 @@ const seatRender = (
 )
 
 
-const menuKeys = ['/']
-const index = () => {
+const menuKeys = [page.key]
+const index = ({ error, title, desc, bg }) => {
+
+  if (error) return (<Error error={error} />)
 
   console.log('index')
 
@@ -93,13 +96,7 @@ const index = () => {
     </div>
   )
 
-  const banner = useMemo(() => (
-    <Banner
-      title="记录生活 分享技术"
-      desc="编程是一门艺术，生活亦是如此"
-    />
-  ), [])
-
+  const banner = useMemo(() => (bg || title || desc) && <Banner bg={bg} title={title} desc={desc} />, [])
 
   const list = useMemo(() => (
     <LoadMoreList
@@ -123,4 +120,22 @@ const index = () => {
 }
 
 
+index.getInitialProps = async () => {
+  if (page.cache) return page.cache
+
+  const promise = new Promise(
+    resolve => {
+      httpPost(
+        apiMap.type,
+        { key: page.key },
+        data => {
+          page.cache = data
+          resolve(data)
+        },
+        res => resolve({ error: res })
+      )
+    }
+  )
+  return await promise
+}
 export default index

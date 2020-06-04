@@ -4,6 +4,7 @@ import { List, Skeleton } from 'antd'
 import { useState, useMemo } from 'react'
 
 import apiMap from '../config/apiMap'
+import Error from '../component/Error'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
@@ -12,17 +13,17 @@ import { httpPost } from '../component/util/httpUtil'
 import '../static/style/pages/album.css'
 
 
-const
+const page = { key: 'album' },
   height = 300,
   preview = 2,
-  type = 'album'
+  menuKeys = [page.key]
 
-const getData = (page, cb) => {
+const getData = (p, cb) => {
   httpPost(
     apiMap.list,
     {
-      page,
-      'type.key': type
+      page: p,
+      'type.key': page.key
     },
     data => cb(data)
   )
@@ -41,7 +42,9 @@ const seatRender = (
   />
 )
 
-const album = () => {
+const album = ({ error, title, desc, bg }) => {
+
+  if (error) return (<Error error={error} />)
 
   console.log('album render')
   const [spinning, setSpinning] = useState(false)
@@ -64,6 +67,9 @@ const album = () => {
     </Link>
   )
 
+
+  const banner = useMemo(() => (bg || title || desc) && <Banner bg={bg} title={title} desc={desc} />, [])
+
   const list = useMemo(() => (
     <AutoList
       className="list"
@@ -76,12 +82,33 @@ const album = () => {
 
   return (
     <Layout
-      banner={<Banner />}
+      banner={banner}
       main={list}
-      menuKeys={['album']}
+      menuKeys={menuKeys}
       spinning={spinning}
     />
   )
 }
+
+
+album.getInitialProps = async () => {
+  if (page.cache) return page.cache
+
+  const promise = new Promise(
+    resolve => {
+      httpPost(
+        apiMap.type,
+        { key: page.key },
+        data => {
+          page.cache = data
+          resolve(data)
+        },
+        res => resolve({ error: res })
+      )
+    }
+  )
+  return await promise
+}
+
 
 export default album
