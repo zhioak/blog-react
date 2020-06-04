@@ -1,6 +1,10 @@
 import Router from 'next/router'
-import { useState, useEffect } from 'react'
 import { Menu, Spin } from 'antd'
+import { useState, useEffect } from 'react'
+
+import apiMap from '../config/apiMap'
+import { httpPost } from './util/httpUtil'
+
 import * as icons from '@ant-design/icons'
 
 
@@ -19,51 +23,28 @@ var menuList
 export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     console.log('menu render')
-    const [spinning, setSpinning] = useState(false)
+    const [spinning, setSpinning] = useState(!menuList)
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
+
+
+    useEffect(() => {
+        if (!menuList) {
+            httpPost(
+                apiMap.menuList,
+                null,
+                data => {
+                    menuList = data
+                    setSpinning(false)
+                }
+            )
+        }
+    }, [])
+
+
 
 
     // 默认使用key作为跳转路径,
     // pathname存在时则作为跳转页面，key变为参数传递
-    if (!menuList) {
-        menuList = [
-            {
-                key: ' ',
-                name: '首页',
-                type: 1,
-                icon: 'HomeOutlined',
-                path: '/ '
-            },
-            {
-                key: 'notes',
-                name: '日志',
-                type: 1,
-                icon: 'ReadOutlined',
-                path: '/list'
-            },
-            {
-                key: 'album',
-                name: '相册',
-                type: 1,
-                icon: 'PictureOutlined',
-                path: '/album'
-            },
-            {
-                key: 'java',
-                name: 'JAVA',
-                type: 1,
-                icon: 'CoffeeOutlined',
-                path: '/list'
-            }, {
-                key: 'about',
-                name: '关于',
-                type: 1,
-                icon: 'UserOutlined',
-                path: '/ablout'
-            }
-        ]
-    }
-
     const handleClick = ({ item, key }) => {
 
         if (!selectedKeys || !selectedKeys.includes(key)) {
@@ -80,14 +61,17 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     return (
         <Spin spinning={spinning}>
-            <Menu
-                mode={mode}
-                onClick={handleClick}
-                selectedKeys={selectedKeys}
-                style={{ border: 'none' }}
-            >
-                {menus(menuList)}
-            </Menu>
+            {
+                menuList &&
+                <Menu
+                    mode={mode}
+                    onClick={handleClick}
+                    selectedKeys={selectedKeys}
+                    style={{ border: 'none' }}
+                >
+                    {menus(menuList)}
+                </Menu>
+            }
         </Spin>
     )
 }

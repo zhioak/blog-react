@@ -114,9 +114,8 @@ detail.getInitialProps = async ({ query, asPath }) => {
         return { error: ERROR_ENUM[404] }
     }
 
-    const promise = new Promise((resolve) => {
+    const promise = new Promise(resolve => {
         setTimeout(() => {
-
             httpPost(
                 apiMap.detail + id,
                 null,
