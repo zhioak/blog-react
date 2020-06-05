@@ -23,8 +23,8 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
 
     if (error) return (<Error error={error} />)
 
-    console.log('detail render')
 
+    let tocify
     menuKeys[0] = type.key
     const [spinning, setSpinning] = useState(false)
 
@@ -33,19 +33,15 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
         spinning && setSpinning(false)
     }, [id])
 
-    let tocify
+
     let banner = useMemo(() => (
         <div className="detail-header">
             <Breadcrumb>
                 <Breadcrumb.Item>
-                    <Link href='/'>
-                        <a onClick={() => setSpinning(true)}>首页</a>
-                    </Link>
+                    <Link href='/'><a onClick={() => setSpinning(true)}>首页</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>
-                    <Link href={menu.path}>
-                        <a onClick={() => setSpinning(true)}>{type.name}</a>
-                    </Link>
+                    <Link href={menu.path}><a onClick={() => setSpinning(true)}>{type.name}</a></Link>
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
@@ -59,6 +55,7 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
         </div>
     ), [id])
 
+
     let main = useMemo(() => (
         <>
             <div className="detail-content">
@@ -68,13 +65,14 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
                 {prev &&
                     <Link href={`?id=${prev.id}`}>
                         <a className="nav-prev" onClick={() => setSpinning(true)}>
-                            <LeftOutlined />{prev.title}</a>
+                            <LeftOutlined />{prev.title}
+                        </a>
                     </Link>
                 }
                 {next &&
                     <Link href={`?id=${next.id}`}>
-                        <a className="nav-next" onClick={() => setSpinning(true)}>{next.title}
-                            <RightOutlined className="end" />
+                        <a className="nav-next" onClick={() => setSpinning(true)}>
+                            {next.title}<RightOutlined className="end" />
                         </a>
                     </Link>
                 }
@@ -86,46 +84,40 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
     let sticky = useMemo(() => (
         tocify.tocItems.length > 0 &&
         <Affix offsetTop={55}>
-            <div className="detail-toc">
-                {tocify.render()}
-            </div>
+            <div className="detail-toc">{tocify.render()}</div>
         </Affix>
     ), [id])
 
 
     return (
         <Layout
-            menuKeys={menuKeys}
-            banner={banner}
             main={main}
+            banner={banner}
             sticky={sticky}
+            menuKeys={menuKeys}
             spinning={spinning}
         />
     )
 }
 
 
-detail.getInitialProps = async ({ query, asPath }) => {
-
-    console.log(asPath)
+detail.getInitialProps = async ({ query }) => {
 
     let { id } = query
     if (!id) {
         return { error: ERROR_ENUM[404] }
     }
 
-    const promise = new Promise(resolve => {
-        setTimeout(() => {
-            httpPost(
-                apiMap.detail,
-                { id },
-                data => {
-                    resolve(data)
-                },
-                res => resolve({ error: res })
-            )
-        }, 2000)
-    })
+    const promise = new Promise(
+        resolve => httpPost({
+            url: apiMap.detail,
+            data: { id },
+            cb: data => {
+                resolve(data)
+            },
+            fcb: res => resolve({ error: res })
+        })
+    )
     return await promise
 }
 

@@ -1,66 +1,83 @@
+import { useState, useMemo, useEffect } from 'react'
+import { Avatar, Col, Row, Tooltip, Spin } from 'antd'
 import { GithubFilled, MailFilled, WechatFilled } from '@ant-design/icons'
-import { Avatar, Col, Row, Tooltip } from 'antd'
+
+import apiMap from '../config/apiMap'
+import { httpPost } from './util/httpUtil'
+
 import '../static/style/component/social.css'
-import { useMemo } from 'react'
 
-
-const zhou = {
-    email: 'flyingnoob@qq.com',
-    wechat: 'https://zhousb.cn/resource/wechatQR.png',
-    github: 'https://github.com/zhousb1999'
-}
 
 const size = 25,
+    dictKey = 'zhou_sns',
+    GRID = 'grid',
+    placement = "bottom",
     trigger = ['click', 'hover']
 
-const GRID = 'grid'
 
-const placement = "bottom"
-
-const SNS = ({ mode }) => {
+var dataMap
+const Sns = ({ mode }) => {
+    const [spinning, setSpinning] = useState(!dataMap)
+    useEffect(() => {
+        if (!dataMap) {
+            httpPost({
+                url: apiMap.dictDataMap,
+                data: { dictKey },
+                cb: data => {
+                    dataMap = data
+                    setSpinning(false)
+                }
+            })
+        }
+    }, [])
 
     const email = useMemo(() => (
-        <Tooltip trigger={trigger} placement={placement} title={zhou.email}  >
-            <Avatar size={size} icon={<MailFilled />} className="social-email" />
-        </Tooltip>
-    ), [])
+        dataMap &&
+            <Tooltip trigger={trigger} placement={placement} title={dataMap.email.label}  >
+                <Avatar size={size} icon={<MailFilled />} className="sns-email" />
+            </Tooltip>
+    ), [spinning])
+
     const wechat = useMemo(() => (
-        <Tooltip trigger={trigger} placement={placement} title={(<img src={zhou.wechat} />)} overlayStyle={{ width: 200 }} >
-            <Avatar size={size} icon={<WechatFilled />} className="social-wechat" />
-        </Tooltip>
-    ), [])
+        dataMap &&
+            <Tooltip trigger={trigger} placement={placement} title={(<img src={dataMap.wechat.label} />)} overlayStyle={{ width: 200 }} >
+                <Avatar size={size} icon={<WechatFilled />} className="sns-wechat" />
+            </Tooltip>
+    ), [spinning])
+
     const github = useMemo(() => (
-        <Tooltip title={zhou.github} placement={placement}>
-            <a href={zhou.github} target="_blank">
-                <Avatar size={size} icon={<GithubFilled />} className="social-github" />
-            </a>
-        </Tooltip>
-    ), [])
+        dataMap &&
+            <Tooltip title={dataMap.github.label} placement={placement}>
+                <a href={dataMap.github.label} target="_blank">
+                    <Avatar size={size} icon={<GithubFilled />} className="sns-github" />
+                </a>
+            </Tooltip>
+    ), [spinning])
 
-
-    if (GRID == mode) {
-        return (
-            <Row className='social' justify="end">
-                <Col xs={0} sm={0} md={0} lg={5}>
-                    {email}
-                </Col>
-                <Col xs={0} sm={0} md={8} lg={5}>
-                    {wechat}
-                </Col>
-                <Col xs={24} sm={24} md={8} lg={5} >
-                    {github}
-                </Col>
-            </Row>
-        )
-    }
 
     return (
-        <div className='social'>
-            {email}
-            {wechat}
-            {github}
+        <div className='sns'>
+            <Spin
+                spinning={spinning}
+                wrapperClassName="spin-wrap"
+            >
+                {
+                    GRID == mode ?
+                        <Row className="grid" justify="end">
+                            <Col xs={0} sm={0} md={0} lg={5}>{email}</Col>
+                            <Col xs={0} sm={0} md={8} lg={5}>{wechat}</Col>
+                            <Col xs={24} sm={24} md={8} lg={5} > {github}</Col>
+                        </Row>
+                        :
+                        <>
+                            {email}
+                            {wechat}
+                            {github}
+                        </>
+                }
+            </Spin>
         </div>
     )
 }
 
-export default SNS
+export default Sns

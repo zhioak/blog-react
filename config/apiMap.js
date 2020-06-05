@@ -5,7 +5,8 @@ const apiMap = {
     type: gate + 'blog/type/get',
     list: gate + 'blog/list',
     menuList: gate + 'menu/list',
-    dictData: gate + 'dict/dataList'
+    dictDataList: gate + 'dict/dataList',
+    dictDataMap: gate + 'dict/dataMap',
 }
 
 export default apiMap

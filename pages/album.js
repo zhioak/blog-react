@@ -20,12 +20,11 @@ const page = { key: 'album' },
 
 const getData = (p, cb) => {
   httpPost(
-    apiMap.list,
     {
-      page: p,
-      'type.key': page.key
-    },
-    data => cb(data)
+      url: apiMap.list,
+      data: { page: p, 'type.key': page.key },
+      cb: data => cb(data)
+    }
   )
 }
 
@@ -46,12 +45,14 @@ const album = ({ error, title, desc, bg }) => {
 
   if (error) return (<Error error={error} />)
 
-  console.log('album render')
   const [spinning, setSpinning] = useState(false)
 
   const render = ({ id, title, preview, previewImg }) => (
-    <Link href={`detail?id=${id}`}>
-      <a onClick={() => setSpinning(true)} className="album-item done">
+    <Link href={'/detail?id=' + id}>
+      <a
+        className="album-item done"
+        onClick={() => setSpinning(true)}
+      >
         <div
           className="album-img"
           style={{ backgroundImage: `url(${previewImg})` }}
@@ -82,30 +83,30 @@ const album = ({ error, title, desc, bg }) => {
 
   return (
     <Layout
-      banner={banner}
       main={list}
+      banner={banner}
       menuKeys={menuKeys}
       spinning={spinning}
     />
   )
+
 }
 
 
 album.getInitialProps = async () => {
+
   if (page.cache) return page.cache
 
   const promise = new Promise(
-    resolve => {
-      httpPost(
-        apiMap.type,
-        { key: page.key },
-        data => {
-          page.cache = data
-          resolve(data)
-        },
-        res => resolve({ error: res })
-      )
-    }
+    resolve => httpPost({
+      url: apiMap.type,
+      data: { key: page.key },
+      cb: data => {
+        page.cache = data
+        resolve(data)
+      },
+      fcb: res => resolve({ error: res })
+    })
   )
   return await promise
 }

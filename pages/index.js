@@ -12,17 +12,17 @@ import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
 
 import '../static/style/pages/list.css'
-
 const { Title, Paragraph } = Typography
+
 
 const page = { key: '/' }
 const seatRender = (
   <div className="seat">
     <div className="list-item">
       <Skeleton
+        active
         title={{ width: '40%' }}
         paragraph={{ width: ['22%', '100%', '55%'] }}
-        active
       />
     </div>
   </div>
@@ -34,25 +34,23 @@ const index = ({ error, title, desc, bg }) => {
 
   if (error) return (<Error error={error} />)
 
-  console.log('index')
-
   const [spinning, setSpinning] = useState(false)
 
   const getData = (page, cb) => {
-    httpPost(
-      apiMap.list,
-      { page },
-      data => cb(data)
-    )
+    httpPost({
+      url: apiMap.list,
+      data: { page },
+      cb: data => cb(data)
+    })
   }
 
   const render = ({ id, title, type, menu, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
-      <Link href={`/detail?id=${id}`}>
+      <Link href={'/detail?id=' + id}>
         <a onClick={() => setSpinning(true)}>
           <Title
-            className="list-title"
             level={4}
+            className="list-title"
             ellipsis={{ rows: 2 }}
           >
             {title}
@@ -69,20 +67,21 @@ const index = ({ error, title, desc, bg }) => {
         <span className="cut" />
         <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
+
       {
         previewImg &&
-        <Link href={`/detail?id=${id}`}>
+        <Link href={'/detail?id=' + id}>
           <a onClick={() => setSpinning(true)}>
             <div className="list-img-holder">
               <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
             </div>
           </a>
         </Link>
-
       }
+
       {
         preview &&
-        <Link href={`/detail?id=${id}`}>
+        <Link href={'/detail?id=' + id}>
           <a onClick={() => setSpinning(true)}>
             <Paragraph
               className="list-preview"
@@ -93,6 +92,7 @@ const index = ({ error, title, desc, bg }) => {
           </a>
         </Link>
       }
+
     </div>
   )
 
@@ -108,34 +108,34 @@ const index = ({ error, title, desc, bg }) => {
     />
   ), [])
 
-
   return (
     <Layout
-      spinning={spinning}
-      banner={banner}
       main={list}
+      banner={banner}
+      spinning={spinning}
       menuKeys={menuKeys}
     />
   )
+
 }
 
 
 index.getInitialProps = async () => {
+
   if (page.cache) return page.cache
 
   const promise = new Promise(
-    resolve => {
-      httpPost(
-        apiMap.type,
-        { key: page.key },
-        data => {
-          page.cache = data
-          resolve(data)
-        },
-        res => resolve({ error: res })
-      )
-    }
+    resolve => httpPost({
+      url: apiMap.type,
+      data: { key: page.key },
+      cb: data => {
+        page.cache = data
+        resolve(data)
+      },
+      fcb: res => resolve({ error: res })
+    })
   )
   return await promise
 }
+
 export default index

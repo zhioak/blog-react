@@ -29,14 +29,13 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
 
     useEffect(() => {
         if (!menuList) {
-            httpPost(
-                apiMap.menuList,
-                null,
-                data => {
+            httpPost({
+                url: apiMap.menuList,
+                cb: data => {
                     menuList = data
                     setSpinning(false)
                 }
-            )
+            })
         }
     }, [])
 

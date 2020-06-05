@@ -12,17 +12,17 @@ import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 
 import '../static/style/pages/list.css'
+const { Title, Paragraph } = Typography
 
 
 const menuKeys = []
-const { Title, Paragraph } = Typography
 const seatRender = (
   <div className="seat">
     <div className="list-item">
       <Skeleton
+        active
         title={{ width: '40%' }}
         paragraph={{ width: ['22%', '100%', '55%'] }}
-        active
       />
     </div>
   </div>
@@ -37,24 +37,21 @@ const list = ({ error, type, title, desc, bg }) => {
   const [spinning, setSpinning] = useState(false)
 
   const getData = (page, cb) => {
-    httpPost(
-      apiMap.list,
-      {
-        page,
-        'type.key': type
-      },
-      data => cb(data)
-    )
+    httpPost({
+      url: apiMap.list,
+      data: { page, 'type.key': type },
+      cb: data => cb(data)
+    })
   }
 
   const render = ({ id, title, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
-      <Link href={`/detail?id=${id}`}>
+      <Link href={'/detail?id=' + id}>
         <a onClick={() => setSpinning(true)}>
           <Title
-            className="list-title"
             level={4}
             ellipsis={{ rows: 2 }}
+            className="list-title"
           >
             {title}
           </Title>
@@ -66,7 +63,7 @@ const list = ({ error, type, title, desc, bg }) => {
       </div>
       {
         previewImg &&
-        <Link href={`/detail?id=${id}`}>
+        <Link href={'/detail?id=' + id}>
           <a onClick={() => setSpinning(true)}>
             <div className="list-img-holder">
               <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
@@ -76,7 +73,7 @@ const list = ({ error, type, title, desc, bg }) => {
       }
       {
         preview &&
-        <Link href={`/detail?id=${id}`}>
+        <Link href={'/detail?id=' + id}>
           <a onClick={() => setSpinning(true)}>
             <Paragraph
               className="list-preview"
@@ -89,13 +86,13 @@ const list = ({ error, type, title, desc, bg }) => {
       }
     </div>
   )
-  
+
   const banner = useMemo(() => (bg || title || desc) && <Banner bg={bg} title={title} desc={desc} />, [type])
 
   const list = useMemo(() => (
     <LoadMoreList
-      className="list"
       cacheKey={type}
+      className="list"
       getData={getData}
       itemRender={render}
       itemSeatRender={seatRender}
@@ -125,22 +122,19 @@ list.getInitialProps = async ({ query }) => {
   }
 
   const promise = new Promise(
-    resolve => {
-      httpPost(
-        apiMap.type,
-        {
-          key: type
-        },
-        data => {
-          // next 不解析key
-          data.type = type
-          pool[type] = data
-          resolve(data)
-        },
-        res => resolve({ error: res })
-      )
-    }
+    resolve => httpPost({
+      url: apiMap.type,
+      data: { key: type },
+      cb: data => {
+        // next 不解析key
+        data.type = type
+        pool[type] = data
+        resolve(data)
+      },
+      fcb: res => resolve({ error: res })
+    })
   )
   return await promise
 }
+
 export default list
