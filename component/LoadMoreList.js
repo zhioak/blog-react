@@ -31,6 +31,7 @@ const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender
 
     }, [cacheKey])
 
+    
     const onLoadMore = () => {
         if (!hasMore) return
         setLoading(true)

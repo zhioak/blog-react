@@ -73,6 +73,7 @@ const album = ({ error, title, desc, bg }) => {
 
   const list = useMemo(() => (
     <AutoList
+      cacheKey={page.key}
       className="list"
       getData={getData}
       itemHeight={height}

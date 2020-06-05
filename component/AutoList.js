@@ -8,10 +8,11 @@ import InfiniteLoader from 'react-virtualized/dist/commonjs/InfiniteLoader'
 
 
 
-var tasks = 0, // 任务数
-
+var tasks = 0, // 任务数 可能会并发请求
   page,
   hasMore
+
+const pool = {}
 
 /**
 * 无限滚动列表
@@ -19,26 +20,31 @@ var tasks = 0, // 任务数
 * itemRender 单元素渲染
 * itemSeatRender   加载时的占位
 */
-const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender }) => {
-
-  console.log(`autolist render`)
+const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRender, cacheKey }) => {
 
   const [data, setData] = useState(),
     [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    // 重复使用组件
-    if (data) {
-      setData(null)
-    }
-    page = 1
-    hasMore = true
+    let {
+      data: cData = [],
+      page: cPage = 0,
+      hasMore: cMore = true
+    } = pool[cacheKey] ? pool[cacheKey] : {}
+    page = cPage
+    hasMore = cMore
+    hasMore ?
+      getData(++page, r => {
+        hasMore = r.hasMore
+        let tData = cData.concat(r.list)
+        pool[cacheKey] = { hasMore, page, data: tData }
+        setData(tData)
+      })
+      : setData(cData)
 
-    getData(page, r => {
-      hasMore = r.hasMore
-      setData(r.list)
-    })
-  }, [getData])
+  }, [cacheKey])
+
+
 
   // 未获取到数据使用seat占位
   if (!data) {
@@ -56,9 +62,11 @@ const AutoList = ({ className, getData, itemRender, itemHeight = 150, itemSeatRe
 
     ++tasks
     getData(++page, r => {
-      setData(data.concat(r.list))
-      --tasks <= 0 && setLoading(false)
       hasMore = r.hasMore
+      let tData = data.concat(r.list)
+      pool[cacheKey] = { hasMore, page, data: tData }
+      setData(tData)
+      --tasks <= 0 && setLoading(false)
     })
   }
 
