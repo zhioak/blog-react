@@ -21,6 +21,6 @@ export const httpPost = ({ url, data, cb, fcb }) => {
             }
         ).catch(err => {
             console.log(err)
-            message.warning('请求出错咯~')
+            fcb ? fcb({ code: '400', info: '请求出错咯' }) : message.warning('请求出错咯~')
         })
 }

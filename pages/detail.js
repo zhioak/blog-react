@@ -6,12 +6,12 @@ import { useState, useMemo, useEffect } from 'react'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
-import Tocify from '../component/Tocify.tsx'
-import marked from '../component/util/marked'
+import marked,{Toc} from '../component/util/marked'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 
 import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
+
 import '../static/style/pages/detail.css'
 
 /**
@@ -23,8 +23,7 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
 
     if (error) return (<Error error={error} />)
 
-
-    let tocify
+    let toc
     menuKeys[0] = type.key
     const [spinning, setSpinning] = useState(false)
 
@@ -59,7 +58,7 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
     let main = useMemo(() => (
         <>
             <div className="detail-content">
-                <div dangerouslySetInnerHTML={{ __html: marked(content, (tocify = new Tocify())) }}></div>
+                <div dangerouslySetInnerHTML={{ __html: marked(content, (toc = new Toc())) }}></div>
             </div>
             <div className="detail-nav">
                 {prev &&
@@ -82,9 +81,9 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
 
 
     let sticky = useMemo(() => (
-        tocify.tocItems.length > 0 &&
+        !toc.isEmpty() &&
         <Affix offsetTop={55}>
-            <div className="detail-toc">{tocify.render()}</div>
+            <div className="detail-toc">{toc.render()}</div>
         </Affix>
     ), [id])
 
