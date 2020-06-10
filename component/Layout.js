@@ -40,7 +40,6 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
         </layoutContext.Provider>
     ), [siderVisible, menuKeys])
 
-
     const topstory = useMemo(() => (
         <div id="topstory">
             <Row>
@@ -67,15 +66,16 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
     return (
         <>
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
-                <Affix offsetTop={0}>
-                    {header}
-                </Affix>
+                {/* <Affix offsetTop={0}>
+                </Affix> */}
                 <Spin spinning={spinning} className="spin-full">
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
                         {!spinning && <BackTop />}
+                        
+                    {header}
                     </div>
                 </Spin>
             </div>

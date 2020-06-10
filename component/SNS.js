@@ -19,16 +19,16 @@ var dataMap
 const Sns = ({ mode }) => {
     const [spinning, setSpinning] = useState(!dataMap)
     useEffect(() => {
-        if (!dataMap) {
-            httpPost({
-                url: apiMap.dictDataMap,
-                data: { dictKey },
-                cb: data => {
-                    dataMap = data
-                    setSpinning(false)
-                }
-            })
-        }
+        // if (!dataMap) {
+        //     httpPost({
+        //         url: apiMap.dictDataMap,
+        //         data: { dictKey },
+        //         cb: data => {
+        //             dataMap = data
+        //             setSpinning(false)
+        //         }
+        //     })
+        // }
     }, [])
 
     const email = useMemo(() => (
@@ -59,7 +59,6 @@ const Sns = ({ mode }) => {
         <div className='sns'>
             <Spin
                 spinning={spinning}
-                wrapperClassName="spin-wrap"
             >
                 {
                     GRID == mode ?

@@ -37,7 +37,7 @@ const Header = ({ className, menuKeys }) => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col className="header-menu" xs={0} sm={0} md={16}  >
+                    <Col xs={0} sm={0} md={16}>
                         {menu}
                     </Col>
                     <Col className="header-right" xs={8} sm={8} md={4} >

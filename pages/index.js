@@ -1,7 +1,8 @@
 
 import moment from 'moment'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import dynamic from 'next/dynamic'
+import { useMemo, useState, useEffect } from 'react'
 import { Skeleton, Typography } from 'antd'
 
 import apiMap from '../config/apiMap'
@@ -9,11 +10,12 @@ import Error from '../component/Error'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
-import { httpPost } from '../component/util/httpUtil'
+import localUtil from '../component/util/localUtil'
+import { initPost, tokenPost } from '../component/util/httpUtil'
 
 import '../static/style/pages/list.css'
-const { Title, Paragraph } = Typography
 
+const { Title, Paragraph } = Typography
 
 const page = { key: '/' }
 const seatRender = (
@@ -30,14 +32,23 @@ const seatRender = (
 
 
 const menuKeys = [page.key]
-const index = ({ error, title, desc, bg }) => {
+const index = ({ error, outsider, title, desc, bg }) => {
+
+  console.log('index render ')
 
   if (error) return (<Error error={error} />)
+
+
+  useEffect(() => {
+    
+    console.log('index init ')
+    outsider && localUtil.setEach(outsider)
+  }, [])
 
   const [spinning, setSpinning] = useState(false)
 
   const getData = (page, cb) => {
-    httpPost({
+    tokenPost({
       url: apiMap.list,
       data: { page },
       cb: data => cb(data)
@@ -118,16 +129,15 @@ const index = ({ error, title, desc, bg }) => {
   )
 
 }
-
-
-index.getInitialProps = async () => {
+index.getInitialProps = async ({ req }) => {
 
   if (page.cache) return page.cache
 
   const promise = new Promise(
-    resolve => httpPost({
+    resolve => initPost({
       url: apiMap.type,
       data: { key: page.key },
+      cookie: req.headers.cookie,
       cb: data => {
         page.cache = data
         resolve(data)

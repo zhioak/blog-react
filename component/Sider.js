@@ -53,7 +53,9 @@ const Sider = ({ className, menuKeys }) => {
         >
             {profile}
             {menu}
-            {sns}
+            <div className="sider-footer">
+                {sns}
+            </div>
         </Drawer>
     )
 }
