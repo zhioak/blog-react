@@ -1,52 +1,13 @@
 import qs from 'qs'
 import axios from 'axios'
 import { message } from 'antd'
-import apiMap from '../../config/apiMap'
+import localUtil from './localUtil'
 
 
-
-export const initPost = (options) => {
-    if (!options.data) {
-        options.data = {}
-    }
-    let cookie = cookied(options.cookie)
-    if (cookie && cookie.token) {
-        options.data.token = cookie.token
-        httpPost(options)
-        return
-    }
-
-    httpPost({
-        url: apiMap.init,
-        cb: idata => {
-            options.data.token = idata.token
-            let ocb = options.cb
-            options.cb = data => {
-                console.log('a')
-                data.outsider = idata
-                ocb(data)
-            }
-            httpPost(options)
-        },
-        fcb: res => resolve({ error: res })
-    })
-}
-
-
-export const tokenPost = (options) => {
-    if (!options.data) {
-        op
-        tions.data = {}
-    }
-    const storage = window.localStorage
-    if (!storage) {
-        return console.log('in server side or disable localStorage')
-    }
-    options.data.token = storage.getItem('token')
-    httpPost(options)
-}
-
-
+/**
+ * cookie携带
+ */
+axios.defaults.withCredentials = true
 
 /**
  * 
@@ -54,16 +15,28 @@ export const tokenPost = (options) => {
  * 
  * @param {string} url 请求地址
  * @param {object} data 请求数据
+ * @param {boolean} ssr 是否在服务器端渲染
+ * @param {object} headers 请求头
  * @param {fucntion} cb 成功回调
  * @param {function} fcb 失败回调 默认使用消息提示
  */
-export const httpPost = ({ url, data, cb, fcb }) => {
-    data = qs.stringify(data)
-    axios.post(url, data)
+export const httpPost = ({ url, data, ssr = false, headers, cb, fcb }) => {
+
+    ssr && data ? data.ssr = ssr : data = { ssr }
+    axios.post(url, qs.stringify(data), headers && { headers })
         .then(
             res => {
+                console.log(res.headers['content-type'])
                 let { code, info, data } = res.data
-                code === '0000' ? cb && cb(data) : fcb ? fcb(res.data) : message.warning(info)
+                switch (code) {
+                    case '0200':
+                        !ssr && localUtil.remove('menuList', 'snsMap')
+                    case '0000':
+                        cb && cb(data)
+                        break
+                    default:
+                        fcb ? fcb(res.data) : message.warning(info)
+                }
             }
         ).catch(err => {
             console.log(err)

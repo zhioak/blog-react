@@ -1,9 +1,11 @@
-import Router from 'next/router'
-import { Menu, Spin } from 'antd'
-import { useState, useEffect } from 'react'
-
-import localUtil from './util/localUtil'
 import * as icons from '@ant-design/icons'
+import { Menu, Spin } from 'antd'
+import Router from 'next/router'
+import { useEffect, useState } from 'react'
+import apiMap from '../config/apiMap'
+import { httpPost } from './util/httpUtil'
+import localUtil from './util/localUtil'
+
 
 
 
@@ -26,10 +28,15 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
 
 
     useEffect(() => {
-        if (!menuList) {
-            menuList = localUtil.getObj('menuList')
-            console.log(menuList)
-            setSpinning(false)
+        if (!(menuList = localUtil.getObj('menuList'))) {
+            httpPost({
+                url: apiMap.menuList,
+                cb: data => {
+                    localUtil.setObj('menuList', data)
+                    menuList = data
+                    setSpinning(false)
+                }
+            })
         }
     }, [])
 

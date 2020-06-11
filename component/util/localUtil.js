@@ -13,13 +13,9 @@ const localUtil = {
 
     setObj: (key, value) => localUtil.set(key, JSON.stringify(value)),
 
-    /**
-     * 将对象的属性独立存储
-     */
-    setEach: outsider => {
-        for (let k in outsider) {
-            let v = outsider[k]
-            typeof v === 'object' ? localUtil.setObj(k, v) : localUtil.set(k, v)
+    remove: (...keys) => {
+        for (let key of keys) {
+            window.localStorage.removeItem(key)
         }
     }
 }
