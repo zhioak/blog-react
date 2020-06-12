@@ -1,11 +1,9 @@
-.list-item, .loadMore {
-    width: 100%;
-    max-width: 800px;
-}
 
 .list-item {
     margin: auto;
     padding: .5rem 0;
+    width: 100%;
+    max-width: 800px;
     height: 100%;
 }
 
@@ -50,10 +48,6 @@
     line-height: 1.6rem;
 }
 
-.loadMore {
-    display: block;
-    margin: 12px auto 0;
-}
 
 @media (min-width: 576px) {
     .list-title, .list-type, .list-img-holder, .list-preview:hover {

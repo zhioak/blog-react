@@ -55,3 +55,17 @@
     top: 2.8rem !important;
     max-height: none !important;
 }
+
+/* 置顶 */
+
+.backTop {
+    padding-top: 8px;
+    height: 40px;
+    font-weight: 900;
+    font-size: 14.5px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 50%;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, .125);
+}

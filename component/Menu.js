@@ -40,7 +40,6 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     }, [])
 
     const handleClick = ({ item, key }) => {
-
         if (!selectedKeys || !selectedKeys.includes(key)) {
             let { path } = item.props
 
@@ -49,11 +48,11 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
             Router.push(path)
         }
     }
-
     return (
-        <Spin spinning={spinning}>
-            {
-                menuList &&
+        <>
+            {spinning ?
+                <Spin spinning={spinning}></Spin>
+                :
                 <Menu
                     mode={mode}
                     onClick={handleClick}
@@ -63,7 +62,7 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
                     {menus(menuList)}
                 </Menu>
             }
-        </Spin>
+        </>
     )
 }
 

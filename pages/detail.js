@@ -3,10 +3,11 @@ import moment from 'moment'
 import Link from 'next/link'
 import { Affix, Breadcrumb } from 'antd'
 import { useState, useMemo, useEffect } from 'react'
-import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { CalendarFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
+import Comment from '../component/Comment'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 import marked, { Toc } from '../component/util/marked'
@@ -18,7 +19,7 @@ import '../static/style/pages/detail.css'
  */
 
 const menuKeys = []
-const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, next }) => {
+const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }) => {
 
     if (error) return (<Error error={error} />)
 
@@ -47,7 +48,6 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
                 <div className="detail-title">{title}</div>
                 <div className="detail-meta">
                     <div><CalendarFilled /> {moment(gmtCreate).format('YYYY-MM-DD')}</div>
-                    <div><EyeFilled /> {pv}</div>
                 </div>
             </div>
         </div>
@@ -75,6 +75,7 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
                     </Link>
                 }
             </div>
+            <Comment/>
         </>
     ), [id])
 

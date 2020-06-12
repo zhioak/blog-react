@@ -1,0 +1,21 @@
+
+.comment{
+    margin-top: 2vh;
+}
+.comment-avatar {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #eee;
+}
+
+.comment-avatar>img {
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    .comment-avatar {
+        width: 48px;
+        height: 48px;
+    }
+}

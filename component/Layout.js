@@ -4,7 +4,7 @@ import Header from './Header'
 import Sider from './Sider'
 import Footer from './Footer'
 
-import { LoadingOutlined } from '@ant-design/icons'
+import { LoadingOutlined, UpOutlined } from '@ant-design/icons'
 
 import '../static/style/component/layout.css'
 // xs: <576
@@ -63,19 +63,25 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
     const footer = useMemo(() => (<Footer />), [])
 
+    const backTop = useMemo(() => (
+        <BackTop >
+            <div className="backTop"><svg t="1591953988461" class="icon" viewBox="0 0 1752 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12979" width="15" ><path d="M876.173472 463.203709L359.815239 979.415913A146.028912 146.028912 0 1 1 153.330358 772.931031L772.931031 153.330358a146.028912 146.028912 0 0 1 206.484882 0l619.600674 619.600673a146.028912 146.028912 0 1 1-206.484882 206.484882L876.173472 463.203709z" p-id="12980" fill="#8a8a8a"></path></svg>
+            </div>
+        </BackTop>
+    ), [])
+
     return (
         <>
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
                 <Affix offsetTop={0}>
-                
-                {header}
+                    {header}
                 </Affix>
                 <Spin spinning={spinning} className="spin-full">
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
-                        {!spinning && <BackTop />}
+                        {!spinning && backTop}
                     </div>
                 </Spin>
             </div>

@@ -2,6 +2,8 @@ import { List, Button } from 'antd'
 import { useEffect, useState } from 'react'
 
 
+import '../static/style/component/loadMoreList.css'
+
 const pool = {}
 var page, hasMore
 

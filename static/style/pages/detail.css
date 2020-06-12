@@ -47,14 +47,15 @@
 
 .detail-nav {
     position: relative;
-    height: 70px;
-    border-top: 1px solid #eee
+    height: 10vh;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
 }
 
 .nav-prev, .nav-next {
     position: absolute;
     width: 50%;
-    line-height: 70px;
+    line-height: 10vh;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -73,7 +74,7 @@
 /* markdown解析 */
 
 .detail-content {
-    margin: 2vh 0 4vh;
+    margin: 2vh 0 5vh;
 }
 
 .detail-content img {
