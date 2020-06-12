@@ -112,7 +112,7 @@ const list = ({ error, type, title, desc, bg }) => {
 
 
 const pool = {}
-list.getInitialProps = async ({ query }) => {
+list.getInitialProps = async ({ query, req: request, res: response }) => {
 
   let { type } = query
   if (!type) {
@@ -131,7 +131,9 @@ list.getInitialProps = async ({ query }) => {
         pool[type] = data
         resolve(data)
       },
-      fcb: res => resolve({ error: res })
+      fcb: res => resolve({ error: res }),
+      request,
+      response
     })
   )
   return await promise

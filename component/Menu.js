@@ -28,15 +28,15 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
 
 
     useEffect(() => {
-        if (!(menuList = localUtil.getObj('menuList'))) {
+        (menuList = localUtil.getObj('menuList')) ?
+            spinning && setSpinning(false) :
             httpPost({
                 url: apiMap.menuList,
                 cb: data => {
                     localUtil.setObj('menuList', menuList = data)
-                    setSpinning(false)
+                    spinning && setSpinning(false)
                 }
             })
-        }
     }, [])
 
     const handleClick = ({ item, key }) => {

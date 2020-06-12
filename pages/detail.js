@@ -3,14 +3,13 @@ import moment from 'moment'
 import Link from 'next/link'
 import { Affix, Breadcrumb } from 'antd'
 import { useState, useMemo, useEffect } from 'react'
+import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
-import marked,{Toc} from '../component/util/marked'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
-
-import { CalendarFilled, EyeFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
+import marked, { Toc } from '../component/util/marked'
 
 import '../static/style/pages/detail.css'
 
@@ -100,7 +99,7 @@ const detail = ({ error, id, title, content, type, menu, pv, gmtCreate, prev, ne
 }
 
 
-detail.getInitialProps = async ({ query }) => {
+detail.getInitialProps = async ({ query, req: request, res: response }) => {
 
     let { id } = query
     if (!id) {
@@ -114,7 +113,9 @@ detail.getInitialProps = async ({ query }) => {
             cb: data => {
                 resolve(data)
             },
-            fcb: res => resolve({ error: res })
+            fcb: res => resolve({ error: res }),
+            request,
+            response
         })
     )
     return await promise

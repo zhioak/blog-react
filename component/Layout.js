@@ -66,16 +66,16 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
     return (
         <>
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
-                {/* <Affix offsetTop={0}>
-                </Affix> */}
+                <Affix offsetTop={0}>
+                
+                {header}
+                </Affix>
                 <Spin spinning={spinning} className="spin-full">
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
                         {!spinning && <BackTop />}
-                        
-                    {header}
                     </div>
                 </Spin>
             </div>

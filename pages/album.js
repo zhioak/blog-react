@@ -94,7 +94,7 @@ const album = ({ error, title, desc, bg }) => {
 }
 
 
-album.getInitialProps = async () => {
+album.getInitialProps = async ({ req: request, res: response }) => {
 
   if (page.cache) return page.cache
 
@@ -106,7 +106,9 @@ album.getInitialProps = async () => {
         page.cache = data
         resolve(data)
       },
-      fcb: res => resolve({ error: res })
+      fcb: res => resolve({ error: res }),
+      request,
+      response
     })
   )
   return await promise

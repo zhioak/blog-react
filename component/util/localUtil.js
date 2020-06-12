@@ -9,7 +9,11 @@ const localUtil = {
 
     getObj: key => JSON.parse(localUtil.get(key)),
 
-    set: (key, value) => window.localStorage.setItem(key, value),
+    set: (key, value) => {
+        
+        window.localStorage.setItem(key, value)
+        console.log('保存local')
+    },
 
     setObj: (key, value) => localUtil.set(key, JSON.stringify(value)),
 

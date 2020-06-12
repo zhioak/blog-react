@@ -3,7 +3,6 @@ import axios from 'axios'
 import qs from 'qs'
 import localUtil from './localUtil'
 
-
 /**
  * cookie携带
  */
@@ -12,41 +11,29 @@ axios.defaults.withCredentials = true
 
 /**
  * 
- * 服务器端post请求，
- * 默认携带浏览器的请求头，设置cookie响应头
- * 
- */
-export const ssHttpPost = ({ url, data, cb, fcb, request, response }) => {
-
-    let { headers } = request
-    headers['zhousb-server-side'] = true
-    console.log(headers)
-
-    axios.post(url, qs.stringify(data), { headers })
-        .then(
-            res => {
-                let cookie = res.headers['zhousb-blog-token']
-                cookie && response.setHeader('Set-Cookie', cookie)
-                success(res, cb, fcb)
-            }
-        ).catch(e => error(e, fcb))
-}
-
-
-/**
- * 
- * 封装post请求
+ * 封装post请求,
+ * 服务端请求默认携带浏览器的请求头，设置cookie响应头
  * 
  * @param {string} url 请求地址
  * @param {object} data 请求数据
  * @param {fucntion} cb 成功回调
  * @param {function} fcb 失败回调 默认使用消息提示
+ * @param {IncomingMessage} request 浏览器请求
+ * @param {ServerResponse} response 浏览器响应
  */
-export const httpPost = ({ url, data, cb, fcb }) => {
-    axios.post(url, qs.stringify(data))
+export const httpPost = ({ url, data, cb, fcb, request, response }) => {
+    let headers
+    if (request) {
+        headers = request.headers
+        headers['zhousb-server-side'] = true
+    }
+    axios.post(url, qs.stringify(data), headers && { headers })
         .then(
             res => {
-                if ('0200' === res.data.code) {
+                if (response) {
+                    let cookie = res.headers['zhousb-blog-token']
+                    cookie && response.setHeader('Set-Cookie', cookie)
+                } else if ('0200' === res.data.code) {
                     res.data.code = '0000'
                     localUtil.remove('menuList', 'snsMap')
                 }
@@ -69,21 +56,4 @@ const success = ({ data: vo }, cb, fcb) => {
 const error = (e, fcb) => {
     console.log(e)
     fcb ? fcb({ code: '400', info: '请求出错咯' }) : message.warning('请求出错咯~')
-}
-
-
-/**
- * 将cookie字符串转换为对象
- * 
- * @param {string} cookieStr cookie字符串
- */
-export const cookied = cookieStr => {
-    if (cookieStr) {
-        let cookie = {}
-        for (let item of cookieStr.split(';')) {
-            let parts = item.split('=').join().trim().split(',');
-            cookie[parts[0]] = parts[1]
-        }
-        return cookie
-    }
 }
