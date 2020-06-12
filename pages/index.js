@@ -7,7 +7,7 @@ import Banner from '../component/Banner'
 import Error from '../component/Error'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
-import { httpPost } from '../component/util/httpUtil'
+import { ssHttpPost, httpPost } from '../component/util/httpUtil'
 import apiMap from '../config/apiMap'
 import '../static/style/pages/list.css'
 
@@ -121,27 +121,20 @@ const index = ({ error, title, desc, bg }) => {
   )
 
 }
-index.getInitialProps = async ({ req,res }) => {
-
-
-  
-  res.setHeader('Set-Cookie', 'nimadesuccess=caode')
-  console.log(res)
-
+index.getInitialProps = async ({ req: request, res: response }) => {
 
   if (page.cache) return page.cache
   const promise = new Promise(
-    resolve => httpPost({
+    resolve => ssHttpPost({
       url: apiMap.type,
-      ssr: true,
-      headers: req.headers,
       data: { key: page.key },
       cb: data => {
-      
         page.cache = data
         resolve(data)
       },
-      fcb: res => resolve({ error: res })
+      fcb: res => resolve({ error: res }),
+      request,
+      response
     })
   )
   return await promise

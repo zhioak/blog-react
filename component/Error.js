@@ -15,7 +15,14 @@ export default ({ error }) => {
             status={state}
             title={code}
             subTitle={info}
-            extra={<Button type="primary" onClick={() => { window.history.back() }} >Go Back</Button>}
+            extra={<Button type="primary" onClick={() => {
+
+                let history = window.history
+
+                1 === history.length ? history.go(0) : history.back()
+
+
+            }} >Go Back</Button>}
         />
     )
 }

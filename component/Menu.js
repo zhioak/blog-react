@@ -32,8 +32,7 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
             httpPost({
                 url: apiMap.menuList,
                 cb: data => {
-                    localUtil.setObj('menuList', data)
-                    menuList = data
+                    localUtil.setObj('menuList', menuList = data)
                     setSpinning(false)
                 }
             })
