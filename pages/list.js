@@ -117,7 +117,7 @@ list.getInitialProps = async ({ query, req: request, res: response }) => {
   let { type } = query
   if (!type) {
     return { error: ERROR_ENUM[404] }
-  } else if (pool[type]) {
+  } else if (!request && pool[type]) {
     return pool[type]
   }
 
@@ -126,7 +126,6 @@ list.getInitialProps = async ({ query, req: request, res: response }) => {
       url: apiMap.type,
       data: { key: type },
       cb: data => {
-        // next 不解析key
         data.type = type
         pool[type] = data
         resolve(data)

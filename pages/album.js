@@ -96,7 +96,7 @@ const album = ({ error, title, desc, bg }) => {
 
 album.getInitialProps = async ({ req: request, res: response }) => {
 
-  if (page.cache) return page.cache
+  if (!request && page.cache) return page.cache
 
   const promise = new Promise(
     resolve => httpPost({

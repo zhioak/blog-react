@@ -75,7 +75,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }
                     </Link>
                 }
             </div>
-            <Comment/>
+            <Comment />
         </>
     ), [id])
 

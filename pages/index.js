@@ -124,7 +124,9 @@ const index = ({ error, title, desc, bg }) => {
 }
 index.getInitialProps = async ({ req: request, res: response }) => {
 
-  if (page.cache) return page.cache
+  if (!request && page.cache) return page.cache
+
+  console.log(request)
   
   const promise = new Promise(
     resolve => httpPost({

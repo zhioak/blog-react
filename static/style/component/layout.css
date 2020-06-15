@@ -57,15 +57,20 @@
 }
 
 /* 置顶 */
-
 .backTop {
     padding-top: 8px;
     height: 40px;
+    line-height: 17px;
     font-weight: 900;
     font-size: 14.5px;
     text-align: center;
-    background: #fff;
-    border: 1px solid #eee;
+    fill: #565656;
+    background: #F7F7F6;
+    border: 2px solid #e0e0e0;
     border-radius: 50%;
-    box-shadow: 0 0 15px 0 rgba(0, 0, 0, .125);
+    transition: all .3s;
+}
+
+.backTop:hover {
+    fill: #1890ff;
 }
