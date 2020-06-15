@@ -93,7 +93,7 @@ export class Toc {
      * 渲染目录
      */
     render() {
-        return (<Anchor>{this.renderNodes(this.tree)}</Anchor>)
+        return (<Anchor style={{maxHeight:'60vh'}}>{this.renderNodes(this.tree)}</Anchor>)
     }
 }
 
