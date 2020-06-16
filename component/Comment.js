@@ -18,17 +18,22 @@ export default ({ blogId }) => {
 
     const getData = (page, cb) => {
         httpPost({
-            url: apiMap.list,
-            data: { page },
+            url: apiMap.commentList,
+            data: {
+                blogId: 1,
+                page
+            },
             cb: data => cb(data)
         })
     }
 
-    const render = () => (
+    const render = ({ id, fromVisitor, content, gmtCreate }) => (
         <Comment
             className="comment"
-            actions={[<span key="comment-nested-reply-to">Reply to</span>]}
-            author={<a>我是你的爸爸</a>}
+            author={fromVisitor.website ?
+                <a href={fromVisitor.website}>{fromVisitor.nickname}</a> :
+                fromVisitor.nickname
+            }
             avatar={
                 <Avatar
                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
@@ -38,12 +43,10 @@ export default ({ blogId }) => {
             }
             datetime={
                 <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
-                    <span>{moment([2019, 5, 5]).fromNow()}</span>
+                    <span>{moment(gmtCreate).fromNow()}</span>
                 </Tooltip>
             }
-            content={
-                <p>天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情天道酬勤啊，卧槽无情</p>
-            }
+            content={content}
         >
         </Comment>
     )
