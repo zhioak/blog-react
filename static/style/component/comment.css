@@ -26,6 +26,7 @@
 .comment-list .ant-comment-content-author-name,
 .comment-list .ant-comment-content-author-name>* {
     max-width: 50%;
+    font-size: .82rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -91,6 +92,15 @@
 
 .reply-list .comment-reply>.icon {
     vertical-align: text-top;
+}
+
+/* 展开回复 */
+.reply-spread{
+    padding: 5px 0;
+    cursor: pointer;
+}
+.reply-spread:hover{
+    color: #1890ff;
 }
 
 @media (min-width: 768px) {

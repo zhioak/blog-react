@@ -29,7 +29,7 @@ export default ({ blogId }) => {
 
 
 
-    const render = ({ id, fromVisitor, content, gmtCreate, replyList }) => (
+    const render = ({ id, fromVisitor, content, gmtCreate, replyCount, replyList }) => (
         <Comment
             className="comment-item"
             author={
@@ -66,7 +66,11 @@ export default ({ blogId }) => {
                 replyList.length != 0 &&
                 <div className="reply-list">
                     {replyList.map(render)}
-                    <div>展开</div>
+                    <div className="reply-spread" onClick={()=>{
+                        console.log('aaaa')
+                    }}>
+                        <span className="tips">还有{replyCount - replyList.length}条评论</span>，点击展开
+                        </div>
                 </div>
             }
         </Comment>
@@ -87,7 +91,7 @@ export default ({ blogId }) => {
 
     const comment = useMemo(() => (
         <div className="comment">
-            <input type="text"/>
+            <input type="text" />
         </div>
     ), [])
 

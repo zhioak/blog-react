@@ -12,12 +12,10 @@ import localUtil from './util/localUtil'
 const { SubMenu, Item } = Menu
 const menus = list => (
     list.map(({ key, path, type, icon, name, childList }) => {
-
         icon = icons[icon]
         if (!icon) {
             icon = icons['CoffeeOutlined']
         }
-
         return (0 === type ?
             (<SubMenu key={key} title={name} icon={React.createElement(icon)}>{menus(childList)}</SubMenu>)
             :
