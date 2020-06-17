@@ -1,4 +1,5 @@
-const gate = 'http://192.168.1.80:8080/'
+// const gate = 'http://192.168.1.80:8080/'
+const gate = 'http://192.168.199.9:8080/'
 
 const apiMap = {
     detail: gate + 'blog/get',
