@@ -20,19 +20,6 @@
     transform: translateX(225px);
 }
 
-@media (min-width: 768px) {
-    .sider {
-        display: none;
-    }
-    .lose-retinue {
-        transform: none !important;
-    }
-    /* 侧栏出现时，会去除滚动条,放大后恢复它 */
-    .ant-scrolling-effect {
-        overflow: visible !important;
-    }
-}
-
 /* 主显示层 */
 
 #topstory {
@@ -68,7 +55,26 @@
     border-radius: 50%;
     transition: all .3s;
 }
+.backTop>.icon{
+    width: 16px;
+}
 
-.backTop:hover {
-    fill: #1890ff;
+
+
+
+/* 兼容性 */
+@media (min-width: 768px) {
+    .sider {
+        display: none;
+    }
+    .lose-retinue {
+        transform: none !important;
+    }
+    /* 侧栏出现时，会去除滚动条,放大后恢复它 */
+    .ant-scrolling-effect {
+        overflow: visible !important;
+    }
+    .backTop:hover {
+        fill: #1890ff;
+    }    
 }

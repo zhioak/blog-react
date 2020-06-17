@@ -1,11 +1,64 @@
-
-.comment{
-    margin-top: 2vh;
+.comment-list .ant-list-item {
+    padding: 12px 0;
 }
+
+.comment-list .ant-comment-inner {
+    padding: 12px 0;
+}
+
+.comment-list .ant-comment-nested {
+    margin-left: 12px;
+}
+
+.comment-list .ant-comment-content-author {
+    margin-bottom: 5px;
+    padding: 3px 5px;
+    border-radius: 2px;
+    background: #eee;
+}
+
+.reply-list .ant-comment-content-author {
+    margin-bottom: 2px;
+    padding: 0;
+    background: none;
+}
+
+.comment-list .ant-comment-content-author-name {
+    max-width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgba(0, 0, 0, .65);
+}
+
+.comment-list .ant-comment-content-author-name>a {
+    color: #1890ff;
+}
+
+.comment-list .ant-comment-content-author-time {
+    color: rgba(0, 0, 0, .45);
+}
+
+.comment-item {
+    width: 100%;
+}
+
+.reply-list {
+    padding-left: 15px;
+    border-left: 1px solid #eee;
+}
+
+/* 头像 */
+
 .comment-avatar {
-    width: 42px;
-    height: 42px;
+    width: 48px;
+    height: 48px;
     border: 1px solid #eee;
+}
+
+.reply-list .comment-avatar {
+    width: 38px;
+    height: 38px;
 }
 
 .comment-avatar>img {
@@ -13,9 +66,52 @@
     height: 100%;
 }
 
+/* 回复 */
+
+.comment-reply {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 10px;
+    height: 24px;
+    fill: #ccc;
+    transition: color .3s;
+}
+
+.reply-list .comment-reply {
+    height: 18px;
+}
+
+.comment-reply:hover {
+    fill: #1890ff;
+}
+
+.comment-reply>.icon {
+    width: 16px;
+    vertical-align: middle;
+}
+
+.reply-list .comment-reply>.icon {
+    vertical-align: text-top;
+}
+
 @media (min-width: 768px) {
-    .comment-avatar {
-        width: 48px;
-        height: 48px;
+    
+    .reply-list {
+        padding-left: 0;
+        border-left: none;
+    }
+    .reply-list .comment-avatar {
+        width: 44px;
+        height: 44px;
+    }
+    .comment-list .ant-comment-nested {
+        margin-left: 60px;
+    }
+    .comment-reply {
+        visibility: hidden;
+    }
+    .comment-item .ant-comment-inner:hover .comment-reply {
+        visibility: visible;
     }
 }

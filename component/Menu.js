@@ -42,7 +42,6 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     const handleClick = ({ item, key }) => {
         if (!selectedKeys || !selectedKeys.includes(key)) {
             let { path } = item.props
-
             Router.route != path.substr(0, path.indexOf('?')) ? setSpinning(true) : closeSider && closeSider()
             setSelectedKeys([key])
             Router.push(path)
@@ -50,17 +49,20 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     }
     return (
         <>
-            {spinning ?
-                <Spin spinning={spinning}></Spin>
-                :
-                <Menu
-                    mode={mode}
-                    onClick={handleClick}
-                    selectedKeys={selectedKeys}
-                    style={{ border: 'none' }}
-                >
-                    {menus(menuList)}
-                </Menu>
+            {
+                <Spin spinning={spinning}>
+                    {
+                        menuList &&
+                        <Menu
+                            mode={mode}
+                            onClick={handleClick}
+                            selectedKeys={selectedKeys}
+                            style={{ border: 'none' }}
+                        >
+                            {menus(menuList)}
+                        </Menu>
+                    }
+                </Spin>
             }
         </>
     )

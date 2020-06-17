@@ -7,7 +7,7 @@ import '../static/style/component/loadMoreList.css'
 const pool = {}
 var page, hasMore
 
-const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender }) => {
+const LoadMoreList = ({ className, split = true, cacheKey, getData, itemRender, itemSeatRender }) => {
 
     console.log('loadmorelist render')
 
@@ -33,7 +33,7 @@ const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender
 
     }, [cacheKey])
 
-    
+
     const onLoadMore = () => {
         if (!hasMore) return
         setLoading(true)
@@ -53,6 +53,7 @@ const LoadMoreList = ({ cacheKey, className, getData, itemRender, itemSeatRender
 
     return (
         <List
+            split={split}
             className={className}
             dataSource={data}
             loadMore={data && hasMore && !loading && loadMore}

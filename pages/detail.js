@@ -58,6 +58,10 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }
         <>
             <div className="detail-content">
                 <div dangerouslySetInnerHTML={{ __html: marked(content, (toc = new Toc())) }}></div>
+                <div className="content-footer">
+                    <div className="content-end" data-text="完"></div>
+
+                </div>
             </div>
             <div className="detail-nav">
                 {prev &&
@@ -75,6 +79,8 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }
                     </Link>
                 }
             </div>
+            {/* <div>最后修订更新于 2019.8.9</div> */}
+
             <Comment />
         </>
     ), [id])
