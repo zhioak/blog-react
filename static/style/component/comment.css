@@ -23,20 +23,18 @@
     background: none;
 }
 
-.comment-list .ant-comment-content-author-name {
+.comment-list .ant-comment-content-author-name,
+.comment-list .ant-comment-content-author-name>* {
     max-width: 50%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    color: rgba(0, 0, 0, .65);
+    color: #636363;
 }
 
-.comment-list .ant-comment-content-author-name>a {
-    color: #1890ff;
-}
 
 .comment-list .ant-comment-content-author-time {
-    color: rgba(0, 0, 0, .45);
+    color: #838383;
 }
 
 .comment-item {

@@ -3,7 +3,7 @@ import moment from 'moment'
 import Link from 'next/link'
 import { Affix, Breadcrumb } from 'antd'
 import { useState, useMemo, useEffect } from 'react'
-import { CalendarFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined, CalendarFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
@@ -19,7 +19,7 @@ import '../static/style/pages/detail.css'
  */
 
 const menuKeys = []
-const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }) => {
+const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified, prev, next }) => {
 
     if (error) return (<Error error={error} />)
 
@@ -61,25 +61,31 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, prev, next }
                 <div className="content-footer">
                     <div className="content-end" data-text="完"></div>
 
+                    <div className="content-declare">
+                        <ExclamationCircleOutlined className="declare-icon" />
+                        <div className="declare-list">
+                            <div>本文修订更新于 {moment(gmtModified).format('YYYY-MM-DD A')}</div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div className="detail-nav">
                 {prev &&
                     <Link href={`?id=${prev.id}`}>
-                        <a className="nav-prev" onClick={() => setSpinning(true)}>
-                            <LeftOutlined />{prev.title}
+                        <a data-text="PREV" onClick={() => setSpinning(true)}>
+                            {prev.title}
                         </a>
                     </Link>
                 }
                 {next &&
                     <Link href={`?id=${next.id}`}>
-                        <a className="nav-next" onClick={() => setSpinning(true)}>
-                            {next.title}<RightOutlined className="end" />
+                        <a data-text="NEXT" onClick={() => setSpinning(true)}>
+                            {next.title}
                         </a>
                     </Link>
                 }
             </div>
-            {/* <div>最后修订更新于 2019.8.9</div> */}
 
             <Comment />
         </>

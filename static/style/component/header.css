@@ -1,7 +1,6 @@
 .header {
-    /* padding: 0 5%; */
     line-height: 2.8rem;
-    background-color: #fff;
+    background: #fff;
     border-bottom: 1px solid #eee;
 }
 
@@ -12,9 +11,9 @@
 }
 
 .logo {
+    display: block; 
     font-size: 1.4rem;
     font-weight: 700;
-    display: block;
     text-align: center;
 }
 
