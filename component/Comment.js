@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 import { useMemo } from 'react'
-import { List, Comment, Avatar, Tooltip, Skeleton } from 'antd'
+import { Comment, Avatar, Tooltip, Skeleton } from 'antd'
 
 import LoadMoreList from './LoadMoreList'
 import { httpPost } from './util/httpUtil'
@@ -18,42 +18,38 @@ export default ({ blogId }) => {
 
     const getData = (page, cb) => {
         httpPost({
+            cb,
             url: apiMap.commentList,
             data: {
                 blogId: 1,
                 page
-            },
-            cb: data => cb(data)
+            }
         })
     }
     const render = ({ id, fromVisitor, content, gmtCreate, replyCount, replyList }) => {
 
-
         const getReplyList = (page, cb) => {
             httpPost({
+                cb,
                 url: apiMap.replyList,
-                data: {
-                    topicId: id,
-                    page
-                },
-                cb: data => cb(data)
+                data: { topicId: id, page }
             })
         }
+
+        const author = fromVisitor.website ?
+            <a href={fromVisitor.website} target="_blank">{fromVisitor.nickname}</a> :
+            fromVisitor.nickname
 
         return (
             <Comment
                 className="comment-item"
-                author={
-                    fromVisitor.website ?
-                        <a href={fromVisitor.website} target="_blank">{fromVisitor.nickname}</a> :
-                        fromVisitor.nickname
-                }
+                author={author}
                 avatar={
                     <Avatar
-                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                        alt={fromVisitor.nickname + ' avatar'}
                         shape="square"
                         className="comment-avatar"
+                        alt={fromVisitor.nickname + ' avatar'}
+                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                     />
                 }
                 datetime={
@@ -74,32 +70,22 @@ export default ({ blogId }) => {
                 }
             >
                 {
-                    replyList.length != 0 &&
+                    replyList.length > 0 &&
                     <LoadMoreList
-                        className="reply-list"
                         split={false}
-                        cacheKey={'replyList' + id}
                         rawData={replyList}
-                        rawHasMore={0 < replyCount - replyList.length}
-                        getData={getReplyList}
                         itemRender={render}
+                        className="reply-list"
+                        getData={getReplyList}
+                        cacheKey={'replyList' + id}
                         itemSeatRender={seatRender}
+                        rawHasMore={0 < replyCount - replyList.length}
+                        loadMore={(<div className="reply-spread" >  <span className="tips">还有{replyCount - replyList.length}条评论</span>，点击展开</div>)}
                     />
-
-                    // <div className="reply-list">
-                    //     {replyList.map(render)}
-                    //     {seatRender}
-                    //     <div className="reply-spread" onClick={() => {
-                    //         console.log('aaaa')
-                    //     }}>
-                    //         <span className="tips">还有{replyCount - replyList.length}条评论</span>，点击展开
-                    // </div>
-                    // </div>
                 }
             </Comment>
         )
     }
-
 
     const list = useMemo(() => (
         <LoadMoreList
@@ -111,7 +97,6 @@ export default ({ blogId }) => {
             itemSeatRender={seatRender}
         />
     ), [])
-
 
     const comment = useMemo(() => (
         <div className="comment">

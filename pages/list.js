@@ -40,7 +40,7 @@ const list = ({ error, type, title, desc, bg }) => {
     httpPost({
       url: apiMap.list,
       data: { page, 'type.key': type },
-      cb: data => cb(data)
+      cb
     })
   }
 

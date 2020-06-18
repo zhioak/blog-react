@@ -14,13 +14,16 @@ import '../static/style/component/layout.css'
 // xl: ≥1200
 // xxl: ≥1600
 
-/**
- * 公用布局
- */
+
 export const layoutContext = createContext()
 
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
 
+
+
+/**
+ * 公用布局
+ */
 const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)

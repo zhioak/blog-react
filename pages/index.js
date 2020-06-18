@@ -44,7 +44,7 @@ const index = ({ error, title, desc, bg }) => {
     httpPost({
       url: apiMap.list,
       data: { page },
-      cb: data => cb(data)
+      cb
     })
   }
 

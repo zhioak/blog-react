@@ -23,7 +23,7 @@ const getData = (p, cb) => {
     {
       url: apiMap.list,
       data: { page: p, 'type.key': page.key },
-      cb: data => cb(data)
+      cb
     }
   )
 }

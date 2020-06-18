@@ -9,16 +9,26 @@ const pool = {}
 /**
  * 封装List组件，提供缓存式自动加载
  * @param {string} className 类名称
- * @param {boolean} split 列表是否带分割线
  * @param {string} cacheKey 缓存列表数据的标识
- * @param {any[]} rawData 初始数据，当存在初始数据时，初始化不进行获取数据
  * @param {function} getData 获取数据的方法,会自动传入页数page和一个接收返回值为{list,hasMore}的钩子函数
  * @param {item => ReactNode} itemRender 数据渲染方式
  * @param {ReactNode} itemSeatRender 获取数据时占位元素
+ * @param {ReactNode} loadMore 加载更多的样式
+ * @param {any[]} rawData 初始数据，当存在初始数据时，初始化不进行获取数据
+ * @param {boolean} rawHasMore 初始是否还有更多
+ * @param {boolean} split 列表是否带分割线
  */
-const LoadMoreList = ({ className, split = true, cacheKey, rawData = [], rawHasMore = true, getData, itemRender, itemSeatRender }) => {
-
-
+const LoadMoreList = ({
+    cacheKey,
+    className,
+    getData,
+    itemRender,
+    itemSeatRender,
+    loadMore = (<Button className="loadMore">加载更多</Button>),
+    rawData = [],
+    rawHasMore = true,
+    split = true
+}) => {
 
     const [data, setData] = useState(),
         [loading, setLoading] = useState(false)
@@ -26,18 +36,17 @@ const LoadMoreList = ({ className, split = true, cacheKey, rawData = [], rawHasM
     useEffect(() => {
         let cache = pool[cacheKey]
         if (!cache) {
-            cache = {
+            pool[cacheKey] = cache = {
                 page: 0,
                 data: rawData,
                 hasMore: rawHasMore
             }
-            pool[cacheKey] = cache
         }
         let { page, data: _data, hasMore } = cache
         0 == rawData.length && hasMore ?
-            getData(++page, r => {
-                let tempData = _data.concat(r.list)
-                pool[cacheKey] = { hasMore: r.hasMore, page, data: tempData }
+            getData(++page, ({ list = [], hasMore }) => {
+                let tempData = _data.concat(list)
+                pool[cacheKey] = { hasMore, page, data: tempData }
                 setData(tempData)
             })
             : setData(_data)
@@ -46,20 +55,22 @@ const LoadMoreList = ({ className, split = true, cacheKey, rawData = [], rawHasM
 
     const onLoadMore = () => {
         let { page, hasMore } = pool[cacheKey]
-
         if (!hasMore) return
+
         setLoading(true)
-        getData(++page, r => {
-            let tempData = data.concat(r.list)
-            pool[cacheKey] = { hasMore: r.hasMore, page, data: tempData }
+        getData(++page, ({ list = [], hasMore }) => {
+            let tempData = data.concat(list)
+            pool[cacheKey] = { hasMore, page, data: tempData }
             setLoading(false)
             setData(tempData)
             window.dispatchEvent(new Event('resize'))
         })
     }
 
-    const loadMore = (
-        <Button className="loadMore" onClick={onLoadMore}>加载更多</Button>
+    const _loadMore = (
+        <div onClick={onLoadMore} >
+            {loadMore}
+        </div>
     )
 
     let hasMore = pool[cacheKey] ? pool[cacheKey].hasMore : rawHasMore
@@ -68,13 +79,11 @@ const LoadMoreList = ({ className, split = true, cacheKey, rawData = [], rawHasM
             split={split}
             className={className}
             dataSource={data}
-            loadMore={data && hasMore && !loading && loadMore}
+            loadMore={data && hasMore && !loading && _loadMore}
             renderItem={item => (<List.Item key={item.id}>{itemRender(item)}</List.Item>)}
         >
             {(!data || loading) && itemSeatRender}
         </List>
     )
-
-
 }
 export default LoadMoreList
