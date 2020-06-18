@@ -6,7 +6,7 @@
     margin-bottom: 5px;
     padding: 3px 5px;
     border-radius: 2px;
-    background: #eee;
+    background: #f7f7f7;
 }
 
 .comment-list .ant-comment-content-author-name, .comment-list .ant-comment-content-author-name>* {
@@ -24,6 +24,48 @@
 
 .comment-item {
     width: 100%;
+}
+
+/* 评论表单 */
+
+.comment {
+    margin: 6vh 0 0;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 2px;
+}
+
+.visitor-info {
+    display: flex;
+}
+
+.visitor-info>input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    border-bottom: 1px dashed #eee;
+    padding: 10px 5px;
+}
+
+.comment .content {
+    resize: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 15px 5px;
+}
+
+.comment-footer {
+    cursor: pointer;
+    margin: 10px 0 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-submit {
+    padding: 8px 16px;
+    border-radius: 2px;
+    background: #eee;
 }
 
 /* 头像 */
@@ -62,7 +104,7 @@
     margin-left: 12px;
 }
 
-.reply-list .ant-comment-content-author  {
+.reply-list .ant-comment-content-author {
     margin-bottom: 2px;
     padding: 0;
     background: none;
@@ -72,7 +114,8 @@
     padding-left: 15px;
     border-left: 1px solid #eee;
 }
-.reply-list .ant-list-item{
+
+.reply-list .ant-list-item {
     padding: 0;
 }
 
@@ -134,7 +177,8 @@
     margin: 0 0 5px 0 !important;
     width: 100% !important;
 }
-.reply-list .ant-skeleton-title{
+
+.reply-list .ant-skeleton-title {
     margin: 0 0 2px 0 !important;
 }
 
@@ -146,6 +190,7 @@
 .reply-list .ant-skeleton-paragraph {
     margin: 6px 0 0 0 !important;
 }
+
 .reply-list .ant-skeleton-header {
     padding-right: 12px;
 }

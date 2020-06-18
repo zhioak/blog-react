@@ -5,14 +5,16 @@ import { useEffect, useState } from 'react'
 import '../static/style/component/loadMoreList.css'
 
 const pool = {}
-
 /**
+ * 
  * 封装List组件，提供缓存式自动加载
+ * 
  * @param {string} className 类名称
  * @param {string} cacheKey 缓存列表数据的标识
  * @param {function} getData 获取数据的方法,会自动传入页数page和一个接收返回值为{list,hasMore}的钩子函数
  * @param {item => ReactNode} itemRender 数据渲染方式
  * @param {ReactNode} itemSeatRender 获取数据时占位元素
+ * @param {object} locale 列表文案
  * @param {ReactNode} loadMore 加载更多的样式
  * @param {any[]} rawData 初始数据，当存在初始数据时，初始化不进行获取数据
  * @param {boolean} rawHasMore 初始是否还有更多
@@ -24,6 +26,7 @@ const LoadMoreList = ({
     getData,
     itemRender,
     itemSeatRender,
+    locale,
     loadMore = (<Button className="loadMore">加载更多</Button>),
     rawData = [],
     rawHasMore = true,
@@ -77,8 +80,9 @@ const LoadMoreList = ({
     return (
         <List
             split={split}
-            className={className}
+            locale={locale}
             dataSource={data}
+            className={className}
             loadMore={data && hasMore && !loading && _loadMore}
             renderItem={item => (<List.Item key={item.id}>{itemRender(item)}</List.Item>)}
         >

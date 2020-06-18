@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 import { useMemo } from 'react'
-import { Comment, Avatar, Tooltip, Skeleton } from 'antd'
+import { Comment, Avatar, Tooltip, Skeleton, Input } from 'antd'
 
 import LoadMoreList from './LoadMoreList'
 import { httpPost } from './util/httpUtil'
@@ -9,6 +9,7 @@ import apiMap from '../config/apiMap'
 
 import '../static/style/component/comment.css'
 
+const { TextArea } = Input
 
 const seatRender = (
     <Skeleton avatar={{ shape: 'square' }} active paragraph={{ rows: 1 }} className="comment-seat" />
@@ -21,7 +22,7 @@ export default ({ blogId }) => {
             cb,
             url: apiMap.commentList,
             data: {
-                blogId: 1,
+                blogId,
                 page
             }
         })
@@ -77,7 +78,7 @@ export default ({ blogId }) => {
                         itemRender={render}
                         className="reply-list"
                         getData={getReplyList}
-                        cacheKey={'replyList' + id}
+                        cacheKey={'reply' + id}
                         itemSeatRender={seatRender}
                         rawHasMore={0 < replyCount - replyList.length}
                         loadMore={(<div className="reply-spread" >  <span className="tips">还有{replyCount - replyList.length}条评论</span>，点击展开</div>)}
@@ -89,24 +90,39 @@ export default ({ blogId }) => {
 
     const list = useMemo(() => (
         <LoadMoreList
-            className="comment-list"
             split={false}
-            cacheKey={blogId}
             getData={getData}
             itemRender={render}
+            className="comment-list"
             itemSeatRender={seatRender}
+            cacheKey={'comment' + blogId}
+            locale={{ emptyText: '暂无评论' }}
         />
     ), [])
 
     const comment = useMemo(() => (
         <div className="comment">
-            <input type="text" />
+            <div className="visitor-info">
+                <input type="text" placeholder="昵称" />
+                <input type="email" placeholder="邮箱" />
+                <input type="text" placeholder="网址" />
+            </div>
+            <div>
+                <TextArea className="content" placeholder="这里可以随便比比点什么（如果你想收到回复提醒或使用Gravatar，就给老子把邮箱写上）" autoSize={{ minRows: 3 }} />
+            </div>
+            <div className="comment-footer">
+                <div></div>
+                <div>
+                    <div className="comment-submit">提交</div>
+                </div>
+            </div>
         </div>
+        // Gravatar
     ), [])
 
     return (
         <>
-            {/* {comment} */}
+            {comment}
             {list}
         </>
     )
