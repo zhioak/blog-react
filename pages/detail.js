@@ -17,7 +17,6 @@ import '../static/style/pages/detail.css'
 /**
  * 每次新建数组 导致更新
  */
-
 const menuKeys = []
 const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified, prev, next }) => {
 
