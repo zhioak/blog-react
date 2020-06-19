@@ -3,7 +3,6 @@ body {
     background-color: #fff;
 }
 
-
 img {
     width: 100%;
 }
@@ -44,10 +43,11 @@ img {
     -webkit-box-sizing: border-box;
 }
 
-.tips{
+.tips {
     color: #838383;
     font-size: .85rem;
 }
+
 .title {
     font-size: 1.4rem;
 }

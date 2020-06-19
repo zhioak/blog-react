@@ -1,50 +1,48 @@
-.comment-list .ant-list-item, .comment-list .ant-comment-inner {
-    padding: 12px 0;
-}
-
-.comment-list .ant-comment-content-author {
-    margin-bottom: 5px;
-    padding: 3px 5px;
-    border-radius: 2px;
-    background: #f7f7f7;
-}
-
-.comment-list .ant-comment-content-author-name, .comment-list .ant-comment-content-author-name>* {
-    max-width: 50%;
-    font-size: .82rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    color: #636363;
-}
-
-.comment-list .ant-comment-content-author-time {
-    color: #838383;
-}
-
-.comment-item {
-    width: 100%;
-}
-
 /* 评论表单 */
 
 .comment {
-    margin: 6vh 0 0;
+    margin: 4vh 0;
     padding: 10px;
     border: 1px solid #eee;
     border-radius: 2px;
 }
-
-.visitor-info {
-    display: flex;
+.comment-item .comment{
+    margin: 12px 0 0 0 ;
 }
 
-.visitor-info>input {
+.comment-bar{
+    height: 22px;
+    text-align: right;
+}
+
+.comment-bar .comment-close{
+    cursor: pointer;
+    width: 22px;
+    padding: 5px;
+    border-radius: 2px;
+    transition: background-color .3s;
+    fill:#999;
+}
+.comment-bar .comment-close:hover{
+    background: #eee;
+}
+
+.visitor-info>span {
     flex-grow: 1;
+    margin-bottom: 4px;
     border: none;
-    outline: none;
     border-bottom: 1px dashed #eee;
-    padding: 10px 5px;
+    transition: border-bottom-color .3s;
+}
+
+.visitor-info .ant-input-prefix {
+    margin-right: .6rem;
+}
+
+.visitor-info .ant-input-affix-wrapper-focused {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    border-bottom-color: #1890ff !important;
 }
 
 .comment .content {
@@ -52,145 +50,178 @@
     border: none;
     outline: none;
     box-shadow: none;
-    padding: 15px 5px;
+    padding-top: 8px
 }
 
 .comment-footer {
-    cursor: pointer;
     margin: 10px 0 0;
     display: flex;
     justify-content: space-between;
 }
 
 .comment-submit {
+    cursor: pointer;
     padding: 8px 16px;
     border-radius: 2px;
     background: #eee;
+    transition: background-color .3s;
+}
+
+.comment-submit:hover {
+    background: #bbb;
+}
+
+/* 评论列表 */
+
+.comment-item {
+    width: 100%;
+}
+
+.comment-body {
+    display: flex;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.comment-main {
+    width: 100%;
 }
 
 /* 头像 */
 
-.comment-avatar, .comment-seat .ant-skeleton-avatar {
+.comment-avatar, .comment-item .ant-skeleton-avatar {
+    margin-right: 12px;
     width: 48px;
     height: 48px;
     border: 1px solid #eee;
 }
 
-.reply-list .comment-avatar, .reply-list .comment-seat .ant-skeleton-avatar {
-    width: 38px;
-    height: 38px;
+/* 头部 */
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 5px;
+    margin-bottom: 4px;
+    width: 100%;
+    border-radius: 2px;
+    background-color: #F7F7F7;
 }
 
-.comment-avatar>img {
-    width: 100%;
-    height: 100%;
+.comment-header .header-left {
+    display: flex;
+}
+
+.comment-header .header-left>span {
+    margin-right: 8px;
+}
+
+.comment-author, .comment-author>a {
+    max-width: 50%;
+    color: #636363;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.comment-time {
+    color: #999;
 }
 
 /* 回复按钮 */
 
 .comment-reply {
     cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 10px;
-    height: 24px;
+    width: 16px;
+    vertical-align: sub;
     fill: #ccc;
     transition: color .3s;
 }
 
+.comment-reply:hover ,
+.comment-body.reply-active .comment-reply{
+    fill: #1890ff;
+}
+
 /* 回复列表 */
 
-.comment-list .ant-comment-nested {
-    margin-left: 12px;
-}
-
-.reply-list .ant-comment-content-author {
-    margin-bottom: 2px;
-    padding: 0;
-    background: none;
-}
-
 .reply-list {
+    margin: 12px 0 0 12px;
     padding-left: 15px;
     border-left: 1px solid #eee;
 }
 
-.reply-list .ant-list-item {
-    padding: 0;
+.reply-list .comment-body, .reply-list .comment-content {
+    margin-bottom: 0;
 }
 
-.reply-list .comment-reply {
-    height: 18px;
+.reply-list .comment-header {
+    padding: 0 5px 0 0;
+    margin-bottom: 0;
+    background: none;
 }
 
-.comment-reply:hover {
-    fill: #1890ff;
+.reply-list .comment-avatar, .reply-list .comment-item .ant-skeleton-avatar {
+    width: 38px;
+    height: 38px;
 }
 
-.comment-reply>.icon {
-    width: 16px;
-    vertical-align: middle;
-}
-
-.reply-list .comment-reply>.icon {
-    vertical-align: text-top;
-}
-
-/* 展开回复 */
+/* 展开按钮 */
 
 .reply-spread {
     padding: 5px 0;
     cursor: pointer;
+    transition: color .3s;
 }
 
-.reply-spread:hover {
+.reply-spread:hover{
     color: #1890ff;
-}
-
-@media (min-width: 768px) {
-    .reply-list {
-        padding-left: 0;
-        border-left: none;
-    }
-    .reply-list .comment-avatar {
-        width: 44px;
-        height: 44px;
-    }
-    .comment-list .ant-comment-nested {
-        margin-left: 60px;
-    }
-    .comment-reply {
-        visibility: hidden;
-    }
-    .comment-item .ant-comment-inner:hover .comment-reply {
-        visibility: visible;
-    }
 }
 
 /* 骨架 */
 
-.comment-seat {
-    padding: 14px 0;
+.comment-item.ant-skeleton {
+    padding: 12px 0;
 }
 
-.comment-seat .ant-skeleton-title {
-    margin: 0 0 5px 0 !important;
+.comment-item .ant-skeleton-header {
+    padding: 0;
+}
+
+.comment-item .ant-skeleton-title {
+    margin: 0 0 16px 0 !important;
     width: 100% !important;
 }
 
-.reply-list .ant-skeleton-title {
-    margin: 0 0 2px 0 !important;
+.reply-list .comment-item .ant-skeleton-title {
+    margin-bottom: 6px !important;
 }
 
-.comment-seat .ant-skeleton-paragraph {
+.comment-item .ant-skeleton-paragraph {
     width: 50%;
-    margin: 16px 0 0 0 !important;
+    margin: 0 !important;
 }
 
-.reply-list .ant-skeleton-paragraph {
-    margin: 6px 0 0 0 !important;
-}
-
-.reply-list .ant-skeleton-header {
-    padding-right: 12px;
+@media (min-width: 768px) {
+    .comment .visitor-info {
+        display: flex;
+    }
+    .comment-reply {
+        visibility: hidden;
+    }
+    .comment-body:hover .comment-reply {
+        visibility: visible;
+    }
+    .reply-list {
+        margin-left: 60px;
+        padding-left: 0;
+        border-left: none;
+    }
+    .reply-list .comment-avatar, .comment-item .ant-skeleton-avatar {
+        width: 44px;
+        height: 44px;
+    }
+    .comment-item .ant-skeleton-title {
+        margin-bottom: 12px !important;
+    }
 }

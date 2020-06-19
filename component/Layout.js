@@ -4,7 +4,7 @@ import Header from './Header'
 import Sider from './Sider'
 import Footer from './Footer'
 
-import { LoadingOutlined, UpOutlined } from '@ant-design/icons'
+import { LoadingOutlined } from '@ant-design/icons'
 
 import '../static/style/component/layout.css'
 // xs: <576
