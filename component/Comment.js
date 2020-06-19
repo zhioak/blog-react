@@ -1,7 +1,9 @@
+
 import moment from 'moment'
 
+import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { Input, Select, Avatar, Tooltip, Skeleton } from 'antd'
+import { Anchor, Input, Select, Avatar, Tooltip, Skeleton } from 'antd'
 import { UserOutlined, MailOutlined, LinkOutlined } from '@ant-design/icons'
 
 import LoadMoreList from './LoadMoreList'
@@ -59,7 +61,10 @@ export default ({ blogId }) => {
         </div>
     ), [replier])
 
-    const render = ({ id, fromVisitor, content, gmtCreate, replyCount, replyList }) => {
+    const render = ({ id, repliedId, fromVisitor, toVisitor, content, gmtCreate, replyCount, replyList }) => {
+
+        // const anchor = 'comment-' + id
+        // const replyAnchor = repliedId && 'comment-' + repliedId
 
         const getReplyList = (page, cb) => {
             httpPost({
@@ -68,7 +73,6 @@ export default ({ blogId }) => {
                 data: { topicId: id, page }
             })
         }
-
         const author = (
             <span className="comment-author">
                 {
@@ -78,6 +82,8 @@ export default ({ blogId }) => {
                 }
             </span>
         )
+
+
         return (
             <div className="comment-item">
                 <div className={`comment-body ${replier && id == replier.id && 'reply-active'}`}>
@@ -86,7 +92,7 @@ export default ({ blogId }) => {
                             shape="square"
                             className="comment-avatar"
                             alt={fromVisitor.nickname + ' avatar'}
-                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                            src={fromVisitor.avatar}
                         />
                     </div>
                     <div className="comment-main">
@@ -104,7 +110,12 @@ export default ({ blogId }) => {
                                 </svg>
                             </div>
                         </div>
+
                         <div className="comment-content">
+                            {/* <Anchor affix={false}>
+                                <Anchor.Link href="#test" title="test"/>
+                            </Anchor> */}
+                            {/* {repliedId && <Link href={'#comment-' + repliedId}><a>@{toVisitor.nickname}</a></Link>} */}
                             {content}
                         </div>
                     </div>
@@ -144,6 +155,7 @@ export default ({ blogId }) => {
         <>
             {!replier && form}
             {list}
+            <a id="test"></a>
         </>
     )
 } 
