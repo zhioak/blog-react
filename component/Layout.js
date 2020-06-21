@@ -1,5 +1,6 @@
 import { Row, Col, Affix, BackTop, Spin } from 'antd'
 import { useState, useMemo, createContext } from 'react'
+import Head from './Head'
 import Header from './Header'
 import Sider from './Sider'
 import Footer from './Footer'
@@ -78,6 +79,7 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
     return (
         <>
+            <Head/>
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
                 <Affix offsetTop={0}>
                     {header}
