@@ -1,4 +1,4 @@
-import { Row, Col, Affix, BackTop, Spin } from 'antd'
+import { Row, Col, BackTop, Spin } from 'antd'
 import { useState, useMemo, createContext } from 'react'
 import Head from './Head'
 import Header from './Header'
@@ -25,10 +25,12 @@ Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
 /**
  * 公用布局
  */
-const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
+const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
 
+
+    const head = useMemo(() => (<Head title={title} />), [title])
     const header = useMemo(() => (
         <layoutContext.Provider value={{ setSiderVisible }}>
             <Header className="lose-retinue" menuKeys={menuKeys} />
@@ -79,11 +81,9 @@ const Layout = ({ banner, main, sticky, menuKeys, spinning = false }) => {
 
     return (
         <>
-            <Head/>
+            {head}
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
-                <Affix offsetTop={0}>
-                    {header}
-                </Affix>
+                {header}
                 <Spin spinning={spinning} className="spin-full">
                     <div className="lose-retinue">
                         {banner}

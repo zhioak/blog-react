@@ -29,7 +29,7 @@ export default (markdown, toc) => {
     if (toc) {
         renderer.heading = (text, level) => {
             let anchor = toc.add(text, level)
-            return `<Link href="#${anchor}"><a id="${anchor}" class="anchor-fix"><h${level}>${text}</h${level}></a></Link>\n`
+            return `<a id="${anchor}"><h${level}>${text}</h${level}></a>\n`
         }
     }
     marked.setOptions({ renderer })
@@ -38,6 +38,9 @@ export default (markdown, toc) => {
 
 
 const { Link } = Anchor
+
+
+
 /**
  * 目录
  */
@@ -50,7 +53,7 @@ export class Toc {
      * 添加目录
      */
     add(text, level) {
-        let anchor = `toc${level}${++this.index}`,
+        let anchor = `toc-${level}${++this.index}`,
             node = { anchor, level, text }
         this.getTrunk(level, this.tree).push(node)
         return anchor
@@ -93,9 +96,41 @@ export class Toc {
      * 渲染目录
      */
     render() {
-        return (<Anchor style={{maxHeight:'60vh'}}>{this.renderNodes(this.tree)}</Anchor>)
+        return (
+            <Anchor
+                style={{ maxHeight: '60vh' }}
+                onClick={(e) => e.preventDefault()}
+            >
+                {this.renderNodes(this.tree)}
+            </Anchor>
+        )
+    }
+
+
+    renderNodes1(nodes) {
+        return nodes.map(({ anchor, text, nodes }) => (
+            <>
+                <a onClick={() => toAnchor(anchor)}>
+                    {text}
+                </a>
+                {nodes && this.renderNodes(nodes)}
+            </>
+        ))
+    }
+
+    render1() {
+        return (
+            <div className="toc">
+                {this.renderNodes1(this.tree)}
+            </div>
+        )
     }
 }
+
+const toAnchor = () => {
+
+}
+
 
 
 

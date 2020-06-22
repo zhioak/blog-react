@@ -85,7 +85,6 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
                     </Link>
                 }
             </div>
-
             <Comment blogId={id}/>
         </>
     ), [id])
@@ -101,6 +100,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
 
     return (
         <Layout
+            title={title}
             main={main}
             banner={banner}
             sticky={sticky}

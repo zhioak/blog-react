@@ -1,7 +1,20 @@
-.header {
+#header {
+    position: fixed;
+    top: 0;
+    z-index: 999;
+    width: 100%;
     line-height: 2.8rem;
     background: #fff;
     border-bottom: 1px solid #eee;
+    -webkit-transition: top .3s ease;
+    -moz-transition: top .3s ease;
+    -o-transition: top .3s ease;
+    transition: top .3s ease;
+}
+
+/* 菜单选中边框为2px */
+#header.unpin {
+    top: calc(-2.8rem - 3px);
 }
 
 .header-holder {
@@ -11,7 +24,7 @@
 }
 
 .logo {
-    display: block; 
+    display: block;
     font-size: 1.4rem;
     font-weight: 700;
     text-align: center;
@@ -29,7 +42,7 @@
 
 /* 侧栏控制 */
 
-.header .ant-row {
+#header .ant-row {
     height: 100%;
 }
 

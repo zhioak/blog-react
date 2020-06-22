@@ -53,6 +53,10 @@
     padding-top: 8px
 }
 
+.comment-content>a{
+    margin-right: .2rem;
+}
+
 .comment-footer {
     margin: 10px 0 0;
     display: flex;

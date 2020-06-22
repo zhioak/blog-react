@@ -19,6 +19,10 @@
     }
     .album-item.done {
         cursor: pointer;
+        -webkit-transition: all 300ms ease;
+        -moz-transition: all 300ms ease;
+        -o-transition: all 300ms ease;
+        transition: all 300ms ease;
         transition: all 300ms ease;
     }
     .album-item.done:hover {

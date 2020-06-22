@@ -1,9 +1,8 @@
 
 import moment from 'moment'
 
-import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { Anchor, Input, Select, Avatar, Tooltip, Skeleton } from 'antd'
+import { Input, Select, Avatar, Tooltip, Skeleton } from 'antd'
 import { UserOutlined, MailOutlined, LinkOutlined } from '@ant-design/icons'
 
 import LoadMoreList from './LoadMoreList'
@@ -18,8 +17,20 @@ const seatRender = (
     <Skeleton className="comment-item" avatar={{ shape: 'square' }} active paragraph={{ rows: 1 }} />
 )
 
+const anchorPrefix = 'comment-'
+
+const toComment = (commentId) => {
+    if (!commentId) return
+
+    let anchor = document.getElementById(anchorPrefix + commentId)
+    if (anchor) {
+        let targetTop = anchor.getBoundingClientRect().top
+        window.scrollBy({ top: targetTop > 0 ? targetTop : targetTop - 48, behavior: 'smooth' })
+    }
+}
 
 export default ({ blogId }) => {
+
 
     const [replier, setReplier] = useState()
 
@@ -63,8 +74,6 @@ export default ({ blogId }) => {
 
     const render = ({ id, repliedId, fromVisitor, toVisitor, content, gmtCreate, replyCount, replyList }) => {
 
-        // const anchor = 'comment-' + id
-        // const replyAnchor = repliedId && 'comment-' + repliedId
 
         const getReplyList = (page, cb) => {
             httpPost({
@@ -83,11 +92,10 @@ export default ({ blogId }) => {
             </span>
         )
 
-
         return (
             <div className="comment-item">
                 <div className={`comment-body ${replier && id == replier.id && 'reply-active'}`}>
-                    <div>
+                    <div id={anchorPrefix + id}>
                         <Avatar
                             shape="square"
                             className="comment-avatar"
@@ -112,10 +120,7 @@ export default ({ blogId }) => {
                         </div>
 
                         <div className="comment-content">
-                            {/* <Anchor affix={false}>
-                                <Anchor.Link href="#test" title="test"/>
-                            </Anchor> */}
-                            {/* {repliedId && <Link href={'#comment-' + repliedId}><a>@{toVisitor.nickname}</a></Link>} */}
+                            {repliedId && <a onClick={() => toComment(repliedId)}>@{toVisitor.nickname}</a>}
                             {content}
                         </div>
                     </div>
