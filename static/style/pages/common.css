@@ -58,5 +58,6 @@ img {
 }
 
 .ant-spin-nested-loading {
+    overflow: hidden;
     height: 100%;
 }

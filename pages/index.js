@@ -117,6 +117,7 @@ const index = ({ error, title, desc, bg }) => {
       main={list}
       banner={banner}
       spinning={spinning}
+      setSpinning={setSpinning}
       menuKeys={menuKeys}
     />
   )

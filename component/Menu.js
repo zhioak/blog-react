@@ -26,21 +26,21 @@ const menus = list => (
 )
 
 var menuList
-export default ({ menuKeys, mode = "inline", closeSider }) => {
+export default ({ menuKeys, mode = "inline", closeSider, setSpinning }) => {
 
     console.log('menu render')
-    const [spinning, setSpinning] = useState(!menuList)
+    const [loading, setLoading] = useState(!menuList)
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
 
 
     useEffect(() => {
         (menuList = localUtil.getObj('menuList')) ?
-            spinning && setSpinning(false) :
+            loading && setLoading(false) :
             httpPost({
                 url: apiMap.menuList,
                 cb: data => {
                     localUtil.setObj('menuList', menuList = data)
-                    spinning && setSpinning(false)
+                    loading && setLoading(false)
                 }
             })
     }, [])
@@ -56,7 +56,7 @@ export default ({ menuKeys, mode = "inline", closeSider }) => {
     return (
         <>
             {
-                <Spin spinning={spinning}>
+                <Spin spinning={loading}>
                     {
                         menuList &&
                         <Menu

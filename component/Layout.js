@@ -1,5 +1,5 @@
 import { Row, Col, BackTop, Spin } from 'antd'
-import { useState, useMemo, createContext } from 'react'
+import { useState, useMemo } from 'react'
 import Head from './Head'
 import Header from './Header'
 import Sider from './Sider'
@@ -15,36 +15,34 @@ import '../static/style/component/layout.css'
 // xl: ≥1200
 // xxl: ≥1600
 
-
-export const layoutContext = createContext()
-
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
-
-
 
 /**
  * 公用布局
  */
-const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false }) => {
+const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false, setSpinning = () => console.log('empty setSpinning') }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
 
-
     const head = useMemo(() => (<Head title={title} />), [title])
     const header = useMemo(() => (
-        <layoutContext.Provider value={{ setSiderVisible }}>
-            <Header className="lose-retinue" menuKeys={menuKeys} />
-        </layoutContext.Provider>
-    ), [menuKeys])
+        <Header
+            className="lose-retinue"
+            menuKeys={menuKeys}
+            setSpinning={setSpinning}
+            setSiderVisible={setSiderVisible}
+        />
+    ), [menuKeys, setSpinning])
 
     const sider = useMemo(() => (
-        <layoutContext.Provider value={{ siderVisible, setSiderVisible }}>
-            <Sider
-                className="sider"
-                menuKeys={menuKeys}
-            />
-        </layoutContext.Provider>
-    ), [siderVisible, menuKeys])
+        <Sider
+            className="sider"
+            menuKeys={menuKeys}
+            setSpinning={setSpinning}
+            siderVisible={siderVisible}
+            setSiderVisible={setSiderVisible}
+        />
+    ), [siderVisible, menuKeys, setSpinning])
 
     const topstory = useMemo(() => (
         <div id="topstory">
@@ -80,20 +78,19 @@ const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false }) => 
     ), [])
 
     return (
-        <>
+        <>   <Spin spinning={spinning} className="spin-full">
             {head}
             <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
                 {header}
-                <Spin spinning={spinning} className="spin-full">
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
                         {!spinning && backTop}
                     </div>
-                </Spin>
             </div>
             {sider}
+                </Spin>
         </>
     )
 }

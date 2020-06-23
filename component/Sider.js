@@ -27,15 +27,21 @@ const Profile = () => (
 /**
  * 小屏侧栏
  */
-const Sider = ({ className, menuKeys }) => {
+const Sider = ({ className, menuKeys, siderVisible, setSiderVisible, setSpinning }) => {
 
     console.log('sider render')
 
-    const { siderVisible, setSiderVisible } = useContext(layoutContext)
-
     const closeSider = () => { setSiderVisible(false) }
 
-    const menu = useMemo(() => (<div><Menu menuKeys={menuKeys} closeSider={closeSider} /></div>), [menuKeys])
+    const menu = useMemo(() => (
+        <div>
+            <Menu
+                menuKeys={menuKeys}
+                loseSider={closeSider}
+                setSpinning={setSpinning}
+            />
+        </div>
+    ), [menuKeys, setSpinning])
 
     const sns = useMemo(() => (<Sns />), [])
 

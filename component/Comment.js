@@ -1,16 +1,16 @@
 
 import moment from 'moment'
 import { useMemo, useState } from 'react'
+import ResizableTextArea from 'antd/lib/input/ResizableTextArea'
 import { Form, Input, Button, Avatar, Tooltip, Skeleton } from 'antd'
 import { UserOutlined, MailOutlined, LinkOutlined } from '@ant-design/icons'
 
 import LoadMoreList from './LoadMoreList'
 import { httpPost } from './util/httpUtil'
 import apiMap from '../config/apiMap'
-import '../static/style/component/comment.css'
-import ResizableTextArea from 'antd/lib/input/ResizableTextArea'
 
-const { TextArea } = Input
+import '../static/style/component/comment.css'
+
 const seatRender = (
     <Skeleton className="comment-item" avatar={{ shape: 'square' }} active paragraph={{ rows: 1 }} />
 )
@@ -32,35 +32,27 @@ const toComment = (commentId) => {
     }
 }
 
-export default ({ blogId }) => {
+
+export default ({ blogId, setSpinning }) => {
 
     const [replier, setReplier] = useState()
+
     const getData = (page, cb) => {
         httpPost({
             cb,
             url: apiMap.commentList,
-            data: {
-                blogId,
-                page
-            }
+            data: { blogId, page }
         })
     }
-
+    const onSubmit = data => {
+        if (replier) {
+            data.repliedId = replier.id
+        }
+        console.log('Success:', data)
+        setSpinning(true)
+    }
 
     const form = useMemo(() => {
-
-
-        console.log(replier)
-
-        const onSubmit = data => {
-            
-            if(replier){
-                data.repliedId = replier.id
-            }
-
-            console.log('Success:', data)
-        }
-
         return (
             <Form
                 onFinish={onSubmit}
@@ -105,6 +97,7 @@ export default ({ blogId }) => {
                         <Form.Item
                             name="content"
                             rules={[
+                                { required: true, message: '你倒是留点什么呀' },
                                 { pattern: /[\u4e00-\u9fa5]/, message: 'Can you speak chinese?' },
                                 { min: 3, message: '你也太短了吧?' }
                             ]}

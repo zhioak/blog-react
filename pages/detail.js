@@ -3,7 +3,7 @@ import moment from 'moment'
 import Link from 'next/link'
 import { Affix, Breadcrumb } from 'antd'
 import { useState, useMemo, useEffect } from 'react'
-import { ExclamationCircleOutlined, CalendarFilled, LeftOutlined, RightOutlined } from '@ant-design/icons'
+import { ExclamationCircleOutlined, CalendarFilled } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
@@ -22,10 +22,12 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
 
     if (error) return (<Error error={error} />)
 
+    console.log('detail render')
+
     let toc
     menuKeys[0] = type.key
-    const [spinning, setSpinning] = useState(false)
 
+    const [spinning, setSpinning] = useState(false)
 
     useEffect(() => {
         spinning && setSpinning(false)
@@ -85,7 +87,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
                     </Link>
                 }
             </div>
-            <Comment blogId={id}/>
+            <Comment blogId={id} setSpinning={setSpinning} />
         </>
     ), [id])
 
@@ -106,6 +108,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
             sticky={sticky}
             menuKeys={menuKeys}
             spinning={spinning}
+            setSpinning={setSpinning}
         />
     )
 }

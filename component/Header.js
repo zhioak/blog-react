@@ -2,18 +2,16 @@ import Menu from './Menu'
 import Link from 'next/link'
 import Sns from './Sns'
 import { Row, Col } from 'antd'
-import { layoutContext } from './Layout'
-import { useState, useEffect, useContext, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 import '../static/style/component/header.css'
 
 let latestTop = 0
-const Header = ({ className, menuKeys }) => {
+const Header = ({ className, menuKeys, setSiderVisible, setSpinning }) => {
 
     console.log('header render')
 
     const [pin, setPin] = useState(true)
-    const { setSiderVisible } = useContext(layoutContext)
 
     useEffect(() => {
         const onScroll = () => {
@@ -31,7 +29,7 @@ const Header = ({ className, menuKeys }) => {
     }, [pin])
 
 
-    const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} />), [menuKeys])
+    const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} setSpinning={setSpinning} />), [menuKeys, setSpinning])
 
     const sns = useMemo(() => (<Sns mode="grid" />), [])
 

@@ -48,6 +48,7 @@
 .spin-full {
     position: fixed !important;
     top: 2.8rem !important;
+    z-index: 1001 !important;
     max-height: none !important;
 }
 

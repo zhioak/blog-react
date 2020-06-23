@@ -103,6 +103,7 @@ const list = ({ error, type, title, desc, bg }) => {
   return (
     <Layout
       spinning={spinning}
+      setSpinning={setSpinning}
       banner={banner}
       main={list}
       menuKeys={menuKeys}
@@ -128,7 +129,12 @@ list.getInitialProps = async ({ query, req: request, res: response }) => {
       cb: data => {
         data.type = type
         pool[type] = data
-        resolve(data)
+
+        
+        setTimeout(()=>{
+
+          resolve(data)
+      },1000000)
       },
       fcb: res => resolve({ error: res }),
       request,
