@@ -105,31 +105,8 @@ export class Toc {
             </Anchor>
         )
     }
-
-
-    renderNodes1(nodes) {
-        return nodes.map(({ anchor, text, nodes }) => (
-            <>
-                <a onClick={() => toAnchor(anchor)} style={{padding:"10px 0 10px 16px"}}>
-                    {text}
-                </a>
-                {nodes && this.renderNodes(nodes)}
-            </>
-        ))
-    }
-
-    render1() {
-        return (
-            <div className="toc">
-                {this.renderNodes1(this.tree)}
-            </div>
-        )
-    }
 }
 
-const toAnchor = () => {
-
-}
 
 
 

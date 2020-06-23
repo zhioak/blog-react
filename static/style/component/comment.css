@@ -6,30 +6,35 @@
     border: 1px solid #eee;
     border-radius: 2px;
 }
-.comment-item .comment{
-    margin: 12px 0 0 0 ;
+
+.comment-item .comment {
+    margin: 12px 0 0 0;
 }
 
-.comment-bar{
+.comment-bar {
     height: 22px;
     text-align: right;
 }
 
-.comment-bar .comment-close{
+.comment-bar .comment-close {
     cursor: pointer;
     width: 22px;
     padding: 5px;
     border-radius: 2px;
     transition: background-color .3s;
-    fill:#999;
+    fill: #999;
 }
-.comment-bar .comment-close:hover{
+
+.comment-bar .comment-close:hover {
     background: #eee;
 }
 
-.visitor-info>span {
+.visitor-info>.ant-form-item {
     flex-grow: 1;
     margin-bottom: 4px;
+}
+
+.visitor-info .ant-input-affix-wrapper {
     border: none;
     border-bottom: 1px dashed #eee;
     transition: border-bottom-color .3s;
@@ -44,16 +49,23 @@
     -webkit-box-shadow: none !important;
     border-bottom-color: #1890ff !important;
 }
+.visitor-info .ant-form-item-explain{    
+    padding-left: 11px;
+    padding-top: 2px;
+}
 
 .comment .content {
-    resize: none;
+    width: 100%;
     border: none;
     outline: none;
     box-shadow: none;
     padding-top: 8px
 }
+.comment .content:focus{
+    box-shadow: none;
+}
 
-.comment-content>a{
+.comment-content>a {
     margin-right: .2rem;
 }
 
@@ -64,15 +76,18 @@
 }
 
 .comment-submit {
-    cursor: pointer;
-    padding: 8px 16px;
-    border-radius: 2px;
+    border: none;
     background: #eee;
-    transition: background-color .3s;
+    transition: color,background-color .3s;
 }
 
 .comment-submit:hover {
     background: #bbb;
+    color: rgba(0, 0, 0, 0.75);
+}
+.comment-submit:focus{
+    background: #eee;
+    color: rgba(0, 0, 0, 0.65);
 }
 
 /* 评论列表 */
@@ -142,8 +157,7 @@
     transition: color .3s;
 }
 
-.comment-reply:hover ,
-.comment-body.reply-active .comment-reply{
+.comment-reply:hover, .comment-body.reply-active .comment-reply {
     fill: #1890ff;
 }
 
@@ -178,7 +192,7 @@
     transition: color .3s;
 }
 
-.reply-spread:hover{
+.reply-spread:hover {
     color: #1890ff;
 }
 

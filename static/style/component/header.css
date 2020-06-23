@@ -13,6 +13,7 @@
 }
 
 /* 菜单选中边框为2px */
+
 #header.unpin {
     top: calc(-2.8rem - 3px);
 }
@@ -33,6 +34,9 @@
 @media (min-width: 768px) {
     .logo {
         text-align: left;
+    }
+    #header.unpin {
+        top: 0;
     }
 }
 
