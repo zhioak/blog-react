@@ -3,8 +3,8 @@ import { Avatar, Col, Row, Tooltip, Spin } from 'antd'
 import { GithubFilled, MailFilled, WechatFilled } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
-import { httpPost } from './util/httpUtil'
 import localUtil from './util/localUtil'
+import { httpPost } from './util/httpUtil'
 
 import '../static/style/component/social.css'
 
@@ -17,7 +17,9 @@ const size = 25,
 
 var dataMap
 const Sns = ({ mode }) => {
+    
     const [spinning, setSpinning] = useState(!dataMap)
+
     useEffect(() => {
         (dataMap = localUtil.getObj('snsMap')) ?
             spinning && setSpinning(false) :

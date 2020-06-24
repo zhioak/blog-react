@@ -1,5 +1,5 @@
 import { Row, Col, BackTop, Spin } from 'antd'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import Head from './Head'
 import Header from './Header'
 import Sider from './Sider'
@@ -8,29 +8,57 @@ import Footer from './Footer'
 import { LoadingOutlined } from '@ant-design/icons'
 
 import '../static/style/component/layout.css'
+
+
+Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
+
 // xs: <576
 // sm：≥576
 // md: ≥768
 // lg: ≥992
 // xl: ≥1200
 // xxl: ≥1600
-
-Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
-
 /**
  * 公用布局
+ * 
+ * @param {ReactNode} banner 头部内容
+ * @param {ReactNode} main 主内容
+ * @param {string[]} menuKeys 菜单选择的key数组
+ * @param {string} title 标题
+ * @param {ReactNode} sticky 告示栏内容
+ * @param {boolean} spinning 全局加载
+ * @param {function} setSpinning 设置全局加载
  */
-const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false, setSpinning = () => console.log('empty setSpinning') }) => {
+const Layout = ({
+    banner,
+    main,
+    menuKeys,
+    title,
+    sticky,
+    spinning = false,
+    setSpinning = () => console.log('empty setSpinning') }) => {
 
     const [siderVisible, setSiderVisible] = useState(false)
+    const openSider = () => setSiderVisible(true),
+        closeSider = () => setSiderVisible(false),
+        openSpin = () => setSpinning(true)
+
+    useEffect(() => {
+
+        // 禁止移动端滑动
+        document.body.style.overflow = spinning ? 'hidden' : 'visible'
+
+        return () => document.body.style.overflow = 'visible'
+    }, [spinning])
 
     const head = useMemo(() => (<Head title={title} />), [title])
+
     const header = useMemo(() => (
         <Header
             className="lose-retinue"
             menuKeys={menuKeys}
-            setSpinning={setSpinning}
-            setSiderVisible={setSiderVisible}
+            openSpin={openSpin}
+            openSider={openSider}
         />
     ), [menuKeys, setSpinning])
 
@@ -38,9 +66,9 @@ const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false, setSp
         <Sider
             className="sider"
             menuKeys={menuKeys}
-            setSpinning={setSpinning}
-            siderVisible={siderVisible}
-            setSiderVisible={setSiderVisible}
+            openSpin={openSpin}
+            onClose={closeSider}
+            visible={siderVisible}
         />
     ), [siderVisible, menuKeys, setSpinning])
 
@@ -49,17 +77,11 @@ const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false, setSp
             <Row>
                 {main && sticky ?
                     <>
-                        <Col id="main" xs={24} sm={24} md={24} lg={18}>
-                            {main}
-                        </Col>
-                        <Col id="sticky" xs={0} sm={0} md={0} lg={6}>
-                            {sticky}
-                        </Col>
+                        <Col id="main" xs={24} sm={24} md={24} lg={18}>{main}</Col>
+                        <Col id="sticky" xs={0} sm={0} md={0} lg={6}>{sticky}</Col>
                     </>
                     :
-                    <Col id="main" xs={24} sm={24} md={24}>
-                        {main}
-                    </Col>
+                    <Col id="main" xs={24} sm={24} md={24}>{main}</Col>
                 }
             </Row>
         </div>
@@ -78,19 +100,20 @@ const Layout = ({ title, banner, main, sticky, menuKeys, spinning = false, setSp
     ), [])
 
     return (
-        <>   <Spin spinning={spinning} className="spin-full">
+        <>
             {head}
-            <div id="root" className={`${siderVisible ? 'root-lose' : ''}`}>
-                {header}
+            <div id="root" className={`${siderVisible && 'lose'}`}>
+                <Spin spinning={spinning} className="spin-full">
+                    {header}
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
                         {footer}
                         {!spinning && backTop}
                     </div>
-            </div>
-            {sider}
+                    {sider}
                 </Spin>
+            </div>
         </>
     )
 }

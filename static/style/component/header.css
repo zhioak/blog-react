@@ -100,16 +100,16 @@
 
 /* 侧栏打开 */
 
-.root-lose .sider-tigger-icon {
+#root.lose .sider-tigger-icon {
     background: 0 0;
 }
 
-.root-lose .sider-tigger-icon:before {
+#root.lose .sider-tigger-icon:before {
     transform: translateY(5px) rotate(45deg);
     -webkit-transform: translateY(5px) rotate(45deg);
 }
 
-.root-lose .sider-tigger-icon:after {
+#root.lose .sider-tigger-icon:after {
     transform: translateY(-5px) rotate(-45deg);
     -webkit-transform: translateY(-5px) rotate(-45deg);
 }

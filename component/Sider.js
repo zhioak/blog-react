@@ -1,11 +1,10 @@
 
 import { Avatar, Drawer } from 'antd'
-import { useMemo, useContext } from 'react'
+import { useMemo } from 'react'
 import Link from 'next/link'
 
 import Menu from './Menu'
 import Sns from './Sns'
-import { layoutContext } from './Layout'
 
 import '../static/style/component/sider.css'
 
@@ -24,24 +23,22 @@ const Profile = () => (
         </div>
     </div>
 )
+
 /**
  * 小屏侧栏
  */
-const Sider = ({ className, menuKeys, siderVisible, setSiderVisible, setSpinning }) => {
+const Sider = ({ className, menuKeys, visible, onClose, openSpin }) => {
 
     console.log('sider render')
-
-    const closeSider = () => { setSiderVisible(false) }
-
     const menu = useMemo(() => (
         <div>
             <Menu
                 menuKeys={menuKeys}
-                loseSider={closeSider}
-                setSpinning={setSpinning}
+                loseSider={onClose}
+                openSpin={openSpin}
             />
         </div>
-    ), [menuKeys, setSpinning])
+    ), [menuKeys, openSpin])
 
     const sns = useMemo(() => (<Sns />), [])
 
@@ -54,14 +51,12 @@ const Sider = ({ className, menuKeys, siderVisible, setSiderVisible, setSpinning
             width={225}
             closable={false}
             maskStyle={{ backgroundColor: 'transparent' }}
-            onClose={closeSider}
-            visible={siderVisible}
+            onClose={onClose}
+            visible={visible}
         >
             {profile}
             {menu}
-            <div className="sider-footer">
-                {sns}
-            </div>
+            <div className="sider-footer">{sns}</div>
         </Drawer>
     )
 }

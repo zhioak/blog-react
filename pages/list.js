@@ -129,12 +129,7 @@ list.getInitialProps = async ({ query, req: request, res: response }) => {
       cb: data => {
         data.type = type
         pool[type] = data
-
-        
-        setTimeout(()=>{
-
-          resolve(data)
-      },1000000)
+        resolve(data)
       },
       fcb: res => resolve({ error: res }),
       request,

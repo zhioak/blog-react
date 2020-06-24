@@ -1,12 +1,11 @@
-import * as icons from '@ant-design/icons'
-import { Menu, Spin } from 'antd'
 import Router from 'next/router'
+import { Menu, Spin } from 'antd'
+import * as icons from '@ant-design/icons'
 import { useEffect, useState } from 'react'
+
 import apiMap from '../config/apiMap'
-import { httpPost } from './util/httpUtil'
 import localUtil from './util/localUtil'
-
-
+import { httpPost } from './util/httpUtil'
 
 
 const { SubMenu, Item } = Menu
@@ -21,12 +20,11 @@ const menus = list => (
             :
             (<Item key={key} path={path} icon={React.createElement(icon)} >{name}</Item>)
         )
-
     })
 )
 
 var menuList
-export default ({ menuKeys, mode = "inline", closeSider, setSpinning }) => {
+export default ({ menuKeys, mode = "inline", closeSider, openSpin }) => {
 
     console.log('menu render')
     const [loading, setLoading] = useState(!menuList)
@@ -48,7 +46,7 @@ export default ({ menuKeys, mode = "inline", closeSider, setSpinning }) => {
     const handleClick = ({ item, key }) => {
         if (!selectedKeys || !selectedKeys.includes(key)) {
             let { path } = item.props
-            Router.route != path.substr(0, path.indexOf('?')) ? setSpinning(true) : closeSider && closeSider()
+            Router.route != path.substr(0, path.indexOf('?')) ? openSpin() : closeSider && closeSider()
             setSelectedKeys([key])
             Router.push(path)
         }

@@ -125,9 +125,7 @@ detail.getInitialProps = async ({ query, req: request, res: response }) => {
         resolve => httpPost({
             url: apiMap.detail,
             data: { id },
-            cb: data => {
-                resolve(data)
-            },
+            cb: data => resolve(data),
             fcb: res => resolve({ error: res }),
             request,
             response

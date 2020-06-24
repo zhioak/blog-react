@@ -18,15 +18,7 @@ const page = { key: 'album' },
   preview = 2,
   menuKeys = [page.key]
 
-const getData = (p, cb) => {
-  httpPost(
-    {
-      url: apiMap.list,
-      data: { page: p, 'type.key': page.key },
-      cb
-    }
-  )
-}
+const getData = (p, cb) => httpPost({ url: apiMap.list, data: { page: p, 'type.key': page.key }, cb })
 
 const seatRender = (
   <List
@@ -88,6 +80,7 @@ const album = ({ error, title, desc, bg }) => {
       banner={banner}
       menuKeys={menuKeys}
       spinning={spinning}
+      setSpinning={setSpinning}
     />
   )
 
@@ -113,6 +106,5 @@ album.getInitialProps = async ({ req: request, res: response }) => {
   )
   return await promise
 }
-
 
 export default album

@@ -11,11 +11,11 @@ import apiMap from '../config/apiMap'
 
 import '../static/style/component/comment.css'
 
+const anchorPrefix = 'comment-'
+
 const seatRender = (
     <Skeleton className="comment-item" avatar={{ shape: 'square' }} active paragraph={{ rows: 1 }} />
 )
-
-const anchorPrefix = 'comment-'
 
 const toComment = (commentId) => {
     if (!commentId) return
@@ -24,14 +24,12 @@ const toComment = (commentId) => {
     if (anchor) {
         let targetTop = anchor.getBoundingClientRect().top
         window.scrollBy({
+            behavior: 'smooth',
             top: window.innerWidth >= 768 || targetTop < 0 ?
-                targetTop - document.getElementById('header').getBoundingClientRect().height :
-                targetTop,
-            behavior: 'smooth'
+                targetTop - document.getElementById('header').getBoundingClientRect().height : targetTop
         })
     }
 }
-
 
 export default ({ blogId, setSpinning }) => {
 
