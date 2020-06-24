@@ -112,7 +112,7 @@
     border-bottom: 1px solid #eee;
 }
 
-.detail-nav a {
+.detail-nav>a {
     max-width: 45%;
     color: #737373;
     overflow: hidden;
@@ -120,17 +120,17 @@
     white-space: nowrap;
 }
 
-.detail-nav a:hover {
+.detail-nav>a:hover {
     color: #1890ff;
 }
 
-.detail-nav a::before {
+.detail-nav>a::before {
     content: attr(data-text);
     display: block;
     font-weight: 900;
 }
 
-.detail-nav :nth-child(2) {
+.detail-nav>:nth-child(2) {
     text-align: right;
 }
 

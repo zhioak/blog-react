@@ -66,15 +66,19 @@ export default ({ blogId, setSpinning }) => {
         if (replier) {
             data.repliedId = replier.id
         }
+        for (var field in data) {
+            !data[field] && delete data[field]
+        }
         setSpinning(true)
         httpPost({
             url: apiMap.saveComment,
             data,
             cb: () => {
+                let { nickname, email, website } = data
+                localUtil.setObj('visitor', visitor = { nickname, email, website })
+                form.setFieldsValue({ nickname, email, website, content: '' })
                 setSpinning(false)
                 message.success('评论成功')
-                // 更新缓存信息
-                form.resetFields()
                 setFlag(flag + 1)
                 replier && setReplier(null)
             },
@@ -88,74 +92,74 @@ export default ({ blogId, setSpinning }) => {
     const commentForm = useMemo(() => (
         <div className="comment">
             {
-            loading ?
-            <Spin spinning={loading}></Spin> :
-            <Form
-                form={form}
-                initialValues={visitor}
-                onFinish={onSubmit}
-                onFinishFailed={() => { }}
-            >
-                {
-                    replier &&
-                    <div className="comment-bar">
-                        <svg t="1592546976790" className="comment-close" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2107" onClick={() => setReplier(null)}>
-                            <path d="M512 359.08213712L817.83393817 53.24819899c43.69061365-43.69061365 109.22671292-43.69061365 152.9173266 0s43.69061365 109.22671292 0 152.91732657L664.91786288 512l305.83393813 305.83393817c43.69061365 43.69061365 43.69061365 109.22671292 0 152.9173266s-109.22671292 43.69061365-152.91732657 0L512 664.91786288 206.16606183 970.75180101c-43.69061365 43.69061365-109.22671292 43.69061365-152.9173266 0-43.69061365-43.69061365-43.69061365-109.22671292 0-152.91732657L359.08213712 512 53.24819899 206.16606183C9.55687026 162.47473313 9.55687026 96.93952767 53.24819899 53.24819899c43.69061365-43.69061365 109.22671292-43.69061365 152.91732657 0L512 359.08213712Z" p-id="2108"></path>
-                        </svg>
-                    </div>
-                }
-                <div className="visitor-info">
-                    <Form.Item
-                        name="nickname"
-                        rules={[
-                            { required: true, message: '你是无名氏吗' },
-                            { min: 2, message: '你也太短了吧?' }
-                        ]}
+                loading ?
+                    <Spin spinning={loading}></Spin> :
+                    <Form
+                        form={form}
+                        initialValues={visitor}
+                        onFinish={onSubmit}
+                        onFinishFailed={() => { }}
                     >
-                        <Input prefix={<UserOutlined />} type="text" placeholder="昵称*" autoComplete="off" allowClear maxLength={64} />
-                    </Form.Item>
-                    <Form.Item
-                        name="email"
-                        rules={[
-                            { type: 'email', message: '你这邮箱对吗' },
-                        ]}
-                    >
-                        <Input prefix={<MailOutlined />} type="text" placeholder="邮箱" autoComplete="off" allowClear maxLength={64} />
-                    </Form.Item>
-                    <Form.Item
-                        name="website"
-                        rules={[{
-                            pattern: /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$/, message: '你这网址对吗'
-                        }]}
-                    >
-                        <Input prefix={<LinkOutlined />} type="text" placeholder="网址" autoComplete="off" allowClear maxLength={256} />
-                    </Form.Item>
-                </div>
-                <div>
-                    <Form.Item
-                        name="content"
-                        rules={[
-                            { required: true, message: '你倒是留点什么呀' },
-                            { min: 3, message: '你也太短了吧?' },
-                            { pattern: /[\u4e00-\u9fa5]/, message: 'Can you speak chinese?' }
-                        ]}
-                    >
-                        <ResizableTextArea
-                            className="content"
-                            maxLength={256}
-                            autoSize={{ minRows: 3 }}
-                            placeholder={replier ? '@' + replier.nickname : '这里可以留点什么（如果你想收到回复提醒或使用Gravatar，就把邮箱写上）'}
-                        />
-                    </Form.Item>
-                </div>
-                <div className="comment-footer">
-                    <div></div>
-                    <div>
-                        <Button htmlType="submit" className="comment-submit">提交</Button>
-                    </div>
-                </div>
-            </Form>
-}
+                        {
+                            replier &&
+                            <div className="comment-bar">
+                                <svg t="1592546976790" className="comment-close" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2107" onClick={() => setReplier(null)}>
+                                    <path d="M512 359.08213712L817.83393817 53.24819899c43.69061365-43.69061365 109.22671292-43.69061365 152.9173266 0s43.69061365 109.22671292 0 152.91732657L664.91786288 512l305.83393813 305.83393817c43.69061365 43.69061365 43.69061365 109.22671292 0 152.9173266s-109.22671292 43.69061365-152.91732657 0L512 664.91786288 206.16606183 970.75180101c-43.69061365 43.69061365-109.22671292 43.69061365-152.9173266 0-43.69061365-43.69061365-43.69061365-109.22671292 0-152.91732657L359.08213712 512 53.24819899 206.16606183C9.55687026 162.47473313 9.55687026 96.93952767 53.24819899 53.24819899c43.69061365-43.69061365 109.22671292-43.69061365 152.91732657 0L512 359.08213712Z" p-id="2108"></path>
+                                </svg>
+                            </div>
+                        }
+                        <div className="visitor-info">
+                            <Form.Item
+                                name="nickname"
+                                rules={[
+                                    { required: true, message: '你是无名氏吗' },
+                                    { min: 2, message: '你也太短了吧?' }
+                                ]}
+                            >
+                                <Input prefix={<UserOutlined />} type="text" placeholder="昵称*" autoComplete="off" allowClear maxLength={64} />
+                            </Form.Item>
+                            <Form.Item
+                                name="email"
+                                rules={[
+                                    { type: 'email', message: '你这邮箱对吗' },
+                                ]}
+                            >
+                                <Input prefix={<MailOutlined />} type="text" placeholder="邮箱" autoComplete="off" allowClear maxLength={64} />
+                            </Form.Item>
+                            <Form.Item
+                                name="website"
+                                rules={[{
+                                    pattern: /^(http:\/\/|https:\/\/)?(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$/, message: '你这网址对吗'
+                                }]}
+                            >
+                                <Input prefix={<LinkOutlined />} type="text" placeholder="网址" autoComplete="off" allowClear maxLength={256} />
+                            </Form.Item>
+                        </div>
+                        <div>
+                            <Form.Item
+                                name="content"
+                                rules={[
+                                    { required: true, message: '你倒是留点什么呀' },
+                                    { min: 3, message: '你也太短了吧?' },
+                                    { pattern: /[\u4e00-\u9fa5]/, message: 'Can you speak chinese?' }
+                                ]}
+                            >
+                                <ResizableTextArea
+                                    className="content"
+                                    maxLength={256}
+                                    autoSize={{ minRows: 3 }}
+                                    placeholder={replier ? '@' + replier.nickname : '这里可以留点什么（如果你想收到回复提醒或使用Gravatar，就把邮箱写上）'}
+                                />
+                            </Form.Item>
+                        </div>
+                        <div className="comment-footer">
+                            <div></div>
+                            <div>
+                                <Button htmlType="submit" className="comment-submit">提交</Button>
+                            </div>
+                        </div>
+                    </Form>
+            }
         </div>
     ), [loading, blogId, flag, replier])
 

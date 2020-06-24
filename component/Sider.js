@@ -9,7 +9,7 @@ import Sns from './Sns'
 import '../static/style/component/sider.css'
 
 const name = 'zhou',
-    avatar = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2292059386,809594845&fm=26&gp=0.jpg'
+    avatar = 'https://s.gravatar.com/avatar/f4ca98d8768ec3ac3e761335e3f94d1d?s=458&r=g'
 
 const Profile = () => (
     <div className="profile">

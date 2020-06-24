@@ -72,16 +72,14 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
                 </div>
             </div>
             <div className="detail-nav">
-                <div>
-                    {prev &&
+                    {prev ?
                         <Link href={`?id=${prev.id}`}>
                             <a data-text="PREV" onClick={() => setSpinning(true)}>
                                 {prev.title}
                             </a>
                         </Link>
+                        :<div></div>
                     }
-                </div>
-                <div>
                     {next &&
                         <Link href={`?id=${next.id}`}>
                             <a data-text="NEXT" onClick={() => setSpinning(true)}>
@@ -89,7 +87,6 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
                             </a>
                         </Link>
                     }
-                </div>
             </div>
             <Comment blogId={id} setSpinning={setSpinning} />
         </>
