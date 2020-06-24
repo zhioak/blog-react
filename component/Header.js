@@ -24,8 +24,9 @@ const Header = ({ className, menuKeys, openSpin, openSider }) => {
 
     useEffect(() => {
         const onScroll = () => {
+
             let top = window.pageYOffset || document.documentElement.scrollTop
-            if (top <= 0) {
+            if (window.innerWidth >= 768 || top <= 0) {
                 // ios 边缘弹性
                 return !pin && setPin(true)
             }

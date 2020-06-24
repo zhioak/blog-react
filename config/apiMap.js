@@ -7,6 +7,7 @@ const apiMap = {
     type: gate + 'blog/type/get',
     menuList: gate + 'menu/list',
     snsMap: gate + 'dict/snsMap',
+    getVisitor: gate + 'visitor/get',
     saveComment: gate + 'comment/save',
     commentList: gate + 'comment/list',
     replyList: gate + 'comment/reply/list',

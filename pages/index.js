@@ -104,8 +104,8 @@ const index = ({ error, title, desc, bg }) => {
 
   const list = useMemo(() => (
     <LoadMoreList
+      listkey="index"
       className="list"
-      cacheKey="index"
       getData={getData}
       itemRender={render}
       itemSeatRender={seatRender}
@@ -126,7 +126,7 @@ const index = ({ error, title, desc, bg }) => {
 index.getInitialProps = async ({ req: request, res: response }) => {
 
   if (!request && page.cache) return page.cache
-  
+
   const promise = new Promise(
     resolve => httpPost({
       url: apiMap.type,

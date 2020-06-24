@@ -1,7 +1,7 @@
 /* 评论表单 */
 
 .comment {
-    margin: 4vh 0;
+    margin-bottom: 4vh;
     padding: 10px;
     border: 1px solid #eee;
     border-radius: 2px;
@@ -67,6 +67,16 @@
 
 .comment-content>a {
     margin-right: .2rem;
+}
+.comment-pending{
+    margin-top: 6px;
+    color: #ff4d4f;
+}
+.comment-pending>.icon{
+    width: 16px;
+    margin: 1px 2px 1px 0;
+    vertical-align: sub;
+    fill: #ff4d4f;
 }
 
 .comment-footer {
