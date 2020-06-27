@@ -91,7 +91,7 @@ const list = ({ error, type, title, desc, bg }) => {
 
   const list = useMemo(() => (
     <LoadMoreList
-      listKey={type}
+      listkey={type}
       className="list"
       getData={getData}
       itemRender={render}

@@ -195,7 +195,11 @@ export default ({ blogId, setSpinning }) => {
                     </div>
                     <div className="comment-main">
                         <div className="comment-header">
-                            <div className="header-left">
+                            <div className="comment-header-left">
+                                {
+                                    fromVisitor.badge &&
+                                    <span className="visitor-badge">{fromVisitor.badge}</span>
+                                }
                                 {author}
                                 <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
                                     <span className="comment-time">{moment(gmtCreate).fromNow()}</span>
