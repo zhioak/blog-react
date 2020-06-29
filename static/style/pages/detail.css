@@ -23,8 +23,8 @@
 /* 内容导航 */
 
 .detail-toc .ant-anchor {
-    padding-top: 10px;
-    border-radius: 3px;
+    padding: 10px 0;
+    border-radius: 2px;
     background-color: #F7F7F7;
 }
 
@@ -47,7 +47,6 @@
 
 .content-footer {
     overflow: hidden;
-    margin-bottom: 4vh;
 }
 
 .content-end {
@@ -137,27 +136,37 @@
 /* markdown解析 */
 
 .detail-content {
-    margin-top: 2vh;
+    margin: 2vh 0 4vh 0;
 }
 
 .detail-content img {
     display: block;
     margin: auto;
+    width: auto;
     max-width: 800px;
 }
 
+.detail-content p {
+    color: #333;
+}
+
+.detail-content p ,.detail-content .code{
+    line-height: 1.8rem;
+}
+
 pre {
-    padding: .5em;
+    padding: 1.125rem;
     overflow-y: auto;
-    border-radius: 3px;
+    border-radius: 2px;
     background-color: #283646;
 }
 
 code {
     display: inline-block;
     margin: 0px 10px;
+    padding: 2px 4px;
+    background: #f7f7f7;
     font-size: .87rem;
-    line-height: 1.5rem;
 }
 
 pre>code {
@@ -167,21 +176,70 @@ pre>code {
 }
 
 .detail-content h1, .detail-content h2, .detail-content h3 {
-    color: rgba(0, 0, 0, .75);
+    color: #333;
     font-weight: 600;
+    line-height: 4.2rem;
 }
 
 .detail-content h1 {
-    font-size: 1.2rem;
-    line-height: 2.2rem;
+    font-size: 1.6rem;
 }
 
 .detail-content h2 {
-    font-size: 1.05rem;
-    line-height: 2rem;
+    font-size: 1.5rem;
+}
+
+.detail-content h3 {
+    font-size: 1.4rem;
+}
+
+.detail-content h4 {
+    font-size: 1.3rem;
+}
+
+.detail-content h5 {
+    font-size: 1.2rem;
+}
+
+.detail-content h6 {
+    font-size: 1.1rem;
 }
 
 .detail-content p {
     font-size: .95rem;
-    line-height: 1.8rem;
+}
+
+/* 引用 */
+
+.detail-content blockquote {
+    padding: 1.125rem;
+    border-left: 6px solid;
+    border-color: #b4b4b4;
+    background-color: #f7f7f7;
+}
+
+.detail-content blockquote>*:last-child {
+    margin-bottom: 0;
+}
+
+/* 表格 */
+
+.detail-content table {
+    width: 100%;
+    margin-bottom: 1em;
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    border-left: none;
+    word-break: normal;
+}
+
+.detail-content table td, .detail-content table th {
+    padding: .5rem;
+    line-height: 1.2rem;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+}
+
+.detail-content table tr:nth-of-type(2n) {
+    background: #F7F7F7;
 }

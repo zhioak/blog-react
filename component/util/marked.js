@@ -26,10 +26,17 @@ marked.setOptions({
  */
 export default (markdown, toc) => {
     const renderer = new marked.Renderer()
+    renderer.tablecell = (text, { header, align })=>{
+        return header?
+        `<th style="text-align:${align}">${text}</th>`:
+        `<td style="text-align:${align}">${text}</td>`
+    }
+    
+
     if (toc) {
         renderer.heading = (text, level) => {
             let anchor = toc.add(text, level)
-            return `<a id="${anchor}"><h${level}>${text}</h${level}></a>\n`
+            return `<h${level} id="${anchor}">${text}</h${level}>\n`
         }
     }
     marked.setOptions({ renderer })
@@ -99,6 +106,7 @@ export class Toc {
         return (
             <Anchor
                 style={{ maxHeight: '60vh' }}
+                targetOffset={48}
                 onClick={(e) => e.preventDefault()}
             >
                 {this.renderNodes(this.tree)}

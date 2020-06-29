@@ -62,7 +62,7 @@ img {
     height: 100%;
 }
 .ant-menu-vertical.ant-menu-sub{
-    min-height: unset !important;
+    min-width: unset !important;
 }
 .ant-menu-vertical.ant-menu-sub>.ant-menu-item{
     padding: 0 20px;
