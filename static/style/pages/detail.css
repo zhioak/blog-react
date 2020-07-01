@@ -167,11 +167,11 @@ code {
     padding: 0 5px;
     font-size: .87rem;
     border-radius: 3px;
-    background: #eee;
+    background: #F7F7F7;
 }
 
 pre>code {
-    padding: 0;
+    margin: 0;
     color: #FFF;
     border: 0px;
     background-color: #283646;
