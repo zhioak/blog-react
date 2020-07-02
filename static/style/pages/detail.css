@@ -163,9 +163,9 @@ pre {
 
 code {
     display: inline-block;
-    margin: 0 10px;
-    padding: 0 5px;
-    font-size: .87rem;
+    margin: 0 5px;
+    padding: 0 6px;
+    font-size: .84rem;
     border-radius: 3px;
     background: #F7F7F7;
 }
