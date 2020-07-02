@@ -45,7 +45,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>{title}</Breadcrumb.Item>
             </Breadcrumb>
-            <div>
+            <div className="detail-header-main">
                 <div className="detail-title">{title}</div>
                 <div className="detail-meta">
                     <div><CalendarFilled /> {moment(gmtCreate).format('YYYY-MM-DD')}</div>
