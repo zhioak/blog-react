@@ -31,11 +31,7 @@ export default (markdown, toc) => {
             `<th style="text-align:${align}">${text}</th>` :
             `<td style="text-align:${align}">${text}</td>`
     }
-    renderer.Link = (href, title, text) => `<a href="${href}" target="_blank">${text}</a>`
-
-    // <a href="http://write.blog.csdn.net/postlist" target="_blank">跳到自己博客列表</a>
-
-
+    renderer.link = (href, title, text) => `<a href="${href}" target="_blank" rel="nofollow" title="${title}">${text}</a> `
     if (toc) {
         renderer.heading = (text, level) => {
             let anchor = toc.add(text, level)
