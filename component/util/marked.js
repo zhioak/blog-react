@@ -26,12 +26,15 @@ marked.setOptions({
  */
 export default (markdown, toc) => {
     const renderer = new marked.Renderer()
-    renderer.tablecell = (text, { header, align })=>{
-        return header?
-        `<th style="text-align:${align}">${text}</th>`:
-        `<td style="text-align:${align}">${text}</td>`
+    renderer.tablecell = (text, { header, align }) => {
+        return header ?
+            `<th style="text-align:${align}">${text}</th>` :
+            `<td style="text-align:${align}">${text}</td>`
     }
-    
+    renderer.Link = (href, title, text) => `<a href="${href}" target="_blank">${text}</a>`
+
+    // <a href="http://write.blog.csdn.net/postlist" target="_blank">跳到自己博客列表</a>
+
 
     if (toc) {
         renderer.heading = (text, level) => {
