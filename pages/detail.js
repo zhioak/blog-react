@@ -22,8 +22,6 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
 
     if (error) return (<Error error={error} />)
 
-    console.log('detail render')
-
     let toc
     menuKeys[0] = type.key
 

@@ -34,8 +34,6 @@ const seatRender = (
 const menuKeys = [page.key]
 const index = ({ error, title, desc, bg }) => {
 
-  console.log('index render ')
-
   if (error) return (<Error error={error} />)
 
   const [spinning, setSpinning] = useState(false)

@@ -58,7 +58,6 @@ const LoadMoreList = ({
 
         if( !cache){
             return ()=> {
-                console.log('remove'+listkey)
                 pool[listkey] = null
             }
         }

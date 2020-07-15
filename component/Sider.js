@@ -29,7 +29,6 @@ const Profile = () => (
  */
 const Sider = ({ className, menuKeys, visible, onClose, openSpin }) => {
 
-    console.log('sider render')
     const menu = useMemo(() => (
         <div>
             <Menu

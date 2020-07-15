@@ -42,24 +42,21 @@
 
 /* 图片信息 */
 
-.album-cover {
-    position: relative;
+.album-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5%;
+    height: 100%;
+    color: #fff;
     background-color: rgba(0, 0, 0, .2);
 }
 
-.album-meta {
-    padding: 0 5%;
-    position: absolute;
-    top: 40%;
-    width: 100%;
-    color: #fff;
-    text-align: center;
-}
 
-.album-meta>.title {
-    display: -webkit-box;
+.album-holder>.title {
+    overflow: hidden;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: 10px;
+    line-height: 3rem;
 }

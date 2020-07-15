@@ -49,11 +49,9 @@ const album = ({ error, title, desc, bg }) => {
           className="album-img"
           style={{ backgroundImage: `url(${previewImg})` }}
         >
-          <div className="album-cover">
-            <div className="album-meta">
+          <div className="album-holder">
               <div className="title">{title}</div>
               <div>{preview}</div>
-            </div>
           </div>
         </div>
       </a>

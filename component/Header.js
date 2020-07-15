@@ -18,8 +18,6 @@ let lastTop = 0
  */
 const Header = ({ className, menuKeys, openSpin, openSider }) => {
 
-    console.log('header render')
-
     const [pin, setPin] = useState(true)
 
     useEffect(() => {

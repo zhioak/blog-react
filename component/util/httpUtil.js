@@ -54,6 +54,5 @@ const success = ({ data: vo }, cb, fcb) => {
  * 调用失败
  */
 const error = (e, fcb) => {
-    console.log(e)
     fcb ? fcb({ code: '400', info: '请求出错咯' }) : message.error('请求出错咯~')
 }

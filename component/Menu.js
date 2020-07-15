@@ -26,7 +26,6 @@ const menus = list => (
 var menuList
 export default ({ menuKeys, mode = "inline", closeSider, openSpin }) => {
 
-    console.log('menu render')
     const [loading, setLoading] = useState(!menuList)
     const [selectedKeys, setSelectedKeys] = useState(menuKeys)
 
