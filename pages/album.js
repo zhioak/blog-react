@@ -33,13 +33,13 @@ const seatRender = (
   />
 )
 
-const album = ({ error, title, desc, bg }) => {
+const album = ({ error, title, desc, bg, gmtCreate }) => {
 
   if (error) return (<Error error={error} />)
 
   const [spinning, setSpinning] = useState(false)
 
-  const render = ({ id, title, preview, previewImg }) => (
+  const render = ({ id, title, previewImg }) => (
     <Link href={'/detail?id=' + id}>
       <a
         className="album-item done"
@@ -50,8 +50,13 @@ const album = ({ error, title, desc, bg }) => {
           style={{ backgroundImage: `url(${previewImg})` }}
         >
           <div className="album-holder">
-              <div className="title">{title}</div>
-              <div>{preview}</div>
+            <div className="title">{title}</div>
+            <div>
+              <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
+              {
+                remark &&
+                <span> · {remark}</span>}
+            </div>
           </div>
         </div>
       </a>
