@@ -1,4 +1,5 @@
 
+import moment from 'moment'
 import Link from 'next/link'
 import { List, Skeleton } from 'antd'
 import { useState, useMemo } from 'react'
@@ -33,7 +34,7 @@ const seatRender = (
   />
 )
 
-const album = ({ error, title, desc, bg, gmtCreate }) => {
+const album = ({ error, title, desc, bg, remark,gmtCreate }) => {
 
   if (error) return (<Error error={error} />)
 
