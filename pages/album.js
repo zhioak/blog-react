@@ -34,13 +34,13 @@ const seatRender = (
   />
 )
 
-const album = ({ error, title, desc, bg, remark,gmtCreate }) => {
+const album = ({ error, title, desc, bg }) => {
 
   if (error) return (<Error error={error} />)
 
   const [spinning, setSpinning] = useState(false)
 
-  const render = ({ id, title, previewImg }) => (
+  const render = ({ id, title, previewImg,remark,gmtCreate }) => (
     <Link href={'/detail?id=' + id}>
       <a
         className="album-item done"
