@@ -10,7 +10,7 @@ import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
 import apiMap from '../config/apiMap'
-import '../static/style/pages/list.css'
+import '../static/style/pages/list.less'
 
 
 

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Menu from './Menu'
 import Sns from './Sns'
 
-import '../static/style/component/sider.css'
+import '../static/style/component/sider.less'
 
 const name = 'zhou',
     avatar = 'https://s.gravatar.com/avatar/f4ca98d8768ec3ac3e761335e3f94d1d?s=458&r=g'

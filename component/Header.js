@@ -5,7 +5,7 @@ import { useState, useEffect, useMemo } from 'react'
 import Sns from './Sns'
 import Menu from './Menu'
 
-import '../static/style/component/header.css'
+import '../static/style/component/header.less'
 
 let lastTop = 0
 

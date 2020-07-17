@@ -12,7 +12,7 @@ import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 import marked, { Toc } from '../component/util/marked'
 
-import '../static/style/pages/detail.css'
+import '../static/style/pages/detail.less'
 
 /**
  * 每次新建数组 导致更新

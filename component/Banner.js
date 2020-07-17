@@ -1,4 +1,4 @@
-import '../static/style/component/banner.css'
+import '../static/style/component/banner.less'
 const Banner = ({ bg, title, desc }) => (
     <div className="banner" style={bg ? { backgroundImage: `url(${bg})` } : {}} >
         <div className="banner-holder">

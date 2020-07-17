@@ -11,7 +11,7 @@ import Layout from '../component/Layout'
 import AutoList from '../component/AutoList'
 import { httpPost } from '../component/util/httpUtil'
 
-import '../static/style/pages/album.css'
+import '../static/style/pages/album.less'
 
 
 const page = { key: 'album' },

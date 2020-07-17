@@ -7,7 +7,7 @@ import Footer from './Footer'
 
 import { LoadingOutlined } from '@ant-design/icons'
 
-import '../static/style/component/layout.css'
+import '../static/style/component/layout.less'
 
 
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)

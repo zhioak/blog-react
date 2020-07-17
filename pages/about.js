@@ -1,8 +1,5 @@
-
-import moment from 'moment'
 import { Affix } from 'antd'
 import { useState, useMemo, useEffect } from 'react'
-import { ExclamationCircleOutlined } from '@ant-design/icons'
 
 import apiMap from '../config/apiMap'
 import Layout from '../component/Layout'
@@ -11,7 +8,7 @@ import { httpPost } from '../component/util/httpUtil'
 import Error from '../component/Error'
 import marked, { Toc } from '../component/util/marked'
 
-import '../static/style/pages/detail.css'
+import '../static/style/pages/detail.less'
 
 /**
  * 每次新建数组 导致更新

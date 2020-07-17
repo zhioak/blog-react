@@ -1,6 +1,6 @@
 import { Button, List } from 'antd'
 import { useEffect, useState } from 'react'
-import '../static/style/component/loadMoreList.css'
+import '../static/style/component/loadMoreList.less'
 
 
 
