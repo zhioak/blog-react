@@ -1,16 +1,14 @@
-/* eslint-disable */
+
 
 const withCSS = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
+
+// 自定义主题
 const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
 const path = require('path')
-
-if(typeof require !== 'undefined'){
-  require.extensions['.css']=file=>{}
-}
 const vars = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './static/style/theme.less'), 'utf8')
+  fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
 )
 
 module.exports = withLess(withCSS({
