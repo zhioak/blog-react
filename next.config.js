@@ -1,12 +1,6 @@
-// 配置 next 支持 css
-
-
-
-
-
 /* eslint-disable */
 
-const withCss = require('@zeit/next-css')
+const withCSS = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
 const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
@@ -15,43 +9,37 @@ const path = require('path')
 if(typeof require !== 'undefined'){
   require.extensions['.css']=file=>{}
 }
-// Where your antd-custom.less file lives
-const themeVariables = lessToJS(
+const vars = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './static/style/theme.less'), 'utf8')
 )
 
-module.exports = withLess(withCss({
+module.exports = withLess(withCSS({
   lessLoaderOptions: {
     javascriptEnabled: true,
-    modifyVars: themeVariables, // make your antd custom effective
+    modifyVars: vars, // make your antd custom effective
   },
   webpack: (config, { isServer }) => {
     if (isServer) {
-      const antStyles = /antd\/.*?\/style.*?/
-      const origExternals = [...config.externals]
+      const antRegix = /antd\/.*?\/style.*?/
+      const orignExternals = [...config.externals]
       config.externals = [
         (context, request, callback) => {
-          if (request.match(antStyles)) return callback()
-          if (typeof origExternals[0] === 'function') {
-            origExternals[0](context, request, callback)
+          if (request.match(antRegix)) return callback()
+          if (typeof orignExternals[0] === 'function') {
+            orignExternals[0](context, request, callback)
           } else {
             callback()
           }
         },
-        ...(typeof origExternals[0] === 'function' ? [] : origExternals),
+        ...(typeof orignExternals[0] === 'function' ? [] : orignExternals),
       ]
 
       config.module.rules.unshift({
-        test: antStyles,
+        test: antRegix,
         use: 'null-loader',
       })
     }
     return config
-  },
-//   exportPathMap: async function (defaultPathMap) {
-//     return {
-//       '/': { page: '/' },
-//       '/about': { page: '/about' }
-//     }
-//   }
+  }
 }))
+
