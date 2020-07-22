@@ -1,9 +1,41 @@
-// 配置 next 支持 css
-
+const path = require('path')
 const withCss = require('@zeit/next-css')
+const withLess = require('@zeit/next-less')
 
-if(typeof require !== 'undefined'){
-    require.extensions['.css']=file=>{}
+if (typeof require !== 'undefined') {
+    require.extensions['.less'] = () => { }
+    require.extensions['.css'] = file => { }
 }
 
-module.exports = withCss({})
+// 获取自定义主题
+const lessToJS = require('less-vars-to-js')
+const fs = require('fs')
+const vars = lessToJS(
+  fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
+)
+
+
+module.exports = withCss(withLess({
+    lessLoaderOptions: {
+        javascriptEnabled: true,
+        modifyVars: vars, 
+    },
+    webpack(config) {
+        if (config.externals) {
+            const includes = [/antd/]
+            config.externals = config.externals.map(external => {
+                if (typeof external !== 'function') return external
+                return (ctx, req, cb) => {
+                    return includes.find(include =>
+                        req.startsWith('.')
+                            ? include.test(path.resolve(ctx, req))
+                            : include.test(req)
+                    )
+                        ? cb()
+                        : external(ctx, req, cb)
+                }
+            })
+        }
+        return config;
+    }
+}))
