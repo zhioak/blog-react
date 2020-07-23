@@ -5,11 +5,7 @@
             "import",
             {
                 "libraryName":"antd",
-<<<<<<< HEAD
                 "style": true
-=======
-                "style":true
->>>>>>> css
             }
         ]
     ]
