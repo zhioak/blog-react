@@ -26,7 +26,6 @@ module.exports = withCss(withLess(withDynamicTheme({
         modifyVars: vars,
     },
     webpack(config) {
-        config.plugins.push(initTheme)
         if (config.externals) {
             const includes = [/antd/]
             config.externals = config.externals.map(external => {
