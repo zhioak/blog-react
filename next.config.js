@@ -8,8 +8,8 @@ if (typeof require !== 'undefined') {
 }
 
 // 获取自定义主题
-const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
+const lessToJS = require('less-vars-to-js')
 const vars = lessToJS(
     fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
 )
@@ -19,7 +19,7 @@ module.exports = withCss(withLess(withDynamicTheme({
         stylesDir: path.join(__dirname, './static/style'),
         antDir: path.join(__dirname, './node_modules/antd'),
         varFile: path.join(__dirname, './static/style/vars.less'),
-        mainLessFile: path.join(__dirname, './static/style/main.less'),
+        mainLessFile: path.join(__dirname, './static/style/main.less')
     },
     lessLoaderOptions: {
         javascriptEnabled: true,
