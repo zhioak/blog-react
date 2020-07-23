@@ -1,43 +1,46 @@
-
-
-const withCSS = require('@zeit/next-css')
-const withLess = require('@zeit/next-less')
-
-// 自定义主题
-const lessToJS = require('less-vars-to-js')
-const fs = require('fs')
 const path = require('path')
+const withCss = require('@zeit/next-css')
+const withLess = require('@zeit/next-less')
+const withDynamicTheme = require('./dynamic-theme')
+if (typeof require !== 'undefined') {
+    require.extensions['.less'] = () => { }
+    require.extensions['.css'] = file => { }
+}
+
+// 获取自定义主题
+const fs = require('fs')
+const lessToJS = require('less-vars-to-js')
 const vars = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
+    fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
 )
 
-module.exports = withLess(withCSS({
-  lessLoaderOptions: {
-    javascriptEnabled: true,
-    modifyVars: vars, // make your antd custom effective
-  },
-  webpack: (config, { isServer }) => {
-    if (isServer) {
-      const antRegix = /antd\/.*?\/style.*?/
-      const orignExternals = [...config.externals]
-      config.externals = [
-        (context, request, callback) => {
-          if (request.match(antRegix)) return callback()
-          if (typeof orignExternals[0] === 'function') {
-            orignExternals[0](context, request, callback)
-          } else {
-            callback()
-          }
-        },
-        ...(typeof orignExternals[0] === 'function' ? [] : orignExternals),
-      ]
-
-      config.module.rules.unshift({
-        test: antRegix,
-        use: 'null-loader',
-      })
+module.exports = withCss(withLess(withDynamicTheme({
+    dynamicTheme: {
+        stylesDir: path.join(__dirname, './static/style'),
+        antDir: path.join(__dirname, './node_modules/antd'),
+        varFile: path.join(__dirname, './static/style/vars.less'),
+        mainLessFile: path.join(__dirname, './static/style/main.less')
+    },
+    lessLoaderOptions: {
+        javascriptEnabled: true,
+        modifyVars: vars,
+    },
+    webpack(config) {
+        if (config.externals) {
+            const includes = [/antd/]
+            config.externals = config.externals.map(external => {
+                if (typeof external !== 'function') return external
+                return (ctx, req, cb) => {
+                    return includes.find(include =>
+                        req.startsWith('.')
+                            ? include.test(path.resolve(ctx, req))
+                            : include.test(req)
+                    )
+                        ? cb()
+                        : external(ctx, req, cb)
+                }
+            })
+        }
+        return config;
     }
-    return config
-  }
-}))
-
+})))

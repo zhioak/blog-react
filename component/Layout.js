@@ -4,6 +4,7 @@ import Head from './Head'
 import Header from './Header'
 import Sider from './Sider'
 import Footer from './Footer'
+import {modifyVars,changeTheme} from './util/themeUtil'
 
 import { LoadingOutlined } from '@ant-design/icons'
 
@@ -106,6 +107,13 @@ const Layout = ({
             <div id="root" className={`${siderVisible && 'lose'}`}>
                 <Spin spinning={spinning} className="spin-full">
                     {header}
+                    <button onClick={()=>{
+                        console.log('change')
+                        changeTheme('dark')
+                        // modifyVars({'@body-background':'#000'})
+                    }}>
+                        Change
+                    </button>
                     <div className="lose-retinue">
                         {banner}
                         {topstory}
