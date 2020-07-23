@@ -11,7 +11,7 @@ import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 
-import '../static/style/pages/list.less'
+import '../static/style/pages/list.css'
 const { Title, Paragraph } = Typography
 
 

@@ -1,5 +1,5 @@
 import { CopyrightCircleOutlined } from '@ant-design/icons'
-import '../static/style/component/footer.less'
+import '../static/style/component/footer.css'
 
 /**
  * 公用页脚

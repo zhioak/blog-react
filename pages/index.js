@@ -3,18 +3,19 @@ import moment from 'moment'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
 import { Skeleton, Typography } from 'antd'
+
 import Error from '../component/Error'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
 import apiMap from '../config/apiMap'
-import '../static/style/pages/list.less'
+import '../static/style/pages/list.css'
 
 
 
 const { Title, Paragraph } = Typography
-// https://cdnjs.cloudflare.com/ajax/libs/less.js/3.11.1/less.min.js
+
 
 const page = { key: '/' }
 const seatRender = (

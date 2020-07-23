@@ -1,0 +1,69 @@
+body {
+    width: 100% !important;
+    background-color: #fff;
+}
+
+img {
+    width: 100%;
+}
+
+/* 滚动条 */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #1890ff;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #eee;
+}
+
+/* 全局样式 */
+
+.card {
+    overflow: hidden;
+    margin-bottom: 10px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.tips {
+    color: #838383;
+    font-size: .85rem;
+}
+
+.title {
+    font-size: 1.4rem;
+}
+
+.cut::after {
+    content: " · ";
+    padding: 0 .5%;
+}
+
+.ant-spin-nested-loading {
+    overflow: hidden;
+    height: 100%;
+}
+.ant-menu-vertical.ant-menu-sub{
+    min-width: unset !important;
+}
+.ant-menu-vertical.ant-menu-sub>.ant-menu-item{
+    padding: 0 20px;
+}

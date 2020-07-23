@@ -6,7 +6,7 @@ import apiMap from '../config/apiMap'
 import localUtil from './util/localUtil'
 import { httpPost } from './util/httpUtil'
 
-import '../static/style/component/sns.less'
+import '../static/style/component/sns.css'
 
 
 const size = 25,

@@ -1,7 +1,8 @@
 .album-item, .album-img, .album-cover, .album-item .ant-skeleton, .album-item .ant-skeleton-input {
     height: 100%;
-  }
-  .album-item {
+}
+
+.album-item {
     overflow: hidden;
     margin: auto;
     width: 100%;
@@ -9,29 +10,7 @@
     max-width: 800px;
     border: 1px solid #eee;
     border-radius: 5px;
-  }
-  .album-img {
-    background-size: cover;
-    background-position: center;
-  }
-  /* 图片信息 */
-  .album-holder {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    padding: 0 5%;
-    height: 100%;
-    color: #fff;
-    background-color: rgba(0, 0, 0, .2);
-    & > .title {
-      overflow: hidden;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      line-height: 3rem;
-    }
-  }
-  
+}
 
 @media (min-width: 768px) {
     .album-item {
@@ -54,4 +33,30 @@
         -webkit-box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
         box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
     }
+}
+
+.album-img {
+    background-size: cover;
+    background-position: center;
+}
+
+/* 图片信息 */
+
+.album-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 0 5%;
+    height: 100%;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+
+.album-holder>.title {
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 3rem;
 }

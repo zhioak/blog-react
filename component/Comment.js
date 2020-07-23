@@ -10,7 +10,7 @@ import { httpPost } from './util/httpUtil'
 import localUtil from './util/localUtil'
 import apiMap from '../config/apiMap'
 
-import '../static/style/component/comment.less'
+import '../static/style/component/comment.css'
 
 
 const seatRender = (

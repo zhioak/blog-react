@@ -8,7 +8,7 @@ import {modifyVars,changeTheme} from './util/themeUtil'
 
 import { LoadingOutlined } from '@ant-design/icons'
 
-import '../static/style/component/layout.less'
+import '../static/style/component/layout.css'
 
 
 Spin.setDefaultIndicator(<LoadingOutlined style={{ fontSize: 24 }} />)
@@ -43,7 +43,6 @@ const Layout = ({
     const openSider = () => setSiderVisible(true),
         closeSider = () => setSiderVisible(false),
         openSpin = () => setSpinning(true)
-
 
     useEffect(() => {
 
