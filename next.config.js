@@ -1,7 +1,7 @@
 const path = require('path')
 const withCss = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
-
+const withDynamicTheme = require('./dynamic-theme')
 if (typeof require !== 'undefined') {
     require.extensions['.less'] = () => { }
     require.extensions['.css'] = file => { }
@@ -11,16 +11,22 @@ if (typeof require !== 'undefined') {
 const lessToJS = require('less-vars-to-js')
 const fs = require('fs')
 const vars = lessToJS(
-  fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
+    fs.readFileSync(path.resolve(__dirname, './static/style/vars.less'), 'utf8')
 )
 
-
-module.exports = withCss(withLess({
+module.exports = withCss(withLess(withDynamicTheme({
+    dynamicTheme: {
+        stylesDir: path.join(__dirname, './static/style'),
+        antDir: path.join(__dirname, './node_modules/antd'),
+        varFile: path.join(__dirname, './static/style/vars.less'),
+        mainLessFile: path.join(__dirname, './static/style/main.less'),
+    },
     lessLoaderOptions: {
         javascriptEnabled: true,
-        modifyVars: vars, 
+        modifyVars: vars,
     },
     webpack(config) {
+        config.plugins.push(initTheme)
         if (config.externals) {
             const includes = [/antd/]
             config.externals = config.externals.map(external => {
@@ -38,4 +44,4 @@ module.exports = withCss(withLess({
         }
         return config;
     }
-}))
+})))
