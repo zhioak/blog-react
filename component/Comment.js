@@ -1,7 +1,6 @@
 
 import moment from 'moment'
 import { useMemo, useState, useEffect } from 'react'
-import ResizableTextArea from 'antd/lib/input/ResizableTextArea'
 import { Form, Input, Button, Avatar, Tooltip, Skeleton, message, Spin } from 'antd'
 import { UserOutlined, MailOutlined, LinkOutlined } from '@ant-design/icons'
 
@@ -12,6 +11,7 @@ import apiMap from '../config/apiMap'
 
 import '../static/style/component/comment.css'
 
+const { TextArea } = Input;
 
 const seatRender = (
     <Skeleton className="comment-item" avatar={{ shape: 'square' }} active paragraph={{ rows: 1 }} />
@@ -144,7 +144,7 @@ export default ({ blogId, setSpinning }) => {
                                     { pattern: /[\u4e00-\u9fa5]/, message: 'Can you speak chinese?' }
                                 ]}
                             >
-                                <ResizableTextArea
+                                <TextArea
                                     className="content"
                                     maxLength={256}
                                     autoSize={{ minRows: 3 }}
