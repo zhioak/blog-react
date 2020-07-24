@@ -31,7 +31,7 @@ module.exports = (nextConfig = {}) => {
         webpack(config) {
             config.plugins.push({
                 apply: (compiler) => {
-                    compiler.hooks.emit.tapAsync('generateTheme', async (compilation, cb) => {
+                    compiler.hooks.afterCompile.tapAsync('generateTheme', async (compilation, cb) => {
                         // 生成主题
                         let dir = path.dirname(sheetPath)
                         !(await fs.existsSync(dir)) && await fs.mkdirSync(dir)

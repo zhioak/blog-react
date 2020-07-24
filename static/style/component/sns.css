@@ -7,15 +7,15 @@
 }
 
 .sns-email {
-    background-color: #F7B007;
+    background: #F7B007 !important;
 }
 
 .sns-wechat {
     font-size: 15px !important;
-    background-color: #07C160
+    background: #07C160 !important;
 }
 
 .sns-github {
     font-size: 15px !important;
-    background-color: #24292e;
+    background: #24292e !important;
 }
