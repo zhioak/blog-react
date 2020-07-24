@@ -1,6 +1,5 @@
 body {
     width: 100% !important;
-    background-color: #fff;
 }
 
 img {
@@ -31,22 +30,6 @@ img {
 }
 
 /* 全局样式 */
-
-.card {
-    overflow: hidden;
-    margin-bottom: 10px;
-    border-radius: 2px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
-    -webkit-box-shadow: 0 1px 3px rgba(26, 26, 26, .1);
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-
-.tips {
-    color: #838383;
-    font-size: .85rem;
-}
 
 .title {
     font-size: 1.4rem;

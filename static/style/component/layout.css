@@ -93,6 +93,6 @@
     
     .backTop:hover {
         background: #fafafa;
-        fill: #1890ff;
+        fill: var(--primary-color);
     }
 }

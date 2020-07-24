@@ -1,8 +1,8 @@
 import { Anchor } from 'antd'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/monokai-sublime.css'
 import marked from 'marked'
 
+import 'highlight.js/styles/monokai-sublime.css'
 
 /**
  * marked 全局配置

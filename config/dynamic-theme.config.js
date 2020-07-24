@@ -3,7 +3,8 @@ const path = require('path')
 const { generateTheme, getLessVars } = require('antd-theme-generator')
 
 
-const sheetURI = '/_next/static/theme.less', sheetPath = __dirname + '/.next/static/theme.less'
+const sheetURI = '/_next/static/theme.less',
+    sheetPath = path.join(__dirname, '../.next/static/theme.less')
 
 module.exports = (nextConfig = {}) => {
     const {
@@ -14,9 +15,9 @@ module.exports = (nextConfig = {}) => {
     // 获取主题
     const themes = {}
     let themeDir = path.join(antDir, 'lib/style/themes')
-    fs.readdirSync(themeDir).map(themeFile => {
-        let res = /(.*)\.less/.exec(themeFile)
-        res && res[1] !== 'index' && (themes[res[1]] = getLessVars(path.join(themeDir, themeFile)))
+    fs.readdirSync(themeDir).map(theme => {
+        let res = /(.*)\.less/.exec(theme)
+        res && res[1] !== 'index' && (themes[res[1]] = getLessVars(path.join(themeDir, theme)))
     })
 
     return Object.assign({}, nextConfig, {
