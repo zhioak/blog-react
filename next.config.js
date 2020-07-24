@@ -1,6 +1,6 @@
 const path = require('path')
 const withCss = require('@zeit/next-css')
-const withAntd = require('./config/next-antd.config');
+const withAntd = require('./config/next-antd.config')
 const withDynamicTheme = require('./config/dynamic-theme.config')
 
 if (typeof require !== 'undefined') {

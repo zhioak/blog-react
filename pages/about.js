@@ -15,7 +15,7 @@ import '../static/style/pages/detail.css'
  */
 const page = { blogId: 0, key: 'about' }
 const menuKeys = [page.key]
-const detail = ({ error, id, title, content, gmtModified }) => {
+const detail = ({ error, id, title, content }) => {
 
     if (error) return (<Error error={error} />)
 

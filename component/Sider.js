@@ -33,7 +33,7 @@ const Sider = ({ className, menuKeys, visible, onClose, openSpin }) => {
         <div>
             <Menu
                 menuKeys={menuKeys}
-                loseSider={onClose}
+                closeSider={onClose}
                 openSpin={openSpin}
             />
         </div>
