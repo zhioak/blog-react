@@ -1,20 +1,28 @@
 @import '~antd/lib/style/themes/default.less';
-@primary-color: red;
+@body-background: @component-background;
 
+@theme-color-1: #F7F7F7; // 30303
+@theme-color-1-hover: #FAFAFA;
+@theme-color-2: #E0E0E0; //171717
+// @theme-color-1:#2E2E2E;
+// @theme-color-1-hover:#2B2B2B;
+// @theme-color-2:#454545;
 :root {
     --primary-color: @primary-color;
 
-    --popover-background:@popover-background;
-    --component-background: @component-background; 
+    --popover-background: @popover-background;
+    --popover-customize-border-color: @popover-customize-border-color;
+    --component-background: @component-background;
 
-
-    // Border color
     --border-color-base: @border-color-base;
+    --border-color-split: @border-color-split;
 
     --text-color: @text-color;
-    --text-color-secondary:@text-color-secondary;
+    --text-color-secondary: @text-color-secondary;
 
-    --input-icon-color:@input-icon-color;
+    --shadow-color: @shadow-color;
 
-    --avatar-bg: @avatar-bg;
+    --theme-color-1: @theme-color-1;
+    --theme-color-1-hover: @theme-color-1-hover;
+    --theme-color-2: @theme-color-2;
 }

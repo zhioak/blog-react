@@ -49,7 +49,7 @@
     position: fixed !important;
     z-index: 1001 !important;
     max-height: none !important;
-    background: rgba(255, 255, 255, .7);
+    background: var(--shadow-color);
 }
 
 #root>.ant-spin-nested-loading>.ant-spin-container {
@@ -67,9 +67,9 @@
     height: 40px;
     line-height: 17px;
     text-align: center;
-    fill: #565656;
-    background: #F7F7F7;
-    border: 2px solid #e0e0e0;
+    fill: var(--text-color);
+    background: var(--theme-color-1);
+    border: 2px solid var(--theme-color-2);
     border-radius: 50%;
     transition: all .3s;
 }
@@ -92,7 +92,7 @@
     }
     
     .backTop:hover {
-        background: #fafafa;
+        background: var(--theme-color-1-hover);
         fill: var(--primary-color);
     }
 }

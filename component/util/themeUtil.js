@@ -1,6 +1,6 @@
 import less from 'less'
 import nextConfig from 'next/config'
-const { themes, sheetURI } = nextConfig().publicRuntimeConfig.dynamicTheme
+const { themes, sheetURI } = nextConfig().publicRuntimeConfig.liveTheme
 
 export const modifyVars = (vars) => {
     !less.options.javascriptEnabled && loadSheet()
@@ -10,6 +10,7 @@ export const modifyVars = (vars) => {
 
 export const changeTheme = (name) => {
     let theme = themes[name]
+    console.log({ ...themes.default, ...theme })
     theme ? modifyVars({ ...themes.default, ...theme }) : console.log(`未找到 ${name} 主题`)
 }
 

@@ -9,21 +9,29 @@ const sheetURI = '/_next/static/theme.less',
 module.exports = (nextConfig = {}) => {
     const {
         antDir,
+        customDir,
         themeVariable = {}
-    } = nextConfig.dynamicTheme
+    } = nextConfig.liveTheme
 
     // 获取主题
     const themes = {}
     let themeDir = path.join(antDir, 'lib/style/themes')
     fs.readdirSync(themeDir).map(theme => {
         let res = /(.*)\.less/.exec(theme)
-        res && res[1] !== 'index' && (themes[res[1]] = getLessVars(path.join(themeDir, theme)))
+        if (res && res[1] !== 'index') {
+            let customPath = path.join(customDir, theme)
+            themes[res[1]] = {
+                ...getLessVars(path.join(themeDir, theme)),
+                ...(fs.existsSync(customPath) ? getLessVars(customPath) : {})
+            }
+        }
     })
+
 
     return Object.assign({}, nextConfig, {
         publicRuntimeConfig: {
             ...nextConfig.publicRuntimeConfig,
-            dynamicTheme: {
+            liveTheme: {
                 themes,
                 sheetURI
             }
@@ -36,12 +44,12 @@ module.exports = (nextConfig = {}) => {
                         let dir = path.dirname(sheetPath)
                         !(await fs.existsSync(dir)) && await fs.mkdirSync(dir)
                         generateTheme({
-                            ...nextConfig.dynamicTheme,
+                            ...nextConfig.liveTheme,
                             outputFilePath: sheetPath,
                             themeVariables: Array.from(
                                 new Set(Object.keys(themes.dark)
                                     .concat(Object.keys(themes.default))
-                                    .concat(Object.keys(themeVariable))
+                                    .concat(themeVariable)
                                 ))
                         })
                         cb()

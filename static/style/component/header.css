@@ -71,7 +71,7 @@
     position: relative;
     width: 14px;
     height: 2px;
-    background: var(--input-icon-color);
+    background: var(--text-color);
     transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
     -webkit-transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
 }
@@ -90,7 +90,7 @@
     position: absolute;
     width: 100%;
     height: 2px;
-    background: var(--input-icon-color);
+    background: var(--text-color);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
@@ -99,8 +99,8 @@
 
 /* 侧栏打开 */
 
-#root.lose .sider-tigger-icon {
-    background: 0 0;
+#root.lose .sider-tigger-icon {    
+    background: transparent;
 }
 
 #root.lose .sider-tigger-icon:before {

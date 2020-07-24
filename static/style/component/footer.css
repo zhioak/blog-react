@@ -1,5 +1,5 @@
 .footer {
     margin: 5vh 0 3vh 0;
     text-align: center;
-    color: #888;
+    color: var(--text-color-secondary);
 }

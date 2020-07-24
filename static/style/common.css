@@ -1,12 +1,7 @@
-body {
-    width: 100% !important;
-}
-
 * {
     -webkit-transition: color .3s cubic-bezier(.645, .045, .355, 1), border-color .3s cubic-bezier(.645, .045, .355, 1), background .3s cubic-bezier(.645, .045, .355, 1);
     transition: color .3s cubic-bezier(.645, .045, .355, 1), border-color .3s cubic-bezier(.645, .045, .355, 1), background .3s cubic-bezier(.645, .045, .355, 1);
 }
-
 img {
     width: 100%;
 }
@@ -27,11 +22,11 @@ img {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #1890ff;
+    background-color: var(--primary-color);
 }
 
 ::-webkit-scrollbar-track {
-    background-color: #eee;
+    background-color: var(--theme-color-1);
 }
 
 /* 全局样式 */
@@ -44,7 +39,6 @@ img {
     content: " · ";
     padding: 0 .5%;
 }
-
 
 .ant-spin-nested-loading {
     overflow: hidden;
