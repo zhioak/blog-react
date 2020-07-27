@@ -10,7 +10,7 @@
     height: 3rem;
     text-align: center;
     line-height: 3rem;
-    border-top: 1px solid var(--border-color-base);
+    border-top: 1px solid var(--theme-border-color);
 }
 .sider .ant-menu-inline .ant-menu-item{
     width: 100%;

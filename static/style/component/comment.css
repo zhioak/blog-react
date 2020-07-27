@@ -4,7 +4,7 @@
     margin-bottom: 4vh;
     padding: 10px;
     border: 1px solid #eee;
-    border-radius: 2px;
+    border-radius: var(--border-radius-base);
 }
 
 .comment-item .comment {
@@ -20,7 +20,7 @@
     cursor: pointer;
     width: 22px;
     padding: 5px;
-    border-radius: 2px;
+    border-radius: var(--border-radius-base);
     transition: background-color .3s;
     fill: #999;
 }
@@ -132,7 +132,7 @@
     justify-content: space-between;
     padding: .125rem .35rem;
     margin-bottom: .1rem;
-    border-radius: 2px;
+    border-radius: var(--border-radius-base);
     background-color: #F7F7F7;
 }
 
@@ -151,7 +151,7 @@
 
 .visitor-badge {
     padding: 0 6px;
-    border-radius: 2px;
+    border-radius: var(--border-radius-base);
     max-width: 30%;
     font-size: .843rem;
     color: #fff;

@@ -68,8 +68,8 @@
     line-height: 17px;
     text-align: center;
     fill: var(--text-color);
-    background: var(--theme-color-light);
-    border: 2px solid var(--theme-color-secondary);
+    background: var(--theme-color-a);
+    border: 2px solid var(--theme-color-b);
     border-radius: 50%;
     transition: all .3s;
 }
@@ -92,7 +92,7 @@
     }
     
     .backTop:hover {
-        background: var(--theme-color-light-hover);
+        background: var(--theme-color-a-hover);
         fill: var(--primary-color);
     }
 }

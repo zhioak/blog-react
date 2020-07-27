@@ -1,9 +1,18 @@
 @import '~antd/lib/style/themes/default.less';
 @body-background: @component-background;
+@text-color: fade(@black, 80%);
+@text-color-secondary: fade(@black, 60%);
 
-@theme-color-light : #F7F7F7; // 30303
-@theme-color-light-hover: #FAFAFA;
-@theme-color-secondary: #E0E0E0; //171717
+@theme-color-a : #F7F7F7;
+@theme-color-a-reverse: #2E2E2E;
+@theme-color-a-hover: #FAFAFA;
+@theme-color-b: #E0E0E0;
+@theme-color-f: #AAA;
+
+
+@theme-boder-color: #EEE;
+@theme-shadow-color: rgba(0, 0, 0, .2);
+
 
 :root {
     --primary-color: @primary-color;
@@ -12,15 +21,23 @@
     --popover-customize-border-color: @popover-customize-border-color;
     --component-background: @component-background;
 
-    --border-color-base: @border-color-base;
-    --border-color-split: @border-color-split;
 
     --text-color: @text-color;
     --text-color-secondary: @text-color-secondary;
 
+    --border-radius-base:@border-radius-base;
+
     --shadow-color: @shadow-color;
 
-    --theme-color-light: @theme-color-light;
-    --theme-color-light-hover: @theme-color-light-hover;
-    --theme-color-secondary:@theme-color-secondary;
+    // 自定义
+    --theme-color-a: @theme-color-a;
+    --theme-color-a-hover: @theme-color-a-hover;
+    --theme-color-a-reverse: @theme-color-a-reverse;
+    --theme-color-b: @theme-color-b;
+
+
+    --theme-color-f: @theme-color-f;
+
+    --theme-border-color: @theme-boder-color;
+    --theme-shadow-color: @theme-shadow-color;
 }

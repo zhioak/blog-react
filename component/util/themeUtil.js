@@ -10,7 +10,6 @@ export const modifyVars = (vars) => {
 
 export const changeTheme = (name) => {
     let theme = themes[name]
-    console.log({ ...themes.default, ...theme })
     theme ? modifyVars({ ...themes.default, ...theme }) : console.log(`未找到 ${name} 主题`)
 }
 
