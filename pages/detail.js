@@ -96,9 +96,7 @@ const detail = ({ error, id, title, content, type, menu, gmtCreate, gmtModified,
 
     let sticky = useMemo(() => (
         !toc.isEmpty() &&
-        <Affix offsetTop={55}>
-            <div className="detail-toc">{toc.render()}</div>
-        </Affix>
+        <Affix offsetTop={55}>{toc.render()}</Affix>
     ), [id])
 
 

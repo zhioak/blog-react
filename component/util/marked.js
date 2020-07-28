@@ -2,6 +2,7 @@ import { Anchor } from 'antd'
 import hljs from 'highlight.js'
 import marked from 'marked'
 
+import '../../static/style/component/toc.css'
 import 'highlight.js/styles/monokai-sublime.css'
 
 /**
@@ -105,6 +106,7 @@ export class Toc {
         return (
             <Anchor
                 style={{ maxHeight: '60vh' }}
+                className="toc"
                 targetOffset={48}
                 onClick={(e) => e.preventDefault()}
             >

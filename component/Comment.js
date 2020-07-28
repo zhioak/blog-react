@@ -76,11 +76,12 @@ export default ({ blogId, setSpinning }) => {
             cb: () => {
                 let { nickname, email, website } = data
                 localUtil.setObj('visitor', visitor = { nickname, email, website })
-                form.setFieldsValue({ nickname, email, website, content: '' })
-                setSpinning(false)
-                message.success('评论成功')
+                form.setFieldsValue({ ...visitor, content: '' })
+
                 setFlag(flag + 1)
-                replier && setReplier(null)
+                setSpinning(false)
+                // message.success('评论成功')
+                // replier && setReplier(null)
             },
             fcb: ({ info }) => {
                 message.warning(info)
@@ -163,7 +164,11 @@ export default ({ blogId, setSpinning }) => {
         </div>
     ), [loading, blogId, flag, replier])
 
-    const render = ({ id, repliedId, fromVisitor, toVisitor, content, state, gmtCreate, replyCount, replyList }) => {
+    const render = (commentItem) => {
+
+        let { id, repliedId, fromVisitor, toVisitor, content, state, gmtCreate, replyCount, replyList, flagTime = new Date().getTime() } = commentItem
+        // flagTime 用来标识评论是否被刷新
+        commentItem.flagTime = flagTime
 
         const getReplyList = (page, cb) => {
             httpPost({
@@ -172,15 +177,6 @@ export default ({ blogId, setSpinning }) => {
                 data: { topicId: id, page, limit: 50 }
             })
         }
-        const author = (
-            <span className="comment-author">
-                {
-                    fromVisitor.website ?
-                        <a href={fromVisitor.website} target="_blank" >{fromVisitor.nickname}</a> :
-                        fromVisitor.nickname
-                }
-            </span>
-        )
 
         return (
             <div className="comment-item">
@@ -200,7 +196,15 @@ export default ({ blogId, setSpinning }) => {
                                     fromVisitor.badge &&
                                     <span className="visitor-badge">{fromVisitor.badge}</span>
                                 }
-                                {author}
+                                {
+                                    <span className="comment-author">
+                                        {
+                                            fromVisitor.website ?
+                                                <a href={fromVisitor.website} target="_blank" >{fromVisitor.nickname}</a> :
+                                                fromVisitor.nickname
+                                        }
+                                    </span>
+                                }
                                 <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>
                                     <span className="comment-time">{moment(gmtCreate).fromNow()}</span>
                                 </Tooltip>
@@ -235,14 +239,14 @@ export default ({ blogId, setSpinning }) => {
                 </div>
                 {replier && id == replier.id && commentForm}
                 {
-                    replyList.length > 0 &&
+                    replyCount > 0 &&
                     <LoadMoreList
                         cache={false}
                         split={false}
                         rawData={replyList}
                         itemRender={render}
                         className="reply-list"
-                        listkey={'topic-' + id + flag}
+                        listkey={'reply-list-' + id + flagTime}
                         getData={getReplyList}
                         itemSeatRender={seatRender}
                         rawHasMore={0 < replyCount - replyList.length}
@@ -261,7 +265,7 @@ export default ({ blogId, setSpinning }) => {
             itemRender={render}
             className="comment-list"
             itemSeatRender={seatRender}
-            listkey={'blog-comment-' + blogId + flag}
+            listkey={'comment-list-' + blogId + flag}
             locale={{ emptyText: '暂无评论' }}
         />
     ), [blogId, flag, replier])

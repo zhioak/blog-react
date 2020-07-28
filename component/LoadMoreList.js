@@ -39,6 +39,7 @@ const LoadMoreList = ({
         [loading, setLoading] = useState(false)
 
     useEffect(() => {
+
         let member = pool[listkey]
         if (!member) {
             pool[listkey] = member = {
@@ -48,6 +49,8 @@ const LoadMoreList = ({
             }
         }
         let { page, data: _data, hasMore } = member
+        if(0===rawData.length){}
+
         0 == rawData.length && hasMore ?
             getData(++page, ({ list = [], hasMore }) => {
                 let tempData = _data.concat(list)
@@ -56,10 +59,8 @@ const LoadMoreList = ({
             })
             : setData(_data)
 
-        if( !cache){
-            return ()=> {
-                pool[listkey] = null
-            }
+        if (!cache) {
+            return () => delete pool[listkey]
         }
     }, [listkey])
 
@@ -92,7 +93,7 @@ const LoadMoreList = ({
             dataSource={data}
             className={className}
             loadMore={data && hasMore && !loading && _loadMore}
-            renderItem={item => (<List.Item listkey={item.id}>{itemRender(item)}</List.Item>)}
+            renderItem={item => (<List.Item listkey={item.id}>{itemRender(item, listkey)}</List.Item>)}
         >
             {(!data || loading) && itemSeatRender}
         </List>

@@ -1,0 +1,22 @@
+/* 内容导航 */
+
+.toc .ant-anchor {
+    padding: 10px 0;
+    border-radius: var(--border-radius);
+    background-color: var(--toc-background);
+}
+
+.toc .ant-anchor-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.toc .ant-anchor-link-title {
+    font-size: .8rem;
+}
+
+.toc .ant-anchor-ink-ball {
+    margin-top: -6px;
+    width: 3px;
+    height: 21px;
+}

@@ -24,29 +24,6 @@
     margin: 0 10px;
 }
 
-/* 内容导航 */
-
-.detail-toc .ant-anchor {
-    padding: 10px 0;
-    border-radius: var(--border-radius-base);
-    background-color: var(--theme-color-a);
-}
-
-.detail-toc .ant-anchor-link {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.detail-toc .ant-anchor-link-title {
-    font-size: .8rem;
-}
-
-.detail-toc .ant-anchor-ink-ball {
-    margin-top: -6px;
-    width: 3px;
-    height: 21px;
-}
-
 /* 内容结尾 */
 
 .content-footer {
@@ -56,7 +33,7 @@
 .content-end {
     position: relative;
     margin: 6vh 0;
-    border-bottom: 3px dashed var(--theme-border-color);
+    border-bottom: 3px dashed var(--border-color);
 }
 
 .content-end::after {
@@ -84,8 +61,8 @@
     padding: 1.125rem;
     display: flex;
     color: var(--text-color-secondary);
-    background: var(--theme-color-a);
-    border-radius: var(--border-radius-base);
+    background: var(--detail-declare-background);
+    border-radius: var(--border-radius);
 }
 
 .declare-icon {
@@ -111,8 +88,8 @@
     margin-bottom: 4vh;
     flex-wrap: nowrap;
     font-size: 1.125rem;
-    border-top: 1px solid var(--theme-border-color);
-    border-bottom: 1px solid var(--theme-border-color);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .detail-nav>a {
@@ -148,7 +125,7 @@
     margin: auto;
     width: auto;
     max-width: 100%;
-    border-radius: var(--border-radius-base);
+    border-radius: var(--border-radius);
 }
 
 .detail-content p, .detail-content .code {
@@ -158,7 +135,7 @@
 pre {
     padding: 1.125rem;
     overflow-y: auto;
-    border-radius: var(--border-radius-base);
+    border-radius: var(--border-radius);
     background-color: #283646;
 }
 
@@ -167,19 +144,19 @@ code {
     margin: 0 5px;
     padding: 0 6px;
     font-size: .84rem;
-    border-radius: var(--border-radius-base);
-    background: var(--theme-color-a);
+    border-radius: var(--border-radius);
+    background: var(--detail-code-background);
 }
 
 pre>code {
     margin: 0;
-    color: var(--theme-color-a);
     border: 0px;
-    background: #283646;
+    color: var(--detail-precode-color);
+    background: var(--detail-precode-background);
 }
 
 .hljs-strong, .hljs-emphasis {
-    color: var(--theme-color-f);
+    color: var(--detail-strong-color);
 }
 
 .detail-content h1, .detail-content h2, .detail-content h3, .detail-content h4, .detail-content h5, .detail-content h6 {
@@ -223,8 +200,8 @@ pre>code {
 .detail-content blockquote {
     padding: 1.125rem;
     border-left: 6px solid;
-    border-color: var(--theme-color-b);
-    background-color: var(--theme-color-a);
+    border-color: var(--detail-quote-border-color);
+    background: var(--detail-quote-background);
 }
 
 .detail-content blockquote>*:last-child {
@@ -236,7 +213,7 @@ pre>code {
 .detail-content table {
     width: 100%;
     margin-bottom: 1em;
-    border: 1px solid var(--theme-color-b);
+    border: 1px solid var(--detail-table-border-color);
     border-collapse: collapse;
     border-left: none;
     word-break: normal;
@@ -246,9 +223,9 @@ pre>code {
     padding: .5rem;
     line-height: 1.2rem;
     vertical-align: middle;
-    border: 1px solid var(--theme-color-b);
+    border: 1px solid var(--detail-table-border-color);
 }
 
 .detail-content table tr:nth-of-type(2n) {
-    background: var(--theme-color-a)
+    background: var(--detail-table-trnth-background);
 }

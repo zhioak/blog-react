@@ -1,21 +1,21 @@
 .sns {
     height: 100%;
 }
+
 .sns svg {
     margin-left: 7px;
     width: 24px;
     vertical-align: middle;
 }
 
-.sns .icon-email{
+.sns .icon-email {
     fill: #F7B007 !important;
 }
 
-.sns .icon-wechat{
+.sns .icon-wechat {
     fill: #07C160 !important;
 }
 
-.sns .icon-github{
-    fill: #24292e !important;
+.sns .icon-github {
+    fill: var(--github-color)!important;
 }
-

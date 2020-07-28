@@ -10,7 +10,7 @@ const apiMap = {
     getVisitor: gate + 'visitor/get',
     saveComment: gate + 'comment/save',
     commentList: gate + 'comment/list',
-    replyList: gate + 'comment/reply/list',
+    replyList: gate + 'comment/reply/list'
 }
 
 export default apiMap
