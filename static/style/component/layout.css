@@ -60,25 +60,50 @@
     display: none;
 }
 
-/* 置顶 */
+/* 辅助租 */
 
-.backtop {
-    padding-top: 8px;
-    height: 40px;
-    line-height: 17px;
-    text-align: center;
-    fill: var(--text-color);
-    background: var(--backtop-background);
-    border: 2px solid var(--backtop-border-color);
-    border-radius: 50%;
-    transition: all .3s;
+.aux-group {
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    width: 40px;
 }
 
-.backtop>.icon {
+.aux-item {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    fill: var(--text-color);
+    background: var(--aux-item-background);
+    border: 2px solid var(--aux-item-border-color);
+    border-radius: 50%;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.aux-item svg {
     width: 16px;
 }
 
+.theme-change {
+    fill: #F6BB42;
+}
+
+.theme-change svg {
+    width: 20px;
+}
+
+.ant-back-top {
+    bottom: 100px;
+}
+
 /* 兼容性 */
+
+@media (min-width: 480px) {
+    .aux-group {
+        right: 60px;
+    }
+}
 
 @media (min-width: 768px) {
     .sider {
@@ -91,8 +116,13 @@
     .ant-scrolling-effect {
         overflow: visible !important;
     }
-    .backTop:hover {
-        background: var(--backtop-background-hover);
+    .aux-group {
+        right: 100px;
+    }
+    .aux-item:hover {
+        background: var(--aux-item-background-hover);
+    }
+    .backtop:hover {
         fill: var(--primary-color);
     }
 }

@@ -1,18 +1,19 @@
 @import '~antd/lib/style/themes/default.less';
+
 @body-background: @component-background;
 @text-color: fade(@black, 75%);
 @text-color-secondary: fade(@black, 60%);
 
-@theme-grey-1: #FAFAFA;
-@theme-grey-2: #F7F7F7;
-@theme-grey-3: #EEE;
-@theme-grey-4: #E0E0E0;
-@theme-grey-5: #A9A9A9;
 
+@theme-color: #F7F7F7;
+@theme-color-hover: #FAFAFA;
+@theme-color-aux: #EEE;
+@theme-color-aux-contrast: #E0E0E0;
+@theme-color-sharp: #A9A9A9;
+@theme-color-contrast: #2E2E2E;
 
-@theme-soot-7: #454545;
-@theme-soot-8: #2E2E2E;
-@theme-soot-9: #2B2B2B;
+@banner-background-color: none;
+
 
 :root {
     --primary-color: @primary-color;
@@ -25,39 +26,42 @@
     --text-color-secondary: @text-color-secondary;
 
     // common
-    --border-color: @theme-grey-3;
+    --border-color: @theme-color-aux;
     --border-radius: @border-radius-base;
 
-    --shadow-color: fade(@black, 20%);
-    --github-color: #24292e;
+    --shadow-color: fade(@theme-color-contrast, 20%);
 
-    --scrollbar-thumb-background: @primary-color;
-    --scrollbar-track-background: @theme-grey-3;
+    --github-color: @theme-color-contrast;
 
+
+    --scrollbar-thumb-background: @theme-color-sharp;
+    --scrollbar-track-background: @theme-color-aux;
 
     // backtop
-    --backtop-border-color: @theme-grey-4;
-    --backtop-background: @theme-grey-2;
-    --backtop-background-hover: @theme-grey-1;
+    --aux-item-border-color: @theme-color-aux-contrast;
+    --aux-item-background: @theme-color;
+    --aux-item-background-hover: @theme-color-hover;
+
+    // banner
+    --banner-background-color: @banner-background-color;
 
     // album
-    --album-color: @theme-grey-2;
-
+    --album-color: @theme-color;
 
     // detail
-    --toc-background: @theme-grey-2;
-    --detail-declare-background: @theme-grey-2;
+    --toc-background: @theme-color;
+    --detail-declare-background: @theme-color;
 
-    --detail-strong-color: @theme-grey-3;
-    --detail-code-background: @theme-grey-3;
-    --detail-precode-color: @theme-grey-2;
+    --detail-strong-color: @theme-color-aux;
+    --detail-code-background: @theme-color-aux;
+    --detail-precode-color: @theme-color;
     --detail-precode-background: #283646;
-    --detail-quote-border-color: @theme-grey-4;
-    --detail-quote-background: @theme-grey-2;
+    --detail-quote-border-color: @theme-color-sharp;
+    --detail-quote-background: @theme-color;
 
-    --detail-table-border-color: @theme-grey-3;
-    --detail-table-trnth-background: @theme-grey-2;
+    --detail-table-border-color: @theme-color-aux;
+    --detail-table-trnth-background: @theme-color;
 
     // comment
-    --comment-close-color: @theme-grey-5;
+    --comment-close-color: @theme-color-sharp;
 }
