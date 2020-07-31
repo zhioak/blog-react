@@ -21,7 +21,6 @@ module.exports = withCss(withAntd(withLiveTheme({
         antDir: path.join(__dirname, './node_modules/antd'),
         customDir:path.join(__dirname,'./static/theme'),
         varFile: path.join(__dirname, './static/style/vars.less')
-        
     },
     lessLoaderOptions: {
         javascriptEnabled: true,

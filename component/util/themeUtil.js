@@ -2,12 +2,9 @@ import less from 'less'
 import nextConfig from 'next/config'
 const { themes, sheetURI } = nextConfig().publicRuntimeConfig.liveTheme
 
-export const localThemeKey = 'current-theme'
+export const themeEnum = {}
+Object.keys(themes).forEach(name => themeEnum[name] = name)
 
-export const presetTheme = {
-    default: 'default',
-    dark: 'dark'
-}
 
 export const modifyVars = (vars, cb) => {
     !less.options.javascriptEnabled && loadSheet()
@@ -16,9 +13,10 @@ export const modifyVars = (vars, cb) => {
         .catch(e => console.log('主题切换失败', e))
 }
 
-export const changeTheme = (name, cb) => {
+export const modifyTheme = (name, cb) => {
     let theme = themes[name]
-    theme ? modifyVars(theme === themes.default ? theme.default : { ...themes.default, ...theme }, cb) : console.log(`未找到 ${name} 主题`)
+    theme ? modifyVars(theme === themes.default ? theme.default : { ...themes.default, ...theme }, cb)
+        : console.log(`未找到 ${name} 主题`)
 }
 
 function loadSheet() {
@@ -28,6 +26,7 @@ function loadSheet() {
         type: 'text/css',
         href: sheetURI
     })
-    less.options.javascriptEnabled = true
     less.sheets = [link]
+    less.options.javascriptEnabled = true
+
 }

@@ -6,9 +6,6 @@
     line-height: 2.8rem;
     background: var(--component-background);
     border-bottom: 1px solid var(--border-color);
-    -webkit-transition: top .3s ease;
-    -moz-transition: top .3s ease;
-    -o-transition: top .3s ease;
     transition: top .3s ease;
 }
 
@@ -71,9 +68,8 @@
     position: relative;
     width: 14px;
     height: 2px;
-    background: var(--text-color);
-    transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
-    -webkit-transition: 'background' .3s cubic-bezier(.78, .14, .15, .86);
+    background: black;
+    transition: background .3s cubic-bezier(.78, .14, .15, .86);
 }
 
 .sider-tigger-icon:before {
@@ -89,26 +85,21 @@
     display: block;
     position: absolute;
     width: 100%;
-    height: 2px;
+    height: 100%;
     background: var(--text-color);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
-    transition: transform .3s cubic-bezier(.78, .14, .15, .86);
-    transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
-    -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
 /* 侧栏打开 */
 
-#root.lose .sider-tigger-icon {    
+#root.lose .sider-tigger-icon {
     background: transparent;
 }
 
 #root.lose .sider-tigger-icon:before {
     transform: translateY(5px) rotate(45deg);
-    -webkit-transform: translateY(5px) rotate(45deg);
 }
 
 #root.lose .sider-tigger-icon:after {
     transform: translateY(-5px) rotate(-45deg);
-    -webkit-transform: translateY(-5px) rotate(-45deg);
 }

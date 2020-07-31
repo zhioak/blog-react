@@ -21,7 +21,7 @@
     width: 22px;
     padding: 5px;
     border-radius: var(--border-radius);
-    transition: 'background' .3s;
+    transition: background .3s;
     fill: #999;
 }
 

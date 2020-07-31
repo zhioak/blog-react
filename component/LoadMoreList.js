@@ -49,7 +49,6 @@ const LoadMoreList = ({
             }
         }
         let { page, data: _data, hasMore } = member
-        if(0===rawData.length){}
 
         0 == rawData.length && hasMore ?
             getData(++page, ({ list = [], hasMore }) => {

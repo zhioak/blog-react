@@ -5,16 +5,10 @@
 }
 
 .lose-retinue {
-    -webkit-transition: transform .3s cubic-bezier(.78, .14, .15, .86);
-    -moz-transition: transform .3s cubic-bezier(.78, .14, .15, .86);
-    -o-transition: transform .3s cubic-bezier(.78, .14, .15, .86);
     transition: transform .3s cubic-bezier(.78, .14, .15, .86);
 }
 
 #header.lose-retinue {
-    -webkit-transition: transform .3s cubic-bezier(.78, .14, .15, .86), top .3s ease;
-    -moz-transition: transform .3s cubic-bezier(.78, .14, .15, .86), top .3s ease;
-    -o-transition: transform .3s cubic-bezier(.78, .14, .15, .86), top .3s ease;
     transition: transform .3s cubic-bezier(.78, .14, .15, .86), top .3s ease;
 }
 

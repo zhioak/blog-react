@@ -34,7 +34,7 @@ const Header = ({ className, menuKeys, openSpin, openSider }) => {
         }
         window.addEventListener('scroll', onScroll)
 
-        return () => window.removeEventListener("scroll", onScroll)
+        return () => window.removeEventListener('scroll', onScroll)
     }, [pin])
 
     const menu = useMemo(() => (<Menu mode="horizontal" menuKeys={menuKeys} openSpin={openSpin} />), [menuKeys, openSpin])
