@@ -1,9 +1,9 @@
-.profile{
-    text-align: center;    
+.profile {
+    text-align: center;
     padding: 2em 2em 1em;
 }
 
-.sider .sider-footer{
+.sider .sider-footer {
     position: absolute;
     bottom: 1px;
     width: 100%;
@@ -12,14 +12,19 @@
     line-height: 3rem;
     border-top: 1px solid var(--border-color);
 }
-.sider .ant-menu-inline .ant-menu-item{
+
+.sider .ant-menu-inline .ant-menu-item {
     width: 100%;
 }
 
-.sider-footer .sns .ant-avatar{
+.sider-footer .sns .ant-avatar {
     margin-right: 7px;
 }
 
-.ant-drawer-content{
-    background:var(--component-background) !important;
+.ant-drawer-content {
+    background: var(--component-background) !important;
+}
+
+.ant-drawer-left.ant-drawer-open .ant-drawer-content-wrapper {
+    box-shadow: 6px 0 16px -8px var(--sider-open-shadow), 9px 0 28px 0 var(--sider-open-shadow-secondary), 12px 0 48px 16px var(--sider-open-shadow-secondary);
 }

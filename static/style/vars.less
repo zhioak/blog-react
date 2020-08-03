@@ -1,6 +1,6 @@
 @import '~antd/lib/style/themes/default.less';
 
-@body-background: @component-background;
+@shadow-color: rgba(0, 0, 0, 0.3);
 @text-color: fade(@black, 75%);
 @text-color-secondary: fade(@black, 60%);
 
@@ -18,9 +18,9 @@
 :root {
     --primary-color: @primary-color;
 
+    --component-background: @component-background;
     --popover-background: @popover-background;
     --popover-customize-border-color: @popover-customize-border-color;
-    --component-background: @component-background;
 
     --text-color: @text-color;
     --text-color-secondary: @text-color-secondary;
@@ -29,10 +29,9 @@
     --border-color: @theme-color-aux;
     --border-radius: @border-radius-base;
 
-    --shadow-color: fade(@theme-color, 30%);
+    --shadow-color: @shadow-color;
 
     --github-color: @theme-color-contrast;
-
 
     --scrollbar-thumb-background: @theme-color-sharp;
     --scrollbar-track-background: @theme-color-aux;
@@ -44,6 +43,10 @@
 
     // banner
     --banner-background-color: @banner-background-color;
+
+    // sider
+    --sider-open-shadow: @background-color-base;
+    --sider-open-shadow-secondary: @background-color-light;
 
     // album
     --album-color: @theme-color;
@@ -61,6 +64,7 @@
 
     --detail-table-border-color: @theme-color-aux;
     --detail-table-trnth-background: @theme-color;
+    
 
     // comment
     --comment-close-color: @theme-color-sharp;
