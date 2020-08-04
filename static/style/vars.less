@@ -4,16 +4,21 @@
 @text-color: fade(@black, 75%);
 @text-color-secondary: fade(@black, 60%);
 
+@sub-color: #F7F7F7;
+@sub-color-hover: #FAFAFA;
+@sub-color-sharp: #A9A9A9;
+@sub-color-contrast: #2E2E2E;
 
-@theme-color: #F7F7F7;
-@theme-color-hover: #FAFAFA;
-@theme-color-aux: #EEE;
-@theme-color-aux-contrast: #E0E0E0;
-@theme-color-sharp: #A9A9A9;
-@theme-color-contrast: #2E2E2E;
+@aux-color: #EEE;
+@aux-color-sharp: #E0E0E0;
 
 @banner-background-color: none;
 
+@mkd-strong-color: #eee;
+@mkd-code-background: #E0E0E0;
+@mkd-precode-color: #f8f8f2;
+@mkd-precode-background: #283646;
+@mkd-quote-background: #F7F7F7;
 
 :root {
     --primary-color: @primary-color;
@@ -26,20 +31,20 @@
     --text-color-secondary: @text-color-secondary;
 
     // common
-    --border-color: @theme-color-aux;
+    --border-color: @aux-color;
     --border-radius: @border-radius-base;
 
     --shadow-color: @shadow-color;
 
-    --github-color: @theme-color-contrast;
+    --github-color: @sub-color-contrast;
 
-    --scrollbar-thumb-background: @theme-color-sharp;
-    --scrollbar-track-background: @theme-color-aux;
+    --scrollbar-thumb-background: @sub-color-sharp;
+    --scrollbar-track-background: @aux-color;
 
     // backtop
-    --aux-item-border-color: @theme-color-aux-contrast;
-    --aux-item-background: @theme-color;
-    --aux-item-background-hover: @theme-color-hover;
+    --aux-item-border-color: @aux-color-sharp;
+    --aux-item-background: @sub-color;
+    --aux-item-background-hover: @sub-color-hover;
 
     // banner
     --banner-background-color: @banner-background-color;
@@ -49,23 +54,37 @@
     --sider-open-shadow-secondary: @background-color-light;
 
     // album
-    --album-color: @theme-color;
+    --album-color: @sub-color;
 
     // detail
-    --toc-background: @theme-color;
-    --detail-declare-background: @theme-color;
+    --toc-background: @sub-color;
+    --detail-declare-background: @sub-color;
 
-    --detail-strong-color: @theme-color-aux;
-    --detail-code-background: @theme-color-aux;
-    --detail-precode-color: @theme-color;
-    --detail-precode-background: #283646;
-    --detail-quote-border-color: @theme-color-sharp;
-    --detail-quote-background: @theme-color;
 
-    --detail-table-border-color: @theme-color-aux;
-    --detail-table-trnth-background: @theme-color;
-    
+    // markdown
+    --mkd-meta-color: @sub-color-sharp;
+    --mkd-strong-color: @mkd-strong-color;
+    --mkd-code-background: @mkd-code-background;
+    --mkd-precode-color: @mkd-precode-color;
+    --mkd-precode-background: @mkd-precode-background;
+    --mkd-quote-border-color: @sub-color-sharp;
+    --mkd-quote-background: @mkd-quote-background;
+
+    --mkd-table-border-color: @aux-color;
+    --mkd-table-trnth-background: @sub-color;
+
 
     // comment
-    --comment-close-color: @theme-color-sharp;
+    --comment-close-color: @sub-color-sharp;
+    --comment-background-hover: @aux-color;
+    --comment-submit-background: @aux-color;
+
+
+    --comment-pending-color: @red-5;
+    --comment-badge-color: #f7f7f7;
+    --comment-badge-background: @red-5;
+    --comment-header-background: @sub-color;
+    --comment-author-color: @text-color-secondary;
+    --comment-time-color: @text-color-secondary;
+    --comment-reply-color: @sub-color-sharp;
 }

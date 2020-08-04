@@ -1,11 +1,23 @@
 @body-background: @component-background;
 
-@theme-color: #2B2B2B;
-@theme-color-hover: #2E2E2E;
-@theme-color-aux: #343434;
-@theme-color-aux-contrast: #424242;
-@theme-color-sharp: #797979;
-@theme-color-contrast: #F7F7F7;
 
-@banner-background-color: fade(@component-background, 30%)
+@text-color: fade(@white, 75%);
+@text-color-secondary: fade(@white, 60%);
 
+@sub-color: #2B2B2B;
+@sub-color-hover: #2E2E2E;
+@sub-color-sharp: #797979;
+@sub-color-contrast: #F7F7F7;
+
+
+@aux-color: #343434;
+@aux-color-sharp: #424242;
+
+@banner-background-color: fade(@component-background, 15%);
+
+
+@mkd-strong-color: fade(@white, 85%);
+@mkd-code-background: @sub-color;
+@mkd-precode-color: @text-color;
+@mkd-precode-background: @sub-color;
+@mkd-quote-background: @aux-color;

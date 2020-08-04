@@ -119,11 +119,12 @@ const Layout = ({
 
                 if (themeState.isModify) return
                 themeState.isModify = true
-
                 let tagetTheme = theme === themeEnum.default ? themeEnum.dark : themeEnum.default
-                localUtil.set(themeState.localKey, tagetTheme)
-                modifyTheme(tagetTheme, () => setTimeout(() => themeState.isModify = false, 300))
-                setTheme(tagetTheme)
+                modifyTheme(tagetTheme, () => {
+                    setTheme(tagetTheme)
+                    localUtil.set(themeState.localKey, tagetTheme)
+                    setTimeout(() => themeState.isModify = false, 300)
+                })
             }}>
                 {
                     theme === themeEnum.default ?

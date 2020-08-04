@@ -3,6 +3,7 @@ import hljs from 'highlight.js'
 import marked from 'marked'
 
 import '../../static/style/component/toc.css'
+import '../../static/style/component/markdown.css'
 import 'highlight.js/styles/monokai-sublime.css'
 
 /**
@@ -40,7 +41,7 @@ export default (markdown, toc) => {
         }
     }
     marked.setOptions({ renderer })
-    return marked(markdown)
+    return `<div class="markdown"> ${marked(markdown)} </div>`
 }
 
 

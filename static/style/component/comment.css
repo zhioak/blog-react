@@ -17,16 +17,10 @@
 }
 
 .comment-close {
-    cursor: pointer;
     width: 22px;
     padding: 5px;
+    fill: var(--comment-close-color);
     border-radius: var(--border-radius);
-    transition: background .3s;
-    fill: #999;
-}
-
-.comment-close:hover {
-    background: #eee;
 }
 
 .visitor-info>.ant-form-item {
@@ -36,8 +30,7 @@
 
 .visitor-info .ant-input-affix-wrapper {
     border: none;
-    border-bottom: 1px dashed #eee;
-    transition: border-bottom-color .3s;
+    border-bottom: 1px dashed var(--border-color);
 }
 
 .visitor-info .ant-input-prefix {
@@ -47,12 +40,11 @@
 .visitor-info .ant-input-affix-wrapper-focused {
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
-    border-bottom-color: #1890ff !important;
+    border-bottom-color: var(--primary-color) !important;
 }
 
 .visitor-info .ant-form-item-explain {
-    padding-left: 11px;
-    padding-top: 2px;
+    padding: 2px 0 0 11px;
 }
 
 .comment .content {
@@ -73,14 +65,14 @@
 
 .comment-pending {
     margin-top: 6px;
-    color: #ff4d4f;
+    color: var(--comment-pending-color);
 }
 
 .comment-pending>.icon {
     width: 16px;
     margin: 1px 2px 1px 0;
     vertical-align: sub;
-    fill: #ff4d4f;
+    fill: var(--comment-pending-color);
 }
 
 .comment-footer {
@@ -91,24 +83,10 @@
 
 .comment-submit {
     border: none;
-    background: #eee;
-    transition: color, background-color .3s;
-}
-
-.comment-submit:hover {
-    background: #bbb;
-    color: rgba(0, 0, 0, 0.75);
-}
-
-.comment-submit:focus {
-    background: #eee;
-    color: rgba(0, 0, 0, 0.65);
+    background: var(--comment-submit-background);
 }
 
 /* 评论列表 */
-.comment-list .ant-list-item{
-    /* padding: 0; */
-}
 
 .comment-item, .comment-main {
     width: 100%;
@@ -125,7 +103,7 @@
     margin-right: 12px;
     width: 48px;
     height: 48px;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
 }
 
 /* 评论头部 */
@@ -136,7 +114,7 @@
     padding: .125rem .35rem;
     margin-bottom: .1rem;
     border-radius: var(--border-radius);
-    background-color: #F7F7F7;
+    background-color: var(--comment-header-background);
 }
 
 .comment-header-left {
@@ -154,21 +132,21 @@
 
 .visitor-badge {
     padding: 0 6px;
-    border-radius: var(--border-radius);
     max-width: 30%;
     font-size: .843rem;
-    color: #fff;
-    background: #E31836;
+    border-radius: var(--border-radius);
+    color: var(--comment-badge-color);
+    background: var(--comment-badge-background);
 }
 
 .comment-author, .comment-author>a {
     max-width: 40%;
-    color: #636363;
+    color: var(--comment-author-color);
 }
 
 .comment-time {
     max-width: 25%;
-    color: #999;
+    color: var(--comment-time-color);
 }
 
 /* 回复按钮 */
@@ -177,12 +155,7 @@
     cursor: pointer;
     width: 16px;
     vertical-align: sub;
-    fill: #ccc;
-    transition: color .3s;
-}
-
-.comment-reply:hover, .comment-body.reply-active .comment-reply {
-    fill: #1890ff;
+    fill: var(--comment-reply-color);
 }
 
 /* 回复列表 */
@@ -190,7 +163,7 @@
 .reply-list {
     margin: 12px 0 0 12px;
     padding-left: 15px;
-    border-left: 1px solid #eee;
+    border-left: 1px solid var(--border-color);
 }
 
 .reply-list .comment-body, .reply-list .comment-content {
@@ -217,7 +190,7 @@
 }
 
 .reply-spread:hover {
-    color: #1890ff;
+    color: var(--primary-color);
 }
 
 /* 骨架 */
@@ -245,12 +218,21 @@
 }
 
 @media (min-width: 768px) {
+    .comment-close {
+        cursor: pointer;
+    }
+    .comment-close:hover {
+        background: var(--comment-background-hover);
+    }
     .comment .visitor-info {
         display: flex;
     }
     .comment-reply {
         opacity: 0;
         transition: opacity .2s;
+    }
+    .comment-reply:hover, .comment-body.reply-active .comment-reply {
+        fill: var(--primary-color);
     }
     .comment-body:hover .comment-reply {
         opacity: 1;

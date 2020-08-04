@@ -1,6 +1,6 @@
 .detail-header {
     margin: 0 auto;
-    padding: 2vh 4vw;
+    padding: 2vh 4vw 0;
     max-width: 1200px;
 }
 
@@ -114,118 +114,6 @@
     text-align: right;
 }
 
-/* markdown解析 */
-
 .detail-content {
     margin: 2vh 0 4vh 0;
-}
-
-.detail-content img {
-    display: block;
-    margin: auto;
-    width: auto;
-    max-width: 100%;
-    border-radius: var(--border-radius);
-}
-
-.detail-content p, .detail-content .code {
-    line-height: 1.8rem;
-}
-
-pre {
-    padding: 1.125rem;
-    overflow-y: auto;
-    border-radius: var(--border-radius);
-    background-color: #283646;
-}
-
-code {
-    display: inline-block;
-    margin: 0 5px;
-    padding: 0 6px;
-    font-size: .84rem;
-    border-radius: var(--border-radius);
-    background: var(--detail-code-background);
-}
-
-pre>code {
-    margin: 0;
-    border: 0px;
-    color: var(--detail-precode-color);
-    background: var(--detail-precode-background);
-}
-
-.hljs-strong, .hljs-emphasis {
-    color: var(--detail-strong-color);
-}
-
-.detail-content h1, .detail-content h2, .detail-content h3, .detail-content h4, .detail-content h5, .detail-content h6 {
-    font-weight: bold;
-    margin: 1rem 0 1rem 0;
-}
-
-.detail-content h1 {
-    margin-top: 1.9rem;
-    font-size: 1.4rem;
-}
-
-.detail-content h2 {
-    margin-top: 1.6rem;
-    font-size: 1.34rem;
-}
-
-.detail-content h3 {
-    margin-top: 1.3rem;
-    font-size: 1.28rem;
-}
-
-.detail-content h4 {
-    font-size: 1.22rem;
-}
-
-.detail-content h5 {
-    font-size: 1.18rem;
-}
-
-.detail-content h6 {
-    font-size: 1.06rem;
-}
-
-.detail-content p {
-    font-size: .95rem;
-}
-
-/* 引用 */
-
-.detail-content blockquote {
-    padding: 1.125rem;
-    border-left: 6px solid;
-    border-color: var(--detail-quote-border-color);
-    background: var(--detail-quote-background);
-}
-
-.detail-content blockquote>*:last-child {
-    margin-bottom: 0;
-}
-
-/* 表格 */
-
-.detail-content table {
-    width: 100%;
-    margin-bottom: 1em;
-    border: 1px solid var(--detail-table-border-color);
-    border-collapse: collapse;
-    border-left: none;
-    word-break: normal;
-}
-
-.detail-content table td, .detail-content table th {
-    padding: .5rem;
-    line-height: 1.2rem;
-    vertical-align: middle;
-    border: 1px solid var(--detail-table-border-color);
-}
-
-.detail-content table tr:nth-of-type(2n) {
-    background: var(--detail-table-trnth-background);
 }

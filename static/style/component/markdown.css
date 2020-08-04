@@ -1,0 +1,109 @@
+pre {
+    padding: 1.125rem;
+    overflow-y: auto;
+    border-radius: var(--border-radius);
+    background-color: var(--mkd-precode-background);
+}
+
+code {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 0 6px;
+    font-size: .84rem;
+    border-radius: var(--border-radius);
+    background: var(--mkd-code-background);
+}
+
+pre>code {
+    margin: 0;
+    border: 0px;
+    color: var(--mkd-precode-color);
+    background: var(--mkd-precode-background);
+}
+
+.markdown img {
+    display: block;
+    margin: auto;
+    width: auto;
+    max-width: 100%;
+    border-radius: var(--border-radius);
+}
+
+.markdown p, .markdown .code {
+    line-height: 1.8rem;
+}
+
+.markdown h1, .markdown h2, .markdown h3, .markdown h4, .markdown h5, .markdown h6 {
+    font-weight: bold;
+    margin: 1rem 0 1rem 0;
+}
+
+.markdown h1 {
+    margin-top: 1.9rem;
+    font-size: 1.4rem;
+}
+
+.markdown h2 {
+    margin-top: 1.6rem;
+    font-size: 1.34rem;
+}
+
+.markdown h3 {
+    margin-top: 1.3rem;
+    font-size: 1.28rem;
+}
+
+.markdown h4 {
+    font-size: 1.22rem;
+}
+
+.markdown h5 {
+    font-size: 1.18rem;
+}
+
+.markdown h6 {
+    font-size: 1.06rem;
+}
+
+.markdown p {
+    font-size: .95rem;
+}
+
+.markdown blockquote {
+    padding: 1.125rem;
+    border-left: 6px solid;
+    border-color: var(--mkd-quote-border-color);
+    background: var(--mkd-quote-background);
+}
+
+.markdown table {
+    width: 100%;
+    margin-bottom: 1em;
+    border: 1px solid var(--mkd-table-border-color);
+    border-collapse: collapse;
+    border-left: none;
+    word-break: normal;
+}
+
+.markdown table td, .markdown table th {
+    padding: .5rem;
+    line-height: 1.2rem;
+    vertical-align: middle;
+    border: 1px solid var(--mkd-table-border-color);
+}
+
+.markdown table tr:nth-of-type(2n) {
+    background: var(--mkd-table-trnth-background);
+}
+
+.markdown blockquote>*:last-child {
+    margin-bottom: 0;
+}
+
+.hljs-strong, .hljs-emphasis {
+    color: var(--mkd-strong-color);
+}
+
+.hljs-comment, .hljs-deletion, .hljs-meta {
+    color: var(--mkd-meta-color);
+}
