@@ -51,8 +51,9 @@ const Layout = ({
         closeSider = () => setSiderVisible(false),
         openSpin = () => setSpinning(true)
 
-
     useEffect(() => {
+
+        // 使用缓存主题
         let localTheme = localUtil.get(themeState.localKey)
         if (localTheme && localTheme != themeEnum.default) {
             modifyTheme(localTheme)
@@ -108,6 +109,7 @@ const Layout = ({
 
     const auxGroup = useMemo(() => (
         <div className="aux-group">
+
             <BackTop >
                 <div className="aux-item backtop">
                     <svg t="1592182843875" viewBox="0 0 1752 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1150">
@@ -150,7 +152,7 @@ const Layout = ({
                         {banner}
                         {topstory}
                         {footer}
-                        {!spinning && auxGroup}
+                        {auxGroup}
                     </div>
                     {sider}
                 </Spin>
