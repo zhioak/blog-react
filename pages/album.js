@@ -40,24 +40,21 @@ const album = ({ error, title, desc, bg }) => {
 
   const [spinning, setSpinning] = useState(false)
 
-  const render = ({ id, title, previewImg,remark,gmtCreate }) => (
+  const render = ({ id, title, previewImg, remark, gmtCreate }) => (
     <Link href={'/detail?id=' + id}>
       <a
-        className="album-item done"
+        className="album-item"
         onClick={() => setSpinning(true)}
       >
         <div
-          className="album-img"
-          style={{ backgroundImage: `url(${previewImg})` }}
-        >
-          <div className="album-holder">
-            <div className="title">{title}</div>
-            <div>
-              <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
-              {
-                remark &&
-                <span> · {remark}</span>}
-            </div>
+          className="album-holder"
+          style={{ backgroundImage: `url(${previewImg})` }}>
+          <div className="title">{title}</div>
+          <div>
+            <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
+            {
+              remark &&
+              <span> · {remark}</span>}
           </div>
         </div>
       </a>
