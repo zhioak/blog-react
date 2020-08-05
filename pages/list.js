@@ -1,18 +1,16 @@
 import moment from 'moment'
 import Link from 'next/link'
+import { Skeleton } from 'antd'
 import { useMemo, useState } from 'react'
-import { Skeleton, Typography } from 'antd'
 
-
-import apiMap from '../config/apiMap'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
 import Error, { ERROR_ENUM } from '../component/Error'
 
+import apiMap from '../config/apiMap'
 import '../static/style/pages/list.css'
-const { Title, Paragraph } = Typography
 
 
 const menuKeys = []
@@ -47,14 +45,8 @@ const list = ({ error, type, title, desc, bg }) => {
   const render = ({ id, title, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
       <Link href={'/detail?id=' + id}>
-        <a onClick={() => setSpinning(true)}>
-          <Title
-            level={4}
-            ellipsis={{ rows: 2 }}
-            className="list-title"
-          >
-            {title}
-          </Title>
+        <a className="list-title" onClick={() => setSpinning(true)}>
+          {title}
         </a>
       </Link>
 
@@ -63,24 +55,19 @@ const list = ({ error, type, title, desc, bg }) => {
       </div>
       {
         previewImg &&
-        <Link href={'/detail?id=' + id}>
-          <a onClick={() => setSpinning(true)}>
-            <div className="list-img-holder">
+        <div className="list-img-holder">
+          <Link href={'/detail?id=' + id}>
+            <a onClick={() => setSpinning(true)}>
               <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
-            </div>
-          </a>
-        </Link>
+            </a>
+          </Link>
+        </div>
       }
       {
         preview &&
         <Link href={'/detail?id=' + id}>
-          <a onClick={() => setSpinning(true)}>
-            <Paragraph
-              className="list-preview"
-              ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-            >
-              {preview}
-            </Paragraph>
+          <a className="list-preview" onClick={() => setSpinning(true)}>
+            {preview}
           </a>
         </Link>
       }

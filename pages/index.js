@@ -1,21 +1,17 @@
 
 import moment from 'moment'
 import Link from 'next/link'
+import { Skeleton } from 'antd'
 import { useMemo, useState } from 'react'
-import { Skeleton, Typography } from 'antd'
 
 import Error from '../component/Error'
 import Banner from '../component/Banner'
 import Layout from '../component/Layout'
 import LoadMoreList from '../component/LoadMoreList'
 import { httpPost } from '../component/util/httpUtil'
+
 import apiMap from '../config/apiMap'
 import '../static/style/pages/list.css'
-
-
-
-const { Title, Paragraph } = Typography
-
 
 const page = { key: '/' }
 const seatRender = (
@@ -49,14 +45,8 @@ const index = ({ error, title, desc, bg }) => {
   const render = ({ id, title, type, menu, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
       <Link href={'/detail?id=' + id}>
-        <a onClick={() => setSpinning(true)}>
-          <Title
-            level={4}
-            className="list-title"
-            ellipsis={{ rows: 2 }}
-          >
-            {title}
-          </Title>
+        <a className="list-title" onClick={() => setSpinning(true)}>
+          {title}
         </a>
       </Link>
 
@@ -69,32 +59,24 @@ const index = ({ error, title, desc, bg }) => {
         <span className="cut" />
         <span>{moment(gmtCreate).format('YYYY-MM-DD')}</span>
       </div>
-
       {
         previewImg &&
-        <Link href={'/detail?id=' + id}>
-          <a onClick={() => setSpinning(true)}>
-            <div className="list-img-holder">
+        <div className="list-img-holder">
+          <Link href={'/detail?id=' + id}>
+            <a onClick={() => setSpinning(true)}>
               <div className="list-img" style={{ backgroundImage: `url(${previewImg})` }}></div>
-            </div>
-          </a>
-        </Link>
+            </a>
+          </Link>
+        </div>
       }
-
       {
         preview &&
-        <Link href={'/detail?id=' + id}>
-          <a onClick={() => setSpinning(true)}>
-            <Paragraph
-              className="list-preview"
-              ellipsis={{ rows: previewImg ? 2 : 3, expandable: false }}
-            >
-              {preview}
-            </Paragraph>
+        <Link href={'/detail?id=' + id} >
+          <a className={`list-preview ${!previewImg && 'line-3'}`} onClick={() => setSpinning(true)}>
+            {preview}
           </a>
         </Link>
       }
-
     </div>
   )
 

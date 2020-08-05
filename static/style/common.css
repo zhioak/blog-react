@@ -1,5 +1,9 @@
 * {
-    transition: color, fill, background, border-color .3s;
+    transition: color, fill, background-color, border-color .3s;
+}
+
+.ant-menu {
+    transition: none !important;
 }
 
 img {

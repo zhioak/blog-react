@@ -1,5 +1,9 @@
 /* 内容导航 */
 
+.toc {
+    background: transparent;
+}
+
 .toc .ant-anchor {
     padding: 10px 0;
     border-radius: var(--border-radius);

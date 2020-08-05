@@ -125,7 +125,7 @@ const Layout = ({
                 modifyTheme(tagetTheme, () => {
                     setTheme(tagetTheme)
                     localUtil.set(themeState.localKey, tagetTheme)
-                    setTimeout(() => themeState.isModify = false, 300)
+                    setTimeout(() => themeState.isModify = false, 250)
                 })
             }}>
                 {
