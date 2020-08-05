@@ -15,15 +15,16 @@
 .album-holder {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 0 5%;
     height: 100%;
-    color: var(--album-color);
+    color: #F7F7F7;
     background-size: cover;
     background-position: center;
-    border: 1px solid var(--border-color);
     border-radius: 5px;
+    border: 1px solid var(--border-color);
+    filter: brightness(var(--img-color-brightness));
     transition: border-color, transform .3s;
 }
 

@@ -65,7 +65,7 @@
     width: 100%;
     height: 2px;
     background: var(--text-color);
-    transition: background .3s cubic-bezier(.78, .14, .15, .86);
+    transition: background-color .3s;
 }
 
 .sider-tigger-icon:before, .sider-tigger-icon:after {
@@ -76,7 +76,7 @@
     height: 2px;
     box-sizing: border-box;
     background: var(--text-color);
-    transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86), background-color .3s;
 }
 
 .sider-tigger-icon:before {

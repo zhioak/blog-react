@@ -28,5 +28,5 @@
 }
 
 .ant-drawer-left.ant-drawer-open .ant-drawer-content-wrapper {
-    box-shadow: 6px 0 16px -8px var(--sider-open-shadow), 9px 0 28px 0 var(--sider-open-shadow-secondary), 12px 0 48px 16px var(--sider-open-shadow-secondary);
+    box-shadow: 6px 0 16px -8px var(--lose-color), 9px 0 28px 0 var(--lose-color-second), 12px 0 48px 16px var(--lose-color-third) !important;
 }

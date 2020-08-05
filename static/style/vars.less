@@ -12,12 +12,16 @@
 @aux-color: #EEE;
 @aux-color-sharp: #E0E0E0;
 
-@banner-background-color: none;
+@img-color-brightness: none;
+
+@lose-color: rgba(0, 0, 0, .08);
+@lose-color-second: rgba(0, 0, 0, .05);
+@lose-color-third: rgba(0, 0, 0, .03);
 
 @mkd-strong-color: #eee;
 @mkd-code-background: #E0E0E0;
 @mkd-precode-color: #f8f8f2;
-@mkd-precode-background: #2a405a;
+@mkd-precode-background: #283646;
 @mkd-quote-background: #F7F7F7;
 
 :root {
@@ -36,6 +40,8 @@
 
     --shadow-color: @shadow-color;
 
+    --img-color-brightness: @img-color-brightness;
+
     --github-color: @sub-color-contrast;
 
     --scrollbar-thumb-background: @sub-color-sharp;
@@ -46,16 +52,10 @@
     --aux-item-background: @sub-color;
     --aux-item-background-hover: @sub-color-hover;
 
-    // banner
-    --banner-color: fade(@black, 75%);
-    --banner-background-color: @banner-background-color;
-
     // sider
-    --sider-open-shadow: @background-color-base;
-    --sider-open-shadow-secondary: @background-color-light;
-
-    // album
-    --album-color: @sub-color;
+    --lose-color: @lose-color;
+    --lose-color-second: @lose-color-second;
+    --lose-color-third: @lose-color-third;
 
     // detail
     --toc-background: @sub-color;

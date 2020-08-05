@@ -58,8 +58,8 @@
 }
 
 .content-declare {
-    padding: 1.125rem;
     display: flex;
+    padding: 1.125rem;
     color: var(--text-color-secondary);
     background: var(--detail-declare-background);
     border-radius: var(--border-radius);
