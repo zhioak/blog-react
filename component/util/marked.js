@@ -2,7 +2,6 @@ import { Anchor } from 'antd'
 import hljs from 'highlight.js'
 import marked from 'marked'
 
-import '../../static/style/component/toc.css'
 import '../../static/style/component/markdown.css'
 import 'highlight.js/styles/monokai-sublime.css'
 

@@ -25,7 +25,7 @@ pre>code {
     display: block;
     margin: auto;
     width: auto;
-    max-width: 85%;
+    max-width: 100%;
     border-radius: var(--border-radius);
     filter: brightness(var(--img-color-brightness));
 }
@@ -107,4 +107,37 @@ pre>code {
 
 .hljs-comment, .hljs-deletion, .hljs-meta {
     color: var(--mkd-meta-color);
+}
+
+@media (min-width: 768px) {
+    .markdown img {
+        max-width: 85%;
+    }
+}
+
+/* 内容导航 */
+
+.toc {
+    background: transparent;
+}
+
+.toc .ant-anchor {
+    padding: 10px 0;
+    border-radius: var(--border-radius);
+    background-color: var(--toc-background);
+}
+
+.toc .ant-anchor-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.toc .ant-anchor-link-title {
+    font-size: .8rem;
+}
+
+.toc .ant-anchor-ink-ball {
+    margin-top: -6px;
+    width: 3px;
+    height: 21px;
 }

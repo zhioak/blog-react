@@ -1,3 +1,6 @@
+/**
+ * 暂时取消使用！！！和list进行合并
+ */
 
 import moment from 'moment'
 import Link from 'next/link'
@@ -33,6 +36,7 @@ const seatRender = (
     )}
   />
 )
+
 
 const album = ({ error, title, desc, bg }) => {
 
