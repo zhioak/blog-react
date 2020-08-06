@@ -1,5 +1,5 @@
 // const gate = 'http://192.168.1.80:8081/'
-const gate = 'http://192.168.1.41:8081/'
+const gate = 'http://192.168.1.37:8081/'
 
 const apiMap = {
     list: gate + 'blog/list',

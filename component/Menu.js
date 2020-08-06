@@ -45,7 +45,7 @@ export default ({ menuKeys, mode = "inline", closeSider, openSpin }) => {
     const handleClick = ({ item, key }) => {
         if (!selectedKeys || !selectedKeys.includes(key)) {
             let { path } = item.props
-            Router.route != path.substr(0, path.indexOf('?')) ? openSpin() : closeSider && closeSider()
+            path.startsWith(Router.route) ? closeSider && closeSider() : openSpin()
             setSelectedKeys([key])
             Router.push(path)
         }
