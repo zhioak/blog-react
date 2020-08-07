@@ -1,28 +1,14 @@
 
-import { Avatar, Drawer } from 'antd'
 import { useMemo } from 'react'
-import Link from 'next/link'
+import { Avatar, Drawer } from 'antd'
 
-import Menu from './Menu'
 import Sns from './Sns'
+import Menu from './Menu'
 
 import '../static/style/component/sider.css'
 
 const name = 'zhou',
     avatar = 'https://s.gravatar.com/avatar/f4ca98d8768ec3ac3e761335e3f94d1d?s=458&r=g'
-
-const Profile = () => (
-    <div className="profile">
-        <div>
-            <Link href="/">
-                <a>
-                    <Avatar shape="square" size={128} src={avatar} />
-                </a>
-            </Link>
-            <div className="name">{name}</div>
-        </div>
-    </div>
-)
 
 /**
  * 小屏侧栏
@@ -41,7 +27,12 @@ const Sider = ({ className, menuKeys, visible, onClose, openSpin }) => {
 
     const sns = useMemo(() => (<Sns />), [])
 
-    const profile = useMemo(() => (<Profile />), [])
+    const profile = useMemo(() => (
+        <div className="profile">
+            <Avatar shape="square" size={128} src={avatar} />
+            <div className="name">{name}</div>
+        </div>
+    ), [])
 
     return (
         <Drawer

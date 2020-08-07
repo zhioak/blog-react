@@ -5,22 +5,25 @@
 
 .sider .sider-footer {
     position: absolute;
-    bottom: 1px;
-    margin: 0 8px;
-    width: calc(100% - 16px);
+    bottom: 0;
+    margin-right: 8px;
+    width: calc(100% - 8px);
     height: 3rem;
     line-height: 3rem;
     text-align: center;
     background: var(--component-background);
+}
+.sider .sns{
+    margin-left: 8px;
     border-top: 1px solid var(--border-color);
 }
 
-.sider .ant-menu-inline .ant-menu-item {
-    width: 100%;
+.sider .ant-menu-root {
+    margin-bottom: 3rem;
 }
 
-.sider-footer .sns .ant-avatar {
-    margin-right: 7px;
+.sider .ant-menu-item {
+    width: 100%;
 }
 
 .ant-drawer-content {

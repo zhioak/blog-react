@@ -21,18 +21,16 @@ const list = ({ error, type, title, desc, bg }) => {
   if (error) return (<Error error={error} />)
 
 
-  menuKeys[0] = type ? type : indexKey
+  menuKeys[0] = type
   const [spinning, setSpinning] = useState(false)
 
   const getData = (page, cb) => {
     httpPost({
       url: apiMap.list,
-      data: { page, 'type.key': type },
+      data: { page, 'type.key': indexKey === type ? undefined : type },
       cb
     })
   }
-
-
 
   const render = ({ id, title, type: itemType, menu, preview, previewImg, gmtCreate }) => (
     <div className="list-item">
@@ -126,7 +124,7 @@ list.getInitialProps = async ({ query, req: request, res: response }) => {
     resolve => httpPost({
       url: apiMap.type,
       data: { key: type },
-      cb: data => resolve(pool[type] = indexKey === type ? data : { ...data, type }),
+      cb: data => resolve(pool[type] = { ...data, type }),
       fcb: res => resolve({ error: res }),
       request,
       response

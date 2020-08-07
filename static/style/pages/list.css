@@ -56,15 +56,14 @@
     background-size: cover;
     background-position: center;
     filter: brightness(var(--img-color-brightness));
+    transition: transform .5s ease-in-out;
+}
+
+.list-img:hover {
+    transform: scale3d(1.025, 1.025, 1.025);
 }
 
 @media (min-width: 768px) {
-    .list-img {
-        transition: transform .5s ease-in-out;
-    }
-    .list-img:hover {
-        transform: scale3d(1.025, 1.025, 1.025);
-    }
     .list-img-holder {
         height: 26vh;
         cursor: pointer;
