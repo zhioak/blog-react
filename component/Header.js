@@ -42,9 +42,9 @@ const Header = ({ className, menuKeys, openSpin, openSider }) => {
     const sns = useMemo(() => (<Sns mode="grid" />), [])
 
     const siderTrigger = useMemo(() => (
-        <div className="tigger-wrap">
-            <div onClick={openSider} className={`sider-tigger`}>
-                <i className="sider-tigger-icon"></i>
+        <div className="trigger-wrap">
+            <div onClick={openSider} className={`sider-trigger`}>
+                <i className="sider-trigger-icon"></i>
             </div>
         </div>
     ), [])

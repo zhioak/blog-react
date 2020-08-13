@@ -145,7 +145,7 @@ const Layout = ({
     return (
         <>
             {head}
-            <div id="root" className={`${siderVisible && 'lose'}`}>
+            <div id="root" className={`${siderVisible && 'lose-sider'}`}>
                 <Spin spinning={spinning} className="spin-full">
                     {header}
                     <div className="lose-retinue">

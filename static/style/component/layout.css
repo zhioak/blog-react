@@ -18,7 +18,7 @@
     padding: 0;
 }
 
-#root.lose .lose-retinue {
+#root.lose-sider .lose-retinue {
     transform: translateX(225px);
 }
 
