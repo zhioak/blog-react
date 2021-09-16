@@ -27,7 +27,7 @@ export const httpPost = ({ url, data, cb, fcb, request, response }) => {
         headers = request.headers
         headers['zhousb-server-side'] = true
     }
-    axios.post(url, qs.stringify(data), headers && { headers })
+    axios.post(url, qs.stringify(data, { allowDots: true }), headers && { headers })
         .then(
             res => {
                 if (response) {
