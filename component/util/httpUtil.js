@@ -25,13 +25,13 @@ export const httpPost = ({ url, data, cb, fcb, request, response }) => {
     let headers
     if (request) {
         headers = request.headers
-        headers['zhousb-server-side'] = true
+        headers['zhioak-server-side'] = true
     }
     axios.post(url, qs.stringify(data, { allowDots: true }), headers && { headers })
         .then(
             res => {
                 if (response) {
-                    let cookie = res.headers['zhousb-blog-token']
+                    let cookie = res.headers['zhioak-blog-token']
                     cookie && response.setHeader('Set-Cookie', cookie)
                 } else if ('0200' === res.data.code) {
                     res.data.code = '0000'

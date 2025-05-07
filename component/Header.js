@@ -57,7 +57,7 @@ const Header = ({ className, menuKeys, openSpin, openSider }) => {
                         <Row>
                             <Col xs={12} sm={12} md={0}>{siderTrigger}</Col>
                             <Col xs={12} sm={12} md={24}>
-                                <Link href="/" ><a className="logo">ZHOU</a></Link>
+                                <Link href="/" ><a className="logo">ZHIOAK</a></Link>
                             </Col>
                         </Row>
                     </Col>

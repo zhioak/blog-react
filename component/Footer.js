@@ -8,7 +8,7 @@ const Footer = () => {
     return (
         <div className="footer">
             <div>Powered by React & Ant Desgin</div>
-            <div><CopyrightCircleOutlined /> 2020 zhou </div>
+            <div><CopyrightCircleOutlined /> 2020 zhioak </div>
         </div>
     )
 }
